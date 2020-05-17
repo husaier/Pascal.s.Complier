@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/LexicalAnalyze.dir/main.cpp.o  -o LexicalAnalyze 
