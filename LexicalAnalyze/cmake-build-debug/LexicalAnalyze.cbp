@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
+				<Option working_dir="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
+				<Option working_dir="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
+				<Option working_dir="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="LexicalAnalyze">
-				<Option output="/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/LexicalAnalyze" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
+				<Option output="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/LexicalAnalyze" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -54,15 +54,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 LexicalAnalyze"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 LexicalAnalyze"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="LexicalAnalyze/fast">
-				<Option output="/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/LexicalAnalyze" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
+				<Option output="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/LexicalAnalyze" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -77,23 +77,23 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 LexicalAnalyze/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 LexicalAnalyze/fast"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.cpp">
+		<Unit filename="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.cpp">
 			<Option target="LexicalAnalyze"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h">
+		<Unit filename="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h">
 			<Option target="LexicalAnalyze"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LexicalAnalyze/main.cpp">
+		<Unit filename="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/main.cpp">
 			<Option target="LexicalAnalyze"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LexicalAnalyze/CMakeLists.txt">
+		<Unit filename="/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

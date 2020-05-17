@@ -6,15 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.cpp
+/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.cpp
 lexical_analyzer.h
-/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h
+/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h
 
-/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h
+/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h
 fstream
 -
 algorithm
 -
 vector
 -
+
+/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/main.cpp
+iostream
+-
+lexical_analyzer.h
+/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h
 
