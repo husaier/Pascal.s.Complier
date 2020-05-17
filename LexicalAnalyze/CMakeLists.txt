@@ -3,4 +3,4 @@ project(LexicalAnalyze)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(LexicalAnalyze main.cpp)
+add_executable(LexicalAnalyze main.cpp lexical_analyzer.h lexical_analyzer.cpp)

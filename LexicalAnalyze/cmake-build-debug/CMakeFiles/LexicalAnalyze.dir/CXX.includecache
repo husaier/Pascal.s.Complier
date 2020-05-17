@@ -6,10 +6,14 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LexicalAnalyze/main.cpp
-iostream
--
+/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.cpp
+lexical_analyzer.h
+/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h
+
+/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.h
 fstream
+-
+algorithm
 -
 vector
 -
