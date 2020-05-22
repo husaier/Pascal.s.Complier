@@ -1,6 +1,36 @@
 #include "FirstSetCalculator.h"
+#include <set>
 
 using namespace std;
+
+class LR1Item {
+public:
+    explicit LR1Item(Production p) {
+        production = p;
+        pos = 0;
+        tail = "$";
+        reductionFlag = false;
+    }
+
+    LR1Item(Production p, int position, string t) {
+        production = p;
+        pos = position;
+        tail = t;
+        reductionFlag = false;
+    }
+
+    bool operator== (LR1Item &t) const {
+        return this->reductionFlag == t.reductionFlag
+        && this->pos == t.pos
+        && this->tail == t.tail
+        && this->production == t.production;
+    }
+
+    Production production;
+    int pos; //圆点的位置
+    string tail; //向前看符号
+    bool reductionFlag;
+};
 
 class LR1TableMaker {
 public:
@@ -35,11 +65,26 @@ private:
     //识别终结符和非终结符
     void recognize();
 
-    //获取字符串在向量里面的位置，不存在则返回 -1
-    int get_Index(string str, vector<string> vec);
+    //计算闭包
+    vector<LR1Item> closure(LR1Item);
 
-    //计算first集
-    void Letter_First(Production *p, string str);
+    //判断是不是终结符
+    bool isVt(string s);
+
+    //计算符号串的first集
+    vector<string> calculateFirst(const vector<string>& symbols);
+
+    //判断first集是否含有ε
+    static bool hasEpsilon(vector<string> t);
+
+    //合并两个first集，把source中的元素合并到target，除去ε
+    static void mergeFirstSet(vector<string> &target, vector<string> &source);
+
+    //扩展文法
+    void extendGrammar();
+
+    //生成有效项目集规范族
+    void makeLR1Table();
 
     void printOut();
 };
@@ -105,57 +150,190 @@ void LR1TableMaker::recognize() {
     }
 }
 
-int LR1TableMaker::get_Index(string str, vector<string> vec) {
-    if (count(vec.begin(), vec.end(), str) != 0) {
-        vector<string>::iterator it = find(vec.begin(), vec.end(), str);
-        //此时it对应的元素下标为
-        return (&*it - &vec[0]);
-    } else {
-        return -1;
+vector<LR1Item> LR1TableMaker::closure(LR1Item origin){
+    vector<LR1Item> result;
+    result.push_back(origin);
+    while (true){
+        vector<LR1Item> Jnew = result;
+        int changeFlag = false; //本轮循环是否有变动
+        for (int i = 0 ; i < Jnew.size(); i++) { //每一个项目
+            LR1Item item = Jnew[i];
+            Production p = item.production;
+            int pos = item.pos;
+            string tail = item.tail;
+            bool reductionFlag = item.reductionFlag;
+            if (reductionFlag) //如果是规约项目，直接跳过
+                continue;
+            string B=p.right[pos];
+            if (isVt(B)) //如果B是终结符，直接跳过
+                continue;
+            vector<string> beta;
+            vector<string> firstSet;
+            //判断beta是否为空
+            if (p.right.size() - pos == 1) {
+                beta.push_back(tail);
+            }
+            else{
+                for (int j = pos + 1; j < p.right.size(); j++)
+                    beta.push_back(p.right[j]);
+                beta.push_back(tail);
+            }
+            firstSet = calculateFirst(beta);
+
+            // 遍历产生式列表
+            for (const auto& pro : productions) {
+                if (pro.left == B){
+                    for (auto &symbol : firstSet) {
+                        LR1Item project(pro, 0, symbol);
+                        //判断是否是空产生式
+                        if (pro.right.size() == 1 && pro.right[0] == "#")
+                            project.reductionFlag = true;
+                        else
+                            project.reductionFlag = false;
+                        //判断新项目是否已经在项目集中
+                        int flag = false;
+                        for (const auto& tmp : Jnew) {
+                            if (tmp == project){
+                                flag = true;
+                                break;
+                            }
+                        }
+                        //如果不在项目集中
+                        if (! flag) {
+                            Jnew.push_back(project);
+                            changeFlag = true;
+                        }
+                    }
+                }
+            }
+        }
+        if (! changeFlag) //如果没有变动，就结束
+            break;
+        else
+            result = Jnew;
     }
+    return result;
 }
 
-void LR1TableMaker::printOut() {
-    for (auto & production : productions) {
-        cout<<production.left<<" -> ";
-        for(auto & item : production.right)
-            cout<<item<<' ';
-        cout<<'\n';
+bool LR1TableMaker::isVt(string s) {
+    for(const auto& symbol : Vt) {
+        if (s == symbol)
+            return true;
     }
-    cout<<"****************************************\n";
-    cout<<"非终结符："<<Vn.size()<<"个\n";
-    for (const auto& symbol : Vn)
-        cout<<symbol<<'\n';
-
-    cout<<"*******************************************\n";
-    cout<<"终结符："<<Vt.size()<<"个\n";
-    for (const auto& symbol : Vt)
-        cout<<symbol<<'\n';
+    return false;
 }
+
+//void LR1TableMaker::printOut() {
+//    for (auto & production : productions) {
+//        cout<<production.left<<" -> ";
+//        for(auto & item : production.right)
+//            cout<<item<<' ';
+//        cout<<'\n';
+//    }
+//    cout<<"****************************************\n";
+//    cout<<"非终结符："<<Vn.size()<<"个\n";
+//    for (const auto& symbol : Vn)
+//        cout<<symbol<<'\n';
+//
+//    cout<<"*******************************************\n";
+//    cout<<"终结符："<<Vt.size()<<"个\n";
+//    for (const auto& symbol : Vt)
+//        cout<<symbol<<'\n';
+//}
 
 void LR1TableMaker::start() {
     initial();
     load("grammar.txt");
     firstSetCalculator.initial(Vn, Vt, productions);
-    for (auto & symbol : Vn) {
-        vector<string> set;
-        set = firstSetCalculator.parse(symbol);
-        cout<<"\n*************************************************************\n";
-        cout<<symbol<<"的first集：\n";
-        for (const auto& item : set) {
-            cout<<item<<'\n';
-        }
-    }
 
+    extendGrammar();
+
+
+
+//    vector<LR1Item> tmp;
+//    LR1Item s(productions[2], 0, "$");
+//    s.reductionFlag = false;
+//    tmp = closure(s);
+
+
+//    cout<<"非终结符：\n";
+//    for (auto & symbol : Vn) {
+//        vector<string> set;
+//        set = firstSetCalculator.parse(symbol);
+//        cout<<"\n*************************************************************\n";
+//        cout<<symbol<<"的first集：\n";
+//        for (const auto& item : set) {
+//            cout<<item<<'\n';
+//        }
+//    }
+//    cout<<"\n终结符：\n";
+//    for (auto & symbol : Vt) {
+//        vector<string> set;
+//        set = firstSetCalculator.parse(symbol);
+//        cout<<"\n*************************************************************\n";
+//        cout<<symbol<<"的first集：\n";
+//        for (const auto& item : set) {
+//            cout<<item<<'\n';
+//        }
+//    }
+//
 //    vector<string> set;
-//    set = firstSetCalculator.parse("Compound_statement");
+//    set = firstSetCalculator.parse("$");
 //    cout<<"\n*************************************************************\n";
-//    cout<<"Compound_statement"<<"的first集：\n";
+//    cout<<"$"<<"的first集：\n";
 //    for (const auto& item : set) {
 //        cout<<item<<'\n';
 //    }
 
-//    printOut();
+}
+
+vector<string> LR1TableMaker::calculateFirst(const vector<string>& symbols) {
+    vector<string> result;
+    for (auto &symbol : symbols) {
+        vector<string> tmp;
+        tmp = firstSetCalculator.parse(symbol);
+        mergeFirstSet(result, tmp);
+        if (!hasEpsilon(tmp))
+            break;
+    }
+    return result;
+}
+
+bool LR1TableMaker::hasEpsilon(vector<string> t) {
+    for (const auto& symbol : t) {
+        if (symbol == "#")
+            return true;
+    }
+    return false;
+}
+
+void LR1TableMaker::mergeFirstSet(vector<string> &target, vector<string> &source) {
+    for (const auto& symbol : source)
+        target.push_back(symbol);
+    //去重
+    set<string> s(target.begin(), target.end());
+    target.assign(s.begin(), s.end());
+    //去空
+    vector<string>::iterator i;
+    for (i = target.begin(); i != target.end(); ++i) {
+        if (*i == "#"){
+            target.erase(i);
+            break;
+        }
+    }
+}
+
+void LR1TableMaker::extendGrammar() {
+    Production pro;
+    string newVn = "S'";
+    pro.left = newVn;
+    pro.right.push_back(productions[0].left);
+    productions.insert(productions.cbegin(), pro);
+    Vn.insert(Vn.begin(), newVn);
+}
+
+void LR1TableMaker::makeLR1Table() {
+
 }
 
 int main() {

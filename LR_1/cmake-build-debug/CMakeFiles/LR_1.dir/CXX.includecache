@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.cpp
-FirstSetCalculator.h
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
-
 /home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
 iostream
 -
@@ -22,5 +18,11 @@ fstream
 vector
 -
 sstream
+-
+
+/home/husserl/Pascal.s.Complier/LR_1/main.cpp
+FirstSetCalculator.h
+/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
+set
 -
 

@@ -77,10 +77,6 @@ void FirstSetCalculator::initial(vector<string> &Vn, vector<string> &Vt, vector<
 }
 
 vector<string> FirstSetCalculator::parse(string symbol) {
-    // TODO: 为什么必须要刷新??
-    // 否则的话会在连续计算的时候出错，有的
-    // Vn_recursive.clear();
-
     if (isVn(symbol)) {
         int index = get_Index(symbol, Vn);
         if (First[index].empty()) // 如果没有计算过
@@ -176,7 +172,7 @@ void FirstSetCalculator::Letter_First(string str) {
                 {
                     if (p[i].right.size() == 1) //只有一个符号
                     {
-                        if (p[i].right[0] == str) { //这个符号不能等于左侧的符号
+                        if (p[i].right[0] != str) { //这个符号不能等于左侧的符号
                             Letter_First(p[i].right[0]); //把右侧符号的first集合加入到左侧符号中
                             vector<string> ff = First[get_Index(p[i].right[0], Vn)];
                             for (int k = 0; k < ff.size(); k++) {
@@ -228,7 +224,7 @@ void FirstSetCalculator::Letter_First(string str) {
                                         {
                                             if (ndy[i].size() == 1) //只有一个符号
                                             {
-                                                if (ndy[i][0] == str) { //这个符号不能等于左侧的符号
+                                                if (ndy[i][0] != str) { //这个符号不能等于左侧的符号
                                                     Letter_First(ndy[i][0]); //把右侧符号的first集合加入到左侧符号中
                                                     vector<string> ff = First[get_Index(ndy[i][0], Vn)];
                                                     for (int k = 0; k < ff.size(); k++) {
