@@ -90,6 +90,12 @@
 		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h">
 			<Option target="LR_1"/>
 		</Unit>
+		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.cpp">
+			<Option target="LR_1"/>
+		</Unit>
+		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h">
+			<Option target="LR_1"/>
+		</Unit>
 		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/main.cpp">
 			<Option target="LR_1"/>
 		</Unit>

@@ -150,6 +150,33 @@ FirstSetCalculator.cpp.s:
 	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/FirstSetCalculator.cpp.s
 .PHONY : FirstSetCalculator.cpp.s
 
+LR1TableMaker.o: LR1TableMaker.cpp.o
+
+.PHONY : LR1TableMaker.o
+
+# target to build an object file
+LR1TableMaker.cpp.o:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/LR1TableMaker.cpp.o
+.PHONY : LR1TableMaker.cpp.o
+
+LR1TableMaker.i: LR1TableMaker.cpp.i
+
+.PHONY : LR1TableMaker.i
+
+# target to preprocess a source file
+LR1TableMaker.cpp.i:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/LR1TableMaker.cpp.i
+.PHONY : LR1TableMaker.cpp.i
+
+LR1TableMaker.s: LR1TableMaker.cpp.s
+
+.PHONY : LR1TableMaker.s
+
+# target to generate assembly for a file
+LR1TableMaker.cpp.s:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/LR1TableMaker.cpp.s
+.PHONY : LR1TableMaker.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -189,6 +216,9 @@ help:
 	@echo "... FirstSetCalculator.o"
 	@echo "... FirstSetCalculator.i"
 	@echo "... FirstSetCalculator.s"
+	@echo "... LR1TableMaker.o"
+	@echo "... LR1TableMaker.i"
+	@echo "... LR1TableMaker.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

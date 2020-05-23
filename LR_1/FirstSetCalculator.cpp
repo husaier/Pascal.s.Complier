@@ -91,6 +91,8 @@ vector<string> FirstSetCalculator::parse(string symbol) {
     }
     else { //文法中未出现过，主要针对 $
         Vt.push_back(symbol);
+        vector<string> t;
+        first.push_back(t);
         Letter_First(symbol);
         return first[get_Index(symbol, Vt)];
     }

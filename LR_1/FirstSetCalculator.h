@@ -1,9 +1,9 @@
 //
 // Created by husserl on 2020/5/22.
 //
-#include<iostream>
-#include<string>
-#include<algorithm>
+#include <iostream>
+#include <string>
+#include <algorithm>
 #include <fstream>
 #include <vector>
 #include<sstream>
@@ -16,7 +16,7 @@ public:
     string left;         //左部只有一个符号
     vector<string> right;//右部可能有多个符号
 
-    bool operator== (Production &t) const {
+    bool operator== (const Production &t) const {
         return this->left == t.left && this->right == t.right;
     }
 };
