@@ -32,12 +32,32 @@ LR1Table LR1TableMaker::makeTable() {
     //构造有效项目集规范族
     vector<LR1Group> family;
     makeFamily(family);
-    for(const auto& group : family) {
+    for(int i=0; i < family.size(); i++) {
+        LR1Group group = family[i];
         //构造新的一行
         vector<TableItem> newRow;
         for (int j = 0; j < table.colNum; ++j) {
             TableItem tmp(TableItem::ERROR, 0);
             newRow.push_back(tmp);
+        }
+        //填入SHIFT和GOTO类型的表项
+        for (const auto& edge : group.others) {
+            int symIndex = table.invMap[edge.condition];
+            int groupIndex = edge.target;
+            if (newRow[symIndex].type == TableItem::ERROR){
+                if (symIndex <= table.dividingIndex)
+                    newRow[symIndex].type = TableItem::SHIFT;
+                else
+                    newRow[symIndex].type = TableItem::GOTO;
+                newRow[symIndex].index = groupIndex;
+            }
+            else {
+                cout<<"========================================================\n";
+                cout<<"出错了！LR1分析表存在多重定义的表项(移进-归约)冲突B\n";
+                cout<<"出错的项目集下标为"<<i<<",内容为\n";
+                printGroup(group);
+                cout<<"========================================================\n";
+            }
         }
         //根据项目集填入规约表项
         for (const auto& item : group.items) {
@@ -52,24 +72,20 @@ LR1Table LR1TableMaker::makeTable() {
                         newRow[symIndex].type = TableItem::REDUCTION;
                     newRow[symIndex].index = proIndex;
                 }
-                else {
-                    cout<<"出错了！LR1分析表存在多重定义的表项\n";
+                else if (newRow[symIndex].type == TableItem::REDUCTION){
+                    cout<<"========================================================\n";
+                    cout<<"出错了！LR1分析表存在多重定义的表项(归约-归约冲突)\n";
+                    cout<<"出错的项目集下标为"<<i<<",内容为\n";
+                    printGroup(group);
+                    cout<<"========================================================\n";
                 }
-            }
-        }
-        //填入SHIFT和GOTO类型的表项
-        for (const auto& edge : group.others) {
-            int symIndex = table.invMap[edge.condition];
-            int groupIndex = edge.target;
-            if (newRow[symIndex].type == TableItem::ERROR){
-                if (symIndex <= table.dividingIndex)
-                    newRow[symIndex].type = TableItem::SHIFT;
-                else
-                    newRow[symIndex].type = TableItem::GOTO;
-                newRow[symIndex].index = groupIndex;
-            }
-            else {
-                cout<<"出错了！LR1分析表存在多重定义的表项\n";
+                else {
+                    cout<<"========================================================\n";
+                    cout<<"出错了！LR1分析表存在多重定义的表项(移进-归约)冲突A\n";
+                    cout<<"出错的项目集下标为"<<i<<",内容为\n";
+                    printGroup(group);
+                    cout<<"========================================================\n";
+                }
             }
         }
         table.table.push_back(newRow);
@@ -447,5 +463,22 @@ void LR1TableMaker::makeFamily(vector<LR1Group> &family) {
         //如果规范族family不再变化则退出
         if (!changeFlag)
             break;
+    }
+}
+
+void LR1TableMaker::printGroup(const LR1TableMaker::LR1Group& group) {
+    for (const auto& item : group.items) {
+        Production pro = item.production;
+        int pos = item.pos;
+        string tail = item.tail;
+        cout << pro.left << " -> ";
+        for (int i=0; i < pro.right.size(); i++) {
+            string symbol=pro.right[i];
+            if(i == pos)
+                cout << "^ " << symbol << " ";
+            else
+                cout << symbol << " ";
+        }
+        cout<<"|| "<<tail<<'\n';
     }
 }

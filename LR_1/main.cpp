@@ -41,9 +41,10 @@ void print(LR1Table table) {
 
 int main() {
     LR1TableMaker parser;
-    parser.load("test1.txt");
+    parser.load("grammar.txt");
     //test1,txt
     //test2.txt
+    //test3.txt
     //grammar.txt
     LR1Table table = parser.makeTable();
     print(table);

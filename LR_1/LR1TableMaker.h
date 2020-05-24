@@ -99,8 +99,6 @@ private:
 
     //LR1项目集
     class LR1Group {
-    private:
-
     public:
         vector<LR1Item> items;
         vector<Edge> others;
@@ -163,6 +161,7 @@ private:
     //在productions数组里面找到产生式，并返回其下标
     int findProduction(const Production&);
 
+    void printGroup(const LR1Group&);
 //    void printOut(); //测试
 };
 
