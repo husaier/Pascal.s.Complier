@@ -15,7 +15,7 @@ int main() {
     result = lexicalAnalyzer.analyze();
     lexicalAnalyzer.closeFile();
     for (auto item : result) {
-        cout << item.tokenToString() << "\t" << item.attribute << endl;
+        cout << item.tokenToString() << "\t" << item.attribute<< '\t'<< item.symbol << endl;
     }
     return 0;
 }

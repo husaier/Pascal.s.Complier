@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.cpp" "/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/lexical_analyzer.cpp.o"
-  "/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/main.cpp" "/home/parallels/CLionProjects/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/main.cpp.o"
+  "/home/husserl/Pascal.s.Complier/LexicalAnalyze/lexical_analyzer.cpp" "/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/lexical_analyzer.cpp.o"
+  "/home/husserl/Pascal.s.Complier/LexicalAnalyze/main.cpp" "/home/husserl/Pascal.s.Complier/LexicalAnalyze/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

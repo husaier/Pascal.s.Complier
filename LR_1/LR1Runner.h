@@ -6,6 +6,8 @@
 #define LR_1_LR1RUNNER_H
 
 #include <queue>
+#include <iomanip>
+#include <stack>
 #include "LR1TableMaker.h"
 
 class LR1Runner {

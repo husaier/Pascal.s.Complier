@@ -4,6 +4,7 @@
 
 #include "LR1Runner.h"
 
+
 vector<string> vectorInput;
 int ip = 0;
 //queue<string> queueInput;

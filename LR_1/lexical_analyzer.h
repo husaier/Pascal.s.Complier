@@ -70,7 +70,7 @@ public:
     string symbol;
     string attribute;
 
-    string tokenToString();
+    string tokenToString() const;
 };
 
 class LexicalAnalyzer

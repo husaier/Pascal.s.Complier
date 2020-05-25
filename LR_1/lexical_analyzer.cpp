@@ -3,7 +3,7 @@
 //
 #include "lexical_analyzer.h"
 
-string LexicalItem::tokenToString() {
+string LexicalItem::tokenToString() const {
     switch (token) {
         case NUM:
             return "NUM";
