@@ -1,4 +1,4 @@
-/home/husserl/Clion/clion-2020.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/husserl/Pascal.s.Complier/LR_1
+/usr/local/Cellar/cmake/3.17.2/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug
+-- Build files have been written to: /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/cmake-build-debug

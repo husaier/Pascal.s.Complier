@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/FirstSetCalculator.h
 iostream
 -
 string
@@ -20,17 +20,25 @@ vector
 sstream
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.cpp
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/LR1Runner.h
+queue
+-
 LR1TableMaker.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/LR1TableMaker.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/LR1TableMaker.h
 FirstSetCalculator.h
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/FirstSetCalculator.h
 set
 -
 map
 -
 utility
 -
+
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/main.cpp
+LR1TableMaker.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/LR1TableMaker.h
+LR1Runner.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier2/LR_1/LR1Runner.h
 

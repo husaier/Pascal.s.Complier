@@ -3,4 +3,4 @@ project(LR_1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(LR_1 main.cpp FirstSetCalculator.cpp FirstSetCalculator.h LR1TableMaker.cpp LR1TableMaker.h)
+add_executable(LR_1 main.cpp FirstSetCalculator.cpp FirstSetCalculator.h LR1TableMaker.cpp LR1TableMaker.h LR1Runner.cpp LR1Runner.h)

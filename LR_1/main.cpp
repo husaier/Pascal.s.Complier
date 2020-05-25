@@ -1,4 +1,5 @@
 #include "LR1TableMaker.h"
+#include "LR1Runner.h"
 
 using namespace std;
 
@@ -41,12 +42,13 @@ void print(LR1Table table) {
 
 int main() {
     LR1TableMaker parser;
-    parser.load("grammar.txt");
+    parser.load("test2.txt");
     //test1,txt
     //test2.txt
     //test3.txt
     //grammar.txt
     LR1Table table = parser.makeTable();
     print(table);
+    LR1Runner::run(table);
     return 0;
 }
