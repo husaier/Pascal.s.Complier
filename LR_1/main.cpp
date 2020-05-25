@@ -1,5 +1,6 @@
 #include "LR1TableMaker.h"
 #include "LR1Runner.h"
+#include "lexical_analyzer.h"
 
 using namespace std;
 
@@ -42,13 +43,29 @@ void print(LR1Table table) {
 
 int main() {
     LR1TableMaker parser;
-    parser.load("test2.txt");
-    //test1,txt
+    parser.load("grammar.txt");
+    //test1.txt
     //test2.txt
     //test3.txt
     //grammar.txt
     LR1Table table = parser.makeTable();
     print(table);
+
+    string fileName = "SourceFile.pas";
+    LexicalAnalyzer lexicalAnalyzer;
+    if (!lexicalAnalyzer.openFile(fileName)) {
+        cout << "fail to open it" << endl;
+        return 0;
+    }
+    vector<LexicalItem> result;
+    result = lexicalAnalyzer.analyze();
+    lexicalAnalyzer.closeFile();
+    for (const auto& item : result) {
+        cout << item.tokenToString() << "\t" << item.attribute<< '\t'<< item.symbol << endl;
+    }
+
+    LR1Runner::load(result);
+
     LR1Runner::run(table);
     return 0;
 }

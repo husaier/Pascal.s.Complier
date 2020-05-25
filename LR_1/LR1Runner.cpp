@@ -6,8 +6,6 @@
 
 
 vector<string> vectorInput;
-int ip = 0;
-//queue<string> queueInput;
 stack<int> stackState;
 stack<string> stackSymbol;
 
@@ -18,16 +16,6 @@ void LR1Runner::run(LR1Table table) {
     cout << "-------------------------------------------------------------------------------------------Runner::run"
          << "------------------------------------------------------------------------------------------------------"
          << endl;
-    cout << "请输入输入串(无需加$):";
-    string tempInputString, tempStackString;
-    getline(cin, tempInputString);
-//    cout << tempInputString << endl;
-    istringstream is(tempInputString);
-    while (is >> tempStackString) {
-        vectorInput.push_back(tempStackString);
-//        queueInput.push(tempStackString);
-    }
-    vectorInput.emplace_back("$");
     stackState.push(0);
     stackSymbol.push(" ");
     cout << setiosflags(ios::left) << setw(width1) << "Stack" << resetiosflags(ios::left) << setiosflags(ios::left)
@@ -36,7 +24,7 @@ void LR1Runner::run(LR1Table table) {
          << "------------------------------------------------------------------------------------------------------"
          << endl;
 
-    int errorIpNumber = 0;
+    int errorIpNumber = 0, ip = 0;
     while (true) {
         if (ip >= vectorInput.size()) {
             cout << "ERROR Break" << endl;
@@ -46,13 +34,8 @@ void LR1Runner::run(LR1Table table) {
         outStackString(stackSymbol);
         outStrInput(vectorInput, ip);
         int s = stackState.top();       //从栈顶取当前状态
-//        tempInputString =  vectorInput.at(ip);
-//        cout << tempInputString << endl;
-//        cout << table.invMap[tempInputString] << endl;
         cout << setw(width3) << setiosflags(ios::left);
         int tempCol = table.invMap[vectorInput.at(ip)];
-//        break;
-//        int temp = getColumnNumber(strInput.substr(ip, 1)); //获得输入第一个字符所在表的列
         int currentType = table.table[s][tempCol].type;
         if (currentType == TableItem::SHIFT) {
             stackSymbol.push(vectorInput.at(ip));   //根据输入，压入当前遇到的输入
@@ -132,6 +115,18 @@ void LR1Runner::outStrInput(vector<string> tempVector, int temp) {
     for (int i = temp; i < tempVector.size(); i++)
         tempString += tempVector.at(i) + " ";
     cout << tempString << resetiosflags(ios::left);
+}
+
+void LR1Runner::load(const vector<LexicalItem> &result) {
+    string tempInputString, tempStackString;
+    for (const auto &i : result) {
+        vectorInput.push_back(i.symbol);
+    }
+    for (const auto &i : vectorInput) {
+        cout << i + " ";
+    }
+    cout << endl;
+    vectorInput.emplace_back("$");
 }
 
 

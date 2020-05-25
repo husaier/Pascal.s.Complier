@@ -6,11 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.cpp
-FirstSetCalculator.h
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
-
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
 iostream
 -
 string
@@ -24,37 +20,17 @@ vector
 sstream
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.cpp
-LR1Runner.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
-
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
-queue
--
-iomanip
--
-stack
--
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.cpp
 LR1TableMaker.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.cpp
-LR1TableMaker.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
-
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
 FirstSetCalculator.h
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
+/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
 set
 -
 map
 -
 utility
 -
-
-/home/husserl/Pascal.s.Complier/LR_1/main.cpp
-LR1TableMaker.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
-LR1Runner.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
 
