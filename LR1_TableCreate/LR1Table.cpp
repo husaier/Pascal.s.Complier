@@ -150,6 +150,12 @@ void LR1Table::fromJsonObejct(neb::CJsonObject oJson) {
     }
 }
 
+bool LR1Table::operator==(LR1Table &t) const {
+
+    return rowNum == t.rowNum && colNum == t.colNum && dividingIndex == t.dividingIndex && productions == t.productions
+    && symbols == t.symbols && table == t.table;
+}
+
 neb::CJsonObject TableItem::toJsonbject() {
     neb::CJsonObject tmp;
     tmp.Add(TYPE, type);
@@ -160,4 +166,8 @@ neb::CJsonObject TableItem::toJsonbject() {
 void TableItem::fromJson(const neb::CJsonObject& oJson) {
     oJson.Get(TYPE, type);
     oJson.Get(INDEX, index);
+}
+
+bool TableItem::operator==(const TableItem &t) const {
+    return type == t.type && index == t.index;
 }

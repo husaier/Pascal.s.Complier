@@ -34,7 +34,7 @@ void LR1Runner::run(LR1Table& table) {
         outStackString(stackSymbol);
         outStrInput(vectorInput, ip);
         int s = stackState.top();       //从栈顶取当前状态
-        cout << setw(width3) << setiosflags(ios::left);
+        cout << endl << "OutPut:" << setw(width3) << setiosflags(ios::left);
         int tempCol = table.invMap[vectorInput.at(ip)];
         int currentType = table.table[s][tempCol].type;
         if (currentType == TableItem::SHIFT) {

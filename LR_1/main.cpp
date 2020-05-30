@@ -9,7 +9,7 @@ const string fileName = "grammar.json";
 int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
-    table.printOut();
+    //table.printOut();
 
     string fileName = "SourceFile.pas";
     LexicalAnalyzer lexicalAnalyzer;

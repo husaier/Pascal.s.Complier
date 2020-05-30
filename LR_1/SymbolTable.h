@@ -33,7 +33,7 @@ public:
 //    static const int  = 2;
 //    static const int  = 3;
 //    static const int  = 4;
-//
+
     int id;//序号
     string name;//名字
     int type;//类型

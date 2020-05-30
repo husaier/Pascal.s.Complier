@@ -27,6 +27,8 @@ public:
 
     void fromJson(const neb::CJsonObject&);
 
+    bool operator==(const TableItem&) const;
+
 private:
     string TYPE = "type";
     string INDEX = "index";
@@ -54,6 +56,8 @@ public:
     void printJsonFile(const string& fileName);
 
     void loadJsonFile(const string& fileName);
+
+    bool operator == (LR1Table& ) const;
 
 private:
     //JSON tag
