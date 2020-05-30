@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="LR1_TableCreate" targetName="LR1_TableCreate" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="aac2c4c8-ad57-4515-bb73-661090e1ab53" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/LR1_TableCreate.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CJsonObject.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CJsonObject.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LR1Table.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LR1Table.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Production.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Production.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cJSON.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cJSON.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeCCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeSystem.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/a.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdCXX/a.out" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/CXX.includecache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/DependInfo.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/build.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/cmake_clean.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/depend.internal" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/depend.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/flags.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/link.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/main.cpp.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/progress.make" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/LR1_TableCreate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/LR1_TableCreate.cbp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/SourceFile.pas" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/grammar.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/CJsonObject.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/CJsonObject.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/LR1Table.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/LR1Table.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/Production.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/Production.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/cJSON.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../LR_1/cJSON.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/FirstSetCalculator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/FirstSetCalculator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/FirstSetCalculator.h" beforeDir="false" afterPath="$PROJECT_DIR$/FirstSetCalculator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/LR1TableMaker.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LR1TableMaker.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/LR1TableMaker.h" beforeDir="false" afterPath="$PROJECT_DIR$/LR1TableMaker.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/FirstSetCalculator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/FirstSetCalculator.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1TableMaker.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1TableMaker.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/main.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1ccHBamOqeZcNA2E0chk2lw1w2T" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LR_1" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/cmake-build-debug" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="LR1_TableCreate" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LR1_TableCreate" TARGET_NAME="LR1_TableCreate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LR1_TableCreate" RUN_TARGET_NAME="LR1_TableCreate">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aac2c4c8-ad57-4515-bb73-661090e1ab53" name="Default Changelist" comment="" />
+      <created>1590820826029</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590820826029</updated>
+      <workItem from="1590820827664" duration="11033000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="739" y="270" key="FileChooserDialogImpl" timestamp="1590831195571">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state x="739" y="270" key="FileChooserDialogImpl/67.27.1853.1052@67.27.1853.1052" timestamp="1590831195571" />
+    <state width="1801" height="334" key="GridCell.Tab.0.bottom" timestamp="1590831758325">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="334" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590831758325" />
+    <state width="1801" height="334" key="GridCell.Tab.0.center" timestamp="1590831758325">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="334" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590831758325" />
+    <state width="1801" height="334" key="GridCell.Tab.0.left" timestamp="1590831758325">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="334" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590831758325" />
+    <state width="1801" height="334" key="GridCell.Tab.0.right" timestamp="1590831758325">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="334" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590831758325" />
+    <state width="1801" height="340" key="GridCell.Tab.1.bottom" timestamp="1590829474981">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="340" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590829474981" />
+    <state width="1801" height="340" key="GridCell.Tab.1.center" timestamp="1590829474981">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="340" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590829474981" />
+    <state width="1801" height="340" key="GridCell.Tab.1.left" timestamp="1590829474980">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="340" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590829474980" />
+    <state width="1801" height="340" key="GridCell.Tab.1.right" timestamp="1590829474981">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="340" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590829474981" />
+    <state width="926" height="536" key="XDebugger.FullValuePopup" timestamp="1590829178502">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="926" height="536" key="XDebugger.FullValuePopup/67.27.1853.1052@67.27.1853.1052" timestamp="1590829178502" />
+  </component>
+</project>

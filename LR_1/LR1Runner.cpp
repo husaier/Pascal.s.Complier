@@ -12,7 +12,7 @@ stack<string> stackSymbol;
 const int width1 = 50, width2 = 50, width3 = 50;
 
 
-void LR1Runner::run(LR1Table table) {
+void LR1Runner::run(LR1Table& table) {
     cout << "-------------------------------------------------------------------------------------------Runner::run"
          << "------------------------------------------------------------------------------------------------------"
          << endl;

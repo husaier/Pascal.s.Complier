@@ -209,67 +209,6 @@ bool LR1TableMaker::isVt(string s) {
     return false;
 }
 
-//void LR1TableMaker::printOut() {
-//    for (auto & production : productions) {
-//        cout<<production.left<<" -> ";
-//        for(auto & item : production.right)
-//            cout<<item<<' ';
-//        cout<<'\n';
-//    }
-//    cout<<"****************************************\n";
-//    cout<<"非终结符："<<Vn.size()<<"个\n";
-//    for (const auto& symbol : Vn)
-//        cout<<symbol<<'\n';
-//
-//    cout<<"*******************************************\n";
-//    cout<<"终结符："<<Vt.size()<<"个\n";
-//    for (const auto& symbol : Vt)
-//        cout<<symbol<<'\n';
-//}
-//
-//void LR1TableMaker::start() {
-//    load("grammar.txt");
-//    firstSetCalculator.initial(Vn, Vt, productions);
-//
-//    extendGrammar();
-//
-//    vector<LR1Item> tmp;
-//    LR1Item s(productions[3], 0, END);
-//    s.reductionFlag = false;
-//    tmp = closure(s);
-//
-//
-////    cout<<"非终结符：\n";
-////    for (auto & symbol : Vn) {
-////        vector<string> set;
-////        set = firstSetCalculator.parse(symbol);
-////        cout<<"\n*************************************************************\n";
-////        cout<<symbol<<"的first集：\n";
-////        for (const auto& item : set) {
-////            cout<<item<<'\n';
-////        }
-////    }
-////    cout<<"\n终结符：\n";
-////    for (auto & symbol : Vt) {
-////        vector<string> set;
-////        set = firstSetCalculator.parse(symbol);
-////        cout<<"\n*************************************************************\n";
-////        cout<<symbol<<"的first集：\n";
-////        for (const auto& item : set) {
-////            cout<<item<<'\n';
-////        }
-////    }
-////
-////    vector<string> set;
-////    set = firstSetCalculator.parse(END);
-////    cout<<"\n*************************************************************\n";
-////    cout<<END<<"的first集：\n";
-////    for (const auto& item : set) {
-////        cout<<item<<'\n';
-////    }
-//
-//}
-
 vector<string> LR1TableMaker::calculateFirst(const vector<string>& symbols) {
     vector<string> result;
     for (auto &symbol : symbols) {

@@ -8,13 +8,13 @@
 #include <queue>
 #include <iomanip>
 #include <stack>
-#include "LR1TableMaker.h"
+#include "LR1Table.h"
 #include "lexical_analyzer.h"
 
 class LR1Runner {
 
 public:
-    static void run(LR1Table table);
+    static void run(LR1Table &table);
 
     static void load(const vector<LexicalItem>& vector);
 

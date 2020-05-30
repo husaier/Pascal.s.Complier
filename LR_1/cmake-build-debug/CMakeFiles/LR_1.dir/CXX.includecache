@@ -6,31 +6,28 @@
 
 #IncludeRegexTransform: 
 
-<<<<<<< Updated upstream
-/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
-=======
-/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
->>>>>>> Stashed changes
-iostream
+/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.hpp
+stdio.h
+-
+stddef.h
+-
+malloc.h
+-
+errno.h
+-
+limits.h
+-
+math.h
 -
 string
 -
-algorithm
+map
 -
-fstream
+list
 -
-vector
--
-sstream
--
+cJSON.h
+/home/husserl/Pascal.s.Complier/LR_1/cJSON.h
 
-<<<<<<< Updated upstream
-/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.cpp
-LR1TableMaker.h
-/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
-
-/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
-=======
 /home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
 queue
 -
@@ -38,17 +35,46 @@ iomanip
 -
 stack
 -
-LR1TableMaker.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+LR1Table.h
+/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
+lexical_analyzer.h
+/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
->>>>>>> Stashed changes
-FirstSetCalculator.h
-/Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
-set
--
+/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
 map
 -
-utility
+Production.h
+/home/husserl/Pascal.s.Complier/LR_1/Production.h
+fstream
 -
+
+/home/husserl/Pascal.s.Complier/LR_1/Production.h
+iostream
+-
+string
+-
+vector
+-
+CJsonObject.hpp
+/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.hpp
+
+/home/husserl/Pascal.s.Complier/LR_1/cJSON.h
+stdint.h
+-
+
+/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+fstream
+-
+algorithm
+-
+vector
+-
+
+/home/husserl/Pascal.s.Complier/LR_1/main.cpp
+LR1Table.h
+/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
+LR1Runner.h
+/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
+lexical_analyzer.h
+/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
 

@@ -6,20 +6,12 @@
 #include <algorithm>
 #include <fstream>
 #include <vector>
-#include<sstream>
+#include <sstream>
+#include "CJsonObject.hpp"
+#include "Production.h"
 #ifndef LR_1_FIRSTSETCALCULATOR_H
 #define LR_1_FIRSTSETCALCULATOR_H
 using namespace std;
-
-class Production {
-public:
-    string left;         //左部只有一个符号
-    vector<string> right;//右部可能有多个符号
-
-    bool operator== (const Production &t) const {
-        return this->left == t.left && this->right == t.right;
-    }
-};
 
 class FirstSetCalculator {
 public:
