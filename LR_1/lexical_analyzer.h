@@ -58,6 +58,8 @@ static const int ADD_ADDOP = 24;
 static const int ADD_MULOP = 25;
 static const int ADD_DELIMITER = 26;
 
+static const int SPECIAL = 27; // 0..特殊情况
+
 class LexicalItem
 {
 public:

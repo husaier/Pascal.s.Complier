@@ -1,5 +1,5 @@
 PROGRAM yuan (i);
-var R,S,C:real; W:array[0 .. 40]of char;
+var R,S,C:real; W:array[0..40]of char;
 begin
  write('请输入圆的半径');
  readln(R);

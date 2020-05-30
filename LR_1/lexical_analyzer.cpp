@@ -142,6 +142,10 @@ void LexicalAnalyzer::DFA(char t) {
                 state = SUB1_S3;
                 putToBuffer(t);
             }
+            else if (t == '.') {
+                state = SPECIAL;
+                putToBuffer(t);
+            }
             else {
                 state = S0;
                 string s = "附近有不合法的数字：";
@@ -378,6 +382,11 @@ void LexicalAnalyzer::DFA(char t) {
             addToken(DELIMITER);
             break;
         }
+        case SPECIAL: {
+            state = S0;
+            addToken(SPECIAL);
+            break;
+        }
     }
 }
 
@@ -439,6 +448,26 @@ void LexicalAnalyzer::addToken(int type) {
         lexicalItem.symbol = "string";
     else if(type == NUM)
         lexicalItem.symbol = "num";
+    else if(type == SPECIAL) {
+        string s;
+        char t;
+        for (auto c : buffer) {
+            if (c == '.')
+                break;
+            else {
+                char a[2];
+                a[0] = c;
+                a[1] = '\0';
+                s.append(a);
+            }
+        }
+        LexicalItem item(NUM, s);
+        item.symbol = "num";
+        tokenFlow.push_back(item);
+        lexicalItem.token = SUBDELIMITER;
+        lexicalItem.attribute = "..";
+        lexicalItem.symbol = "..";
+    }
     tokenFlow.push_back(lexicalItem);
     buffer.clear();
     if (!fin.eof()) {
