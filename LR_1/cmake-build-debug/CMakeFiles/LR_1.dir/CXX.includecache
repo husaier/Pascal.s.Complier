@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
+<<<<<<< Updated upstream
 /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
+=======
+/home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
+>>>>>>> Stashed changes
 iostream
 -
 string
@@ -20,11 +24,25 @@ vector
 sstream
 -
 
+<<<<<<< Updated upstream
 /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.cpp
 LR1TableMaker.h
 /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
 
 /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
+=======
+/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
+queue
+-
+iomanip
+-
+stack
+-
+LR1TableMaker.h
+/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+
+/home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+>>>>>>> Stashed changes
 FirstSetCalculator.h
 /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
 set

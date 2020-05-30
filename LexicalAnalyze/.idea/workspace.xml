@@ -12,57 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="849cff4b-66bd-4dde-8b19-079c88f5ff6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../LR_1/lexical_analyzer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../LR_1/lexical_analyzer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/FirstSetCalculator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/FirstSetCalculator.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1TableMaker.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1TableMaker.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeSystem.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.16.5/CMakeSystem.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/lexical_analyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/lexical_analyzer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LexicalAnalyze.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/LexicalAnalyze" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/LexicalAnalyze" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/LexicalAnalyze.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/LexicalAnalyze.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/SourceFile.pas" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test1.pas" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexical_analyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lexical_analyzer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexical_analyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/lexical_analyzer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +36,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LR_1" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -109,7 +60,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1590386973089</updated>
-      <workItem from="1590386974508" duration="512000" />
+      <workItem from="1590386974508" duration="987000" />
+      <workItem from="1590400165878" duration="17000" />
     </task>
     <servers />
   </component>
@@ -117,37 +69,41 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1801" height="275" key="GridCell.Tab.0.bottom" timestamp="1590387421051">
+    <state x="739" y="289" key="FileChooserDialogImpl" timestamp="1590400180493">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590387421051" />
-    <state width="1801" height="275" key="GridCell.Tab.0.center" timestamp="1590387421051">
+    <state x="739" y="289" key="FileChooserDialogImpl/67.27.1853.1052@67.27.1853.1052" timestamp="1590400180493" />
+    <state width="1801" height="340" key="GridCell.Tab.0.bottom" timestamp="1590387961247">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="275" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590387421051" />
-    <state width="1801" height="275" key="GridCell.Tab.0.left" timestamp="1590387421051">
+    <state width="1801" height="340" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961247" />
+    <state width="1801" height="340" key="GridCell.Tab.0.center" timestamp="1590387961247">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="275" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590387421051" />
-    <state width="1801" height="275" key="GridCell.Tab.0.right" timestamp="1590387421051">
+    <state width="1801" height="340" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961247" />
+    <state width="1801" height="340" key="GridCell.Tab.0.left" timestamp="1590387961246">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="275" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590387421051" />
-    <state width="1801" height="340" key="GridCell.Tab.1.bottom" timestamp="1590387420453">
+    <state width="1801" height="340" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961246" />
+    <state width="1801" height="340" key="GridCell.Tab.0.right" timestamp="1590387961247">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="340" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590387420453" />
-    <state width="1801" height="340" key="GridCell.Tab.1.center" timestamp="1590387420453">
+    <state width="1801" height="340" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961247" />
+    <state width="1801" height="340" key="GridCell.Tab.1.bottom" timestamp="1590387961248">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="340" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590387420453" />
-    <state width="1801" height="340" key="GridCell.Tab.1.left" timestamp="1590387420453">
+    <state width="1801" height="340" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961248" />
+    <state width="1801" height="340" key="GridCell.Tab.1.center" timestamp="1590387961248">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="340" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590387420453" />
-    <state width="1801" height="340" key="GridCell.Tab.1.right" timestamp="1590387420453">
+    <state width="1801" height="340" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961248" />
+    <state width="1801" height="340" key="GridCell.Tab.1.left" timestamp="1590387961248">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="340" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590387420453" />
+    <state width="1801" height="340" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961248" />
+    <state width="1801" height="340" key="GridCell.Tab.1.right" timestamp="1590387961248">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state width="1801" height="340" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590387961248" />
   </component>
 </project>

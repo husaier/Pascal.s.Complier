@@ -44,12 +44,17 @@ void print(LR1Table table) {
 int main() {
     LR1TableMaker parser;
     parser.load("grammar.txt");
+<<<<<<< Updated upstream
     //test1.txt
+=======
+    //test1,txt
+>>>>>>> Stashed changes
     //test2.txt
     //test3.txt
     //grammar.txt
     LR1Table table = parser.makeTable();
     print(table);
+<<<<<<< Updated upstream
 
     string fileName = "SourceFile.pas";
     LexicalAnalyzer lexicalAnalyzer;
@@ -67,5 +72,8 @@ int main() {
     LR1Runner::load(result);
 
     LR1Runner::run(table);
+=======
+    //LR1Runner::run(table);
+>>>>>>> Stashed changes
     return 0;
 }

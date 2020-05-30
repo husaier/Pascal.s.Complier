@@ -11,12 +11,21 @@ CMakeFiles/LR_1.dir/LR1Runner.cpp.o
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/lexical_analyzer.h
 CMakeFiles/LR_1.dir/LR1TableMaker.cpp.o
+<<<<<<< Updated upstream
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.cpp
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1TableMaker.h
 CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/lexical_analyzer.cpp
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/lexical_analyzer.h
+=======
+ /home/husserl/Pascal.s.Complier/LR_1/FirstSetCalculator.h
+ /home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.cpp
+ /home/husserl/Pascal.s.Complier/LR_1/LR1TableMaker.h
+CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o
+ /home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.cpp
+ /home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+>>>>>>> Stashed changes
 CMakeFiles/LR_1.dir/main.cpp.o
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/FirstSetCalculator.h
  /Users/robinyer/Robinyer/code/softwareEngineering/Pascal.s.Complier3/LR_1/LR1Runner.h

@@ -92,7 +92,6 @@ Simple_expression -> - Term
 Simple_expression -> Simple_expression + Term
 Simple_expression -> Simple_expression - Term
 Simple_expression -> Simple_expression or Term
-Term -> Term mulop Factor
 Term -> Term * Factor
 Term -> Term / Factor
 Term -> Term div Factor
