@@ -1,5 +1,5 @@
 PROGRAM yuan (i);
-var R,S,C:real;var W:array[0..40]of char;
+var R,S,C:real;W:array[0 .. 40]of char;
 begin
  write('请输入圆的半径');
  readln(R);
@@ -8,8 +8,8 @@ begin
  else write('半径大于或等于5');
  S:=pi*r*r;
  C:=pi*r*2;
- writeln('圆的面积为',s:0:4);
-writeln('圆的周长为',c:0:4);
+ writeln('圆的面积为',s);
+writeln('圆的周长为',c);
  W:='fwefawefsdfawefawefawef';
  writeln(w);
  readln;

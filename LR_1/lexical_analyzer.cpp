@@ -108,7 +108,7 @@ void LexicalAnalyzer::DFA(char t) {
                 state = ADD_DELIMITER;
                 putToBuffer(t);
             }
-            else if (t == ' ' || t == '\t' || t == '\n')
+            else if (t == ' ' || t == '\t' || t == '\n' || t == '\r')
                 state = S0;
             else {
                 state = S0;
@@ -354,8 +354,7 @@ void LexicalAnalyzer::DFA(char t) {
             }
             else {
                 state = S0;
-                string s = "未识别的字符：";
-                errorCtr(s + buffer);
+                addToken(DELIMITER);
             }
             break;
         }

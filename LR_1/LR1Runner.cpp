@@ -46,8 +46,10 @@ void LR1Runner::run(LR1Table& table) {
             int tempProd = table.table[s][tempCol].index;  //取出要按哪个产生式R
             Production tempProduction = table.productions.at(tempProd);
             for (int i = 0; i < tempProduction.right.size(); ++i) {    //按照产生式右侧数目来弹出
-                stackState.pop();
-                stackSymbol.pop();
+                if (tempProduction.right[i] != "#"){
+                    stackState.pop();
+                    stackSymbol.pop();
+                }
             }
             stackSymbol.push(tempProduction.left);  //将产生式的左侧符号压入栈
             //根据当前状态栈和遇到的输入符号，确定下一次goto到几号状态
@@ -106,7 +108,7 @@ void LR1Runner::outStackString(stack<string> staTemp) {
         strTemp += staTempR.top() + " ";
         staTempR.pop();
     }
-    cout << setiosflags(ios::left) << setw(width1) << strTemp << resetiosflags(ios::left);
+    cout << setiosflags(ios::left) << setw(width1) << strTemp << resetiosflags(ios::left)<<"\n";
 }
 
 void LR1Runner::outStrInput(vector<string> tempVector, int temp) {
