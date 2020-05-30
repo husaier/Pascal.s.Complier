@@ -231,6 +231,33 @@ Production.cpp.s:
 	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/Production.cpp.s
 .PHONY : Production.cpp.s
 
+SymbolTable.o: SymbolTable.cpp.o
+
+.PHONY : SymbolTable.o
+
+# target to build an object file
+SymbolTable.cpp.o:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolTable.cpp.o
+.PHONY : SymbolTable.cpp.o
+
+SymbolTable.i: SymbolTable.cpp.i
+
+.PHONY : SymbolTable.i
+
+# target to preprocess a source file
+SymbolTable.cpp.i:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolTable.cpp.i
+.PHONY : SymbolTable.cpp.i
+
+SymbolTable.s: SymbolTable.cpp.s
+
+.PHONY : SymbolTable.s
+
+# target to generate assembly for a file
+SymbolTable.cpp.s:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolTable.cpp.s
+.PHONY : SymbolTable.cpp.s
+
 cJSON.o: cJSON.c.o
 
 .PHONY : cJSON.o
@@ -333,6 +360,9 @@ help:
 	@echo "... Production.o"
 	@echo "... Production.i"
 	@echo "... Production.s"
+	@echo "... SymbolTable.o"
+	@echo "... SymbolTable.i"
+	@echo "... SymbolTable.s"
 	@echo "... cJSON.o"
 	@echo "... cJSON.i"
 	@echo "... cJSON.s"
