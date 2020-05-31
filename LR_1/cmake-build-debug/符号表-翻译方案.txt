@@ -1,33 +1,23 @@
 Program -> Program_head Program_body .
-Program_head -> program id ( Identifier_list ) ;
-//声明：定位，查询本块中是否重复定义，插入id
+Program_head -> program id ( Identifier_list ) ; //声明：定位，插入id   1
 Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
-Identifier_list -> Identifier_list , id
-//声明：查询本块中是否重复定义，插入id
-Identifier_list -> id
-//声明：查询本块中是否重复定义，插入id
+Identifier_list -> Identifier_list , id   //声明：查询本块中是否重复定义，插入id  3
+Identifier_list -> id  //声明：查询本块中是否重复定义，插入id  4
 Const_declarations -> const Const_declaration ;
 Const_declarations -> #
-Const_declaration -> Const_declaration ; id = Const_variable
-//声明：查询本块中是否重复定义，插入id
-Const_declaration -> id = Const_variable
-//声明：查询本块中是否重复定义，插入id
-Const_variable -> + id
-//这里属于引用，查询本块、父块中是否有定义
-Const_variable -> - id
-//这里属于引用，查询本块、父块中是否有定义
-Const_variable -> id
-//这里属于引用，查询本块、父块中是否有定义
+Const_declaration -> Const_declaration ; id = Const_variable //声明：查询本块中是否重复定义，插入id  7
+Const_declaration -> id = Const_variable  //声明：查询本块中是否重复定义，插入id  8
+Const_variable -> + id  //这里属于引用，查询本块、父块中是否有定义  9
+Const_variable -> - id //这里属于引用，查询本块、父块中是否有定义  10
+Const_variable -> id  //这里属于引用，查询本块、父块中是否有定义11
 Const_variable -> + num
 Const_variable -> - num
 Const_variable -> num
 Const_variable -> string
 Type_declarations -> type Type_declaration ;
 Type_declarations -> #
-Type_declaration -> Type_declaration ; id = Type
-//声明：查询本块中是否重复定义，插入id
-Type_declaration -> id = Type
-//声明：查询本块中是否重复定义，插入id
+Type_declaration -> Type_declaration ; id = Type //声明：查询本块中是否重复定义，插入id  18
+Type_declaration -> id = Type //声明：查询本块中是否重复定义，插入id  19
 Type -> Standard_type
 Type -> record Record_body end
 Type -> array [ Periods ] of Type
@@ -47,10 +37,8 @@ Var_declaration -> Identifier_list : Type
 Subprogram_declarations -> Subprogram_declarations Subprogram_declaration ;
 Subprogram_declarations -> #
 Subprogram_declaration -> Subprogram_head Program_body
-Subprogram_head -> function id Formal_parameter : Standard_type ;
-//定位，声明：查询本块中是否重复定义，插入id
-Subprogram_head -> procedure id Formal_parameter ;
-//定位，声明：查询本块中是否重复定义，插入id
+Subprogram_head -> function id Formal_parameter : Standard_type ; //定位，声明：插入id  39
+Subprogram_head -> procedure id Formal_parameter ;  //定位，声明：插入id 40
 Formal_parameter -> ( Parameter_lists )
 Formal_parameter -> #
 Parameter_lists -> Parameter_lists ; Parameter_list
@@ -59,8 +47,7 @@ Parameter_list -> Var_parameter
 Parameter_list -> Value_parameter
 Var_parameter -> var Value_parameter
 Value_parameter -> Identifier_list : Standard_type
-Compound_statement -> begin Statement_list end
-//看见end要重定位
+Compound_statement -> begin Statement_list end //看见end要重定位  49
 Statement_list -> Statement_list ; Statement
 Statement_list -> Statement
 Statement -> Variable assignop Expression
@@ -70,16 +57,13 @@ Statement -> if Expression then Statement Else_part
 Statement -> case Expression of Case_body end
 Statement -> while Expression do Statement
 Statement -> repeat Statement_list until Expression
-Statement -> for id assignop Expression Updown Expression do Statement
-//这里属于引用，查询本块、父块中是否有定义
+Statement -> for id assignop Expression Updown Expression do Statement  //这里属于引用，查询本块、父块中是否有定义 59
 Statement -> #
-Variable -> id Id_varparts
-//这里属于引用，查询本块、父块中是否有定义
+Variable -> id Id_varparts  //这里属于引用，查询本块、父块中是否有定义  61
 Id_varparts -> Id_varparts Id_varpart
 Id_varparts -> #
 Id_varpart -> [ Expression_list ]
-Id_varpart -> . id
-//这里属于引用，查询本块、父块中是否有定义
+Id_varpart -> . id  //这里属于引用，查询本块、父块中是否有定义  65
 Else_part -> else Statement
 Else_part -> #
 Case_body -> Branch_list
@@ -91,10 +75,8 @@ Const_list -> Const_list , Const_variable
 Const_list -> Const_variable
 Updown -> to
 Updown -> downto
-Call_procedure_statement -> id
-//这里属于引用，查询本块、父块中是否有定义
-Call_procedure_statement -> id ( Expression_list )
-//这里属于引用，查询本块、父块中是否有定义
+Call_procedure_statement -> id //这里属于引用，查询本块、父块中是否有定义 77
+Call_procedure_statement -> id ( Expression_list )  //这里属于引用，查询本块、父块中是否有定义  78
 Expression_list -> Expression_list , Expression
 Expression_list -> Expression
 Expression -> Simple_expression = Simple_expression
@@ -118,11 +100,9 @@ Term -> Term and Factor
 Term -> Factor
 Factor -> Unsign_const_variable
 Factor -> variable
-Factor -> id ( Expression_list )
-//这里属于引用，查询本块、父块中是否有定义
+Factor -> id ( Expression_list ) //这里属于引用，查询本块、父块中是否有定义  102
 Factor -> ( Expression )
 Factor -> not Factor
-Unsign_const_variable -> id
-//这里属于引用，查询本块、父块中是否有定义
+Unsign_const_variable -> id  //这里属于引用，查询本块、父块中是否有定义 105
 Unsign_const_variable -> num
 Unsign_const_variable -> string

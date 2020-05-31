@@ -30,10 +30,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5d34cab-5759-442f-8bc2-71e30e882016" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/TranslateScheme.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TranslateScheme.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LR1Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LR1Runner.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LR1Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/LR1Runner.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SymbolBlock.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolBlock.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SymbolBlock.h" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolBlock.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/LR_1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/LR_1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/LR_1.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/LR_1.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/符号表-翻译方案.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/符号表-翻译方案.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,13 +92,13 @@
     <property name="settings.editor.selected.configurable" value="Console" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/cmake-build-debug" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/cmake-build-debug" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmake-build-debug" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
@@ -109,7 +130,7 @@
       <workItem from="1590831198075" duration="4755000" />
       <workItem from="1590837754637" duration="2858000" />
       <workItem from="1590840819653" duration="1148000" />
-      <workItem from="1590900266751" duration="5588000" />
+      <workItem from="1590900266751" duration="12099000" />
     </task>
     <servers />
   </component>
@@ -151,44 +172,53 @@
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state x="739" y="175" key="FileChooserDialogImpl/67.27.1853.1052@67.27.1853.1052" timestamp="1590834222601" />
-    <state width="1801" height="416" key="GridCell.Tab.0.bottom" timestamp="1590901985594">
+    <state width="1801" height="349" key="GridCell.Tab.0.bottom" timestamp="1590915123469">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="416" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590901985594" />
-    <state width="1801" height="416" key="GridCell.Tab.0.center" timestamp="1590901985594">
+    <state width="1801" height="349" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590915123469" />
+    <state width="1801" height="349" key="GridCell.Tab.0.center" timestamp="1590915123468">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="416" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590901985594" />
-    <state width="1801" height="416" key="GridCell.Tab.0.left" timestamp="1590901985593">
+    <state width="1801" height="349" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590915123468" />
+    <state width="1801" height="349" key="GridCell.Tab.0.left" timestamp="1590915123468">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="416" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590901985593" />
-    <state width="1801" height="416" key="GridCell.Tab.0.right" timestamp="1590901985594">
+    <state width="1801" height="349" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590915123468" />
+    <state width="1801" height="349" key="GridCell.Tab.0.right" timestamp="1590915123468">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="416" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590901985594" />
-    <state width="1801" height="505" key="GridCell.Tab.1.bottom" timestamp="1590840612910">
+    <state width="1801" height="349" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590915123468" />
+    <state width="1801" height="505" key="GridCell.Tab.1.bottom" timestamp="1590915122860">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="505" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590840612910" />
-    <state width="1801" height="505" key="GridCell.Tab.1.center" timestamp="1590840612910">
+    <state width="1801" height="505" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1590915122860" />
+    <state width="1801" height="505" key="GridCell.Tab.1.center" timestamp="1590915122860">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="505" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590840612910" />
-    <state width="1801" height="505" key="GridCell.Tab.1.left" timestamp="1590840612909">
+    <state width="1801" height="505" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1590915122860" />
+    <state width="1801" height="505" key="GridCell.Tab.1.left" timestamp="1590915122860">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="505" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590840612909" />
-    <state width="1801" height="505" key="GridCell.Tab.1.right" timestamp="1590840612910">
+    <state width="1801" height="505" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1590915122860" />
+    <state width="1801" height="505" key="GridCell.Tab.1.right" timestamp="1590915122860">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="505" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590840612910" />
+    <state width="1801" height="505" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1590915122860" />
     <state x="515" y="128" width="953" height="749" key="SettingsEditor" timestamp="1590313628994">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state x="515" y="128" width="953" height="749" key="SettingsEditor/67.27.1853.1052@67.27.1853.1052" timestamp="1590313628994" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/LR1Runner.cpp</url>
+          <line>170</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="table.table[937][39]" language="ObjectiveC" />

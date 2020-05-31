@@ -258,6 +258,33 @@ SymbolBlock.cpp.s:
 	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolBlock.cpp.s
 .PHONY : SymbolBlock.cpp.s
 
+TranslateScheme.o: TranslateScheme.cpp.o
+
+.PHONY : TranslateScheme.o
+
+# target to build an object file
+TranslateScheme.cpp.o:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/TranslateScheme.cpp.o
+.PHONY : TranslateScheme.cpp.o
+
+TranslateScheme.i: TranslateScheme.cpp.i
+
+.PHONY : TranslateScheme.i
+
+# target to preprocess a source file
+TranslateScheme.cpp.i:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/TranslateScheme.cpp.i
+.PHONY : TranslateScheme.cpp.i
+
+TranslateScheme.s: TranslateScheme.cpp.s
+
+.PHONY : TranslateScheme.s
+
+# target to generate assembly for a file
+TranslateScheme.cpp.s:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/TranslateScheme.cpp.s
+.PHONY : TranslateScheme.cpp.s
+
 cJSON.o: cJSON.c.o
 
 .PHONY : cJSON.o
@@ -363,6 +390,9 @@ help:
 	@echo "... SymbolBlock.o"
 	@echo "... SymbolBlock.i"
 	@echo "... SymbolBlock.s"
+	@echo "... TranslateScheme.o"
+	@echo "... TranslateScheme.i"
+	@echo "... TranslateScheme.s"
 	@echo "... cJSON.o"
 	@echo "... cJSON.i"
 	@echo "... cJSON.s"

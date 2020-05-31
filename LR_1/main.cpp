@@ -11,7 +11,7 @@ int main() {
     table.loadJsonFile(fileName);
     //table.printOut();
 
-    string fileName = "test1.pas";
+    string fileName = "SourceFile.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;
@@ -24,8 +24,9 @@ int main() {
         cout << item.tokenToString() << "\t" << item.attribute<< '\t'<< item.symbol << endl;
     }
 
-    LR1Runner::load(result);
+    LR1Runner runner;
+    runner.load(result);
 
-    LR1Runner::run(table);
+    runner.run(table);
     return 0;
 }

@@ -13,8 +13,8 @@ class SymbolBlock;
 
 class SymbolTableLine {
 public:
-    SymbolTableLine(int InId, string InName, int InType, int InOffset, int InDimension, int InDeclarationLine,
-                    SymbolTableLine *InPoint) {
+    SymbolTableLine(int InId, string InName, int InType, int InOffset, int InDimension, int InDeclarationLine
+    ) {
         id = InId;//序号
         name = InName;//名字
         type = InType;//类型
@@ -22,8 +22,8 @@ public:
         dimension = InDimension;//维数,0,1,2,3,...
         declarationLine = InDeclarationLine;//声明行
         vector<int> referenceLineVector;//引用行 创建时为空
-        point = InPoint; //指向自己的指针
-        blockPoint = NULL;
+        point = nullptr; //指向存储位置的指针
+        blockPoint = nullptr;
     }
 
 
@@ -35,7 +35,7 @@ public:
     static const int CHAR = 4;
     static const int ARRAY = 5;
     static const int RECORD = 6;
-    static const int FUNCTION = 6;
+    static const int FUNCTION = 7;
 
 
     int id;//序号
@@ -47,6 +47,8 @@ public:
     vector<int> referenceLineVector;//引用行
     SymbolTableLine *point; //自己指针
     SymbolBlock *blockPoint;//指向下一个表的指针
+
+    void printLine(SymbolTableLine *InLinePoint);
 };
 
 
@@ -58,12 +60,21 @@ public:
     //反映射表，建立string -> index的映射,name -> id
     map<string, int> invMap;
     int rowNum = 0;
-//    int colNum = 8;
+    //int colNum = 8;
 
     SymbolTableLine *query(string name);
+
     SymbolTableLine *insert(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
     SymbolBlock *makeBlock(SymbolBlock *InPrevious);
+
     void deleteBlock(SymbolBlock *InPoint);
+
+    void printBlock(SymbolBlock *InPoint);
+};
+
+class BlockIndexTable {
+public:
+    vector<SymbolBlock*> blockIndexTable;
 };
 
 #endif //LR_1_SYMBOLTABLE_H

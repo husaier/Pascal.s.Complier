@@ -13,6 +13,7 @@ CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../LR1Runner.cpp
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../LR1Runner.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../LR1Table.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../Production.h
+CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../SymbolBlock.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../cJSON.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../lexical_analyzer.h
 
@@ -30,6 +31,12 @@ CMakeFiles/LR_1.dir/Production.cpp.o: ../cJSON.h
 CMakeFiles/LR_1.dir/SymbolBlock.cpp.o: ../SymbolBlock.cpp
 CMakeFiles/LR_1.dir/SymbolBlock.cpp.o: ../SymbolBlock.h
 
+CMakeFiles/LR_1.dir/TranslateScheme.cpp.o: ../CJsonObject.hpp
+CMakeFiles/LR_1.dir/TranslateScheme.cpp.o: ../Production.h
+CMakeFiles/LR_1.dir/TranslateScheme.cpp.o: ../TranslateScheme.cpp
+CMakeFiles/LR_1.dir/TranslateScheme.cpp.o: ../TranslateScheme.h
+CMakeFiles/LR_1.dir/TranslateScheme.cpp.o: ../cJSON.h
+
 CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o: ../lexical_analyzer.cpp
 CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o: ../lexical_analyzer.h
 
@@ -37,6 +44,7 @@ CMakeFiles/LR_1.dir/main.cpp.o: ../CJsonObject.hpp
 CMakeFiles/LR_1.dir/main.cpp.o: ../LR1Runner.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../LR1Table.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../Production.h
+CMakeFiles/LR_1.dir/main.cpp.o: ../SymbolBlock.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../cJSON.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../lexical_analyzer.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../main.cpp

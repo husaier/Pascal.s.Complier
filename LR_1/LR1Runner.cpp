@@ -60,6 +60,7 @@ void LR1Runner::run(LR1Table& table) {
             }
             cout << "R" + to_string(table.table[s][tempCol].index) + " by " + tempProduction.left + " -> " + tempString
                  << endl;
+            switchTable(tempProd, stackSymbol.top());
         } else if (currentType == TableItem::ACC) {
             cout << "ACC" << endl;
             break;
@@ -130,5 +131,69 @@ void LR1Runner::load(const vector<LexicalItem> &result) {
     cout << endl;
     vectorInput.emplace_back("$");
 }
+
+void LR1Runner::switchTable(int type, const string& id) {
+    switch(type) {
+        case 2:
+        case 40:
+        case 41:
+            locate(id);
+            break;
+        case 4:
+        case 5:
+        case 8:
+        case 9:
+        case 19:
+        case 20:
+            declareID(id);
+            break;
+        case 10:
+        case 11:
+        case 12:
+        case 60:
+        case 62:
+        case 66:
+        case 78:
+        case 79:
+        case 103:
+        case 106:
+            quoteID(id);
+            break;
+        case 50:
+            relocate();
+            break;
+        default:
+            break;
+    }
+}
+
+void LR1Runner::declareID(string id) {
+    if (curBlock->query(id) != NULL) {
+        curBlock->insert(id, 0, 0, 0, 0);
+    }
+    else {
+        cout<<"语义错误！在作用域内有重复定义的标识符"<<endl;
+    }
+}
+
+void LR1Runner::quoteID(string id) {
+    if (curBlock->query(id) == NULL)
+        cout<<"语义错误！引用了未定义的标识符";
+}
+
+void LR1Runner::locate(string id) {
+    SymbolBlock* childBlock;
+    childBlock = new SymbolBlock();
+    childBlock->insert(id, 0, 0, 0, 0);
+    curBlock = childBlock;
+}
+
+void LR1Runner::relocate() {
+    SymbolBlock* parentBlock = curBlock->previous;
+    delete curBlock;
+    curBlock = parentBlock;
+}
+
+
 
 

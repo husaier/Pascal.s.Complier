@@ -12,8 +12,15 @@
 
 //查找操作：按给定的名字查找，若查找成功则返回该行的指针，否则返回空指针
 SymbolTableLine *SymbolBlock::query(string name) {
-    const map<string, int>::iterator &iter = invMap.find(name);
-    if (iter != invMap.end())
+    map<string, int>::iterator iter;
+    bool flag;
+    try {
+        iter = invMap.find(name);
+        flag = true;
+    } catch (exception e) {
+        flag = false;
+    }
+    if (flag)
         return &symbolBlock[iter->second];
     else {//当前块没找到，则向外查询
         SymbolTableLine *tempPoint = previous->query(name);
@@ -27,13 +34,11 @@ SymbolTableLine *SymbolBlock::query(string name) {
 
 //插入操作：按给定的名字查表，若查找失败，则在表中建立新的一行，并返回该行的指针，若查找成功则报错，注意作用域的范围
 SymbolTableLine *SymbolBlock::insert(string name, int type, int offset, int dimension, int declarationLine) {
-
     if (SymbolBlock::query(name)) {
         printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
         return nullptr;
     } else {
-        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine,
-                                              &symbolBlock[rowNum]);
+        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine);
         rowNum++;
         if (type == 9999999) {//如果需要新建符号表
             ////高亮未完工
@@ -59,3 +64,23 @@ void SymbolBlock::deleteBlock(SymbolBlock *InPoint) {
     delete InPoint;
 }
 
+void SymbolBlock::printBlock(SymbolBlock *InPoint) {
+    printf("InPoint:%p\n", InPoint);
+    printf("perviousPoint:%p\n", InPoint->previous);
+    printf("rowNum:%d\n", InPoint->rowNum);
+    for (int i = 0; i < InPoint->symbolBlock.size(); ++i) {
+        InPoint->symbolBlock[i].printLine(&InPoint->symbolBlock[i]);//逐行输出
+    }
+}
+
+
+void SymbolTableLine::printLine(SymbolTableLine *InLinePoint) {
+    printf("id:%3d\tname:%8s\ttype:%d\toffset:%d\tdimension:%d\tdeclarationLine:%d\tpoint:%p\tblockPoint:%p\treferenceLineVector:",
+           InLinePoint->id, InLinePoint->name.c_str(),
+           InLinePoint->type, InLinePoint->offset, InLinePoint->dimension, InLinePoint->declarationLine,
+           InLinePoint->point, InLinePoint->blockPoint);
+    for (int i = 0; i < InLinePoint->referenceLineVector.size(); ++i) {
+        printf(" %d", InLinePoint->referenceLineVector[i]);
+    }
+    printf("\n");
+}
