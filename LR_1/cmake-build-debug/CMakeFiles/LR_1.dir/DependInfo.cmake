@@ -5,23 +5,23 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/husserl/Pascal.s.Complier/LR_1/cJSON.c" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cJSON.c" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o"
   )
-set(CMAKE_C_COMPILER_ID "GNU")
+set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR_1/LR1Table.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR_1/Production.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR_1/SymbolTable.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolTable.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR_1/main.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/CJsonObject.cpp" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/LR1Runner.cpp" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/LR1Table.cpp" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/Production.cpp" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/SymbolTable.cpp" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolTable.cpp.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/lexical_analyzer.cpp" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o"
+  "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/main.cpp" "/Users/robinyer/Robinyer/code/exchangePrinciple/Pascal.s.Complier5.31/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
