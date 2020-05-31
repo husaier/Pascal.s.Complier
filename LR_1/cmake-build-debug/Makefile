@@ -231,32 +231,32 @@ Production.cpp.s:
 	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/Production.cpp.s
 .PHONY : Production.cpp.s
 
-SymbolTable.o: SymbolTable.cpp.o
+SymbolBlock.o: SymbolBlock.cpp.o
 
-.PHONY : SymbolTable.o
+.PHONY : SymbolBlock.o
 
 # target to build an object file
-SymbolTable.cpp.o:
-	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolTable.cpp.o
-.PHONY : SymbolTable.cpp.o
+SymbolBlock.cpp.o:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolBlock.cpp.o
+.PHONY : SymbolBlock.cpp.o
 
-SymbolTable.i: SymbolTable.cpp.i
+SymbolBlock.i: SymbolBlock.cpp.i
 
-.PHONY : SymbolTable.i
+.PHONY : SymbolBlock.i
 
 # target to preprocess a source file
-SymbolTable.cpp.i:
-	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolTable.cpp.i
-.PHONY : SymbolTable.cpp.i
+SymbolBlock.cpp.i:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolBlock.cpp.i
+.PHONY : SymbolBlock.cpp.i
 
-SymbolTable.s: SymbolTable.cpp.s
+SymbolBlock.s: SymbolBlock.cpp.s
 
-.PHONY : SymbolTable.s
+.PHONY : SymbolBlock.s
 
 # target to generate assembly for a file
-SymbolTable.cpp.s:
-	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolTable.cpp.s
-.PHONY : SymbolTable.cpp.s
+SymbolBlock.cpp.s:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/SymbolBlock.cpp.s
+.PHONY : SymbolBlock.cpp.s
 
 cJSON.o: cJSON.c.o
 
@@ -360,9 +360,9 @@ help:
 	@echo "... Production.o"
 	@echo "... Production.i"
 	@echo "... Production.s"
-	@echo "... SymbolTable.o"
-	@echo "... SymbolTable.i"
-	@echo "... SymbolTable.s"
+	@echo "... SymbolBlock.o"
+	@echo "... SymbolBlock.i"
+	@echo "... SymbolBlock.s"
 	@echo "... cJSON.o"
 	@echo "... cJSON.i"
 	@echo "... cJSON.s"

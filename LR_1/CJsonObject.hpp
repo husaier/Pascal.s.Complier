@@ -13,7 +13,6 @@
 
 #include <stdio.h>
 #include <stddef.h>
-#include <malloc.h>
 #include <errno.h>
 #include <limits.h>
 #include <math.h>

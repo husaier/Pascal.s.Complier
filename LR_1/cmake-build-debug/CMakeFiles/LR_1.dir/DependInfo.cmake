@@ -17,7 +17,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o"
   "/home/husserl/Pascal.s.Complier/LR_1/LR1Table.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o"
   "/home/husserl/Pascal.s.Complier/LR_1/Production.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR_1/SymbolTable.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolTable.cpp.o"
+  "/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o"
   "/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o"
   "/home/husserl/Pascal.s.Complier/LR_1/main.cpp" "/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o"
   )

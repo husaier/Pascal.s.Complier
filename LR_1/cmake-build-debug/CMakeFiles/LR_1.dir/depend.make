@@ -27,8 +27,8 @@ CMakeFiles/LR_1.dir/Production.cpp.o: ../Production.cpp
 CMakeFiles/LR_1.dir/Production.cpp.o: ../Production.h
 CMakeFiles/LR_1.dir/Production.cpp.o: ../cJSON.h
 
-CMakeFiles/LR_1.dir/SymbolTable.cpp.o: ../SymbolTable.cpp
-CMakeFiles/LR_1.dir/SymbolTable.cpp.o: ../SymbolTable.h
+CMakeFiles/LR_1.dir/SymbolBlock.cpp.o: ../SymbolBlock.cpp
+CMakeFiles/LR_1.dir/SymbolBlock.cpp.o: ../SymbolBlock.h
 
 CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o: ../lexical_analyzer.cpp
 CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o: ../lexical_analyzer.h

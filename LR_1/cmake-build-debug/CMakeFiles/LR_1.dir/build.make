@@ -148,18 +148,18 @@ CMakeFiles/LR_1.dir/CJsonObject.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR_1.dir/CJsonObject.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR_1/CJsonObject.cpp -o CMakeFiles/LR_1.dir/CJsonObject.cpp.s
 
-CMakeFiles/LR_1.dir/SymbolTable.cpp.o: CMakeFiles/LR_1.dir/flags.make
-CMakeFiles/LR_1.dir/SymbolTable.cpp.o: ../SymbolTable.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/LR_1.dir/SymbolTable.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR_1.dir/SymbolTable.cpp.o -c /home/husserl/Pascal.s.Complier/LR_1/SymbolTable.cpp
+CMakeFiles/LR_1.dir/SymbolBlock.cpp.o: CMakeFiles/LR_1.dir/flags.make
+CMakeFiles/LR_1.dir/SymbolBlock.cpp.o: ../SymbolBlock.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/LR_1.dir/SymbolBlock.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR_1.dir/SymbolBlock.cpp.o -c /home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.cpp
 
-CMakeFiles/LR_1.dir/SymbolTable.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR_1.dir/SymbolTable.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR_1/SymbolTable.cpp > CMakeFiles/LR_1.dir/SymbolTable.cpp.i
+CMakeFiles/LR_1.dir/SymbolBlock.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR_1.dir/SymbolBlock.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.cpp > CMakeFiles/LR_1.dir/SymbolBlock.cpp.i
 
-CMakeFiles/LR_1.dir/SymbolTable.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR_1.dir/SymbolTable.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR_1/SymbolTable.cpp -o CMakeFiles/LR_1.dir/SymbolTable.cpp.s
+CMakeFiles/LR_1.dir/SymbolBlock.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR_1.dir/SymbolBlock.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.cpp -o CMakeFiles/LR_1.dir/SymbolBlock.cpp.s
 
 # Object files for target LR_1
 LR_1_OBJECTS = \
@@ -170,7 +170,7 @@ LR_1_OBJECTS = \
 "CMakeFiles/LR_1.dir/Production.cpp.o" \
 "CMakeFiles/LR_1.dir/cJSON.c.o" \
 "CMakeFiles/LR_1.dir/CJsonObject.cpp.o" \
-"CMakeFiles/LR_1.dir/SymbolTable.cpp.o"
+"CMakeFiles/LR_1.dir/SymbolBlock.cpp.o"
 
 # External object files for target LR_1
 LR_1_EXTERNAL_OBJECTS =
@@ -182,7 +182,7 @@ LR_1: CMakeFiles/LR_1.dir/LR1Table.cpp.o
 LR_1: CMakeFiles/LR_1.dir/Production.cpp.o
 LR_1: CMakeFiles/LR_1.dir/cJSON.c.o
 LR_1: CMakeFiles/LR_1.dir/CJsonObject.cpp.o
-LR_1: CMakeFiles/LR_1.dir/SymbolTable.cpp.o
+LR_1: CMakeFiles/LR_1.dir/SymbolBlock.cpp.o
 LR_1: CMakeFiles/LR_1.dir/build.make
 LR_1: CMakeFiles/LR_1.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable LR_1"

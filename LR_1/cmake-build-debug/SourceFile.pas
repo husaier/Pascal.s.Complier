@@ -1,16 +1,30 @@
-PROGRAM yuan (i);
-var R,S,C:real; W:array[0..40]of char;
-begin
- write('请输入圆的半径');
- readln(R);
- if R<5 
- then write('半径小于5')
- else write('半径大于或等于5');
- S:=pi*r*r;
- C:=pi*r*2;
- writeln('圆的面积为',s);
- writeln('圆的周长为',c);
- W:='fwefawefsdfawefawefawef';
- writeln(w);
- readln;
-END.
+Program sort(input, output);
+    var a: array[0..10] of integer;
+        x : integer;
+    procedure readarra;
+        var i: integer;
+        begin for i: =1 to 9 do read(a(i]) end;
+    procedure exchange(i,i: integer);
+        begin x: =a[i], a[i]: =a[j]; a[j]: =x end;
+        procedure quicksort(m, n: integer);
+        var k, v: integer;
+        function partition(y, z: integer): integer;
+        var i,j: integer;
+        begin
+            {a;}
+            {v;}
+            exchange(i, j);
+        end; { end of partition }
+        begin
+            if (n>m)then
+                begin
+                    i: =partition (m, n);
+                    quicksort(m, i-1);
+                    quicksort (i+l, n);
+                end
+        end {end of quicksort}
+    begin
+        a[0]=-999;a[10]=999;
+        readarray;
+        quicksort(1, 9)
+    end. {end of sort}

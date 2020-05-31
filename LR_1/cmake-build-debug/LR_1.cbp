@@ -108,10 +108,10 @@
 		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/Production.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/SymbolTable.cpp">
+		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/SymbolTable.h">
+		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.h">
 			<Option target="LR_1"/>
 		</Unit>
 		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/cJSON.c">

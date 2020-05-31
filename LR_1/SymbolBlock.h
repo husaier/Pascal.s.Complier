@@ -9,7 +9,7 @@
 #define LR_1_SYMBOLTABLE_H
 using namespace std;
 
-class SymbolTable;
+class SymbolBlock;
 
 class SymbolTableLine {
 public:
@@ -23,16 +23,20 @@ public:
         declarationLine = InDeclarationLine;//声明行
         vector<int> referenceLineVector;//引用行 创建时为空
         point = InPoint; //指向自己的指针
-        tablePoint = NULL;
+        blockPoint = NULL;
     }
 
 
 //      类型
 //    static const int  = 0;
-//    static const int  = 1;
-//    static const int  = 2;
-//    static const int  = 3;
-//    static const int  = 4;
+    static const int INTEGER = 1;
+    static const int REAL = 2;
+    static const int BOOLEAN = 3;
+    static const int CHAR = 4;
+    static const int ARRAY = 5;
+    static const int RECORD = 6;
+    static const int FUNCTION = 6;
+
 
     int id;//序号
     string name;//名字
@@ -42,15 +46,15 @@ public:
     int declarationLine;//声明行
     vector<int> referenceLineVector;//引用行
     SymbolTableLine *point; //自己指针
-    SymbolTable *tablePoint;//指向下一个表的指针
+    SymbolBlock *blockPoint;//指向下一个表的指针
 };
 
 
-class SymbolTable {
+class SymbolBlock {
 public:
-    SymbolTable *previous;//用于指向外围的符号表
+    SymbolBlock *previous = NULL;//用于指向外围的符号表
     //符号表
-    vector<SymbolTableLine> symbolTable;
+    vector<SymbolTableLine> symbolBlock;
     //反映射表，建立string -> index的映射,name -> id
     map<string, int> invMap;
     int rowNum = 0;
@@ -58,9 +62,8 @@ public:
 
     SymbolTableLine *query(string name);
     SymbolTableLine *insert(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
-    SymbolTable *makeTable(SymbolTable *InPrevious);
-    void deleteTable(SymbolTable *InPoint);
+    SymbolBlock *makeBlock(SymbolBlock *InPrevious);
+    void deleteBlock(SymbolBlock *InPoint);
 };
-
 
 #endif //LR_1_SYMBOLTABLE_H
