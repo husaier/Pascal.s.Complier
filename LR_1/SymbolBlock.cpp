@@ -13,14 +13,8 @@
 //查找操作：按给定的名字查找，若查找成功则返回该行的指针，否则返回空指针
 SymbolTableLine *SymbolBlock::query(string name) {
     map<string, int>::iterator iter;
-    bool flag;
-    try {
-        iter = invMap.find(name);
-        flag = true;
-    } catch (exception e) {
-        flag = false;
-    }
-    if (flag)
+    iter = invMap.find(name);
+    if (iter != invMap.end())
         return &symbolBlock[iter->second];
     else {//当前块没找到，则向外查询
         SymbolTableLine *tempPoint = previous->query(name);
@@ -34,7 +28,7 @@ SymbolTableLine *SymbolBlock::query(string name) {
 
 //插入操作：按给定的名字查表，若查找失败，则在表中建立新的一行，并返回该行的指针，若查找成功则报错，注意作用域的范围
 SymbolTableLine *SymbolBlock::insert(string name, int type, int offset, int dimension, int declarationLine) {
-    if (SymbolBlock::query(name)) {
+    if (blockQuery(name)) {
         printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
         return nullptr;
     } else {
@@ -50,9 +44,10 @@ SymbolTableLine *SymbolBlock::insert(string name, int type, int offset, int dime
 
 //定位操作，为子过程或函数中声明的局部名字创建符号子表
 SymbolBlock *SymbolBlock::makeBlock(SymbolBlock *InPrevious) {
-    SymbolBlock block;
-    block.previous = InPrevious;
-    return &block;
+    SymbolBlock *block;
+    block = new SymbolBlock();
+    block->previous = InPrevious;
+    return block;
 }
 
 //重定位操作，从符号表中"删除"局部于给定函数或过程的所有名字
@@ -70,6 +65,15 @@ void SymbolBlock::printBlock(SymbolBlock *InPoint) {
     printf("rowNum:%d\n", InPoint->rowNum);
     for (int i = 0; i < InPoint->symbolBlock.size(); ++i) {
         InPoint->symbolBlock[i].printLine(&InPoint->symbolBlock[i]);//逐行输出
+    }
+}
+
+SymbolTableLine *SymbolBlock::blockQuery(string name) {
+    const map<string, int>::iterator &iter = invMap.find(name);
+    if (iter != invMap.end())
+        return &symbolBlock[iter->second];
+    else {//当前块没找到，则向返回空指针
+        return nullptr;
     }
 }
 

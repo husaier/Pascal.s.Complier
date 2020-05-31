@@ -66,9 +66,12 @@ public:
     LexicalItem(int type, string s) {
         token = type;
         attribute = s;
+        line = 0;
+        symbol = "";
     }
 
     int token;
+    int line;
     string symbol;
     string attribute;
 

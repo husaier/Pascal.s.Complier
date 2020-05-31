@@ -440,6 +440,7 @@ void LexicalAnalyzer::addToken(int type) {
     // string attri = StringToUtf(buffer);
     LexicalItem lexicalItem(type, buffer);
     lexicalItem.symbol = buffer;
+    lexicalItem.line = lines;
     if (type == ID)
         lexicalItem.symbol = "id";
     else if(type == ASSIGNOP)
@@ -463,6 +464,7 @@ void LexicalAnalyzer::addToken(int type) {
         }
         LexicalItem item(NUM, s);
         item.symbol = "num";
+        item.line = lines;
         tokenFlow.push_back(item);
         lexicalItem.token = SUBDELIMITER;
         lexicalItem.attribute = "..";

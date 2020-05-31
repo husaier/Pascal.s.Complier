@@ -70,6 +70,8 @@ public:
     void deleteBlock(SymbolBlock *InPoint);
 
     void printBlock(SymbolBlock *InPoint);
+
+    SymbolTableLine* blockQuery(string name);
 };
 
 class BlockIndexTable {

@@ -103,11 +103,11 @@ int main() {
     table.printJsonFile(fileName + out);
     table.printOut();
 
-    LR1Table table2;
-    table2.loadJsonFile(fileName + out);
-    table2.printOut();
+//    LR1Table table2;
+//    table2.loadJsonFile(fileName + out);
+//    table2.printOut();
 
-    bool flag = table == table2;
-    cout << flag << endl;
+//    bool flag = table == table2;
+//    cout << flag << endl;
     return 0;
 }
