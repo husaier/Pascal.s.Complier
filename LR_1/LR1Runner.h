@@ -10,15 +10,17 @@
 #include <stack>
 #include "LR1Table.h"
 #include "lexical_analyzer.h"
+#include "SymbolBlock.h"
 
 class LR1Runner {
 
 public:
-    static void run(LR1Table &table);
+    void run(LR1Table &table);
 
     static void load(const vector<LexicalItem>& vector);
 
 private:
+    SymbolBlock* curBlock = NULL;
 
     static void outStackInt(stack<int> stack);
 
@@ -27,6 +29,16 @@ private:
     static void outStrInput(vector<LexicalItem> vector, int ip);
 
     static void outVectorAttribute(vector<string> vector);
+
+    void switchTable(int);
+
+    void declareID(string);
+
+    void quoteID(string);
+
+    void locate();
+
+    void relocate();
 };
 
 

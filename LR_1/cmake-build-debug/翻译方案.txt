@@ -47,14 +47,14 @@ Parameter_list -> Var_parameter
 Parameter_list -> Value_parameter
 Var_parameter -> var Value_parameter
 Value_parameter -> Identifier_list : Standard_type
-Compound_statement -> begin Statement_list end
+Compound_statement -> begin Statement_list end {重定位}
 Statement_list -> Statement_list ; Statement
 Statement_list -> Statement
 Statement -> Variable assignop Expression
 Statement -> Call_procedure_statement
 Statement -> Compound_statement
 Statement -> if Expression then Statement Else_part
-Statement -> case Expression of Case_body end {重定位}
+Statement -> case Expression of Case_body end
 Statement -> while Expression do Statement
 Statement -> repeat Statement_list until Expression
 Statement -> for id assignop Expression D Updown Expression do Statement
@@ -106,7 +106,7 @@ Factor -> not Factor
 Unsign_const_variable -> id {id.name = stack[top] 引用}
 Unsign_const_variable -> num
 Unsign_const_variable -> string
-A -> # {id.name在stack[top] 声明：定位，插入id}
-B -> # {id.name在stack[top] 声明：定位，插入id}
-C -> # {id.name在stack[top] 声明：定位，插入id}
+A -> # {id.name在stack[top] 定位，声明，插入id}
+B -> # {id.name在stack[top] 声明，定位，插入id}
+C -> # {id.name在stack[top] 声明，定位，插入id}
 D -> # {id.name在stack[top] 引用：查询本块、父块中id是否有定义}

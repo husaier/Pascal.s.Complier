@@ -64,12 +64,12 @@ public:
 
     SymbolTableLine *query(string name);
 
-    SymbolTableLine *insert(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
-    SymbolBlock *makeBlock(SymbolBlock *InPrevious);
+    bool insert(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
+    static SymbolBlock *makeBlock(SymbolBlock *InPrevious);
 
     void deleteBlock(SymbolBlock *InPoint);
 
-    void printBlock(SymbolBlock *InPoint);
+    void printBlock();
 
     SymbolTableLine* blockQuery(string name);
 };

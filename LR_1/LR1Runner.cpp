@@ -48,6 +48,7 @@ void LR1Runner::run(LR1Table &table) {
             cout << "S" + to_string(table.table[s][tempCol].index) << endl;//输出动作
         } else if (currentType == TableItem::REDUCTION) {
             int tempProd = table.table[s][tempCol].index;  //取出要按哪个产生式R
+            switchTable(tempProd);
             Production tempProduction = table.productions.at(tempProd);
             for (int i = 0; i < tempProduction.right.size(); ++i) {    //按照产生式右侧数目来弹出
                 if (tempProduction.right[i] != "#") {
@@ -66,6 +67,7 @@ void LR1Runner::run(LR1Table &table) {
             }
             cout << "R" + to_string(table.table[s][tempCol].index) + " by " + tempProduction.left + " -> " + tempString
                  << endl;
+
         } else if (currentType == TableItem::ACC) {
             cout << "ACC" << endl;
             break;
@@ -158,5 +160,89 @@ void LR1Runner::load(const vector<LexicalItem> &result) {
     vectorInput.emplace_back(temp);
 }
 
+void LR1Runner::switchTable(int type) {
+    int top = vectorAttribute.size() - 1;
+    string id;
+    switch(type) {
+        case 109:
+            locate();
+            id = vectorAttribute[top];
+            declareID(id);
+            break;
+        case 110:
+        case 111:
+            id = vectorAttribute[top];
+            declareID(id);
+            locate();
+            break;
+        case 4:
+        case 5:
+            id = vectorAttribute[top];
+            declareID(id);
+            break;
+        case 8:
+        case 9:
+        case 19:
+        case 20:
+            id = vectorAttribute[top - 2];
+            declareID(id);
+            break;
+        case 10:
+        case 11:
+        case 12:
+        case 66:
+        case 78:
+        case 106:
+            id = vectorAttribute[top];
+            quoteID(id);
+            break;
+        case 62:
+            id = vectorAttribute[top - 1];
+            quoteID(id);
+            break;
+        case 79:
+        case 103:
+            id = vectorAttribute[top - 3];
+            quoteID(id);
+            break;
+        case 50:
+            relocate();
+            break;
+        default:
+            break;
+    }
+}
 
+void LR1Runner::declareID(string id) {
+    if (curBlock->blockQuery(id) == nullptr) {
+        curBlock->insert(id, 0, 0, 0, 0);
+        cout << "声明"<<id<<endl;
+        curBlock->printBlock();
+    }
+    else {
+        cout<<"语义错误！在作用域内有重复定义的标识符"<<endl;
+    }
+}
 
+void LR1Runner::quoteID(string id) {
+    if (curBlock->query(id) == nullptr)
+        cout<<"语义错误！引用了未定义的标识符"<<id<<endl;
+    else{
+        cout<<"找到引用"<<id<<endl;
+        curBlock->printBlock();
+    }
+}
+
+void LR1Runner::locate() {
+    SymbolBlock* childBlock;
+    childBlock = SymbolBlock::makeBlock(curBlock);
+    curBlock = childBlock;
+    cout<<"定位"<<endl;
+}
+
+void LR1Runner::relocate() {
+    SymbolBlock* parentBlock = curBlock->previous;
+    delete curBlock;
+    curBlock = parentBlock;
+    cout<<"重定位删除"<<endl;
+}

@@ -6,15 +6,15 @@ Program sort(input, output);
         begin for i: =1 to 9 do read(a(i]) end;
     procedure exchange(i,i: integer);
         begin x: =a[i], a[i]: =a[j]; a[j]: =x end;
-        procedure quicksort(m, n: integer);
+    procedure quicksort(m, n: integer);
         var k, v: integer;
         function partition(y, z: integer): integer;
-        var i,j: integer;
-        begin
-            {a;}
-            {v;}
-            exchange(i, j);
-        end; { end of partition }
+            var i,j: integer;
+            begin
+                {a;}
+                {v;}
+                exchange(i, j);
+             end; { end of partition }
         begin
             if (n>m)then
                 begin
