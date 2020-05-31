@@ -28,10 +28,6 @@ list
 cJSON.h
 /home/husserl/Pascal.s.Complier/LR_1/cJSON.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.cpp
-LR1Runner.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
-
 /home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
 queue
 -
@@ -65,10 +61,6 @@ CJsonObject.hpp
 /home/husserl/Pascal.s.Complier/LR_1/cJSON.h
 stdint.h
 -
-
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.cpp
-lexical_analyzer.h
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
 
 /home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
 fstream
