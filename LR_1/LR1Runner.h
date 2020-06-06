@@ -12,15 +12,31 @@
 #include "lexical_analyzer.h"
 #include "SymbolBlock.h"
 
+class vectorAttributeItem {
+public:
+    vectorAttributeItem(string InAttribute, int InType, int InWidth) {
+        attribute = InAttribute;
+        type = InType;
+        width = InWidth;
+    }
+
+    string attribute;
+    int type;
+    int width;
+    vector<SymbolTableLine*> IDlist;
+};
+
+
 class LR1Runner {
 
 public:
     void run(LR1Table &table);
 
-    static void load(const vector<LexicalItem>& vector);
+    static void load(const vector<LexicalItem> &vector);
 
 private:
-    SymbolBlock* curBlock = NULL;
+    SymbolBlock *curBlock = nullptr;
+    int offset = 0;
 
     static void outStackInt(stack<int> stack);
 
@@ -28,9 +44,9 @@ private:
 
     static void outStrInput(vector<LexicalItem> vector, int ip);
 
-    static void outVectorAttribute(vector<string> vector);
+    static void outVectorAttribute(vector<vectorAttributeItem> vector);
 
-    void switchTable(int);
+    void switchTable(vectorAttributeItem*, int);
 
     void declareID(string);
 

@@ -56,7 +56,7 @@ class SymbolBlock {
 public:
     SymbolBlock *previous = NULL;//用于指向外围的符号表
     //符号表
-    vector<SymbolTableLine> symbolBlock;
+    vector<SymbolTableLine*> symbolBlock;
     //反映射表，建立string -> index的映射,name -> id
     map<string, int> invMap;
     int rowNum = 0;
@@ -65,6 +65,9 @@ public:
     SymbolTableLine *query(string name);
 
     bool insert(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
+
+    SymbolTableLine* insert2(string name, int type, int offset, int dimension, int declarationLine);
+
     static SymbolBlock *makeBlock(SymbolBlock *InPrevious);
 
     void deleteBlock(SymbolBlock *InPoint);

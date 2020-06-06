@@ -8,7 +8,7 @@
 vector<LexicalItem> vectorInput;
 stack<int> stackState;
 stack<string> stackSymbol;
-vector<string> vectorAttribute;
+vector<vectorAttributeItem> vectorAttribute;
 const int width1 = 50, width2 = 50, width3 = 50;
 
 
@@ -18,7 +18,7 @@ void LR1Runner::run(LR1Table &table) {
          << endl;
     stackState.push(0);
     stackSymbol.push(" ");
-    vectorAttribute.emplace_back(" ");
+    vectorAttribute.emplace_back(vectorAttributeItem(" ",-1,-1));
     cout << setiosflags(ios::left) << setw(width1) << "Stack" << resetiosflags(ios::left) << setiosflags(ios::left)
          << setw(width2) << "Input" << setw(width3) << "Output" << resetiosflags(ios::left) << endl;
     cout << "------------------------------------------------------------------------------------------------------"
@@ -42,14 +42,16 @@ void LR1Runner::run(LR1Table &table) {
         int currentType = table.table[s][tempCol].type;
         if (currentType == TableItem::SHIFT) {
             stackSymbol.push(vectorInput.at(ip).symbol);   //根据输入，压入当前遇到的输入
-            vectorAttribute.push_back(vectorInput.at(ip).attribute);///
+            vectorAttribute.emplace_back(vectorInput.at(ip).attribute,-1,-1);///
             stackState.push(table.table[s][tempCol].index);  //根据表格中S后的数字，压入状态
             ip++;
             cout << "S" + to_string(table.table[s][tempCol].index) << endl;//输出动作
         } else if (currentType == TableItem::REDUCTION) {
             int tempProd = table.table[s][tempCol].index;  //取出要按哪个产生式R
-            switchTable(tempProd);
             Production tempProduction = table.productions.at(tempProd);
+            vectorAttributeItem tempAttributeItem(tempProduction.left,-1,-1);
+            switchTable(&tempAttributeItem, tempProd);
+
             for (int i = 0; i < tempProduction.right.size(); ++i) {    //按照产生式右侧数目来弹出
                 if (tempProduction.right[i] != "#") {
                     stackState.pop();
@@ -58,7 +60,7 @@ void LR1Runner::run(LR1Table &table) {
                 }
             }
             stackSymbol.push(tempProduction.left);  //将产生式的左侧符号压入栈
-            vectorAttribute.push_back(tempProduction.left);////这里与符号相同
+            vectorAttribute.push_back(tempAttributeItem);////这里与符号相同
             //根据当前状态栈和遇到的输入符号，确定下一次goto到几号状态
             stackState.push(table.table[stackState.top()][table.invMap[stackSymbol.top()]].index);
             string tempString;
@@ -119,12 +121,12 @@ void LR1Runner::outStackString(stack<string> staTemp) {
     cout << setiosflags(ios::left) << setw(width1) << strTemp << resetiosflags(ios::left) << "\n";
 }
 
-void LR1Runner::outVectorAttribute(vector<string> tempVector) {
+void LR1Runner::outVectorAttribute(vector<vectorAttributeItem> tempVector) {
     cout << setiosflags(ios::left) << setw(width2);
     string tempString;
     tempString += "VectorAttribute:";
-    for (int i = 0; i < tempVector.size(); i++)
-        tempString += tempVector.at(i) + " ";
+    for (auto & i : tempVector)
+        tempString += i.attribute + " ";
     cout << tempString << resetiosflags(ios::left) << endl;
 }
 
@@ -160,31 +162,90 @@ void LR1Runner::load(const vector<LexicalItem> &result) {
     vectorInput.emplace_back(temp);
 }
 
-void LR1Runner::switchTable(int type) {
+void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
     int top = vectorAttribute.size() - 1;
     string id;
     switch(type) {
         case 109:
             locate();
-            id = vectorAttribute[top];
+            id = vectorAttribute[top].attribute;
             declareID(id);
             break;
         case 110:
         case 111:
-            id = vectorAttribute[top];
+            id = vectorAttribute[top].attribute;
             declareID(id);
             locate();
             break;
+        case 21:
+            leftSymbol->type = vectorAttribute[top].type;
+            leftSymbol->width = vectorAttribute[top].width;
+            break;
+        case 24: //integer
+            leftSymbol->type = 1;
+            leftSymbol->width = 4;
+            break;
+        case 25: //real
+            leftSymbol->type = 2;
+            leftSymbol->width = 4;
+            break;
+        case 26: //boolean
+            leftSymbol->type = 3;
+            leftSymbol->width = 1;
+            break;
+        case 27: //char
+            leftSymbol->type = 4;
+            leftSymbol->width = 1;
+            break;
+        case 35:
+        case 36:
+        case 49:
+            {
+                vectorAttributeItem tmp = vectorAttribute[top];
+                for(auto &item : vectorAttribute[top-2].IDlist){
+                    item->type = tmp.type;
+                    item->offset = offset;
+                    offset += tmp.width;
+                }
+                curBlock->printBlock();
+            }
+            break;
         case 4:
+            id = vectorAttribute[top].attribute;
+            for(auto item : vectorAttribute[top - 2].IDlist) {
+                leftSymbol->IDlist.push_back(item);
+            }
+            if (curBlock->blockQuery(id) == nullptr) {
+                SymbolTableLine* entry;
+                entry = curBlock->insert2(id, 0, 0, 0, 0);
+                cout << "声明"<<id<<endl;
+                curBlock->printBlock();
+
+                leftSymbol->IDlist.push_back(entry);
+            }
+            else {
+                cout<<"语义错误！在作用域内有重复定义的标识符"<<endl;
+            }
+            break;
         case 5:
-            id = vectorAttribute[top];
-            declareID(id);
+            id = vectorAttribute[top].attribute;
+            if (curBlock->blockQuery(id) == nullptr) {
+                SymbolTableLine* entry;
+                entry = curBlock->insert2(id, 0, 0, 0, 0);
+                cout << "声明"<<id<<endl;
+                curBlock->printBlock();
+
+                leftSymbol->IDlist.push_back(entry);
+            }
+            else {
+                cout<<"语义错误！在作用域内有重复定义的标识符"<<endl;
+            }
             break;
         case 8:
         case 9:
         case 19:
         case 20:
-            id = vectorAttribute[top - 2];
+            id = vectorAttribute[top - 2].attribute;
             declareID(id);
             break;
         case 10:
@@ -193,16 +254,16 @@ void LR1Runner::switchTable(int type) {
         case 66:
         case 78:
         case 106:
-            id = vectorAttribute[top];
+            id = vectorAttribute[top].attribute;
             quoteID(id);
             break;
         case 62:
-            id = vectorAttribute[top - 1];
+            id = vectorAttribute[top - 1].attribute;
             quoteID(id);
             break;
         case 79:
         case 103:
-            id = vectorAttribute[top - 3];
+            id = vectorAttribute[top - 3].attribute;
             quoteID(id);
             break;
         case 50:

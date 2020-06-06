@@ -1,0 +1,5 @@
+0 void
+1 integer
+2 real
+3 boolean
+4 char

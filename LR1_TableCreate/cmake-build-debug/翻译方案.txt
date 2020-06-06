@@ -1,4 +1,4 @@
-Program ->  Program_head Program_body .
+Program -> Program_head Program_body .
 Program_head -> program id A ( Identifier_list ) ;
 Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
 Identifier_list -> Identifier_list , id {id.name = stack[top]声明：查询本块中是否重复定义，插入id}
@@ -37,8 +37,10 @@ Var_declaration -> Identifier_list : Type
 Subprogram_declarations -> Subprogram_declarations Subprogram_declaration ;
 Subprogram_declarations -> #
 Subprogram_declaration -> Subprogram_head Program_body
-Subprogram_head -> function id B Formal_parameter : Standard_type ;
-Subprogram_head -> procedure id C Formal_parameter ;
+Subprogram_head -> function id A Formal_parameter : Standard_type ;
+Subprogram_head -> procedure id B Formal_parameter ;
+B -> # {id.name在stack[top] 声明，定位，插入id}
+C -> # {id.name在stack[top] 声明，定位，插入id}
 Formal_parameter -> ( Parameter_lists )
 Formal_parameter -> #
 Parameter_lists -> Parameter_lists ; Parameter_list
