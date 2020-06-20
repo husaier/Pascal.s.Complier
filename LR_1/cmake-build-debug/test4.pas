@@ -8,7 +8,7 @@ program test(input, output);
                 j,k: char
              end; {end of record}
         arr: array [0 .. 7, 0 .. 3] of char;
-        brr: array [0 .. 7]of array [0 .. 3] of integer;
+        brr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
     begin
         a := 3;
         b := 4;

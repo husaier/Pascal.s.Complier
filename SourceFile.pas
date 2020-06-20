@@ -3,6 +3,10 @@ var R,S,C:real;
     W:array[0 .. 4]of char;
     N:array[0 .. 4, 2 .. 7]of integer;
     M:array[0 .. 4]of array [2 .. 7] of integer;
+    rec: record
+    	i: integer;
+        j,k: char
+    end; {end of record}
 begin
  write('请输入圆的半径');
  readln(R);
@@ -24,6 +28,11 @@ writeln('圆的周长为',c);
  {N[4] := 1;}
  {N[5] := 2;}
  N[4][7] := 2;
+ N[4, 7] := 1;
+ {N[1.2, 5] := 0;}
  M[4][7] := 3;
+
+ rec.i := 4;
+ rec.j := 'a';
  readln;
 END.

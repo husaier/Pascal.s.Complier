@@ -14,10 +14,11 @@
 
 class vectorAttributeItem {
 public:
-    vectorAttributeItem(string InAttribute, int InType, int InWidth) {
+    vectorAttributeItem(string InAttribute, int InType, int InWidth,int Inline) {
         attribute = InAttribute;
         type = InType;
         width = InWidth;
+        line = Inline;
     }
 
     string attribute;
@@ -25,6 +26,7 @@ public:
     int width;
     int num;
     int dimension;
+    int line = 0;
     vector<SymbolTableLine*> IDlist;
     SymbolBlock *tableEntry = nullptr;
     ArrayInfo *arrayInfo = nullptr; //数组信息链表

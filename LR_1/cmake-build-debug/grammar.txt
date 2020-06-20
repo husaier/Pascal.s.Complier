@@ -99,7 +99,7 @@ Term -> Term mod Factor
 Term -> Term and Factor
 Term -> Factor
 Factor -> Unsign_const_variable
-Factor -> variable
+Factor -> Variable
 Factor -> id ( Expression_list )
 Factor -> ( Expression )
 Factor -> not Factor

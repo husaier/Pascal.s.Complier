@@ -20,7 +20,7 @@ void LR1Runner::run(LR1Table &table) {
          << endl;
     stackState.push(0);
     stackSymbol.push(" ");
-    vectorAttribute.emplace_back(vectorAttributeItem(" ",-1,-1));
+    vectorAttribute.emplace_back(vectorAttributeItem(" ",-1,-1,-1));    ///line
     cout << setiosflags(ios::left) << setw(width1) << "Stack" << resetiosflags(ios::left) << setiosflags(ios::left)
          << setw(width2) << "Input" << setw(width3) << "Output" << resetiosflags(ios::left) << endl;
     cout << "------------------------------------------------------------------------------------------------------"
@@ -44,14 +44,14 @@ void LR1Runner::run(LR1Table &table) {
         int currentType = table.table[s][tempCol].type;
         if (currentType == TableItem::SHIFT) {
             stackSymbol.push(vectorInput.at(ip).symbol);   //根据输入，压入当前遇到的输入
-            vectorAttribute.emplace_back(vectorInput.at(ip).attribute,-1,-1);///
+            vectorAttribute.emplace_back(vectorInput.at(ip).attribute,-1,-1,vectorInput.at(ip).line);    ///line
             stackState.push(table.table[s][tempCol].index);  //根据表格中S后的数字，压入状态
             ip++;
             cout << "S" + to_string(table.table[s][tempCol].index) << endl;//输出动作
         } else if (currentType == TableItem::REDUCTION) {
             int tempProd = table.table[s][tempCol].index;  //取出要按哪个产生式R
             Production tempProduction = table.productions.at(tempProd);
-            vectorAttributeItem tempAttributeItem(tempProduction.left,-1,-1);
+            vectorAttributeItem tempAttributeItem(tempProduction.left,-1,-1,vectorInput.at(ip).line);    ///line
             switchTable(&tempAttributeItem, tempProd);
 
             for (int i = 0; i < tempProduction.right.size(); ++i) {    //按照产生式右侧数目来弹出
@@ -168,94 +168,6 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
     int top = vectorAttribute.size() - 1;
     string id;
     switch(type) {
-        case 109:
-        case 110:
-        case 111: {
-            id = vectorAttribute[top].attribute;
-            declareID(id);
-
-            auto tableLine = curBlock->blockQuery(id);
-
-            locate();
-
-            tableLine->blockPoint = curBlock;
-            break;
-        }
-        case 21:
-            leftSymbol->type = vectorAttribute[top].type;
-            leftSymbol->width = vectorAttribute[top].width;
-            break;
-        case 22:
-            leftSymbol->type = SymbolTableLine::RECORD;
-            leftSymbol->tableEntry = curBlock;
-            leftSymbol->width = *offset;
-            relocate();
-            break;
-        case 23: {
-            auto Type = vectorAttribute[top];
-            auto Periods = vectorAttribute[top - 3];
-
-            int baseType = Type.type;
-            int elementWidth = Type.width;
-            //把Type.arrayInfo链表插入到Periods.arrayInfo链表的尾部
-            auto tail = Periods.arrayInfo;
-            while(tail != nullptr) {
-                if(tail->nextDemision == nullptr)
-                    break;
-                tail = tail->nextDemision;
-            }
-            int demendionTH = tail->deimensionTH;
-            auto typeArrayInfoHead = Type.arrayInfo;
-            tail->nextDemision = typeArrayInfoHead;
-            while(typeArrayInfoHead != nullptr) {
-                demendionTH++;
-                typeArrayInfoHead->deimensionTH = demendionTH;
-                typeArrayInfoHead = typeArrayInfoHead->nextDemision;
-            }
-            auto head = Periods.arrayInfo;
-            int nums = 1;
-            while (head != nullptr) {
-                head->elementType = baseType;
-                nums *= head->legnth;
-                head = head->nextDemision;
-            }
-            leftSymbol->type = SymbolTableLine::ARRAY;
-            leftSymbol->arrayInfo = Periods.arrayInfo;
-            leftSymbol->width = Type.width * nums;
-            break;
-        }
-        case 24: //integer
-            leftSymbol->type = SymbolTableLine::INTEGER;
-            leftSymbol->width = 4;
-            break;
-        case 25: //real
-            leftSymbol->type = SymbolTableLine::REAL;
-            leftSymbol->width = 4;
-            break;
-        case 26: //boolean
-            leftSymbol->type = SymbolTableLine::BOOLEAN;
-            leftSymbol->width = 1;
-            break;
-        case 27: //char
-            leftSymbol->type = SymbolTableLine::CHAR;
-            leftSymbol->width = 1;
-            break;
-        case 35:
-        case 36:
-        case 49:
-            {
-                vectorAttributeItem tmp = vectorAttribute[top];
-                for(auto &item : vectorAttribute[top-2].IDlist) {
-                    item->type = tmp.type;
-                    item->offset = *offset;
-                    item->blockPoint = tmp.tableEntry;
-                    item->arrayInfo = tmp.arrayInfo;
-                    item->dimension = tmp.dimension;
-                    *offset += tmp.width;
-                }
-                curBlock->printBlock();
-            }
-            break;
         case 4:
             id = vectorAttribute[top].attribute;
             for(auto item : vectorAttribute[top - 2].IDlist) {
@@ -303,23 +215,80 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
             id = vectorAttribute[top].attribute;
             quoteID(id);
             break;
-        case 62:
-            id = vectorAttribute[top - 1].attribute;
-            quoteID(id);
-            break;
-        case 79:
-        case 103:
-            id = vectorAttribute[top - 3].attribute;
-            quoteID(id);
-            break;
-        case 50:
-            relocate();
-            break;
-        case 113:
-            locate();
-            break;
         case 15: {
             leftSymbol->num = stoi(vectorAttribute[top].attribute);
+            break;
+        }
+        case 21:
+            leftSymbol->type = vectorAttribute[top].type;
+            leftSymbol->width = vectorAttribute[top].width;
+            break;
+        case 22: {
+            auto Record_body = vectorAttribute[top - 1];
+            leftSymbol->type = SymbolTableLine::RECORD;
+            leftSymbol->tableEntry = curBlock;
+            leftSymbol->width = *offset;
+            leftSymbol->dimension = Record_body.dimension + 1;
+            relocate();
+            break;
+        }
+        case 23: {
+            auto Type = vectorAttribute[top];
+            auto Periods = vectorAttribute[top - 3];
+
+            int baseType = Type.type;
+            int elementWidth = Type.width;
+            //把Type.arrayInfo链表插入到Periods.arrayInfo链表的尾部
+            auto tail = Periods.arrayInfo;
+            while(tail != nullptr) {
+                if(tail->nextDemision == nullptr)
+                    break;
+                tail = tail->nextDemision;
+            }
+            int demendionTH = tail->deimensionTH;
+            auto typeArrayInfoHead = Type.arrayInfo;
+            tail->nextDemision = typeArrayInfoHead;
+            while(typeArrayInfoHead != nullptr) {
+                demendionTH++;
+                typeArrayInfoHead->deimensionTH = demendionTH;
+                typeArrayInfoHead = typeArrayInfoHead->nextDemision;
+            }
+            auto head = Periods.arrayInfo;
+            int nums = 1;
+            while (head != nullptr) {
+                head->elementType = baseType;
+                nums *= head->legnth;
+                head = head->nextDemision;
+            }
+            leftSymbol->type = SymbolTableLine::ARRAY;
+            leftSymbol->arrayInfo = Periods.arrayInfo;
+            leftSymbol->width = Type.width * nums;
+            leftSymbol->dimension = Periods.dimension + Type.dimension;
+            break;
+        }
+        case 24: //integer
+            leftSymbol->type = SymbolTableLine::INTEGER;
+            leftSymbol->width = 4;
+            leftSymbol->dimension = 0;
+            break;
+        case 25: //real
+            leftSymbol->type = SymbolTableLine::REAL;
+            leftSymbol->width = 4;
+            leftSymbol->dimension = 0;
+            break;
+        case 26: //boolean
+            leftSymbol->type = SymbolTableLine::BOOLEAN;
+            leftSymbol->width = 1;
+            leftSymbol->dimension = 0;
+            break;
+        case 27: //char
+            leftSymbol->type = SymbolTableLine::CHAR;
+            leftSymbol->width = 1;
+            leftSymbol->dimension = 0;
+            break;
+        case 28: {
+            auto Var_declaration = vectorAttribute[top];
+            leftSymbol->dimension = Var_declaration.dimension;
             break;
         }
         case 30: {
@@ -360,6 +329,63 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
             leftSymbol->arrayInfo = t;
             break;
         }
+        case 35:
+        case 36: {
+            vectorAttributeItem &Type = vectorAttribute[top];
+            for(auto &item : vectorAttribute[top-2].IDlist) {
+                item->type = Type.type;
+                item->offset = *offset;
+                item->blockPoint = Type.tableEntry;
+                item->arrayInfo = Type.arrayInfo;
+                item->dimension = Type.dimension;
+                *offset += Type.width;
+            }
+            leftSymbol->dimension = Type.dimension;
+            curBlock->printBlock();
+            break;
+        }
+        case 49:
+            {
+                vectorAttributeItem tmp = vectorAttribute[top];
+                for(auto &item : vectorAttribute[top-2].IDlist) {
+                    item->type = tmp.type;
+                    item->offset = *offset;
+                    item->blockPoint = tmp.tableEntry;
+                    item->arrayInfo = tmp.arrayInfo;
+                    item->dimension = tmp.dimension;
+                    *offset += tmp.width;
+                }
+                curBlock->printBlock();
+            }
+            break;
+        case 50:
+            relocate();
+            break;
+        case 62:
+            id = vectorAttribute[top - 1].attribute;
+            quoteID(id);
+            break;
+        case 79:
+        case 103:
+            id = vectorAttribute[top - 3].attribute;
+            quoteID(id);
+            break;
+        case 109:
+        case 110:
+        case 111: {
+            id = vectorAttribute[top].attribute;
+            declareID(id);
+
+            auto tableLine = curBlock->blockQuery(id);
+
+            locate();
+
+            tableLine->blockPoint = curBlock;
+            break;
+        }
+        case 113:
+            locate();
+            break;
         default:
             break;
     }
