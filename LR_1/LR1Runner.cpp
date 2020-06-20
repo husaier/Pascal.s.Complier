@@ -13,6 +13,8 @@ const int width1 = 50, width2 = 50, width3 = 50;
 
 
 void LR1Runner::run(LR1Table &table) {
+    initial();
+
     cout << "-------------------------------------------------------------------------------------------Runner::run"
          << "------------------------------------------------------------------------------------------------------"
          << endl;
@@ -167,34 +169,75 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
     string id;
     switch(type) {
         case 109:
-            locate();
-            id = vectorAttribute[top].attribute;
-            declareID(id);
-            break;
         case 110:
-        case 111:
+        case 111: {
             id = vectorAttribute[top].attribute;
             declareID(id);
+
+            auto tableLine = curBlock->blockQuery(id);
+
             locate();
+
+            tableLine->blockPoint = curBlock;
             break;
+        }
         case 21:
             leftSymbol->type = vectorAttribute[top].type;
             leftSymbol->width = vectorAttribute[top].width;
             break;
+        case 22:
+            leftSymbol->type = SymbolTableLine::RECORD;
+            leftSymbol->tableEntry = curBlock;
+            leftSymbol->width = *offset;
+            relocate();
+            break;
+        case 23: {
+            auto Type = vectorAttribute[top];
+            auto Periods = vectorAttribute[top - 3];
+
+            int baseType = Type.type;
+            int elementWidth = Type.width;
+            //把Type.arrayInfo链表插入到Periods.arrayInfo链表的尾部
+            auto tail = Periods.arrayInfo;
+            while(tail != nullptr) {
+                if(tail->nextDemision == nullptr)
+                    break;
+                tail = tail->nextDemision;
+            }
+            int demendionTH = tail->deimensionTH;
+            auto typeArrayInfoHead = Type.arrayInfo;
+            tail->nextDemision = typeArrayInfoHead;
+            while(typeArrayInfoHead != nullptr) {
+                demendionTH++;
+                typeArrayInfoHead->deimensionTH = demendionTH;
+                typeArrayInfoHead = typeArrayInfoHead->nextDemision;
+            }
+            auto head = Periods.arrayInfo;
+            int nums = 1;
+            while (head != nullptr) {
+                head->elementType = baseType;
+                nums *= head->legnth;
+                head = head->nextDemision;
+            }
+            leftSymbol->type = SymbolTableLine::ARRAY;
+            leftSymbol->arrayInfo = Periods.arrayInfo;
+            leftSymbol->width = Type.width * nums;
+            break;
+        }
         case 24: //integer
-            leftSymbol->type = 1;
+            leftSymbol->type = SymbolTableLine::INTEGER;
             leftSymbol->width = 4;
             break;
         case 25: //real
-            leftSymbol->type = 2;
+            leftSymbol->type = SymbolTableLine::REAL;
             leftSymbol->width = 4;
             break;
         case 26: //boolean
-            leftSymbol->type = 3;
+            leftSymbol->type = SymbolTableLine::BOOLEAN;
             leftSymbol->width = 1;
             break;
         case 27: //char
-            leftSymbol->type = 4;
+            leftSymbol->type = SymbolTableLine::CHAR;
             leftSymbol->width = 1;
             break;
         case 35:
@@ -202,10 +245,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
         case 49:
             {
                 vectorAttributeItem tmp = vectorAttribute[top];
-                for(auto &item : vectorAttribute[top-2].IDlist){
+                for(auto &item : vectorAttribute[top-2].IDlist) {
                     item->type = tmp.type;
-                    item->offset = offset;
-                    offset += tmp.width;
+                    item->offset = *offset;
+                    item->blockPoint = tmp.tableEntry;
+                    item->arrayInfo = tmp.arrayInfo;
+                    item->dimension = tmp.dimension;
+                    *offset += tmp.width;
                 }
                 curBlock->printBlock();
             }
@@ -269,6 +315,51 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
         case 50:
             relocate();
             break;
+        case 113:
+            locate();
+            break;
+        case 15: {
+            leftSymbol->num = stoi(vectorAttribute[top].attribute);
+            break;
+        }
+        case 30: {
+            auto period = vectorAttribute[top];
+            auto period1 = vectorAttribute[top - 2];
+            auto &period0 = leftSymbol;
+            period0->dimension = period1.dimension + 1;
+            auto *t = period.arrayInfo;
+            auto head = period1.arrayInfo;
+            //插入到链表的尾部
+            while(head != nullptr) {
+                if(head->nextDemision == nullptr)
+                    break;
+                head = head->nextDemision;
+            }
+            t->deimensionTH = head->deimensionTH + 1;
+            head->nextDemision = t;
+            // 传给period0
+            period0->arrayInfo = period1.arrayInfo;
+            break;
+        }
+        case 31: {
+            auto attr = vectorAttribute[top];
+            leftSymbol->dimension = 1;
+            leftSymbol->arrayInfo = attr.arrayInfo;
+            break;
+        }
+        case 32: {
+            int start = vectorAttribute[top - 2].num;
+            int end = vectorAttribute[top].num;
+            auto *t = new ArrayInfo();
+            t->startIndex = start;
+            t->endIndex = end;
+            t->deimensionTH = 1;
+            t->legnth = end - start + 1;
+            t->nextDemision = nullptr;
+
+            leftSymbol->arrayInfo = t;
+            break;
+        }
         default:
             break;
     }
@@ -298,12 +389,31 @@ void LR1Runner::locate() {
     SymbolBlock* childBlock;
     childBlock = SymbolBlock::makeBlock(curBlock);
     curBlock = childBlock;
+    offset = new int(0);
+
+    tablePointers.push(curBlock);
+    offSetStack.push(offset);
     cout<<"定位"<<endl;
 }
 
 void LR1Runner::relocate() {
-    SymbolBlock* parentBlock = curBlock->previous;
-    delete curBlock;
-    curBlock = parentBlock;
-    cout<<"重定位删除"<<endl;
+    tablePointers.pop();
+    offSetStack.pop();
+    // 恢复到父表
+    if (!tablePointers.empty()) {
+        curBlock = tablePointers.top();
+        offset = offSetStack.top();
+    }
+    cout<<"重定位"<<endl;
+}
+
+void LR1Runner::initial() {
+    SymbolBlock* childBlock;
+    childBlock = SymbolBlock::makeBlock(curBlock);
+    curBlock = childBlock;
+    symbolTable = curBlock;
+    offset = new int(0);
+
+    tablePointers.push(curBlock);
+    offSetStack.push(offset);
 }

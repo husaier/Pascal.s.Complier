@@ -19,7 +19,7 @@ Type_declarations -> #
 Type_declaration -> Type_declaration ; id = Type
 Type_declaration -> id = Type
 Type -> Standard_type
-Type -> record Record_body end
+Type -> record E22 Record_body end
 Type -> array [ Periods ] of Type
 Standard_type -> integer
 Standard_type -> real
@@ -110,3 +110,4 @@ A -> #
 B -> #
 C -> #
 D -> #
+E22 -> #

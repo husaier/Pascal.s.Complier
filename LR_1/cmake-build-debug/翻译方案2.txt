@@ -1,5 +1,5 @@
 Program -> Program_head Program_body .
-Program_head -> program id A ( Identifier_list ) ; {无操作}
+Program_head -> program id A ( Identifier_list ) ;
 Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
 Identifier_list -> Identifier_list1 , id {id.name = stack[top]声明：查询本块中是否重复定义，插入id}{Identifier_list.ID_list_head,我们设Identifier_list有这样一个综合属性，它是一个链表头，链表元素是id在符号表的入口地址}
 Identifier_list -> id {id.name = stack[top]声明：查询本块中是否重复定义，插入id}
@@ -12,27 +12,27 @@ Const_variable -> - id {id.name = stack[top] 引用}
 Const_variable -> id {id.name = stack[top] 引用}
 Const_variable -> + num
 Const_variable -> - num
-Const_variable -> num
+Const_variable -> num {Const_variable.num = stack[top]}
 Const_variable -> string
 Type_declarations -> type Type_declaration ;
 Type_declarations -> #
 Type_declaration -> Type_declaration ; id = Type {id.name = stack[top - 2]声明, Type.type和Type.width}
 Type_declaration -> id = Type {id.name = stack[top - 2]声明, Type.type和Type.width}
 Type -> Standard_type {Type.type = Standard_type.type; Type.width = Standard_type.width}
-Type -> record Record_body end
-Type -> array [ Periods ] of Type
+Type -> record E22 Record_body end {Type.type = RECORD, Type.tableEntry = curBlock,重定位}
+Type0 -> array [ Periods ] of Type {Type0.type = ARRAY,把Type.arrayInfo链表插入到Periods.arrayInfo链表的尾部,把ArrayInfo的头指针赋值给Type0.arrayInfo, 计算Type0.width}
 Standard_type -> integer {Standard_type.type = 1; Standard_type.width = 4}
 Standard_type -> real {Standard_type.type = 2; Standard_type.width = 4}
 Standard_type -> boolean {Standard_type.type = 3; Standard_type.width = 1}
 Standard_type -> char {Standard_type.type = 4; Standard_type.width = 1}
 Record_body -> Var_declaration
 Record_body -> #
-Periods -> Periods , Period
-Periods -> Period
-Period -> Const_variable .. Const_variable
+Periods0 -> Periods1 , Period {Periods0.demension = Periods1.demension + 1, 把Period构成的ArrayInfo插入到Periods1.arrayInfo链表的尾部，把链表的头指针赋值给Periods0.arrayInfo }
+Periods -> Period {Periods.demension = 1, Periods.arrayInfo.startIndex, Periods.arrayInfo.endIndex, Periods.arrayInfo.demensionTH}
+Period -> Const_variable0 .. Const_variable1 {Period.arrayInfo.startIndex, Period.arrayInfo.endIndex, Period.arrayInfo.withd}
 Var_declarations -> var Var_declaration ;
 Var_declarations -> #
-Var_declaration -> Var_declaration ; Identifier_list : Type {遍历Identifier_list.IDlist,填写type}
+Var_declaration0 -> Var_declaration ; Identifier_list : Type {遍历Identifier_list.IDlist,填写type}
 Var_declaration -> Identifier_list : Type {遍历Identifier_list.IDlist,填写type}
 Subprogram_declarations -> Subprogram_declarations Subprogram_declaration ;
 Subprogram_declarations -> #
@@ -110,3 +110,4 @@ A -> # {id的属性在stack[top] 定位，声明，插入id}
 B -> # {id.name在stack[top] 声明，定位，插入id}
 C -> # {id.name在stack[top] 声明，定位，插入id}
 D -> # {id.name在stack[top] 引用：查询本块、父块中id是否有定义}
+E22 -> # {record 定位}

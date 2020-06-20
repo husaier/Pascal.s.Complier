@@ -23,7 +23,11 @@ public:
     string attribute;
     int type;
     int width;
+    int num;
+    int dimension;
     vector<SymbolTableLine*> IDlist;
+    SymbolBlock *tableEntry = nullptr;
+    ArrayInfo *arrayInfo = nullptr; //数组信息链表
 };
 
 
@@ -35,8 +39,11 @@ public:
     static void load(const vector<LexicalItem> &vector);
 
 private:
+    SymbolBlock *symbolTable = nullptr;
     SymbolBlock *curBlock = nullptr;
-    int offset = 0;
+    int *offset = nullptr;
+    stack<SymbolBlock*> tablePointers; //栈顶指针指向的是本块
+    stack<int*> offSetStack;
 
     static void outStackInt(stack<int> stack);
 
@@ -55,6 +62,8 @@ private:
     void locate();
 
     void relocate();
+
+    void initial();
 };
 
 

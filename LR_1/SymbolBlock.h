@@ -11,6 +11,16 @@ using namespace std;
 
 class SymbolBlock;
 
+class ArrayInfo {
+public:
+    int deimensionTH; //第几维
+    int startIndex; //起始索引
+    int endIndex; //终止索引
+    int legnth; // 索引宽度
+    int elementType; // 元素类型
+    ArrayInfo *nextDemision = nullptr; //下一维的信息
+};
+
 class SymbolTableLine {
 public:
     SymbolTableLine(int InId, string InName, int InType, int InOffset, int InDimension, int InDeclarationLine
@@ -26,9 +36,7 @@ public:
         blockPoint = nullptr;
     }
 
-
-//      类型
-//    static const int  = 0;
+    //类型
     static const int INTEGER = 1;
     static const int REAL = 2;
     static const int BOOLEAN = 3;
@@ -37,10 +45,10 @@ public:
     static const int RECORD = 6;
     static const int FUNCTION = 7;
 
-
     int id;//序号
     string name;//名字
     int type;//类型
+    ArrayInfo *arrayInfo = nullptr; //数组类型的相关信息，链表
     int offset;//存储地址,这里不确定是否用int
     int dimension;//维数,0,1,2,3,...
     int declarationLine;//声明行

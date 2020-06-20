@@ -28,10 +28,6 @@ list
 cJSON.h
 /home/husserl/Pascal.s.Complier/LR1_TableCreate/cJSON.h
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp
-FirstSetCalculator.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
-
 /home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
 iostream
 -
@@ -62,10 +58,6 @@ Production.h
 fstream
 -
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp
-LR1TableMaker.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
-
 /home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
 FirstSetCalculator.h
 /home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
@@ -75,10 +67,6 @@ set
 -
 utility
 -
-
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.cpp
-Production.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.h
 
 /home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.h
 iostream
