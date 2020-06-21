@@ -27,7 +27,9 @@ public:
     int num;
     int dimension;
     int line = 0;
+    string value;
     vector<SymbolTableLine*> IDlist;
+    SymbolTableLine* entry;
     SymbolBlock *tableEntry = nullptr;
     ArrayInfo *arrayInfo = nullptr; //数组信息链表
 };
@@ -40,6 +42,9 @@ public:
 
     static void load(const vector<LexicalItem> &vector);
 
+    void printSemanticError();
+
+    vector<string> semanticError;
 private:
     SymbolBlock *symbolTable = nullptr;
     SymbolBlock *curBlock = nullptr;
@@ -66,6 +71,8 @@ private:
     void relocate();
 
     void initial();
+
+    void recordSemanticError(const string&); // 记录语义错误
 };
 
 

@@ -59,7 +59,7 @@ Statement -> while Expression do Statement
 Statement -> repeat Statement_list until Expression
 Statement -> for id assignop Expression D Updown Expression do Statement
 Statement -> #
-Variable -> id Id_varparts
+Variable -> id F62 Id_varparts
 Id_varparts -> Id_varparts Id_varpart
 Id_varparts -> #
 Id_varpart -> [ Expression_list ]
@@ -111,3 +111,4 @@ B -> #
 C -> #
 D -> #
 E22 -> #
+F62 -> #

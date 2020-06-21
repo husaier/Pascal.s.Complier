@@ -13,4 +13,8 @@ program test(input, output);
         a := 3;
         b := 4;
         c := 5;
+        a := 4 * 7; {正确}
+        a := 0.2 * 3; {错误，REAL赋值给了INTEGER}
+        rec := 4 * 7; {错误，INTEGER赋值给了RECORD}
+        a := 'c' * 7; {错误，运算对象类型错误，这时表达式的类型为VOID}
     end. {end of test}

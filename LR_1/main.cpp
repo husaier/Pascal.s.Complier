@@ -28,5 +28,13 @@ int main() {
     runner.load(result);
 
     runner.run(table);
+
+    runner.printSemanticError();
+//    string s = "0.23";
+//    float f = stof(s);
+//    cout << f << endl;
+//    s = "123";
+//    f = stof(s);
+//    cout << f << endl;
     return 0;
 }

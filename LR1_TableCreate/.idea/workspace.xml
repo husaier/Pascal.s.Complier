@@ -33,24 +33,22 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/grammar.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/grammar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/grammar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/grammar.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/翻译方案.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/SymbolBlock.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/SymbolBlock.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.json" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test3.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test4.pas" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test4.pas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/类型映射表.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/翻译方案.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SourceFile" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SourceFile.o" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SourceFile.pas" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile.pas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +114,7 @@
       <workItem from="1592634809079" duration="889000" />
       <workItem from="1592647883498" duration="13000" />
       <workItem from="1592653178466" duration="989000" />
+      <workItem from="1592732415978" duration="1208000" />
     </task>
     <servers />
   </component>

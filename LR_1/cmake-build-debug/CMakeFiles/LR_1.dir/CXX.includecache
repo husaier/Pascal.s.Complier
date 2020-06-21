@@ -84,11 +84,3 @@ algorithm
 vector
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/main.cpp
-LR1Table.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
-LR1Runner.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
-lexical_analyzer.h
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
-

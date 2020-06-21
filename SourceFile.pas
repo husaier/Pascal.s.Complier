@@ -1,5 +1,7 @@
 PROGRAM yuan (i);
 var R,S,C:real;
+    K:integer;
+    FLOAT:real;
     W:array[0 .. 4]of char;
     N:array[0 .. 4, 2 .. 7]of integer;
     M:array[0 .. 4]of array [2 .. 7] of integer;
@@ -16,7 +18,7 @@ begin
  S:=pi*r*r;
  C:=pi*r*2;
  writeln('圆的面积为',s);
-writeln('圆的周长为',c);
+ writeln('圆的周长为',c);
  W:='fwea';
  writeln(w);
  writeln(w[0]);
@@ -34,5 +36,14 @@ writeln('圆的周长为',c);
 
  rec.i := 4;
  rec.j := 'a';
+
+ {k := 4 mod 0; 除零错误，不允许}
+ k := 0 div 3; {允许，输出是0}
+ {k := 0.2 div 3; 不允许，类型错误，div运算符两边必须是INTEGER类型}
+ writeln(k);
+ {k := 3 div 0; 不允许，除零错误}
+ float := 3 / 0; {允许，输出是 +Inf}
+ writeln(float);
+ {k := 4 / 6; k为integer，表达式运算结果为REAL，不允许}
  readln;
 END.

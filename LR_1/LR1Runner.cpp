@@ -20,7 +20,7 @@ void LR1Runner::run(LR1Table &table) {
          << endl;
     stackState.push(0);
     stackSymbol.push(" ");
-    vectorAttribute.emplace_back(vectorAttributeItem(" ",-1,-1,-1));    ///line
+    vectorAttribute.emplace_back(vectorAttributeItem(" ", -1, -1, -1));    ///line
     cout << setiosflags(ios::left) << setw(width1) << "Stack" << resetiosflags(ios::left) << setiosflags(ios::left)
          << setw(width2) << "Input" << setw(width3) << "Output" << resetiosflags(ios::left) << endl;
     cout << "------------------------------------------------------------------------------------------------------"
@@ -44,14 +44,14 @@ void LR1Runner::run(LR1Table &table) {
         int currentType = table.table[s][tempCol].type;
         if (currentType == TableItem::SHIFT) {
             stackSymbol.push(vectorInput.at(ip).symbol);   //根据输入，压入当前遇到的输入
-            vectorAttribute.emplace_back(vectorInput.at(ip).attribute,-1,-1,vectorInput.at(ip).line);    ///line
+            vectorAttribute.emplace_back(vectorInput.at(ip).attribute, -1, -1, vectorInput.at(ip).line);    ///line
             stackState.push(table.table[s][tempCol].index);  //根据表格中S后的数字，压入状态
             ip++;
             cout << "S" + to_string(table.table[s][tempCol].index) << endl;//输出动作
         } else if (currentType == TableItem::REDUCTION) {
             int tempProd = table.table[s][tempCol].index;  //取出要按哪个产生式R
             Production tempProduction = table.productions.at(tempProd);
-            vectorAttributeItem tempAttributeItem(tempProduction.left,-1,-1,vectorInput.at(ip).line);    ///line
+            vectorAttributeItem tempAttributeItem(tempProduction.left, -1, -1, vectorInput.at(ip).line);    ///line
             switchTable(&tempAttributeItem, tempProd);
 
             for (int i = 0; i < tempProduction.right.size(); ++i) {    //按照产生式右侧数目来弹出
@@ -127,11 +127,10 @@ void LR1Runner::outVectorAttribute(vector<vectorAttributeItem> tempVector) {
     cout << setiosflags(ios::left) << setw(width2);
     string tempString;
     tempString += "VectorAttribute:";
-    for (auto & i : tempVector)
+    for (auto &i : tempVector)
         tempString += i.attribute + " ";
     cout << tempString << resetiosflags(ios::left) << endl;
 }
-
 
 void LR1Runner::outStrInput(vector<LexicalItem> tempVector, int temp) {
     cout << setiosflags(ios::left) << setw(width2);
@@ -164,39 +163,37 @@ void LR1Runner::load(const vector<LexicalItem> &result) {
     vectorInput.emplace_back(temp);
 }
 
-void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
+void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
     int top = vectorAttribute.size() - 1;
     string id;
-    switch(type) {
+    switch (op_type) {
         case 4:
             id = vectorAttribute[top].attribute;
-            for(auto item : vectorAttribute[top - 2].IDlist) {
+            for (auto item : vectorAttribute[top - 2].IDlist) {
                 leftSymbol->IDlist.push_back(item);
             }
             if (curBlock->blockQuery(id) == nullptr) {
-                SymbolTableLine* entry;
+                SymbolTableLine *entry;
                 entry = curBlock->insert2(id, 0, 0, 0, 0);
-                cout << "声明"<<id<<endl;
+                cout << "声明" << id << endl;
                 curBlock->printBlock();
 
                 leftSymbol->IDlist.push_back(entry);
-            }
-            else {
-                cout<<"语义错误！在作用域内有重复定义的标识符"<<endl;
+            } else {
+                cout << "语义错误！在作用域内有重复定义的标识符" << endl;
             }
             break;
         case 5:
             id = vectorAttribute[top].attribute;
             if (curBlock->blockQuery(id) == nullptr) {
-                SymbolTableLine* entry;
+                SymbolTableLine *entry;
                 entry = curBlock->insert2(id, 0, 0, 0, 0);
-                cout << "声明"<<id<<endl;
+                cout << "声明" << id << endl;
                 curBlock->printBlock();
 
                 leftSymbol->IDlist.push_back(entry);
-            }
-            else {
-                cout<<"语义错误！在作用域内有重复定义的标识符"<<endl;
+            } else {
+                cout << "语义错误！在作用域内有重复定义的标识符" << endl;
             }
             break;
         case 8:
@@ -240,15 +237,15 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
             int elementWidth = Type.width;
             //把Type.arrayInfo链表插入到Periods.arrayInfo链表的尾部
             auto tail = Periods.arrayInfo;
-            while(tail != nullptr) {
-                if(tail->nextDemision == nullptr)
+            while (tail != nullptr) {
+                if (tail->nextDemision == nullptr)
                     break;
                 tail = tail->nextDemision;
             }
             int demendionTH = tail->deimensionTH;
             auto typeArrayInfoHead = Type.arrayInfo;
             tail->nextDemision = typeArrayInfoHead;
-            while(typeArrayInfoHead != nullptr) {
+            while (typeArrayInfoHead != nullptr) {
                 demendionTH++;
                 typeArrayInfoHead->deimensionTH = demendionTH;
                 typeArrayInfoHead = typeArrayInfoHead->nextDemision;
@@ -299,8 +296,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
             auto *t = period.arrayInfo;
             auto head = period1.arrayInfo;
             //插入到链表的尾部
-            while(head != nullptr) {
-                if(head->nextDemision == nullptr)
+            while (head != nullptr) {
+                if (head->nextDemision == nullptr)
                     break;
                 head = head->nextDemision;
             }
@@ -332,7 +329,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
         case 35:
         case 36: {
             vectorAttributeItem &Type = vectorAttribute[top];
-            for(auto &item : vectorAttribute[top-2].IDlist) {
+            for (auto &item : vectorAttribute[top - 2].IDlist) {
                 item->type = Type.type;
                 item->offset = *offset;
                 item->blockPoint = Type.tableEntry;
@@ -344,32 +341,137 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
             curBlock->printBlock();
             break;
         }
-        case 49:
-            {
-                vectorAttributeItem tmp = vectorAttribute[top];
-                for(auto &item : vectorAttribute[top-2].IDlist) {
-                    item->type = tmp.type;
-                    item->offset = *offset;
-                    item->blockPoint = tmp.tableEntry;
-                    item->arrayInfo = tmp.arrayInfo;
-                    item->dimension = tmp.dimension;
-                    *offset += tmp.width;
-                }
-                curBlock->printBlock();
+        case 49: {
+            vectorAttributeItem tmp = vectorAttribute[top];
+            for (auto &item : vectorAttribute[top - 2].IDlist) {
+                item->type = tmp.type;
+                item->offset = *offset;
+                item->blockPoint = tmp.tableEntry;
+                item->arrayInfo = tmp.arrayInfo;
+                item->dimension = tmp.dimension;
+                *offset += tmp.width;
             }
+            curBlock->printBlock();
+        }
             break;
         case 50:
             relocate();
             break;
-        case 62:
-            id = vectorAttribute[top - 1].attribute;
-            quoteID(id);
+        case 53: { // Statement -> Variable assignop Expression
+            auto Expression = vectorAttribute[top];
+            auto Variable = vectorAttribute[top - 2];
+            if(Variable.type != Expression.type)
+                recordSemanticError("赋值语句类型错误");
             break;
+        }
+        case 62: { // Variable -> id F62 Id_varparts
+            auto Id_varparts  = vectorAttribute[top];
+            leftSymbol->entry = Id_varparts.entry;
+            int type = leftSymbol->entry->type;
+            leftSymbol->type = type;
+            break;
+        }
+        case 64: {
+            leftSymbol->entry = vectorAttribute[top].entry;
+            break;
+        }
         case 79:
         case 103:
             id = vectorAttribute[top - 3].attribute;
             quoteID(id);
             break;
+        case 88: { // Expression -> Simple_expression
+            auto Simple_expression = vectorAttribute[top];
+            leftSymbol->type = Simple_expression.type;
+            leftSymbol->value = Simple_expression.value;
+            break;
+        }
+        case 89: { // Simple_expression -> Term
+            auto Term = vectorAttribute[top];
+            leftSymbol->type = Term.type;
+            leftSymbol->value = Term.value;
+            break;
+        }
+        case 95: { //Term0 -> Term1 * Factor
+            auto Term1 = vectorAttribute[top - 2];
+            auto Factor = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            int flag;
+            if (Term1.type == SymbolTableLine::INTEGER) {
+                if (Factor.type == SymbolTableLine::INTEGER)
+                    flag = 1;
+                else if (Factor.type == SymbolTableLine::REAL)
+                    flag = 2;
+                else
+                    flag = 0;
+            } else if (Term1.type == SymbolTableLine::REAL) {
+                if (Factor.type == SymbolTableLine::INTEGER)
+                    flag = 3;
+                else if (Factor.type == SymbolTableLine::REAL)
+                    flag = 4;
+                else
+                    flag = 0;
+            } else
+                flag = 0;
+
+            switch (flag) {
+                case 1: { // 都是INTEGER
+                    resultType = SymbolTableLine::INTEGER;
+                    int a = stoi(Term1.value);
+                    int b = stoi(Factor.value);
+                    value = to_string(a * b);
+                    break;
+                }
+                case 2:
+                case 3:
+                case 4: {
+                    resultType = SymbolTableLine::REAL;
+                    float a = stof(Term1.value);
+                    float b = stof(Factor.value);
+                    value = to_string(a * b);
+                    break;
+                }
+                default: {
+                    recordSemanticError("运算符*：运算对象类型错误");
+                    break;
+                }
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 100: { //Term -> Factor
+            auto Factor = vectorAttribute[top];
+            leftSymbol->type = Factor.type;
+            leftSymbol->value = Factor.value;
+            break;
+        }
+        case 101: { //Factor -> Unsign_const_variable
+            auto Unsign_const_variable = vectorAttribute[top];
+            leftSymbol->type = Unsign_const_variable.type;
+            leftSymbol->value = Unsign_const_variable.value;
+            break;
+        }
+        case 107: {
+            auto num = vectorAttribute[top];
+            bool isRealType = false;
+            for (auto c : num.attribute) {
+                if (c == '.') //如果含有小数点就说明是实数类型
+                {
+                    isRealType = true;
+                    break;
+                }
+            }
+            if (isRealType) {
+                leftSymbol->type = SymbolTableLine::REAL;
+                leftSymbol->value = num.attribute;
+            } else {
+                leftSymbol->type = SymbolTableLine::INTEGER;
+                leftSymbol->value = num.attribute;
+            }
+            break;
+        }
         case 109:
         case 110:
         case 111: {
@@ -386,6 +488,17 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
         case 113:
             locate();
             break;
+        case 114: { // F62 -> #
+            auto t = vectorAttribute[top];
+            auto entry = curBlock->query(t.attribute);
+            if (entry == nullptr) {
+                recordSemanticError("未定义的引用");
+                break;
+            }
+            t.entry = entry;
+            leftSymbol->entry = entry;
+            break;
+        }
         default:
             break;
     }
@@ -394,32 +507,31 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int type) {
 void LR1Runner::declareID(string id) {
     if (curBlock->blockQuery(id) == nullptr) {
         curBlock->insert(id, 0, 0, 0, 0);
-        cout << "声明"<<id<<endl;
+        cout << "声明" << id << endl;
         curBlock->printBlock();
-    }
-    else {
-        cout<<"语义错误！在作用域内有重复定义的标识符"<<endl;
+    } else {
+        cout << "语义错误！在作用域内有重复定义的标识符" << endl;
     }
 }
 
 void LR1Runner::quoteID(string id) {
     if (curBlock->query(id) == nullptr)
-        cout<<"语义错误！引用了未定义的标识符"<<id<<endl;
-    else{
-        cout<<"找到引用"<<id<<endl;
+        cout << "语义错误！引用了未定义的标识符" << id << endl;
+    else {
+        cout << "找到引用" << id << endl;
         curBlock->printBlock();
     }
 }
 
 void LR1Runner::locate() {
-    SymbolBlock* childBlock;
+    SymbolBlock *childBlock;
     childBlock = SymbolBlock::makeBlock(curBlock);
     curBlock = childBlock;
     offset = new int(0);
 
     tablePointers.push(curBlock);
     offSetStack.push(offset);
-    cout<<"定位"<<endl;
+    cout << "定位" << endl;
 }
 
 void LR1Runner::relocate() {
@@ -430,11 +542,11 @@ void LR1Runner::relocate() {
         curBlock = tablePointers.top();
         offset = offSetStack.top();
     }
-    cout<<"重定位"<<endl;
+    cout << "重定位" << endl;
 }
 
 void LR1Runner::initial() {
-    SymbolBlock* childBlock;
+    SymbolBlock *childBlock;
     childBlock = SymbolBlock::makeBlock(curBlock);
     curBlock = childBlock;
     symbolTable = curBlock;
@@ -442,4 +554,18 @@ void LR1Runner::initial() {
 
     tablePointers.push(curBlock);
     offSetStack.push(offset);
+}
+
+void LR1Runner::printSemanticError() {
+    if (semanticError.empty()) {
+        cout << "源代码中没有语义错误";
+        return;
+    }
+    for (const auto &s : semanticError) {
+        cout << s << endl;
+    }
+}
+
+void LR1Runner::recordSemanticError(const string& e) {
+    semanticError.push_back(e);
 }
