@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.hpp
+E:/CLionproject/Pascal.s.Complier1/LR_1/CJsonObject.hpp
 stdio.h
 -
 stddef.h
@@ -24,15 +24,15 @@ map
 list
 -
 cJSON.h
-/home/husserl/Pascal.s.Complier/LR_1/cJSON.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/cJSON.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.cpp
+E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Runner.cpp
 LR1Runner.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Runner.h
 lexical_analyzer.h
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/lexical_analyzer.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Runner.h
 queue
 -
 iomanip
@@ -40,21 +40,21 @@ iomanip
 stack
 -
 LR1Table.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Table.h
 lexical_analyzer.h
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/lexical_analyzer.h
 SymbolBlock.h
-/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/SymbolBlock.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Table.h
 map
 -
 Production.h
-/home/husserl/Pascal.s.Complier/LR_1/Production.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/Production.h
 fstream
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/Production.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/Production.h
 iostream
 -
 string
@@ -62,9 +62,13 @@ string
 vector
 -
 CJsonObject.hpp
-/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.hpp
+E:/CLionproject/Pascal.s.Complier1/LR_1/CJsonObject.hpp
 
-/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/SymbolBlock.cpp
+SymbolBlock.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/SymbolBlock.h
+
+E:/CLionproject/Pascal.s.Complier1/LR_1/SymbolBlock.h
 string
 -
 vector
@@ -72,15 +76,23 @@ vector
 map
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/cJSON.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/cJSON.h
 stdint.h
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/lexical_analyzer.h
 fstream
 -
 algorithm
 -
 vector
 -
+
+E:/CLionproject/Pascal.s.Complier1/LR_1/main.cpp
+LR1Table.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Table.h
+LR1Runner.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Runner.h
+lexical_analyzer.h
+E:/CLionproject/Pascal.s.Complier1/LR_1/lexical_analyzer.h
 
