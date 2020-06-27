@@ -1,3 +1,3 @@
-/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir
+E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir
+E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

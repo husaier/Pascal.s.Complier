@@ -8,134 +8,136 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug"/>
+				<Option working_dir="E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="LR_1">
-				<Option output="/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/LR_1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug"/>
+				<Option output="E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/LR_1.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/7"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
-					<Add directory="/usr/include/c++/7/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 LR_1"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 LR_1"/>
+					<CompileFile command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="LR_1/fast">
-				<Option output="/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/LR_1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug"/>
+				<Option output="E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/LR_1.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/7"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
-					<Add directory="/usr/include/c++/7/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="D:/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 LR_1/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/husserl/Pascal.s.Complier/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 LR_1/fast"/>
+					<CompileFile command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/wingw/mingw64/bin/mingw32-make.exe -f &quot;E:/CLionproject/Pascal.s.Complier1/LR_1/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/CJsonObject.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.hpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/CJsonObject.hpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Runner.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Runner.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/LR1Table.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Table.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/LR1Table.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/Production.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/Pcode_Interpreter.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/Production.h">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/Pcode_Interpreter.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/Production.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.h">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/Production.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/TranslateScheme.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/SymbolBlock.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/TranslateScheme.h">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/SymbolBlock.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/cJSON.c">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/TranslateScheme.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/cJSON.h">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/TranslateScheme.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/cJSON.c">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/cJSON.h">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/main.cpp">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/lexical_analyzer.cpp">
 			<Option target="LR_1"/>
 		</Unit>
-		<Unit filename="/home/husserl/Pascal.s.Complier/LR_1/CMakeLists.txt">
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/lexical_analyzer.h">
+			<Option target="LR_1"/>
+		</Unit>
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/main.cpp">
+			<Option target="LR_1"/>
+		</Unit>
+		<Unit filename="E:/CLionproject/Pascal.s.Complier1/LR_1/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
