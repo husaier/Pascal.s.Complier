@@ -13,7 +13,7 @@ Const_variable -> id
 Const_variable -> + num
 Const_variable -> - num
 Const_variable -> num
-Const_variable -> string
+Const_variable -> letter
 Type_declarations -> type Type_declaration ;
 Type_declarations -> #
 Type_declaration -> Type_declaration ; id = Type
@@ -105,7 +105,7 @@ Factor -> ( Expression )
 Factor -> not Factor
 Unsign_const_variable -> id
 Unsign_const_variable -> num
-Unsign_const_variable -> string
+Unsign_const_variable -> letter
 A -> #
 B -> #
 C -> #

@@ -3,6 +3,9 @@ program test(input, output);
     type list = array [0 .. 10] of integer; {类型声明}
     var a,b,c: integer; {变量声明}
         e,f: real;
+        g,h: char;
+        i,j: boolean;
+        i: char; {语义错误，重复声明}
         rec: record
                 i: integer;
                 j,k: char
@@ -10,6 +13,7 @@ program test(input, output);
         arr: array [0 .. 7, 0 .. 3] of char;
         brr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
     begin
+        w := 3; {语义错误，未定义的变量}
         a := 3;
         b := 4;
         c := 5;
@@ -17,4 +21,13 @@ program test(input, output);
         a := 0.2 * 3; {错误，REAL赋值给了INTEGER}
         rec := 4 * 7; {错误，INTEGER赋值给了RECORD}
         a := 'c' * 7; {错误，运算对象类型错误，这时表达式的类型为VOID}
+        e := 4 / 2; {正确}
+        e := 4 / 0; {除0错误}
+        e := 4.0 / 2.0; {正确}
+        a := 5 mod 2; {正确}
+        a := 5 mod 0; {除0错误}
+        a := 4 div 2; {正确}
+        a := 4 div 0; {除0错误}
+        i := ( 3 = 4 ); {正确}
+        i := ( 'a' < 6 ) {操作数类型错误}
     end. {end of test}

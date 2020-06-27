@@ -18,7 +18,7 @@ static const int DELIMITER = 5; // , ; . ( ) [ ]
 static const int SUBDELIMITER = 6; // ..
 static const int KEY = 7; // 关键字
 static const int ID = 8; // 标识符
-static const int STRING = 9; // '字符串'
+static const int LETTER = 9; // '单个字符'
 
 static const int S0 = 0;
 

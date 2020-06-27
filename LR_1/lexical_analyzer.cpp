@@ -23,8 +23,8 @@ string LexicalItem::tokenToString() const {
             return "KEY";
         case ID:
             return "ID";
-        case STRING:
-            return "STRING";
+        case LETTER:
+            return "LETTER";
     }
 }
 
@@ -326,12 +326,12 @@ void LexicalAnalyzer::DFA(char t) {
             break;
         }
         case SUB7_S2: {
-            if(t == '\'') {
-                state = SUB7_S1;
-                putToBuffer(t);
-            } else {
+            if (buffer.size() == 1) {
                 state = S0;
-                addToken(STRING);
+                addToken(LETTER);
+            }
+            else {
+                errorCtr("letter不应该超过1个字符");
             }
             break;
         }
@@ -440,13 +440,13 @@ void LexicalAnalyzer::addToken(int type) {
     // string attri = StringToUtf(buffer);
     LexicalItem lexicalItem(type, buffer);
     lexicalItem.symbol = buffer;
-    lexicalItem.line = lines;
+    lexicalItem.line = lines + 1;
     if (type == ID)
         lexicalItem.symbol = "id";
     else if(type == ASSIGNOP)
         lexicalItem.symbol = "assignop";
-    else if(type == STRING)
-        lexicalItem.symbol = "string";
+    else if(type == LETTER)
+        lexicalItem.symbol = "letter";
     else if(type == NUM)
         lexicalItem.symbol = "num";
     else if(type == SPECIAL) {

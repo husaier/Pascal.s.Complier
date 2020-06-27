@@ -20,12 +20,15 @@ int main() {
     vector<LexicalItem> result;
     result = lexicalAnalyzer.analyze();
     lexicalAnalyzer.closeFile();
-    for (const auto& item : result) {
-        cout << item.tokenToString() << "\t" << item.attribute<< '\t'<< item.symbol << endl;
-    }
+
+//    for (const auto& item : result) {
+//        cout << item.tokenToString() << "\t" << item.attribute<< '\t'<< item.symbol << endl;
+//    }
 
     LR1Runner runner;
     runner.load(result);
+
+    runner.debugInfoLevel = 1;
 
     runner.run(table);
 

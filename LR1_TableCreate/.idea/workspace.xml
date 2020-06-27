@@ -36,15 +36,16 @@
       <change beforePath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/LR1Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/LR1Runner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/SymbolBlock.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/SymbolBlock.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/LR_1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.json" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/grammar.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test4.pas" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/cmake-build-debug/test4.pas" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/lexical_analyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/lexical_analyzer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LR_1/lexical_analyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/lexical_analyzer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../LR_1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../LR_1/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SourceFile" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SourceFile.o" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile.o" afterDir="false" />
@@ -115,6 +116,7 @@
       <workItem from="1592647883498" duration="13000" />
       <workItem from="1592653178466" duration="989000" />
       <workItem from="1592732415978" duration="1208000" />
+      <workItem from="1593229147405" duration="1834000" />
     </task>
     <servers />
   </component>
@@ -138,22 +140,22 @@
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state x="739" y="232" key="FileChooserDialogImpl/67.27.1853.1052@67.27.1853.1052" timestamp="1590840814920" />
-    <state width="1801" height="333" key="GridCell.Tab.0.bottom" timestamp="1592654166697">
+    <state width="1801" height="333" key="GridCell.Tab.0.bottom" timestamp="1592739468844">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="333" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1592654166697" />
-    <state width="1801" height="333" key="GridCell.Tab.0.center" timestamp="1592654166695">
+    <state width="1801" height="333" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1592739468844" />
+    <state width="1801" height="333" key="GridCell.Tab.0.center" timestamp="1592739468844">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="333" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1592654166695" />
-    <state width="1801" height="333" key="GridCell.Tab.0.left" timestamp="1592654166695">
+    <state width="1801" height="333" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1592739468844" />
+    <state width="1801" height="333" key="GridCell.Tab.0.left" timestamp="1592739468843">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="333" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1592654166695" />
-    <state width="1801" height="333" key="GridCell.Tab.0.right" timestamp="1592654166696">
+    <state width="1801" height="333" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1592739468843" />
+    <state width="1801" height="333" key="GridCell.Tab.0.right" timestamp="1592739468844">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="333" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1592654166696" />
+    <state width="1801" height="333" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1592739468844" />
     <state width="1801" height="340" key="GridCell.Tab.1.bottom" timestamp="1590832217310">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>

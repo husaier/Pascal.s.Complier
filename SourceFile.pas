@@ -1,6 +1,6 @@
 PROGRAM yuan (i);
 var R,S,C:real;
-    K:integer;
+    K,a,b:integer;
     FLOAT:real;
     W:array[0 .. 4]of char;
     N:array[0 .. 4, 2 .. 7]of integer;
@@ -45,5 +45,13 @@ begin
  float := 3 / 0; {允许，输出是 +Inf}
  writeln(float);
  {k := 4 / 6; k为integer，表达式运算结果为REAL，不允许}
+ a := + 123;
+ writeln(a);
+ b := - 123;
+ writeln(b);
+ float := +1.5;
+ writeln(float);
+ float := -1.5;
+ writeln(float);
  readln;
 END.

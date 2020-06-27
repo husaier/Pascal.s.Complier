@@ -38,9 +38,12 @@ public:
 class LR1Runner {
 
 public:
+    int debugInfoLevel = 0;
+    // 0 表示无输出信息，1 只展示分析结果，2 展示分析的详细过程，不展示符号表的内容，3 全部展示
+
     void run(LR1Table &table);
 
-    static void load(const vector<LexicalItem> &vector);
+    void load(const vector<LexicalItem> &vector);
 
     void printSemanticError();
 
@@ -62,9 +65,7 @@ private:
 
     void switchTable(vectorAttributeItem*, int);
 
-    void declareID(string);
-
-    void quoteID(string);
+    void quoteID(int, string);
 
     void locate();
 
@@ -72,7 +73,9 @@ private:
 
     void initial();
 
-    void recordSemanticError(const string&); // 记录语义错误
+    void recordSemanticError(int line, const string&); // 记录语义错误
+
+    static bool isBasicType(int);
 };
 
 

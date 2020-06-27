@@ -14,32 +14,43 @@ const int width1 = 50, width2 = 50, width3 = 50;
 
 void LR1Runner::run(LR1Table &table) {
     initial();
+    if (debugInfoLevel >= 2) {
+        cout << "-------------------------------------------------------------------------------------------Runner::run"
+             << "------------------------------------------------------------------------------------------------------"
+             << endl;
+    }
 
-    cout << "-------------------------------------------------------------------------------------------Runner::run"
-         << "------------------------------------------------------------------------------------------------------"
-         << endl;
     stackState.push(0);
     stackSymbol.push(" ");
     vectorAttribute.emplace_back(vectorAttributeItem(" ", -1, -1, -1));    ///line
-    cout << setiosflags(ios::left) << setw(width1) << "Stack" << resetiosflags(ios::left) << setiosflags(ios::left)
-         << setw(width2) << "Input" << setw(width3) << "Output" << resetiosflags(ios::left) << endl;
-    cout << "------------------------------------------------------------------------------------------------------"
-         << "------------------------------------------------------------------------------------------------------"
-         << endl;
+    if (debugInfoLevel >= 2) {
+        cout << setiosflags(ios::left) << setw(width1) << "Stack" << resetiosflags(ios::left) << setiosflags(ios::left)
+             << setw(width2) << "Input" << setw(width3) << "Output" << resetiosflags(ios::left) << endl;
+        cout << "------------------------------------------------------------------------------------------------------"
+             << "------------------------------------------------------------------------------------------------------"
+             << endl;
+    }
 
     int errorIpNumber = 0, ip = 0;
     while (true) {
         if (ip >= vectorInput.size()) {
-            cout << "ERROR Break" << endl;
+            if (debugInfoLevel >= 2) {
+                cout << "ERROR Break" << endl;
+            }
             break;
         }
-        outStackInt(stackState);
-        outStackString(stackSymbol);
-        outVectorAttribute(vectorAttribute);
-        outStrInput(vectorInput, ip);
+        if (debugInfoLevel >= 2) {
+            outStackInt(stackState);
+            outStackString(stackSymbol);
+            outVectorAttribute(vectorAttribute);
+            outStrInput(vectorInput, ip);
+        }
 
         int s = stackState.top();       //从栈顶取当前状态
-        cout << endl << "OutPut:" << setw(width3) << setiosflags(ios::left);
+        if (debugInfoLevel >= 2) {
+            cout << endl << "OutPut:" << setw(width3) << setiosflags(ios::left);
+        }
+
         int tempCol = table.invMap[vectorInput.at(ip).symbol];
         int currentType = table.table[s][tempCol].type;
         if (currentType == TableItem::SHIFT) {
@@ -47,7 +58,9 @@ void LR1Runner::run(LR1Table &table) {
             vectorAttribute.emplace_back(vectorInput.at(ip).attribute, -1, -1, vectorInput.at(ip).line);    ///line
             stackState.push(table.table[s][tempCol].index);  //根据表格中S后的数字，压入状态
             ip++;
-            cout << "S" + to_string(table.table[s][tempCol].index) << endl;//输出动作
+            if (debugInfoLevel >= 2) {
+                cout << "S" + to_string(table.table[s][tempCol].index) << endl;//输出动作
+            }
         } else if (currentType == TableItem::REDUCTION) {
             int tempProd = table.table[s][tempCol].index;  //取出要按哪个产生式R
             Production tempProduction = table.productions.at(tempProd);
@@ -69,29 +82,43 @@ void LR1Runner::run(LR1Table &table) {
             for (const auto &i : tempProduction.right) {
                 tempString += i + " ";
             }
-            cout << "R" + to_string(table.table[s][tempCol].index) + " by " + tempProduction.left + " -> " + tempString
-                 << endl;
+            if (debugInfoLevel >= 2) {
+                cout << "R" + to_string(table.table[s][tempCol].index) + " by " + tempProduction.left + " -> " +
+                        tempString
+                     << endl;
+            }
 
         } else if (currentType == TableItem::ACC) {
-            cout << "ACC" << endl;
+            if (debugInfoLevel >= 2) {
+                cout << "ACC" << endl;
+            }
             break;
         } else {
-            //没有操作的话报错，ip加一
-            cout << "ERROR ip++" << endl;
+            if (debugInfoLevel >= 2) {
+                //没有操作的话报错，ip加一
+                cout << "ERROR ip++" << endl;
+            }
             ip++;
             errorIpNumber++;
         }
-        cout << resetiosflags(ios::left);
-        cout << "------------------------------------------------------------------------------------------------------"
-             << "------------------------------------------------------------------------------------------------------"
-             << endl;
+        if (debugInfoLevel >= 2) {
+            cout << resetiosflags(ios::left);
+            cout
+                    << "------------------------------------------------------------------------------------------------------"
+                    << "------------------------------------------------------------------------------------------------------"
+                    << endl;
+        }
     }
-    if (errorIpNumber == 0 && ip == vectorInput.size() - 1)    //输出统计信息
-        cout << "分析结束，无错误" << endl;
-    else {
-        cout << "分析结束，出现错误" << endl << endl;
-        cout << "分析过程中错误处理" << endl;
-        cout << "指针后移次数:\t" << errorIpNumber << endl;
+    if (debugInfoLevel >= 1) {
+        cout
+                << "=======================================================================================================\n";
+        if (errorIpNumber == 0 && ip == vectorInput.size() - 1) { //输出统计信息
+            cout << "语法分析结束，无错误" << endl;
+        } else {
+            cout << "分析结束，出现错误" << endl << endl;
+            cout << "分析过程中错误处理" << endl;
+            cout << "指针后移次数:\t" << errorIpNumber << endl;
+        }
     }
 }
 
@@ -149,15 +176,17 @@ void LR1Runner::load(const vector<LexicalItem> &result) {
     for (const auto &i : result) {
         vectorInput.push_back(i);
     }
-    cout << "InputSymbol:";
-    for (const auto &i : vectorInput) {
-        cout << i.symbol + " ";
+    if (debugInfoLevel >= 2) {
+        cout << "InputSymbol:";
+        for (const auto &i : vectorInput) {
+            cout << i.symbol + " ";
+        }
+        cout << endl << "InputAttribute:";
+        for (const auto &i : vectorInput) {
+            cout << i.attribute + " ";
+        }
+        cout << endl;
     }
-    cout << endl << "InputAttribute:";
-    for (const auto &i : vectorInput) {
-        cout << i.attribute + " ";
-    }
-    cout << endl;
     LexicalItem temp = LexicalItem(999, "$");
     temp.symbol = "$";
     vectorInput.emplace_back(temp);
@@ -167,51 +196,70 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
     int top = vectorAttribute.size() - 1;
     string id;
     switch (op_type) {
-        case 4:
+        case 4: { // Identifier_list -> Identifier_list , id
             id = vectorAttribute[top].attribute;
+            int line = vectorAttribute[top].line;
             for (auto item : vectorAttribute[top - 2].IDlist) {
                 leftSymbol->IDlist.push_back(item);
             }
             if (curBlock->blockQuery(id) == nullptr) {
                 SymbolTableLine *entry;
                 entry = curBlock->insert2(id, 0, 0, 0, 0);
-                cout << "声明" << id << endl;
-                curBlock->printBlock();
+                if (debugInfoLevel >= 3) {
+                    cout << "声明" << id << endl;
+                    curBlock->printBlock();
+                }
 
                 leftSymbol->IDlist.push_back(entry);
             } else {
-                cout << "语义错误！在作用域内有重复定义的标识符" << endl;
+                recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
             }
             break;
-        case 5:
+        }
+        case 5: { // Identifier_list -> id
             id = vectorAttribute[top].attribute;
+            int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
                 SymbolTableLine *entry;
                 entry = curBlock->insert2(id, 0, 0, 0, 0);
-                cout << "声明" << id << endl;
-                curBlock->printBlock();
-
+                if (debugInfoLevel >= 3) {
+                    cout << "声明" << id << endl;
+                    curBlock->printBlock();
+                }
                 leftSymbol->IDlist.push_back(entry);
             } else {
-                cout << "语义错误！在作用域内有重复定义的标识符" << endl;
+                recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
             }
             break;
+        }
         case 8:
         case 9:
         case 19:
-        case 20:
+        case 20: {
             id = vectorAttribute[top - 2].attribute;
-            declareID(id);
+            int line = vectorAttribute[top].line;
+            if (curBlock->blockQuery(id) == nullptr) {
+                curBlock->insert(id, 0, 0, 0, 0);
+                if (debugInfoLevel >= 3) {
+                    cout << "声明" << id << endl;
+                    curBlock->printBlock();
+                }
+            } else {
+                recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
+            }
             break;
+        }
         case 10:
         case 11:
         case 12:
         case 66:
         case 78:
-        case 106:
+        case 106: {
             id = vectorAttribute[top].attribute;
-            quoteID(id);
+            int line = vectorAttribute[top].line;
+            quoteID(line, id);
             break;
+        }
         case 15: {
             leftSymbol->num = stoi(vectorAttribute[top].attribute);
             break;
@@ -338,7 +386,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 *offset += Type.width;
             }
             leftSymbol->dimension = Type.dimension;
-            curBlock->printBlock();
+            if (debugInfoLevel >= 3)
+                curBlock->printBlock();
             break;
         }
         case 49: {
@@ -351,7 +400,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 item->dimension = tmp.dimension;
                 *offset += tmp.width;
             }
-            curBlock->printBlock();
+            if (debugInfoLevel >= 3)
+                curBlock->printBlock();
         }
             break;
         case 50:
@@ -360,15 +410,21 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 53: { // Statement -> Variable assignop Expression
             auto Expression = vectorAttribute[top];
             auto Variable = vectorAttribute[top - 2];
-            if(Variable.type != Expression.type)
-                recordSemanticError("赋值语句类型错误");
+            if (Variable.type != Expression.type)
+                recordSemanticError(Variable.line, "赋值语句类型错误");
             break;
         }
         case 62: { // Variable -> id F62 Id_varparts
-            auto Id_varparts  = vectorAttribute[top];
-            leftSymbol->entry = Id_varparts.entry;
-            int type = leftSymbol->entry->type;
-            leftSymbol->type = type;
+            auto Id_varparts = vectorAttribute[top];
+            if (Id_varparts.entry != nullptr) {
+                leftSymbol->entry = Id_varparts.entry;
+                int type = leftSymbol->entry->type;
+                leftSymbol->type = type;
+            }
+            else {
+                leftSymbol->entry = nullptr;
+                leftSymbol->type = SymbolTableLine::VOID;
+            }
             break;
         }
         case 64: {
@@ -376,10 +432,212 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 79:
-        case 103:
+        case 103: {
             id = vectorAttribute[top - 3].attribute;
-            quoteID(id);
+            int line = vectorAttribute[top - 3].line;
+            quoteID(line, id);
             break;
+        }
+        case 82: { // Expression -> Simple_expression0 = Simple_expression1
+            auto Simple_expression0 = vectorAttribute[top - 2];
+            auto Simple_expression1 = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Simple_expression0.type == Simple_expression1.type) {
+                bool flag = isBasicType(Simple_expression0.type) &&
+                            isBasicType(Simple_expression1.type);
+                if (flag) {
+                    resultType = SymbolTableLine::BOOLEAN;
+                    if (Simple_expression0.value == Simple_expression1.value)
+                        value = "1";
+                    else
+                        value = "0";
+                } else {
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符=：操作数类型违法");
+                }
+            } else {
+                recordSemanticError(Simple_expression0.line, "逻辑运算符=：左右操作数类型不一致");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 83: { // Expression -> Simple_expression0 <> Simple_expression1
+            auto Simple_expression0 = vectorAttribute[top - 2];
+            auto Simple_expression1 = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Simple_expression0.type == Simple_expression1.type) {
+                bool flag = isBasicType(Simple_expression0.type) &&
+                            isBasicType(Simple_expression1.type);
+                if (flag) {
+                    resultType = SymbolTableLine::BOOLEAN;
+                    if (Simple_expression0.value == Simple_expression1.value)
+                        value = "0"; // false
+                    else
+                        value = "1"; // true
+                } else {
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符<>：操作数类型违法");
+                }
+            } else {
+                recordSemanticError(Simple_expression0.line, "逻辑运算符<>：左右操作数类型不一致");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 84: { // Expression -> Simple_expression0 < Simple_expression1
+            auto Simple_expression0 = vectorAttribute[top - 2];
+            auto Simple_expression1 = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Simple_expression0.type == Simple_expression1.type) {
+                if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
+                    Simple_expression0.type == SymbolTableLine::INTEGER) {
+                    int a = stoi(Simple_expression0.value);
+                    int b = stoi(Simple_expression1.value);
+                    if (a < b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::REAL) {
+                    float a = stof(Simple_expression0.value);
+                    float b = stof(Simple_expression1.value);
+                    if (a < b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
+                    char a = Simple_expression0.value[0];
+                    char b = Simple_expression1.value[0];
+                    if (a < b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else {
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符<：操作数类型违法");
+                }
+            } else {
+                recordSemanticError(Simple_expression0.line, "逻辑运算符<：左右操作数类型不一致");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 85: { // Expression -> Simple_expression0 <= Simple_expression1
+            auto Simple_expression0 = vectorAttribute[top - 2];
+            auto Simple_expression1 = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Simple_expression0.type == Simple_expression1.type) {
+                if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
+                    Simple_expression0.type == SymbolTableLine::INTEGER) {
+                    int a = stoi(Simple_expression0.value);
+                    int b = stoi(Simple_expression1.value);
+                    if (a <= b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::REAL) {
+                    float a = stof(Simple_expression0.value);
+                    float b = stof(Simple_expression1.value);
+                    if (a <= b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
+                    char a = Simple_expression0.value[0];
+                    char b = Simple_expression1.value[0];
+                    if (a <= b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else {
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符<=：操作数类型违法");
+                }
+            } else {
+                recordSemanticError(Simple_expression0.line, "逻辑运算符<=：左右操作数类型不一致");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 86: { // Expression -> Simple_expression0 > Simple_expression1
+            auto Simple_expression0 = vectorAttribute[top - 2];
+            auto Simple_expression1 = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Simple_expression0.type == Simple_expression1.type) {
+                if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
+                    Simple_expression0.type == SymbolTableLine::INTEGER) {
+                    int a = stoi(Simple_expression0.value);
+                    int b = stoi(Simple_expression1.value);
+                    if (a > b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::REAL) {
+                    float a = stof(Simple_expression0.value);
+                    float b = stof(Simple_expression1.value);
+                    if (a > b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
+                    char a = Simple_expression0.value[0];
+                    char b = Simple_expression1.value[0];
+                    if (a > b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else {
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符>：操作数类型违法");
+                }
+            } else {
+                recordSemanticError(Simple_expression0.line, "逻辑运算符>：左右操作数类型不一致");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 87: { // Expression -> Simple_expression0 >= Simple_expression1
+            auto Simple_expression0 = vectorAttribute[top - 2];
+            auto Simple_expression1 = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Simple_expression0.type == Simple_expression1.type) {
+                if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
+                    Simple_expression0.type == SymbolTableLine::INTEGER) {
+                    int a = stoi(Simple_expression0.value);
+                    int b = stoi(Simple_expression1.value);
+                    if (a >= b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::REAL) {
+                    float a = stof(Simple_expression0.value);
+                    float b = stof(Simple_expression1.value);
+                    if (a >= b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
+                    char a = Simple_expression0.value[0];
+                    char b = Simple_expression1.value[0];
+                    if (a >= b)
+                        value = "1";
+                    else
+                        value = "0";
+                } else {
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符>=：操作数类型违法");
+                }
+            } else {
+                recordSemanticError(Simple_expression0.line, "逻辑运算符>=：左右操作数类型不一致");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
         case 88: { // Expression -> Simple_expression
             auto Simple_expression = vectorAttribute[top];
             leftSymbol->type = Simple_expression.type;
@@ -392,7 +650,146 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = Term.value;
             break;
         }
-        case 95: { //Term0 -> Term1 * Factor
+        case 90: { // Simple_expression -> + Term
+            auto Term = vectorAttribute[top];
+            leftSymbol->type = Term.type;
+            string value;
+            if (Term.type == SymbolTableLine::INTEGER ||
+                Term.type == SymbolTableLine::REAL) {
+                float a = stof(Term.value);
+                value = to_string(a);
+            }
+            leftSymbol->value = Term.value;
+            break;
+        }
+        case 91: { // Simple_expression -> - Term
+            auto Term = vectorAttribute[top];
+            leftSymbol->type = Term.type;
+            string value;
+            if (Term.type == SymbolTableLine::INTEGER ||
+                Term.type == SymbolTableLine::REAL) {
+                float a = stof(Term.value);
+                value = to_string(0 - a);
+            }
+            leftSymbol->value = Term.value;
+            break;
+        }
+        case 92: { // Simple_expression0 -> Simple_expression1 + Term
+            auto Simple_expression1 = vectorAttribute[top - 2];
+            auto Term = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            int flag;
+            if (Simple_expression1.type == SymbolTableLine::INTEGER) {
+                if (Term.type == SymbolTableLine::INTEGER)
+                    flag = 1;
+                else if (Term.type == SymbolTableLine::REAL)
+                    flag = 2;
+                else
+                    flag = 0;
+            } else if (Simple_expression1.type == SymbolTableLine::REAL) {
+                if (Term.type == SymbolTableLine::INTEGER)
+                    flag = 3;
+                else if (Term.type == SymbolTableLine::REAL)
+                    flag = 4;
+                else
+                    flag = 0;
+            } else
+                flag = 0;
+
+            switch (flag) {
+                case 1: { // 都是INTEGER
+                    resultType = SymbolTableLine::INTEGER;
+                    int a = stoi(Simple_expression1.value);
+                    int b = stoi(Term.value);
+                    value = to_string(a + b);
+                    break;
+                }
+                case 2:
+                case 3:
+                case 4: {
+                    resultType = SymbolTableLine::REAL;
+                    float a = stof(Simple_expression1.value);
+                    float b = stof(Term.value);
+                    value = to_string(a + b);
+                    break;
+                }
+                default: {
+                    recordSemanticError(Simple_expression1.line, "运算符+：运算对象类型错误");
+                    break;
+                }
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 93: { // Simple_expression0 -> Simple_expression1 - Term
+            auto Simple_expression1 = vectorAttribute[top - 2];
+            auto Term = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            int flag;
+            if (Simple_expression1.type == SymbolTableLine::INTEGER) {
+                if (Term.type == SymbolTableLine::INTEGER)
+                    flag = 1;
+                else if (Term.type == SymbolTableLine::REAL)
+                    flag = 2;
+                else
+                    flag = 0;
+            } else if (Simple_expression1.type == SymbolTableLine::REAL) {
+                if (Term.type == SymbolTableLine::INTEGER)
+                    flag = 3;
+                else if (Term.type == SymbolTableLine::REAL)
+                    flag = 4;
+                else
+                    flag = 0;
+            } else
+                flag = 0;
+
+            switch (flag) {
+                case 1: { // 都是INTEGER
+                    resultType = SymbolTableLine::INTEGER;
+                    int a = stoi(Simple_expression1.value);
+                    int b = stoi(Term.value);
+                    value = to_string(a - b);
+                    break;
+                }
+                case 2:
+                case 3:
+                case 4: {
+                    resultType = SymbolTableLine::REAL;
+                    float a = stof(Simple_expression1.value);
+                    float b = stof(Term.value);
+                    value = to_string(a - b);
+                    break;
+                }
+                default: {
+                    recordSemanticError(Simple_expression1.line, "运算符-：运算对象类型错误");
+                    break;
+                }
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 94: { // Simple_expression0 -> Simple_expression1 or Term
+            auto Simple_expression1 = vectorAttribute[top - 2];
+            auto Term = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Simple_expression1.type == SymbolTableLine::BOOLEAN &&
+                Term.type == SymbolTableLine::BOOLEAN) {
+                int a = stoi(Simple_expression1.value);
+                int b = stoi(Term.value);
+                value = to_string(a || b);
+            } else {
+                recordSemanticError(Simple_expression1.line, "运算符or：运算对象类型错误");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 95: { // Term0 -> Term1 * Factor
             auto Term1 = vectorAttribute[top - 2];
             auto Factor = vectorAttribute[top];
             int resultType = SymbolTableLine::VOID;
@@ -433,9 +830,94 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     break;
                 }
                 default: {
-                    recordSemanticError("运算符*：运算对象类型错误");
+                    recordSemanticError(Term1.line, "运算符*：运算对象类型错误");
                     break;
                 }
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 96: { // Term0 -> Term1 / Factor
+            auto Term1 = vectorAttribute[top - 2];
+            auto Factor = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            int flag;
+            if ((Term1.type == SymbolTableLine::INTEGER || Term1.type == SymbolTableLine::REAL) &&
+                (Factor.type == SymbolTableLine::INTEGER || Factor.type == SymbolTableLine::REAL)) {
+                float a = stof(Term1.value);
+                float b = stof(Factor.value);
+                if (b != 0) {
+                    resultType = SymbolTableLine::REAL;
+                    value = to_string(a / b);
+                } else {
+                    recordSemanticError(Term1.line, "除0错误");
+                }
+            } else {
+                recordSemanticError(Term1.line, "运算符/：运算对象类型错误");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 97: { // Term0 -> Term1 div Factor
+            auto Term1 = vectorAttribute[top - 2];
+            auto Factor = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Term1.type == SymbolTableLine::INTEGER &&
+                Factor.type == SymbolTableLine::INTEGER) {
+                int a = stoi(Term1.value);
+                int b = stoi(Factor.value);
+                if (b != 0) {
+                    resultType = SymbolTableLine::INTEGER;
+                    value = to_string(a / b);
+                } else {
+                    recordSemanticError(Term1.line, "除0错误");
+                }
+            } else {
+                recordSemanticError(Term1.line, "运算符div：运算对象类型错误");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 98: { // Term0 -> Term1 mod Factor
+            auto Term1 = vectorAttribute[top - 2];
+            auto Factor = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Term1.type == SymbolTableLine::INTEGER &&
+                Factor.type == SymbolTableLine::INTEGER) {
+                int a = stoi(Term1.value);
+                int b = stoi(Factor.value);
+                if (b != 0) {
+                    resultType = SymbolTableLine::INTEGER;
+                    value = to_string(a % b);
+                } else {
+                    recordSemanticError(Term1.line, "除0错误");
+                }
+            } else {
+                recordSemanticError(Term1.line, "运算符mod：运算对象类型错误");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 99: { // Term0 -> Term1 and Factor
+            auto Term1 = vectorAttribute[top - 2];
+            auto Factor = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Term1.type == SymbolTableLine::BOOLEAN &&
+                Factor.type == SymbolTableLine::BOOLEAN) {
+                resultType = SymbolTableLine::BOOLEAN;
+                int a = stoi(Term1.value);
+                int b = stoi(Factor.value);
+                value = to_string(a && b);
+            } else {
+                recordSemanticError(Term1.line, "运算符and：运算对象类型错误");
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
@@ -453,7 +935,29 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = Unsign_const_variable.value;
             break;
         }
-        case 107: {
+        case 104: { // Factor -> ( Expression )
+            auto Expression = vectorAttribute[top - 1];
+            leftSymbol->type = Expression.type;
+            leftSymbol->value = Expression.value;
+            break;
+        }
+        case 105: { // Factor0 -> not Factor1
+            auto Factor1 = vectorAttribute[top];
+            int resultType = SymbolTableLine::VOID;
+            string value;
+            if (Factor1.type == SymbolTableLine::BOOLEAN) {
+                if (Factor1.value == "1")
+                    value = "0";
+                else
+                    value = "1";
+            } else {
+                recordSemanticError(Factor1.line, "逻辑运算符not：操作数类型错误");
+            }
+            leftSymbol->type = resultType;
+            leftSymbol->value = value;
+            break;
+        }
+        case 107: { // Unsign_const_variable -> num
             auto num = vectorAttribute[top];
             bool isRealType = false;
             for (auto c : num.attribute) {
@@ -472,11 +976,26 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
+        case 108: { // Unsign_const_variable -> letter
+            auto letter = vectorAttribute[top];
+            leftSymbol->type = SymbolTableLine::CHAR;
+            leftSymbol->value = letter.attribute;
+            break;
+        }
         case 109:
         case 110:
         case 111: {
             id = vectorAttribute[top].attribute;
-            declareID(id);
+            int line = vectorAttribute[top].line;
+            if (curBlock->blockQuery(id) == nullptr) {
+                curBlock->insert(id, 0, 0, 0, 0);
+                if (debugInfoLevel >= 3) {
+                    cout << "声明" << id << endl;
+                    curBlock->printBlock();
+                }
+            } else {
+                recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
+            }
 
             auto tableLine = curBlock->blockQuery(id);
 
@@ -492,11 +1011,14 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto t = vectorAttribute[top];
             auto entry = curBlock->query(t.attribute);
             if (entry == nullptr) {
-                recordSemanticError("未定义的引用");
+                t.entry = nullptr;
+                leftSymbol->entry = nullptr;
+                recordSemanticError(t.line, "未定义的引用");
                 break;
+            } else {
+                t.entry = entry;
+                leftSymbol->entry = entry;
             }
-            t.entry = entry;
-            leftSymbol->entry = entry;
             break;
         }
         default:
@@ -504,22 +1026,17 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
     }
 }
 
-void LR1Runner::declareID(string id) {
-    if (curBlock->blockQuery(id) == nullptr) {
-        curBlock->insert(id, 0, 0, 0, 0);
-        cout << "声明" << id << endl;
-        curBlock->printBlock();
+void LR1Runner::quoteID(int line, string id) {
+    if (curBlock->query(id) == nullptr) {
+        string t;
+        t = "语义错误！引用了未定义的标识符";
+        t.append(id);
+        recordSemanticError(line, t);
     } else {
-        cout << "语义错误！在作用域内有重复定义的标识符" << endl;
-    }
-}
-
-void LR1Runner::quoteID(string id) {
-    if (curBlock->query(id) == nullptr)
-        cout << "语义错误！引用了未定义的标识符" << id << endl;
-    else {
-        cout << "找到引用" << id << endl;
-        curBlock->printBlock();
+        if (debugInfoLevel >= 3) {
+            cout << "找到引用" << id << endl;
+            curBlock->printBlock();
+        }
     }
 }
 
@@ -531,7 +1048,8 @@ void LR1Runner::locate() {
 
     tablePointers.push(curBlock);
     offSetStack.push(offset);
-    cout << "定位" << endl;
+    if (debugInfoLevel >= 3)
+        cout << "定位" << endl;
 }
 
 void LR1Runner::relocate() {
@@ -542,7 +1060,8 @@ void LR1Runner::relocate() {
         curBlock = tablePointers.top();
         offset = offSetStack.top();
     }
-    cout << "重定位" << endl;
+    if (debugInfoLevel >= 3)
+        cout << "重定位" << endl;
 }
 
 void LR1Runner::initial() {
@@ -558,14 +1077,29 @@ void LR1Runner::initial() {
 
 void LR1Runner::printSemanticError() {
     if (semanticError.empty()) {
-        cout << "源代码中没有语义错误";
+        cout << "源代码中没有语义错误\n";
         return;
     }
+    cout << "=======================================================================================================";
+    cout << "\n";
+    cout << "ERROR!! 源代码中有语义错误\n";
     for (const auto &s : semanticError) {
         cout << s << endl;
     }
 }
 
-void LR1Runner::recordSemanticError(const string& e) {
-    semanticError.push_back(e);
+void LR1Runner::recordSemanticError(int line, const string &e) {
+    string tmp;
+    char s[50];
+    snprintf(s, 50, "第%d行\t", line);
+    tmp.append(s);
+    tmp.append(e);
+    semanticError.push_back(tmp);
+}
+
+bool LR1Runner::isBasicType(int type) {
+    return type == SymbolTableLine::BOOLEAN ||
+           type == SymbolTableLine::INTEGER ||
+           type == SymbolTableLine::REAL ||
+           type == SymbolTableLine::CHAR;
 }
