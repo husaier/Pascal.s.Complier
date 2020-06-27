@@ -37,6 +37,7 @@ public:
     }
 
     //类型
+    static const int VOID = 0;
     static const int INTEGER = 1;
     static const int REAL = 2;
     static const int BOOLEAN = 3;
