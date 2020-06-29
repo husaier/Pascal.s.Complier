@@ -28,7 +28,7 @@ int main() {
     LR1Runner runner;
     runner.load(result);
 
-    runner.debugInfoLevel = 1;
+    runner.debugInfoLevel = 3;
 
     runner.run(table);
 

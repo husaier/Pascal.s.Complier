@@ -22,7 +22,7 @@ SUFFIXES =
 $(VERBOSE).SILENT:
 
 
-# D target that is always out of date.
+# A target that is always out of date.
 cmake_force:
 
 .PHONY : cmake_force

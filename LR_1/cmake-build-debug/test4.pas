@@ -8,8 +8,14 @@ program test(input, output);
         i: char; {语义错误，重复声明}
         rec: record
                 i: integer;
+                c: record
+                    a: integer;
+                    b: boolean;
+                    c: real;
+                    d: char
+                    end; {end of record c}
                 j,k: char
-             end; {end of record}
+             end; {end of record rec}
         arr: array [0 .. 7, 0 .. 3] of char;
         brr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
     begin
@@ -29,5 +35,10 @@ program test(input, output);
         a := 4 div 2; {正确}
         a := 4 div 0; {除0错误}
         i := ( 3 = 4 ); {正确}
-        i := ( 'a' < 6 ) {操作数类型错误}
+        i := ( 'a' < 6 ); {操作数类型错误}
+        i := rec.i + 1; {赋值类型错误}
+        i.a := 4; {错误,i不是一个记录类型}
+        i := rec.abc; {错误,记录rec中没有abc领域}
+        i := rec.c.b; {正确}
+        rec.i := 4 {正确}
     end. {end of test}
