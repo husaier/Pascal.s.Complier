@@ -41,4 +41,7 @@ program test(input, output);
         i := rec.abc; {错误,记录rec中没有abc领域}
         i := rec.c.b; {正确}
         rec.i := 4 {正确}
+
+
+
     end. {end of test}

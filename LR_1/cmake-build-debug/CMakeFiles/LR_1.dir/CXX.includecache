@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.hpp
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/CJsonObject.hpp
 stdio.h
 -
 stddef.h
@@ -24,15 +24,17 @@ map
 list
 -
 cJSON.h
-/home/husserl/Pascal.s.Complier/LR_1/cJSON.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/cJSON.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.cpp
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/LR1Runner.cpp
+sstream
+-
 LR1Runner.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/LR1Runner.h
 lexical_analyzer.h
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/lexical_analyzer.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Runner.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/LR1Runner.h
 queue
 -
 iomanip
@@ -40,21 +42,21 @@ iomanip
 stack
 -
 LR1Table.h
-/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/LR1Table.h
 lexical_analyzer.h
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/lexical_analyzer.h
 SymbolBlock.h
-/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/SymbolBlock.h
 
-/home/husserl/Pascal.s.Complier/LR_1/LR1Table.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/LR1Table.h
 map
 -
 Production.h
-/home/husserl/Pascal.s.Complier/LR_1/Production.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/Production.h
 fstream
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/Production.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/Production.h
 iostream
 -
 string
@@ -62,9 +64,9 @@ string
 vector
 -
 CJsonObject.hpp
-/home/husserl/Pascal.s.Complier/LR_1/CJsonObject.hpp
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/CJsonObject.hpp
 
-/home/husserl/Pascal.s.Complier/LR_1/SymbolBlock.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/SymbolBlock.h
 string
 -
 vector
@@ -72,15 +74,23 @@ vector
 map
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/cJSON.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/cJSON.h
 stdint.h
 -
 
-/home/husserl/Pascal.s.Complier/LR_1/lexical_analyzer.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/lexical_analyzer.h
 fstream
 -
 algorithm
 -
 vector
 -
+
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/main.cpp
+LR1Table.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/LR1Table.h
+LR1Runner.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/LR1Runner.h
+lexical_analyzer.h
+/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/lexical_analyzer.h
 

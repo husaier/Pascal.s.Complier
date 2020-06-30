@@ -33,7 +33,7 @@ public:
         declarationLine = InDeclarationLine;//声明行
         vector<int> referenceLineVector;//引用行 创建时为空
         point = nullptr; //指向存储位置的指针
-        blockPoint = nullptr;
+        blockPoint = nullptr;//指指向下一个符号块
     }
 
     //类型
@@ -49,6 +49,7 @@ public:
     int id;//序号
     string name;//名字
     int type;//类型
+    int isConst = 0;//常量的类型 //为0表示不是常量,为1表示是常量
     ArrayInfo *arrayInfo = nullptr; //数组类型的相关信息，链表
     int offset;//存储地址,这里不确定是否用int
     int dimension;//维数,0,1,2,3,...
@@ -65,7 +66,7 @@ class SymbolBlock {
 public:
     SymbolBlock *previous = NULL;//用于指向外围的符号表
     //符号表
-    vector<SymbolTableLine*> symbolBlock;
+    vector<SymbolTableLine *> symbolBlock;
     //反映射表，建立string -> index的映射,name -> id
     map<string, int> invMap;
     int rowNum = 0;
@@ -75,7 +76,7 @@ public:
 
     bool insert(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
 
-    SymbolTableLine* insert2(string name, int type, int offset, int dimension, int declarationLine);
+    SymbolTableLine *insert2(string name, int type, int offset, int dimension, int declarationLine);
 
     static SymbolBlock *makeBlock(SymbolBlock *InPrevious);
 
@@ -83,12 +84,12 @@ public:
 
     void printBlock();
 
-    SymbolTableLine* blockQuery(string name);
+    SymbolTableLine *blockQuery(string name);
 };
 
 class BlockIndexTable {
 public:
-    vector<SymbolBlock*> blockIndexTable;
+    vector<SymbolBlock *> blockIndexTable;
 };
 
 #endif //LR_1_SYMBOLTABLE_H
