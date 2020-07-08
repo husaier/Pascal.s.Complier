@@ -239,7 +239,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
                 SymbolTableLine *tempPoint = curBlock->insert2(id, vectorAttribute[top].type, 0, 0, 0);
-                tempPoint->isConst = 1;//将常量标志位置为1
+                tempPoint->specialType = SymbolTableLine::CONST;//将常量标志位置为1
                 if (debugInfoLevel >= 3) {
                     cout << "声明" << id << endl;
                     curBlock->printBlock();
@@ -268,7 +268,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 11:    //11. Const_variable -> - id
         case 12:    //12. Const_variable -> id
         case 78:    //78. Call_procedure_statement -> id
-        case 106:{  //106. Unsign_const_variable -> id
+        case 106: {  //106. Unsign_const_variable -> id
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             quoteID(line, id);  //查看是否存在这个id
@@ -430,6 +430,18 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->dimension = Type.dimension;
             if (debugInfoLevel >= 3)
                 curBlock->printBlock();
+            break;
+        }
+        case 40: {//40. Subprogram_head -> function id B Formal_parameter : Standard_type ;
+            auto tempPoint = curBlock->query(vectorAttribute[top - 5].attribute);
+            tempPoint->type = vectorAttribute[top - 1].type;
+            tempPoint->specialType = SymbolTableLine::FUNCTION;
+            break;
+        }
+        case 41: {//41. Subprogram_head -> procedure id C Formal_parameter ;
+            auto tempPoint = curBlock->query(vectorAttribute[top - 3].attribute);
+            tempPoint->type = -1;
+            tempPoint->specialType = SymbolTableLine::PROCEDURE;
             break;
         }
         case 49: {

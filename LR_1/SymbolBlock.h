@@ -44,12 +44,20 @@ public:
     static const int CHAR = 4;
     static const int ARRAY = 5;
     static const int RECORD = 6;
-    static const int FUNCTION = 7;
+//    static const int FUNCTION = 7;
 
     int id;//序号
     string name;//名字
     int type;//类型
-    int isConst = 0;//常量的类型 //为0表示不是常量,为1表示是常量
+//    int isConst = 0;//常量的类型 //为0表示不是常量,为1表示是常量
+//    int isFunc = 0;//函数的类型 //为0表示不是函数,为1表示是函数
+//    int isProc = 0;//过程的类型 //为0表示不是过程,为1表示是过程
+
+    int specialType = 0;
+    static const int CONST = 1;
+    static const int FUNCTION = 2;
+    static const int PROCEDURE = 3;
+
     ArrayInfo *arrayInfo = nullptr; //数组类型的相关信息，链表
     int offset;//存储地址,这里不确定是否用int
     int dimension;//维数,0,1,2,3,...
