@@ -18,6 +18,24 @@ program test(input, output);
              end; {end of record rec}
         arr: array [0 .. 7, 0 .. 3] of char;
         brr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
+    function func1 ( var id2 : real ;var id4 : real) : integer ; {Subprogram声明}
+            procedure proc1 (var id3 : integer;var id4 : real) ;
+                function func2 ( var id2 : real) : integer ;
+                    begin C:=pi*r*2; end ; {end of func2}
+                begin C:=pi*r*2; end ; {end of proc1}
+            begin C:=pi*r*2; end ; {end of func1}
+    procedure d1p1(var m: char);
+        var a,b: char;
+        begin a := b; end; {end of d1p1}
+    procedure d1p2(var n: real);
+        var c,b,d: boolean;
+        procedure d2p1(var q: boolean);
+            var k,m: integer;
+            begin k := 2; end; {end of d2p1]
+        begin
+            c := true;
+            d2p1(c);
+        end; {end of d1p2}
     begin
         w := 3; {语义错误，未定义的变量}
         a := 3;
@@ -41,4 +59,7 @@ program test(input, output);
         i := rec.abc; {错误,记录rec中没有abc领域}
         i := rec.c.b; {正确}
         rec.i := 4 {正确}
+
+
+
     end. {end of test}

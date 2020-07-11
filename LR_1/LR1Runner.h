@@ -14,7 +14,7 @@
 
 class vectorAttributeItem {
 public:
-    vectorAttributeItem(string InAttribute, int InType, int InWidth,int Inline) {
+    vectorAttributeItem(string InAttribute, int InType, int InWidth, int Inline) {
         attribute = InAttribute;
         type = InType;
         width = InWidth;
@@ -23,13 +23,14 @@ public:
 
     string attribute;
     int type;
+    int specialType;
     int width;
     int num;
     int dimension;
     int line = 0;
     string value;
-    vector<SymbolTableLine*> IDlist;
-    SymbolTableLine* entry;
+    vector<SymbolTableLine *> IDlist;
+    SymbolTableLine *entry;
     SymbolBlock *tableEntry = nullptr;
     ArrayInfo *arrayInfo = nullptr; //数组信息链表
 };
@@ -52,8 +53,8 @@ private:
     SymbolBlock *symbolTable = nullptr;
     SymbolBlock *curBlock = nullptr;
     int *offset = nullptr;
-    stack<SymbolBlock*> tablePointers; //栈顶指针指向的是本块
-    stack<int*> offSetStack;
+    stack<SymbolBlock *> tablePointers; //栈顶指针指向的是本块
+    stack<int *> offSetStack;
 
     static void outStackInt(stack<int> stack);
 
@@ -63,7 +64,7 @@ private:
 
     static void outVectorAttribute(vector<vectorAttributeItem> vector);
 
-    void switchTable(vectorAttributeItem*, int);
+    void switchTable(vectorAttributeItem *, int);
 
     void quoteID(int, string);
 
@@ -73,7 +74,7 @@ private:
 
     void initial();
 
-    void recordSemanticError(int line, const string&); // 记录语义错误
+    void recordSemanticError(int line, const string &); // 记录语义错误
 
     static bool isBasicType(int);
 };

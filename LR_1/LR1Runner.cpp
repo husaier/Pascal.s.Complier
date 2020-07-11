@@ -2,6 +2,7 @@
 // Created by 叶铭炜 on 2020/5/24.
 //
 
+#include <sstream>
 #include "LR1Runner.h"
 #include "lexical_analyzer.h"
 
@@ -173,7 +174,7 @@ void LR1Runner::outStrInput(vector<LexicalItem> tempVector, int temp) {
 
 void LR1Runner::load(const vector<LexicalItem> &result) {
     string tempInputString, tempStackString;
-    for (const auto &i : result) {
+    for (const auto &i : result) { //这里的vectorInput其实就是result,最后多了一个$
         vectorInput.push_back(i);
     }
     if (debugInfoLevel >= 2) {
@@ -232,8 +233,22 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
-        case 8:
-        case 9:
+        case 8: //8. Const_declaration -> Const_declaration ; id = Const_variable
+        case 9: {//9. Const_declaration -> id = Const_variable
+            id = vectorAttribute[top - 2].attribute;
+            int line = vectorAttribute[top].line;
+            if (curBlock->blockQuery(id) == nullptr) {
+                SymbolTableLine *tempPoint = curBlock->insert2(id, vectorAttribute[top].type, 0, 0, 0);
+                tempPoint->specialType = SymbolTableLine::CONST;//将常量标志位置为1
+                if (debugInfoLevel >= 3) {
+                    cout << "声明" << id << endl;
+                    curBlock->printBlock();
+                }
+            } else {
+                recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
+            }
+            break;
+        }
         case 19:
         case 20: {
             id = vectorAttribute[top - 2].attribute;
@@ -249,18 +264,46 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
-        case 10:
-        case 11:
-        case 12:
-        case 78:
-        case 106: {
+        case 10:    //10. Const_variable -> + id
+        case 11:    //11. Const_variable -> - id
+        case 12:    //12. Const_variable -> id
+        case 78:    //78. Call_procedure_statement -> id
+        case 106: {  //106. Unsign_const_variable -> id
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
-            quoteID(line, id);
+            quoteID(line, id);  //查看是否存在这个id
+            SymbolTableLine *tempLinePoint = curBlock->query(id);
+            if (tempLinePoint != nullptr) {//如果存在
+                leftSymbol->type = tempLinePoint->type;
+            }
             break;
         }
-        case 15: {
-            leftSymbol->num = stoi(vectorAttribute[top].attribute);
+        case 13:    // 13. Const_variable -> + num
+        case 14:    // 14. Const_variable -> - num
+        case 15: { // 15. Const_variable -> num
+            string tempString = vectorAttribute[top].attribute;
+            leftSymbol->width = 4;
+            leftSymbol->dimension = 0;
+            leftSymbol->num = stoi(tempString);
+            if (op_type == 14) {
+                leftSymbol->value = "-" + tempString;
+                leftSymbol->num *= -1;
+            } else {
+                leftSymbol->value = tempString;
+            }
+            if (tempString.find('.') == std::string::npos) {
+                //如果没找到'.'说明是整形
+                leftSymbol->type = SymbolTableLine::INTEGER;
+            } else {//实数型常量
+                leftSymbol->type = SymbolTableLine::REAL;
+            }
+            break;
+        }
+        case 16: {   //16. Const_variable -> letter
+            leftSymbol->type = SymbolTableLine::CHAR;
+            leftSymbol->width = 1;
+            leftSymbol->dimension = 0;
+            leftSymbol->value = vectorAttribute[top].attribute;
             break;
         }
         case 21:
@@ -360,7 +403,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->arrayInfo = attr.arrayInfo;
             break;
         }
-        case 32: {
+        case 32: {// Const_declarations -> const Const_declaration ;
             int start = vectorAttribute[top - 2].num;
             int end = vectorAttribute[top].num;
             auto *t = new ArrayInfo();
@@ -389,6 +432,18 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 curBlock->printBlock();
             break;
         }
+        case 40: {//40. Subprogram_head -> function id B Formal_parameter : Standard_type ;
+            auto tempPoint = curBlock->query(vectorAttribute[top - 5].attribute);
+            tempPoint->type = vectorAttribute[top - 1].type;
+            tempPoint->specialType = SymbolTableLine::FUNCTION;
+            break;
+        }
+        case 41: {//41. Subprogram_head -> procedure id C Formal_parameter ;
+            auto tempPoint = curBlock->query(vectorAttribute[top - 3].attribute);
+            tempPoint->type = -1;
+            tempPoint->specialType = SymbolTableLine::PROCEDURE;
+            break;
+        }
         case 49: {
             vectorAttributeItem tmp = vectorAttribute[top];
             for (auto &item : vectorAttribute[top - 2].IDlist) {
@@ -410,7 +465,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto Expression = vectorAttribute[top];
             auto Variable = vectorAttribute[top - 2];
             int type;
-            if(Variable.entry != nullptr)
+            if (Variable.entry != nullptr)
                 type = Variable.entry->type;
             else
                 type = SymbolTableLine::VOID;
@@ -930,8 +985,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     } else {
                         recordSemanticError(Term1.line, "除0错误");
                     }
-                }
-                else
+                } else
                     resultType = SymbolTableLine::REAL;
             } else {
                 recordSemanticError(Term1.line, "运算符/：运算对象类型错误");
@@ -956,8 +1010,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     } else {
                         recordSemanticError(Term1.line, "除0错误");
                     }
-                }
-                else
+                } else
                     resultType = SymbolTableLine::REAL;
             } else {
                 recordSemanticError(Term1.line, "运算符div：运算对象类型错误");
@@ -1030,8 +1083,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             string value;
             if (entry != nullptr) {
                 type = entry->type;
-            }
-            else {
+            } else {
                 type = SymbolTableLine::VOID;
             }
             leftSymbol->type = type;
@@ -1102,11 +1154,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
             }
-
+            //块内查询 id 是否存在,存在则返回所在行指针
             auto tableLine = curBlock->blockQuery(id);
 
-            locate();
-
+            locate(); //创建子块,同时完善子块的父亲指针
+            //curblock 这是新创建出来的表的指针,下面语句将原先这一行中的blockPoint指针指向新创建出来的表的指针
             tableLine->blockPoint = curBlock;
             break;
         }
@@ -1148,7 +1200,7 @@ void LR1Runner::quoteID(int line, string id) {
 
 void LR1Runner::locate() {
     SymbolBlock *childBlock;
-    childBlock = SymbolBlock::makeBlock(curBlock);
+    childBlock = SymbolBlock::makeBlock(curBlock);//父亲指针
     curBlock = childBlock;
     offset = new int(0);
 
