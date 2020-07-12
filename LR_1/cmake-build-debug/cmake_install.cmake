@@ -1,4 +1,4 @@
-# Install script for directory: /Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1
+# Install script for directory: /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/7.12/LR_1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/robinyer/Robinyer/code/temp/Pascal.s.Complier/6.30/LR_1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/7.12/LR_1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

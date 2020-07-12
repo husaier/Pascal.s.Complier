@@ -1,5 +1,7 @@
 program test(input, output);
     const pai = 3.14; {常量声明}
+    const pai2 = pai; {常量id声明}
+    const pai3 = pai4; {错误,常量不存在id声明}
     type list = array [0 .. 10] of integer; {类型声明}
     var a,b,c: integer; {变量声明}
         e,f: real;
@@ -20,6 +22,8 @@ program test(input, output);
         brr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
     function func1 ( var id2 : real ;var id4 : real) : integer ; {Subprogram声明}
             procedure proc1 (var id3 : integer;var id4 : real) ;
+                const pai4 = a; {错误,常量声明,id不为常量}
+                const pai6 = pai4;
                 function func2 ( var id2 : real) : integer ;
                     begin C:=pi*r*2; end ; {end of func2}
                 begin C:=pi*r*2; end ; {end of proc1}

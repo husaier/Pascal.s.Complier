@@ -10,6 +10,7 @@
 using namespace std;
 
 class SymbolBlock;
+class SymbolTableLine;
 
 class ArrayInfo {
 public:
@@ -19,6 +20,13 @@ public:
     int legnth; // 索引宽度
     int elementType; // 元素类型
     ArrayInfo *nextDemision = nullptr; //下一维的信息
+};
+
+class FuncInfo {
+public:
+    int parametersNum;//传参个数
+    vector<int> paraTypeArray;//存储各个参数的类型
+    vector<SymbolTableLine *> IDlist;
 };
 
 class SymbolTableLine {
@@ -54,11 +62,12 @@ public:
 //    int isProc = 0;//过程的类型 //为0表示不是过程,为1表示是过程
 
     int specialType = 0;
-    static const int CONST = 1;
-    static const int FUNCTION = 2;
-    static const int PROCEDURE = 3;
+    static const int CONST = 11;
+    static const int FUNCTION = 12;
+    static const int PROCEDURE = 13;
 
     ArrayInfo *arrayInfo = nullptr; //数组类型的相关信息，链表
+    FuncInfo funcInfo;
     int offset;//存储地址,这里不确定是否用int
     int dimension;//维数,0,1,2,3,...
     int declarationLine;//声明行

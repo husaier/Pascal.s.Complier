@@ -267,14 +267,17 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 10:    //10. Const_variable -> + id
         case 11:    //11. Const_variable -> - id
         case 12:    //12. Const_variable -> id
-        case 78:    //78. Call_procedure_statement -> id
         case 106: {  //106. Unsign_const_variable -> id
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
-                leftSymbol->type = tempLinePoint->type;
+                if (tempLinePoint->specialType == SymbolTableLine::CONST) {
+                    leftSymbol->type = tempLinePoint->type;
+                } else {
+                    recordSemanticError(line, "语义错误！此id不为常量");
+                }
             }
             break;
         }
@@ -436,15 +439,50 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto tempPoint = curBlock->query(vectorAttribute[top - 5].attribute);
             tempPoint->type = vectorAttribute[top - 1].type;
             tempPoint->specialType = SymbolTableLine::FUNCTION;
+            // 参数的声明
+            auto tempVector = vectorAttribute[top - 3].IDlist;
+            FuncInfo tempFuncInfo;
+            tempFuncInfo.parametersNum = tempVector.size();
+            tempFuncInfo.IDlist = tempVector;
+            for (int i = 0; i < tempVector.size(); ++i) {
+                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type);
+            }
+            tempPoint->funcInfo = tempFuncInfo;
+
             break;
         }
-        case 41: {//41. Subprogram_head -> procedure id C Formal_parameter ;
+        case 41: {  //41. Subprogram_head -> procedure id C Formal_parameter ;
             auto tempPoint = curBlock->query(vectorAttribute[top - 3].attribute);
             tempPoint->type = -1;
             tempPoint->specialType = SymbolTableLine::PROCEDURE;
+            //参数的声明
+            auto tempVector = vectorAttribute[top - 1].IDlist;
+            FuncInfo tempFuncInfo;
+            tempFuncInfo.parametersNum = tempVector.size();
+            tempFuncInfo.IDlist = tempVector;
+            for (int i = 0; i < tempVector.size(); ++i) {
+                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type);
+            }
+            tempPoint->funcInfo = tempFuncInfo;
             break;
         }
-        case 49: {
+        case 42: {  //42. Formal_parameter -> ( Parameter_lists )
+            leftSymbol->IDlist = vectorAttribute[top-1].IDlist; // 向上传递IDlist
+            break;
+        }
+        case 44: {  //44. Parameter_lists -> Parameter_lists ; Parameter_list
+            leftSymbol->IDlist.insert(leftSymbol->IDlist.end(),vectorAttribute[top-2].IDlist.begin(),vectorAttribute[top-2].IDlist.end());
+            leftSymbol->IDlist.insert(leftSymbol->IDlist.end(),vectorAttribute[top].IDlist.begin(),vectorAttribute[top].IDlist.end());
+            break;
+        }
+        case 45:    //45. Parameter_lists -> Parameter_list
+        case 46:    //46. Parameter_list -> Var_parameter
+        case 47:    //47. Parameter_list -> Value_parameter
+        case 48: {  //48. Var_parameter -> var Value_parameter
+            leftSymbol->IDlist = vectorAttribute[top].IDlist; // 向上传递IDlist
+            break;
+        }
+        case 49: {  //49. Value_parameter -> Identifier_list : Standard_type
             vectorAttributeItem tmp = vectorAttribute[top];
             for (auto &item : vectorAttribute[top - 2].IDlist) {
                 item->type = tmp.type;
@@ -456,8 +494,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             if (debugInfoLevel >= 3)
                 curBlock->printBlock();
-        }
+            leftSymbol->IDlist = vectorAttribute[top - 2].IDlist; // 向上传递IDlist
             break;
+        }
         case 50:
             relocate();
             break;
@@ -508,7 +547,21 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
-        case 79:
+        case 78:    //78. Call_procedure_statement -> id
+        case 79: {  //79. Call_procedure_statement -> id ( Expression_list )
+            id = vectorAttribute[top].attribute;
+            int line = vectorAttribute[top].line;
+            quoteID(line, id);  //查看是否存在这个id
+            SymbolTableLine *tempLinePoint = curBlock->query(id);
+            if (tempLinePoint != nullptr) {//如果存在
+                if (tempLinePoint->specialType == SymbolTableLine::PROCEDURE) {
+                    leftSymbol->type = tempLinePoint->type;
+                } else {
+                    recordSemanticError(line, "语义错误！此id不为Procesure");
+                }
+            }
+            break;
+        }
         case 103: {
             id = vectorAttribute[top - 3].attribute;
             int line = vectorAttribute[top - 3].line;
