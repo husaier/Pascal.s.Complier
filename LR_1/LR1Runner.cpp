@@ -233,28 +233,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
-        case 8: //8. Const_declaration -> Const_declaration ; id = Const_variable
-        case 9: {//9. Const_declaration -> id = Const_variable
+        case 8: // Const_declaration -> Const_declaration ; id = Const_variable
+        case 9: {// Const_declaration -> id = Const_variable
             id = vectorAttribute[top - 2].attribute;
             int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
                 SymbolTableLine *tempPoint = curBlock->insert2(id, vectorAttribute[top].type, 0, 0, 0);
                 tempPoint->specialType = SymbolTableLine::CONST;//将常量标志位置为1
-                if (debugInfoLevel >= 3) {
-                    cout << "声明" << id << endl;
-                    curBlock->printBlock();
-                }
-            } else {
-                recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
-            }
-            break;
-        }
-        case 19:
-        case 20: {
-            id = vectorAttribute[top - 2].attribute;
-            int line = vectorAttribute[top].line;
-            if (curBlock->blockQuery(id) == nullptr) {
-                curBlock->insert(id, 0, 0, 0, 0);
                 if (debugInfoLevel >= 3) {
                     cout << "声明" << id << endl;
                     curBlock->printBlock();
@@ -306,6 +291,21 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = vectorAttribute[top].attribute;
             break;
         }
+        case 19:
+        case 20: {
+            id = vectorAttribute[top - 2].attribute;
+            int line = vectorAttribute[top].line;
+            if (curBlock->blockQuery(id) == nullptr) {
+                curBlock->insert(id, 0, 0, 0, 0);
+                if (debugInfoLevel >= 3) {
+                    cout << "声明" << id << endl;
+                    curBlock->printBlock();
+                }
+            } else {
+                recordSemanticError(line, "语义错误！在作用域内有重复定义的标识符");
+            }
+            break;
+        }
         case 21:
             leftSymbol->type = vectorAttribute[top].type;
             leftSymbol->width = vectorAttribute[top].width;
@@ -322,11 +322,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 23: {
             auto Type = vectorAttribute[top];
             auto Periods = vectorAttribute[top - 3];
-
-            int baseType = Type.type;
             int elementWidth = Type.width;
             //把Type.arrayInfo链表插入到Periods.arrayInfo链表的尾部
             auto tail = Periods.arrayInfo;
+            int baseType = tail->elementType;
             while (tail != nullptr) {
                 if (tail->nextDemision == nullptr)
                     break;
@@ -432,13 +431,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 curBlock->printBlock();
             break;
         }
-        case 40: {//40. Subprogram_head -> function id B Formal_parameter : Standard_type ;
+        case 40: {// Subprogram_head -> function id B Formal_parameter : Standard_type ;
             auto tempPoint = curBlock->query(vectorAttribute[top - 5].attribute);
             tempPoint->type = vectorAttribute[top - 1].type;
             tempPoint->specialType = SymbolTableLine::FUNCTION;
             break;
         }
-        case 41: {//41. Subprogram_head -> procedure id C Formal_parameter ;
+        case 41: {// Subprogram_head -> procedure id C Formal_parameter ;
             auto tempPoint = curBlock->query(vectorAttribute[top - 3].attribute);
             tempPoint->type = -1;
             tempPoint->specialType = SymbolTableLine::PROCEDURE;
@@ -464,27 +463,84 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 53: { // Statement -> Variable assignop Expression
             auto Expression = vectorAttribute[top];
             auto Variable = vectorAttribute[top - 2];
-            int type;
-            if (Variable.entry != nullptr)
-                type = Variable.entry->type;
-            else
-                type = SymbolTableLine::VOID;
+            int type = Variable.type;
             if (type != Expression.type)
                 recordSemanticError(Variable.line, "赋值语句类型错误");
             break;
         }
         case 62: { // Variable -> id F62 Id_varparts
             auto Id_varparts = vectorAttribute[top];
-            leftSymbol->entry = Id_varparts.entry;
+//            leftSymbol->entry = Id_varparts.entry;
+            int type;
+            if (Id_varparts.entry != nullptr)
+                type = Id_varparts.entry->type;
+            else
+                type = SymbolTableLine::VOID;
+
+            // 数组做特殊处理
+            if (type == SymbolTableLine::ARRAY) {
+                // 拷贝构造
+                leftSymbol->entry = new SymbolTableLine(*Id_varparts.entry);
+                if (Id_varparts.curArrayInfo == nullptr) {
+                    type = Id_varparts.entry->arrayInfo->elementType;
+                }
+                else {
+                    recordSemanticError(Id_varparts.line, "不允许数组直接参加运算");
+                }
+            }
+            leftSymbol->type = type;
             break;
         }
         case 63: { // Id_varparts0 -> Id_varparts1 Id_varpart
             auto Id_varpart = vectorAttribute[top];
             leftSymbol->entry = Id_varpart.entry;
+            leftSymbol->curArrayInfo = Id_varpart.curArrayInfo;
             break;
         }
         case 64: { // Id_varparts -> #
             leftSymbol->entry = vectorAttribute[top].entry;
+            leftSymbol->curArrayInfo = vectorAttribute[top].curArrayInfo;
+            break;
+        }
+        case 65: {// Id_varpart -> [ Expression_list ]
+            auto Expression_list = vectorAttribute[top - 1];
+            auto i_entry = vectorAttribute[top - 3].entry;
+            auto i_curArrayInfo = vectorAttribute[top - 3].curArrayInfo;
+            int lines = vectorAttribute[top].line;
+            int type = i_entry->type;
+            if (type == SymbolTableLine::ARRAY) {
+                int dimension = 0;
+                auto ptr = i_curArrayInfo;
+                while (ptr != nullptr) {
+                    dimension++;
+                    ptr = ptr->nextDemision;
+                }
+                auto expressionTypeList = Expression_list.expressionTypeList;
+                if (dimension >= expressionTypeList.size()) {
+                    bool isExpressionsTypeInteger = true;
+                    for(int expressionType : expressionTypeList) {
+                        if (expressionType != SymbolTableLine::INTEGER) {
+                            isExpressionsTypeInteger = false;
+                            break;
+                        }
+                        i_curArrayInfo = i_curArrayInfo->nextDemision;
+                    }
+                    if (isExpressionsTypeInteger) {
+                        leftSymbol->entry = i_entry;
+                        leftSymbol->curArrayInfo = i_curArrayInfo;
+                    }
+                    else {
+                        leftSymbol->entry = nullptr;
+                        recordSemanticError(lines, "运算符[]的参数不是INTEGER");
+                    }
+                } else {
+                    leftSymbol->entry = nullptr;
+                    recordSemanticError(lines, "类型错误，超过指定ARRAY的维度");
+                }
+            } else {
+                leftSymbol->entry = nullptr;
+                recordSemanticError(lines, "类型错误，不是ARRAY类型，不能使用[]运算符");
+            }
             break;
         }
         case 66: { // Id_varpart -> . id
@@ -513,6 +569,18 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             id = vectorAttribute[top - 3].attribute;
             int line = vectorAttribute[top - 3].line;
             quoteID(line, id);
+            break;
+        }
+        case 80: { // Expression_list0 -> Expression_list1 , Expression
+            auto Expression_list1 = vectorAttribute[top - 2];
+            auto Expression = vectorAttribute[top];
+            leftSymbol->expressionTypeList = Expression_list1.expressionTypeList;
+            leftSymbol->expressionTypeList.push_back(Expression.type);
+            break;
+        }
+        case 81: { // Expression_list -> Expression
+            auto Expression = vectorAttribute[top];
+            leftSymbol->expressionTypeList.push_back(Expression.type);
             break;
         }
         case 82: { // Expression -> Simple_expression0 = Simple_expression1
@@ -1079,13 +1147,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 102: { // Factor -> Variable
             auto Variable = vectorAttribute[top];
             auto entry = Variable.entry;
-            int type;
+            int type = Variable.type;
             string value;
-            if (entry != nullptr) {
-                type = entry->type;
-            } else {
-                type = SymbolTableLine::VOID;
-            }
+//            if (entry != nullptr) {
+//                type = entry->type;
+//            } else {
+//                type = SymbolTableLine::VOID;
+//            }
             leftSymbol->type = type;
             leftSymbol->value = value;
             break;
@@ -1166,7 +1234,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             locate();
             break;
         case 114: { // F62 -> #
-            auto t = vectorAttribute[top];
+            auto t = vectorAttribute[top]; // id
             auto entry = curBlock->query(t.attribute);
             if (entry == nullptr) {
                 t.entry = nullptr;
@@ -1176,6 +1244,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 t.entry = entry;
                 leftSymbol->entry = entry;
+                if (entry->type == SymbolTableLine::ARRAY) {
+                    t.curArrayInfo = entry->arrayInfo;
+                    leftSymbol->curArrayInfo = entry->arrayInfo;
+                }
             }
             break;
         }

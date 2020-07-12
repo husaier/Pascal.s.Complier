@@ -4,5 +4,5 @@ program test(input, output);
     begin
         a := 3;
         b := 4;
-        c := 5;
+        c := 5
     end. {end of test}

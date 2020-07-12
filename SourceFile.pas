@@ -53,5 +53,10 @@ begin
  writeln(float);
  float := -1.5;
  writeln(float);
+ N[0] := M[0];
+ {N[0] := M[0][2];}
+ {N[0] := N[1] + M[0];}
+ {N[6] := M[0];}
+ n[0][2] := M[0][2];
  readln;
 END.

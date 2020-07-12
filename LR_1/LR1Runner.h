@@ -29,7 +29,9 @@ public:
     int dimension;
     int line = 0;
     string value;
+    ArrayInfo *curArrayInfo = nullptr;
     vector<SymbolTableLine *> IDlist;
+    vector<int> expressionTypeList;
     SymbolTableLine *entry;
     SymbolBlock *tableEntry = nullptr;
     ArrayInfo *arrayInfo = nullptr; //数组信息链表
