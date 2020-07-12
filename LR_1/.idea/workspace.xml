@@ -29,46 +29,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5d34cab-5759-442f-8bc2-71e30e882016" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../LR1_TableCreate/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LR1_TableCreate/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="a5d34cab-5759-442f-8bc2-71e30e882016" name="Default Changelist" comment="Merge branch 'tmp'&#10;&#10;# Conflicts:&#10;#&#9;LR_1/LR1Runner.cpp&#10;#&#9;LR_1/cmake-build-debug/CMakeCache.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile2&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/clion-log.txt&#10;#&#9;LR_1/cmake-build-debug/LR_1&#10;#&#9;LR_1/cmake-build-debug/LR_1.cbp&#10;#&#9;LR_1/cmake-build-debug/Makefile&#10;#&#9;LR_1/cmake-build-debug/cmake_install.cmake">
+      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/7.12.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LR1Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LR1Runner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LR1Runner.h" beforeDir="false" afterPath="$PROJECT_DIR$/LR1Runner.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/LR_1" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/LR_1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/LR_1.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/LR_1.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test2.pas" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test2.pas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test3.pas" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test3.pas" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SymbolBlock.h" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolBlock.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/test4.pas" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test4.pas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SourceFile" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SourceFile.o" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SourceFile.pas" beforeDir="false" afterPath="$PROJECT_DIR$/../SourceFile.pas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +125,7 @@
       <workItem from="1593333785432" duration="225000" />
       <workItem from="1593419204423" duration="6629000" />
       <workItem from="1594519119155" duration="16886000" />
-      <workItem from="1594554272539" duration="985000" />
+      <workItem from="1594554272539" duration="2694000" />
     </task>
     <servers />
   </component>
@@ -179,16 +149,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Merge branch 'tmp'&#10;&#10;# Conflicts:&#10;#&#9;LR_1/LR1Runner.cpp&#10;#&#9;LR_1/cmake-build-debug/CMakeCache.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile2&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/clion-log.txt&#10;#&#9;LR_1/cmake-build-debug/LR_1&#10;#&#9;LR_1/cmake-build-debug/LR_1.cbp&#10;#&#9;LR_1/cmake-build-debug/Makefile&#10;#&#9;LR_1/cmake-build-debug/cmake_install.cmake" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'tmp'&#10;&#10;# Conflicts:&#10;#&#9;LR_1/LR1Runner.cpp&#10;#&#9;LR_1/cmake-build-debug/CMakeCache.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile2&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/clion-log.txt&#10;#&#9;LR_1/cmake-build-debug/LR_1&#10;#&#9;LR_1/cmake-build-debug/LR_1.cbp&#10;#&#9;LR_1/cmake-build-debug/Makefile&#10;#&#9;LR_1/cmake-build-debug/cmake_install.cmake" />
   </component>
   <component name="WindowStateProjectService">
     <state x="633" y="269" width="716" height="543" key="#LR_1" timestamp="1594554343705">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state x="633" y="269" width="716" height="543" key="#LR_1/67.27.1853.1052@67.27.1853.1052" timestamp="1594554343705" />
-    <state x="562" y="307" width="858" height="429" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591411435335">
+    <state x="562" y="288" width="858" height="429" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594555682480">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state x="562" y="307" width="858" height="429" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1052@67.27.1853.1052" timestamp="1591411435335" />
+    <state x="562" y="288" width="858" height="429" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1052@67.27.1853.1052" timestamp="1594555682480" />
     <state x="729" y="278" width="524" height="525" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590831340275">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
@@ -197,61 +169,60 @@
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state width="621" height="588" key="DebuggerActiveHint/67.27.1853.1052@67.27.1853.1052" timestamp="1594555038214" />
-    <state x="167" y="87" width="1653" height="873" maximized="true" key="DiffContextDialog" timestamp="1592656641899">
+    <state x="167" y="87" width="1653" height="873" maximized="true" key="DiffContextDialog" timestamp="1594556966858">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state x="167" y="87" width="1653" height="873" maximized="true" key="DiffContextDialog/67.27.1853.1052@67.27.1853.1052" timestamp="1592656641899" />
+    <state x="167" y="87" width="1653" height="873" maximized="true" key="DiffContextDialog/67.27.1853.1052@67.27.1853.1052" timestamp="1594556966858" />
     <state x="739" y="80" key="FileChooserDialogImpl" timestamp="1592656543942">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state x="739" y="80" key="FileChooserDialogImpl/67.27.1853.1052@67.27.1853.1052" timestamp="1592656543942" />
-    <state width="1801" height="419" key="GridCell.Tab.0.bottom" timestamp="1594555004673">
+    <state width="1801" height="116" key="GridCell.Tab.0.bottom" timestamp="1594556583932">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594555004673" />
-    <state width="1801" height="419" key="GridCell.Tab.0.center" timestamp="1594555004673">
+    <state width="1801" height="116" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583932" />
+    <state width="1801" height="116" key="GridCell.Tab.0.center" timestamp="1594556583932">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594555004673" />
-    <state width="1801" height="419" key="GridCell.Tab.0.left" timestamp="1594555004673">
+    <state width="1801" height="116" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583932" />
+    <state width="1801" height="116" key="GridCell.Tab.0.left" timestamp="1594556583931">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594555004673" />
-    <state width="1801" height="419" key="GridCell.Tab.0.right" timestamp="1594555004673">
+    <state width="1801" height="116" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583931" />
+    <state width="1801" height="116" key="GridCell.Tab.0.right" timestamp="1594556583932">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594555004673" />
-    <state width="1801" height="419" key="GridCell.Tab.1.bottom" timestamp="1594555005929">
+    <state width="1801" height="116" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583932" />
+    <state width="1801" height="183" key="GridCell.Tab.1.bottom" timestamp="1594555429561">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594555005929" />
-    <state width="1801" height="419" key="GridCell.Tab.1.center" timestamp="1594555005929">
+    <state width="1801" height="183" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429561" />
+    <state width="1801" height="183" key="GridCell.Tab.1.center" timestamp="1594555429560">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594555005929" />
-    <state width="1801" height="419" key="GridCell.Tab.1.left" timestamp="1594555005929">
+    <state width="1801" height="183" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429560" />
+    <state width="1801" height="183" key="GridCell.Tab.1.left" timestamp="1594555429560">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594555005929" />
-    <state width="1801" height="419" key="GridCell.Tab.1.right" timestamp="1594555005929">
+    <state width="1801" height="183" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429560" />
+    <state width="1801" height="183" key="GridCell.Tab.1.right" timestamp="1594555429560">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="419" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594555005929" />
+    <state width="1801" height="183" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429560" />
+    <state x="107" y="8" width="1767" height="1049" key="MergeDialog" timestamp="1594556953439">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state x="107" y="8" width="1767" height="1049" key="MergeDialog/67.27.1853.1052@67.27.1853.1052" timestamp="1594556953439" />
+    <state x="760" y="339" width="844" height="483" key="MultipleFileMergeDialog" timestamp="1594556966387">
+      <screen x="67" y="27" width="1853" height="1052" />
+    </state>
+    <state x="760" y="339" width="844" height="483" key="MultipleFileMergeDialog/67.27.1853.1052@67.27.1853.1052" timestamp="1594556966387" />
     <state x="515" y="71" width="953" height="749" key="SettingsEditor" timestamp="1594553946286">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state x="515" y="71" width="953" height="749" key="SettingsEditor/67.27.1853.1052@67.27.1853.1052" timestamp="1594553946286" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/LR1Runner.cpp</url>
-          <line>483</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="curBlock" language="ObjectiveC" />
