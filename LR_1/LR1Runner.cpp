@@ -1297,6 +1297,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 t.entry = entry;
                 leftSymbol->entry = entry;
+                if (entry->type == SymbolTableLine::ARRAY) {
+                    t.curArrayInfo = entry->arrayInfo;
+                    leftSymbol->curArrayInfo = entry->arrayInfo;
+                }
             }
             break;
         }
