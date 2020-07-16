@@ -251,8 +251,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 10:    //10. Const_variable -> + id
         case 11:    //11. Const_variable -> - id
-        case 12:    //12. Const_variable -> id
-        case 106: {  //106. Unsign_const_variable -> id
+        case 12: {   //12. Const_variable -> id
+//        case 106:{  //106. Unsign_const_variable -> id //106移到后面去了
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             quoteID(line, id);  //查看是否存在这个id
@@ -263,6 +263,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 } else {
                     recordSemanticError(line, "语义错误！此id不为常量");
                 }
+            } else {
+                recordSemanticError(line, "语义错误！id不存在");
             }
             break;
         }
@@ -466,12 +468,14 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 42: {  //42. Formal_parameter -> ( Parameter_lists )
-            leftSymbol->IDlist = vectorAttribute[top-1].IDlist; // 向上传递IDlist
+            leftSymbol->IDlist = vectorAttribute[top - 1].IDlist; // 向上传递IDlist
             break;
         }
         case 44: {  //44. Parameter_lists -> Parameter_lists ; Parameter_list
-            leftSymbol->IDlist.insert(leftSymbol->IDlist.end(),vectorAttribute[top-2].IDlist.begin(),vectorAttribute[top-2].IDlist.end());
-            leftSymbol->IDlist.insert(leftSymbol->IDlist.end(),vectorAttribute[top].IDlist.begin(),vectorAttribute[top].IDlist.end());
+            leftSymbol->IDlist.insert(leftSymbol->IDlist.end(), vectorAttribute[top - 2].IDlist.begin(),
+                                      vectorAttribute[top - 2].IDlist.end());
+            leftSymbol->IDlist.insert(leftSymbol->IDlist.end(), vectorAttribute[top].IDlist.begin(),
+                                      vectorAttribute[top].IDlist.end());
             break;
         }
         case 45:    //45. Parameter_lists -> Parameter_list
@@ -522,8 +526,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->entry = new SymbolTableLine(*Id_varparts.entry);
                 if (Id_varparts.curArrayInfo == nullptr) {
                     type = Id_varparts.entry->arrayInfo->elementType;
-                }
-                else {
+                } else {
                     recordSemanticError(Id_varparts.line, "不允许数组直接参加运算");
                 }
             }
@@ -557,7 +560,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 auto expressionTypeList = Expression_list.expressionTypeList;
                 if (dimension >= expressionTypeList.size()) {
                     bool isExpressionsTypeInteger = true;
-                    for(int expressionType : expressionTypeList) {
+                    for (int expressionType : expressionTypeList) {
                         if (expressionType != SymbolTableLine::INTEGER) {
                             isExpressionsTypeInteger = false;
                             break;
@@ -567,8 +570,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     if (isExpressionsTypeInteger) {
                         leftSymbol->entry = i_entry;
                         leftSymbol->curArrayInfo = i_curArrayInfo;
-                    }
-                    else {
+                    } else {
                         leftSymbol->entry = nullptr;
                         recordSemanticError(lines, "运算符[]的参数不是INTEGER");
                     }
@@ -605,13 +607,40 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 78:    // Call_procedure_statement -> id
         case 79: {  // Call_procedure_statement -> id ( Expression_list )
-            id = vectorAttribute[top].attribute;
+            if (op_type == 78) {
+                id = vectorAttribute[top].attribute;
+            } else {
+                id = vectorAttribute[top - 3].attribute;
+            }
+
             int line = vectorAttribute[top].line;
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->specialType == SymbolTableLine::PROCEDURE) {
                     leftSymbol->type = tempLinePoint->type;
+                    if (op_type == 78) {
+                        if (tempLinePoint->funcInfo.parametersNum != 0) {//如果为参数个数0则正确
+                            recordSemanticError(line,
+                                                "语义错误！缺失参数,此Proc需要" + to_string(tempLinePoint->funcInfo.parametersNum) +
+                                                "个参数");
+                        }
+                    } else if (op_type == 79) {
+                        if (vectorAttribute[top - 1].expressionTypeList.size() !=
+                            tempLinePoint->funcInfo.parametersNum) {//如果数量不等
+                            recordSemanticError(line,
+                                                "语义错误！参数不一致,此Proc需要" +
+                                                to_string(tempLinePoint->funcInfo.parametersNum) +
+                                                "个参数");
+                        }else{//数量相等,检查类型
+                            for (int i = 0; i < vectorAttribute[top - 1].expressionTypeList.size(); ++i) {
+                                if (vectorAttribute[top-1].expressionTypeList[i]!=tempLinePoint->funcInfo.paraTypeArray[i]){
+                                    recordSemanticError(line,"语义错误！第"+to_string(i+1)+"个参数类型不一致");
+                                }
+                            }
+                        }
+
+                    }
                 } else {
                     recordSemanticError(line, "语义错误！此id不为Procesure");
                 }
@@ -1234,6 +1263,23 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
+            break;
+        }
+        case 106: {  //106. Unsign_const_variable -> id
+            id = vectorAttribute[top].attribute;
+            int line = vectorAttribute[top].line;
+            quoteID(line, id);  //查看是否存在这个id
+            SymbolTableLine *tempLinePoint = curBlock->query(id);
+            if (tempLinePoint != nullptr) {//如果存在
+                leftSymbol->type = tempLinePoint->type;
+//
+//                if (tempLinePoint->specialType == SymbolTableLine::CONST) {
+//                } else {
+//                    recordSemanticError(line, "语义错误！此id不为常量");
+//                }
+            } else {
+                recordSemanticError(line, "语义错误！id不存在");
+            }
             break;
         }
         case 107: { // Unsign_const_variable -> num
