@@ -30,14 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5d34cab-5759-442f-8bc2-71e30e882016" name="Default Changelist" comment="Merge branch 'tmp'&#10;&#10;# Conflicts:&#10;#&#9;LR_1/LR1Runner.cpp&#10;#&#9;LR_1/cmake-build-debug/CMakeCache.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile2&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/clion-log.txt&#10;#&#9;LR_1/cmake-build-debug/LR_1&#10;#&#9;LR_1/cmake-build-debug/LR_1.cbp&#10;#&#9;LR_1/cmake-build-debug/Makefile&#10;#&#9;LR_1/cmake-build-debug/cmake_install.cmake">
-      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/7.12.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LR1Runner.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LR1Runner.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymbolBlock.h" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolBlock.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/test4.pas" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test4.pas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -125,8 +120,17 @@
       <workItem from="1593333785432" duration="225000" />
       <workItem from="1593419204423" duration="6629000" />
       <workItem from="1594519119155" duration="16886000" />
-      <workItem from="1594554272539" duration="2694000" />
+      <workItem from="1594554272539" duration="3420000" />
+      <workItem from="1594865637400" duration="845000" />
     </task>
+    <task id="LOCAL-00001" summary="Merge branch 'tmp'&#10;&#10;# Conflicts:&#10;#&#9;LR_1/LR1Runner.cpp&#10;#&#9;LR_1/cmake-build-debug/CMakeCache.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/CMakeOutput.log&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CXX.includecache&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/DependInfo.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/build.make&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/depend.internal&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile.cmake&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/Makefile2&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/TargetDirectories.txt&#10;#&#9;LR_1/cmake-build-debug/CMakeFiles/clion-log.txt&#10;#&#9;LR_1/cmake-build-debug/LR_1&#10;#&#9;LR_1/cmake-build-debug/LR_1.cbp&#10;#&#9;LR_1/cmake-build-debug/Makefile&#10;#&#9;LR_1/cmake-build-debug/cmake_install.cmake">
+      <created>1594556976134</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1594556976134</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,38 +181,38 @@
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
     <state x="739" y="80" key="FileChooserDialogImpl/67.27.1853.1052@67.27.1853.1052" timestamp="1592656543942" />
-    <state width="1801" height="116" key="GridCell.Tab.0.bottom" timestamp="1594556583932">
+    <state width="1801" height="307" key="GridCell.Tab.0.bottom" timestamp="1594866044116">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="116" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583932" />
-    <state width="1801" height="116" key="GridCell.Tab.0.center" timestamp="1594556583932">
+    <state width="1801" height="307" key="GridCell.Tab.0.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594866044116" />
+    <state width="1801" height="307" key="GridCell.Tab.0.center" timestamp="1594866044115">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="116" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583932" />
-    <state width="1801" height="116" key="GridCell.Tab.0.left" timestamp="1594556583931">
+    <state width="1801" height="307" key="GridCell.Tab.0.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594866044115" />
+    <state width="1801" height="307" key="GridCell.Tab.0.left" timestamp="1594866044114">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="116" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583931" />
-    <state width="1801" height="116" key="GridCell.Tab.0.right" timestamp="1594556583932">
+    <state width="1801" height="307" key="GridCell.Tab.0.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594866044114" />
+    <state width="1801" height="307" key="GridCell.Tab.0.right" timestamp="1594866044115">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="116" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594556583932" />
-    <state width="1801" height="183" key="GridCell.Tab.1.bottom" timestamp="1594555429561">
+    <state width="1801" height="307" key="GridCell.Tab.0.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594866044115" />
+    <state width="1801" height="183" key="GridCell.Tab.1.bottom" timestamp="1594557692910">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="183" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429561" />
-    <state width="1801" height="183" key="GridCell.Tab.1.center" timestamp="1594555429560">
+    <state width="1801" height="183" key="GridCell.Tab.1.bottom/67.27.1853.1052@67.27.1853.1052" timestamp="1594557692910" />
+    <state width="1801" height="183" key="GridCell.Tab.1.center" timestamp="1594557692910">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="183" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429560" />
-    <state width="1801" height="183" key="GridCell.Tab.1.left" timestamp="1594555429560">
+    <state width="1801" height="183" key="GridCell.Tab.1.center/67.27.1853.1052@67.27.1853.1052" timestamp="1594557692910" />
+    <state width="1801" height="183" key="GridCell.Tab.1.left" timestamp="1594557692910">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="183" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429560" />
-    <state width="1801" height="183" key="GridCell.Tab.1.right" timestamp="1594555429560">
+    <state width="1801" height="183" key="GridCell.Tab.1.left/67.27.1853.1052@67.27.1853.1052" timestamp="1594557692910" />
+    <state width="1801" height="183" key="GridCell.Tab.1.right" timestamp="1594557692910">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
-    <state width="1801" height="183" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594555429560" />
+    <state width="1801" height="183" key="GridCell.Tab.1.right/67.27.1853.1052@67.27.1853.1052" timestamp="1594557692910" />
     <state x="107" y="8" width="1767" height="1049" key="MergeDialog" timestamp="1594556953439">
       <screen x="67" y="27" width="1853" height="1052" />
     </state>
