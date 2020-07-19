@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cJSON.c" "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/cJSON.c.o"
+  "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.c" "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/cJSON.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -13,12 +13,12 @@ set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_TARGET_INCLUDE_PATH
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp" "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp" "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp" "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp" "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.cpp" "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/Production.cpp.o"
-  "/home/husserl/Pascal.s.Complier/LR1_TableCreate/main.cpp" "/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/main.cpp.o"
+  "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp" "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o"
+  "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp" "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o"
+  "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp" "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o"
+  "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp" "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o"
+  "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.cpp" "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/Production.cpp.o"
+  "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/main.cpp" "/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

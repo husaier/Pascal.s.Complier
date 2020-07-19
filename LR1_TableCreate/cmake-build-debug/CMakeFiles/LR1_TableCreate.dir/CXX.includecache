@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp
+CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
+
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 stdio.h
 -
 stddef.h
@@ -26,9 +30,13 @@ map
 list
 -
 cJSON.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/cJSON.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.h
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp
+FirstSetCalculator.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
+
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
 iostream
 -
 string
@@ -42,33 +50,41 @@ vector
 sstream
 -
 CJsonObject.hpp
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 Production.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp
 LR1Table.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
 map
 -
 Production.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
 fstream
 -
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp
+LR1TableMaker.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
+
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
 FirstSetCalculator.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
 LR1Table.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
 set
 -
 utility
 -
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.cpp
+Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
+
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
 iostream
 -
 string
@@ -76,15 +92,15 @@ string
 vector
 -
 CJsonObject.hpp
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/cJSON.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.h
 stdint.h
 -
 
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/main.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/main.cpp
 LR1TableMaker.h
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
 CJsonObject.hpp
-/home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 

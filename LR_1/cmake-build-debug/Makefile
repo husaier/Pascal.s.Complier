@@ -312,6 +312,33 @@ TranslateScheme.cpp.s:
 	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/TranslateScheme.cpp.s
 .PHONY : TranslateScheme.cpp.s
 
+TypeSystem.o: TypeSystem.cpp.o
+
+.PHONY : TypeSystem.o
+
+# target to build an object file
+TypeSystem.cpp.o:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/TypeSystem.cpp.o
+.PHONY : TypeSystem.cpp.o
+
+TypeSystem.i: TypeSystem.cpp.i
+
+.PHONY : TypeSystem.i
+
+# target to preprocess a source file
+TypeSystem.cpp.i:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/TypeSystem.cpp.i
+.PHONY : TypeSystem.cpp.i
+
+TypeSystem.s: TypeSystem.cpp.s
+
+.PHONY : TypeSystem.s
+
+# target to generate assembly for a file
+TypeSystem.cpp.s:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/TypeSystem.cpp.s
+.PHONY : TypeSystem.cpp.s
+
 cJSON.o: cJSON.c.o
 
 .PHONY : cJSON.o
@@ -423,6 +450,9 @@ help:
 	@echo "... TranslateScheme.o"
 	@echo "... TranslateScheme.i"
 	@echo "... TranslateScheme.s"
+	@echo "... TypeSystem.o"
+	@echo "... TypeSystem.i"
+	@echo "... TypeSystem.s"
 	@echo "... cJSON.o"
 	@echo "... cJSON.i"
 	@echo "... cJSON.s"

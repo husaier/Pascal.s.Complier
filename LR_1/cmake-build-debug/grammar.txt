@@ -25,7 +25,7 @@ Standard_type -> integer
 Standard_type -> real
 Standard_type -> boolean
 Standard_type -> char
-Record_body -> Var_declaration
+Record_body -> Var_declaration ;
 Record_body -> #
 Periods -> Periods , Period
 Periods -> Period

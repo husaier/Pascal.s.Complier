@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/LR_1.dir/Production.cpp.o"
   "CMakeFiles/LR_1.dir/SymbolBlock.cpp.o"
   "CMakeFiles/LR_1.dir/TranslateScheme.cpp.o"
+  "CMakeFiles/LR_1.dir/TypeSystem.cpp.o"
   "CMakeFiles/LR_1.dir/cJSON.c.o"
   "CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o"
   "CMakeFiles/LR_1.dir/main.cpp.o"

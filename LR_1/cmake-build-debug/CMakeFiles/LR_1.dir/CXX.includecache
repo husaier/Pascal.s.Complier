@@ -73,6 +73,14 @@ vector
 -
 map
 -
+TypeSystem.h
+/home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
+
+/home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
+iostream
+-
+vector
+-
 
 /home/husserl/pascal/Pascal.s.Complier/LR_1/cJSON.h
 stdint.h

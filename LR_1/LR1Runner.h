@@ -16,25 +16,31 @@ class vectorAttributeItem {
 public:
     vectorAttributeItem(string InAttribute, int InType, int InWidth, int Inline) {
         attribute = InAttribute;
-        type = InType;
+        type222 = InType;
         width = InWidth;
         line = Inline;
     }
 
+    ~vectorAttributeItem();
+
     string attribute;
-    int type;
+    int type222;
+
+    Type *type{nullptr};
+
     int specialType;
     int width;
     int num;
     int dimension;
     int line = 0;
     string value;
-    ArrayInfo *curArrayInfo = nullptr;
     vector<SymbolTableLine *> IDlist;
+
     vector<int> expressionTypeList;
+    vector<Type*> typeList;
+
     SymbolTableLine *entry;
     SymbolBlock *tableEntry = nullptr;
-    ArrayInfo *arrayInfo = nullptr; //数组信息链表
 };
 
 

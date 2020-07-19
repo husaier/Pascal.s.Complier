@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "TypeSystem.h"
 
 #ifndef LR_1_SYMBOLTABLE_H
 #define LR_1_SYMBOLTABLE_H
@@ -11,16 +12,6 @@ using namespace std;
 
 class SymbolBlock;
 class SymbolTableLine;
-
-class ArrayInfo {
-public:
-    int deimensionTH; //第几维
-    int startIndex; //起始索引
-    int endIndex; //终止索引
-    int legnth; // 索引宽度
-    int elementType; // 元素类型
-    ArrayInfo *nextDemision = nullptr; //下一维的信息
-};
 
 class FuncInfo {
 public:
@@ -31,8 +22,19 @@ public:
 
 class SymbolTableLine {
 public:
-    SymbolTableLine(int InId, string InName, int InType, int InOffset, int InDimension, int InDeclarationLine
-    ) {
+    SymbolTableLine(int InId, string InName, int InType, int InOffset, int InDimension, int InDeclarationLine) {
+        id = InId;//序号
+        name = InName;//名字
+        type111 = InType;//类型
+        offset = InOffset;//存储地址,这里不确定是否用int
+        dimension = InDimension;//维数,0,1,2,3,...
+        declarationLine = InDeclarationLine;//声明行
+        vector<int> referenceLineVector;//引用行 创建时为空
+        point = nullptr; //指向存储位置的指针
+        blockPoint = nullptr;//指指向下一个符号块
+    }
+
+    SymbolTableLine(int InId, string InName, Type *InType, int InOffset, int InDimension, int InDeclarationLine) {
         id = InId;//序号
         name = InName;//名字
         type = InType;//类型
@@ -56,7 +58,11 @@ public:
 
     int id;//序号
     string name;//名字
-    int type;//类型
+
+    int type111;//类型
+
+    Type *type{nullptr};
+
 //    int isConst = 0;//常量的类型 //为0表示不是常量,为1表示是常量
 //    int isFunc = 0;//函数的类型 //为0表示不是函数,为1表示是函数
 //    int isProc = 0;//过程的类型 //为0表示不是过程,为1表示是过程
@@ -66,7 +72,6 @@ public:
     static const int FUNCTION = 12;
     static const int PROCEDURE = 13;
 
-    ArrayInfo *arrayInfo = nullptr; //数组类型的相关信息，链表
     FuncInfo funcInfo;
     int offset;//存储地址,这里不确定是否用int
     int dimension;//维数,0,1,2,3,...
@@ -91,7 +96,9 @@ public:
 
     SymbolTableLine *query(string name);
 
-    bool insert(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
+    bool insert111(string name, int type, int offset, int dimension, int declarationLine);//新增表的一行
+
+    bool insert(string name, Type *type, int offset, int dimension, int declarationLine);
 
     SymbolTableLine *insert2(string name, int type, int offset, int dimension, int declarationLine);
 
@@ -102,11 +109,6 @@ public:
     void printBlock();
 
     SymbolTableLine *blockQuery(string name);
-};
-
-class BlockIndexTable {
-public:
-    vector<SymbolBlock *> blockIndexTable;
 };
 
 #endif //LR_1_SYMBOLTABLE_H

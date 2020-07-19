@@ -15,6 +15,7 @@ CMakeFiles/LR_1.dir/LR1Runner.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/cJSON.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
 CMakeFiles/LR_1.dir/LR1Table.cpp.o
@@ -34,12 +35,16 @@ CMakeFiles/LR_1.dir/Production.cpp.o
 CMakeFiles/LR_1.dir/SymbolBlock.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.cpp
  /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
 CMakeFiles/LR_1.dir/TranslateScheme.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/CJsonObject.hpp
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/TranslateScheme.cpp
  /home/husserl/pascal/Pascal.s.Complier/LR_1/TranslateScheme.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/cJSON.h
+CMakeFiles/LR_1.dir/TypeSystem.cpp.o
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.cpp
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
 CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.cpp
  /home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
@@ -49,6 +54,7 @@ CMakeFiles/LR_1.dir/main.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/cJSON.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/main.cpp

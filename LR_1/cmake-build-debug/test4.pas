@@ -14,9 +14,9 @@ program test4(input, output);
                     a: integer;
                     b: boolean;
                     c: real;
-                    d: char
+                    d: char;
                     end; {end of record c}
-                j,k: char
+                j,k: char;
              end; {end of record rec}
         arr: array [0 .. 7, 0 .. 3] of integer;
         brr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
@@ -26,10 +26,10 @@ program test4(input, output);
                 const pai4 = a; {错误,常量声明,id不为常量}
                       pai6 = pai4;
                 function func2 ( var id2 : real) : integer ;
-                    begin C:=pi*2; end ; {end of func2}
-                begin C:=pi*2; end ; {end of proc1}
+                    begin C := pi * 2; end ; {end of func2}
+                begin C := pi * 2; end ; {end of proc1}
             begin
-                C:=pi*2; end ; {end of func1}
+                C := pi * 2; end ; {end of func1}
     procedure d1p1(var m: char);
         var a,b: char;
         begin a := b; end; {end of d1p1}
@@ -39,7 +39,7 @@ program test4(input, output);
             var k,m: integer;
             begin k := 2; end; {end of d2p1}
         begin
-            c := true;
+            c := (1 = 1);
             d2p1(c);
         end; {end of d1p2}
     begin

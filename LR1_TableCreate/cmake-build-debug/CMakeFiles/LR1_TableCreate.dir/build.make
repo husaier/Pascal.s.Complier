@@ -43,10 +43,10 @@ RM = /home/husserl/Clion/clion-2020.1.1/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/husserl/Pascal.s.Complier/LR1_TableCreate
+CMAKE_SOURCE_DIR = /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug
+CMAKE_BINARY_DIR = /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/LR1_TableCreate.dir/depend.make
@@ -59,94 +59,94 @@ include CMakeFiles/LR1_TableCreate.dir/flags.make
 
 CMakeFiles/LR1_TableCreate.dir/main.cpp.o: CMakeFiles/LR1_TableCreate.dir/flags.make
 CMakeFiles/LR1_TableCreate.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/LR1_TableCreate.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/main.cpp.o -c /home/husserl/Pascal.s.Complier/LR1_TableCreate/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/LR1_TableCreate.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/main.cpp.o -c /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/main.cpp
 
 CMakeFiles/LR1_TableCreate.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR1_TableCreate.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR1_TableCreate/main.cpp > CMakeFiles/LR1_TableCreate.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/main.cpp > CMakeFiles/LR1_TableCreate.dir/main.cpp.i
 
 CMakeFiles/LR1_TableCreate.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR1_TableCreate.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR1_TableCreate/main.cpp -o CMakeFiles/LR1_TableCreate.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/main.cpp -o CMakeFiles/LR1_TableCreate.dir/main.cpp.s
 
 CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o: CMakeFiles/LR1_TableCreate.dir/flags.make
 CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o: ../FirstSetCalculator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o -c /home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.o -c /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp
 
 CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp > CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp > CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.i
 
 CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp -o CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp -o CMakeFiles/LR1_TableCreate.dir/FirstSetCalculator.cpp.s
 
 CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o: CMakeFiles/LR1_TableCreate.dir/flags.make
 CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o: ../LR1TableMaker.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o -c /home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.o -c /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp
 
 CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp > CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp > CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.i
 
 CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp -o CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp -o CMakeFiles/LR1_TableCreate.dir/LR1TableMaker.cpp.s
 
 CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o: CMakeFiles/LR1_TableCreate.dir/flags.make
 CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o: ../CJsonObject.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o -c /home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.o -c /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp
 
 CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp > CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp > CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.i
 
 CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp -o CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp -o CMakeFiles/LR1_TableCreate.dir/CJsonObject.cpp.s
 
 CMakeFiles/LR1_TableCreate.dir/cJSON.c.o: CMakeFiles/LR1_TableCreate.dir/flags.make
 CMakeFiles/LR1_TableCreate.dir/cJSON.c.o: ../cJSON.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/LR1_TableCreate.dir/cJSON.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/cJSON.c.o   -c /home/husserl/Pascal.s.Complier/LR1_TableCreate/cJSON.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/LR1_TableCreate.dir/cJSON.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/cJSON.c.o   -c /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.c
 
 CMakeFiles/LR1_TableCreate.dir/cJSON.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/LR1_TableCreate.dir/cJSON.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/husserl/Pascal.s.Complier/LR1_TableCreate/cJSON.c > CMakeFiles/LR1_TableCreate.dir/cJSON.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.c > CMakeFiles/LR1_TableCreate.dir/cJSON.c.i
 
 CMakeFiles/LR1_TableCreate.dir/cJSON.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/LR1_TableCreate.dir/cJSON.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/husserl/Pascal.s.Complier/LR1_TableCreate/cJSON.c -o CMakeFiles/LR1_TableCreate.dir/cJSON.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.c -o CMakeFiles/LR1_TableCreate.dir/cJSON.c.s
 
 CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o: CMakeFiles/LR1_TableCreate.dir/flags.make
 CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o: ../LR1Table.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o -c /home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o -c /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp
 
 CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp > CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp > CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.i
 
 CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp -o CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp -o CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.s
 
 CMakeFiles/LR1_TableCreate.dir/Production.cpp.o: CMakeFiles/LR1_TableCreate.dir/flags.make
 CMakeFiles/LR1_TableCreate.dir/Production.cpp.o: ../Production.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/LR1_TableCreate.dir/Production.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/Production.cpp.o -c /home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/LR1_TableCreate.dir/Production.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/LR1_TableCreate.dir/Production.cpp.o -c /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.cpp
 
 CMakeFiles/LR1_TableCreate.dir/Production.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LR1_TableCreate.dir/Production.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.cpp > CMakeFiles/LR1_TableCreate.dir/Production.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.cpp > CMakeFiles/LR1_TableCreate.dir/Production.cpp.i
 
 CMakeFiles/LR1_TableCreate.dir/Production.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LR1_TableCreate.dir/Production.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/Pascal.s.Complier/LR1_TableCreate/Production.cpp -o CMakeFiles/LR1_TableCreate.dir/Production.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.cpp -o CMakeFiles/LR1_TableCreate.dir/Production.cpp.s
 
 # Object files for target LR1_TableCreate
 LR1_TableCreate_OBJECTS = \
@@ -170,7 +170,7 @@ LR1_TableCreate: CMakeFiles/LR1_TableCreate.dir/LR1Table.cpp.o
 LR1_TableCreate: CMakeFiles/LR1_TableCreate.dir/Production.cpp.o
 LR1_TableCreate: CMakeFiles/LR1_TableCreate.dir/build.make
 LR1_TableCreate: CMakeFiles/LR1_TableCreate.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable LR1_TableCreate"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable LR1_TableCreate"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LR1_TableCreate.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -183,6 +183,6 @@ CMakeFiles/LR1_TableCreate.dir/clean:
 .PHONY : CMakeFiles/LR1_TableCreate.dir/clean
 
 CMakeFiles/LR1_TableCreate.dir/depend:
-	cd /home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/husserl/Pascal.s.Complier/LR1_TableCreate /home/husserl/Pascal.s.Complier/LR1_TableCreate /home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug /home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug /home/husserl/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug /home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cmake-build-debug/CMakeFiles/LR1_TableCreate.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/LR1_TableCreate.dir/depend
 

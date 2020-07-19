@@ -12,6 +12,9 @@ stack<string> stackSymbol;
 vector<vectorAttributeItem> vectorAttribute;
 const int width1 = 50, width2 = 50, width3 = 50;
 
+vectorAttributeItem::~vectorAttributeItem() {
+
+}
 
 void LR1Runner::run(LR1Table &table) {
     initial();
@@ -238,7 +241,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             id = vectorAttribute[top - 2].attribute;
             int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
-                SymbolTableLine *tempPoint = curBlock->insert2(id, vectorAttribute[top].type, 0, 0, 0);
+                SymbolTableLine *tempPoint = curBlock->insert2(id, vectorAttribute[top].type222, 0, 0, 0);
                 tempPoint->specialType = SymbolTableLine::CONST;//将常量标志位置为1
                 if (debugInfoLevel >= 3) {
                     cout << "声明" << id << endl;
@@ -251,14 +254,14 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 10:    //10. Const_variable -> + id
         case 11:    //11. Const_variable -> - id
-        case 12:    //12. Const_variable -> id
-        case 106: {  //106. Unsign_const_variable -> id
+        case 12: {  //12. Const_variable -> id
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->specialType == SymbolTableLine::CONST) {
+                    leftSymbol->type222 = tempLinePoint->type111;
                     leftSymbol->type = tempLinePoint->type;
                 } else {
                     recordSemanticError(line, "语义错误！此id不为常量");
@@ -281,21 +284,21 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             if (tempString.find('.') == std::string::npos) {
                 //如果没找到'.'说明是整形
-                leftSymbol->type = SymbolTableLine::INTEGER;
+                leftSymbol->type222 = SymbolTableLine::INTEGER;
             } else {//实数型常量
-                leftSymbol->type = SymbolTableLine::REAL;
+                leftSymbol->type222 = SymbolTableLine::REAL;
             }
             break;
         }
         case 16: {   //16. Const_variable -> letter
-            leftSymbol->type = SymbolTableLine::CHAR;
+            leftSymbol->type222 = SymbolTableLine::CHAR;
             leftSymbol->width = 1;
             leftSymbol->dimension = 0;
             leftSymbol->value = vectorAttribute[top].attribute;
             break;
         }
-        case 19:
-        case 20: {
+        case 19: // Type_declaration -> Type_declaration ; id = Type
+        case 20: { // Type_declaration -> id = Type
             id = vectorAttribute[top - 2].attribute;
             int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
@@ -309,123 +312,96 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
-        case 21:
+        case 21: // Type -> Standard_type
             leftSymbol->type = vectorAttribute[top].type;
             leftSymbol->width = vectorAttribute[top].width;
             break;
-        case 22: {
+        case 22: { // Type -> record E22 Record_body end
             auto Record_body = vectorAttribute[top - 1];
-            leftSymbol->type = SymbolTableLine::RECORD;
             leftSymbol->tableEntry = curBlock;
             leftSymbol->width = *offset;
             leftSymbol->dimension = Record_body.dimension + 1;
+            auto record = new Record();
+            for(auto symbol : curBlock->symbolBlock){
+                EnvItem e;
+                e.id = symbol->name;
+                e.type = symbol->type->copy();
+                record->env.push_back(e);
+            }
+            leftSymbol->type = (Type*)record;
             relocate();
             break;
         }
-        case 23: {
+        case 23: { // Type0 -> array [ Periods ] of Type
             auto Type = vectorAttribute[top];
             auto Periods = vectorAttribute[top - 3];
-            int elementWidth = Type.width;
-            //把Type.arrayInfo链表插入到Periods.arrayInfo链表的尾部
-            auto tail = Periods.arrayInfo;
-            int baseType = tail->elementType;
-            while (tail != nullptr) {
-                if (tail->nextDemision == nullptr)
-                    break;
-                tail = tail->nextDemision;
-            }
-            int demendionTH = tail->deimensionTH;
-            auto typeArrayInfoHead = Type.arrayInfo;
-            tail->nextDemision = typeArrayInfoHead;
-            while (typeArrayInfoHead != nullptr) {
-                demendionTH++;
-                typeArrayInfoHead->deimensionTH = demendionTH;
-                typeArrayInfoHead = typeArrayInfoHead->nextDemision;
-            }
-            auto head = Periods.arrayInfo;
-            int nums = 1;
-            while (head != nullptr) {
-                head->elementType = baseType;
-                nums *= head->legnth;
-                head = head->nextDemision;
-            }
-            leftSymbol->type = SymbolTableLine::ARRAY;
-            leftSymbol->arrayInfo = Periods.arrayInfo;
-            leftSymbol->width = Type.width * nums;
+            auto *type = Periods.type;
+            type->addElem(Type.type);
+            leftSymbol->type = type;
+            leftSymbol->width = type->getWidth();
+            leftSymbol->tableEntry = Type.tableEntry;
             leftSymbol->dimension = Periods.dimension + Type.dimension;
             break;
         }
-        case 24: //integer
-            leftSymbol->type = SymbolTableLine::INTEGER;
+        case 24: // Standard_type -> integer
+            leftSymbol->type = new Type(Type::INTEGER);
             leftSymbol->width = 4;
             leftSymbol->dimension = 0;
             break;
-        case 25: //real
-            leftSymbol->type = SymbolTableLine::REAL;
+        case 25: //25. Standard_type -> real
+            leftSymbol->type = new Type(Type::REAL);
             leftSymbol->width = 4;
             leftSymbol->dimension = 0;
             break;
-        case 26: //boolean
-            leftSymbol->type = SymbolTableLine::BOOLEAN;
+        case 26: //26. Standard_type -> boolean
+            leftSymbol->type = new Type(Type::BOOLEAN);
             leftSymbol->width = 1;
             leftSymbol->dimension = 0;
             break;
-        case 27: //char
-            leftSymbol->type = SymbolTableLine::CHAR;
+        case 27: //27. Standard_type -> char
+            leftSymbol->type = new Type(Type::CHAR);
             leftSymbol->width = 1;
             leftSymbol->dimension = 0;
             break;
-        case 28: {
+        case 28: { //28. Record_body -> Var_declaration
             auto Var_declaration = vectorAttribute[top];
             leftSymbol->dimension = Var_declaration.dimension;
             break;
         }
-        case 30: {
+        case 29: { //29. Record_body -> #
+            break;
+        }
+        case 30: { //30. Periods0 -> Periods1 , Period
             auto period = vectorAttribute[top];
-            auto period1 = vectorAttribute[top - 2];
-            auto &period0 = leftSymbol;
-            period0->dimension = period1.dimension + 1;
-            auto *t = period.arrayInfo;
-            auto head = period1.arrayInfo;
-            //插入到链表的尾部
-            while (head != nullptr) {
-                if (head->nextDemision == nullptr)
-                    break;
-                head = head->nextDemision;
-            }
-            t->deimensionTH = head->deimensionTH + 1;
-            head->nextDemision = t;
-            // 传给period0
-            period0->arrayInfo = period1.arrayInfo;
+            auto periods1 = vectorAttribute[top - 2];
+            auto &periods0 = leftSymbol;
+            periods0->dimension = periods1.dimension + 1;
+
+            auto t = period.type;
+            periods1.type->addElem(t);
+            periods0->type = periods1.type;
             break;
         }
-        case 31: {
-            auto attr = vectorAttribute[top];
+        case 31: { //31. Periods -> Period
+            auto Period = vectorAttribute[top];
             leftSymbol->dimension = 1;
-            leftSymbol->arrayInfo = attr.arrayInfo;
+            leftSymbol->type = Period.type;
             break;
         }
-        case 32: {// Const_declarations -> const Const_declaration ;
+        case 32: { // 32. Period -> Const_variable .. Const_variable
             int start = vectorAttribute[top - 2].num;
             int end = vectorAttribute[top].num;
-            auto *t = new ArrayInfo();
-            t->startIndex = start;
-            t->endIndex = end;
-            t->deimensionTH = 1;
-            t->legnth = end - start + 1;
-            t->nextDemision = nullptr;
-
-            leftSymbol->arrayInfo = t;
+            auto *tmp = new Array(start, end);
+            leftSymbol->type = tmp;
             break;
         }
-        case 35:
-        case 36: {
+        case 35: //35. Var_declaration -> Var_declaration ; Identifier_list : Type
+        case 36: { //36. Var_declaration -> Identifier_list : Type
             vectorAttributeItem &Type = vectorAttribute[top];
             for (auto &item : vectorAttribute[top - 2].IDlist) {
                 item->type = Type.type;
                 item->offset = *offset;
                 item->blockPoint = Type.tableEntry;
-                item->arrayInfo = Type.arrayInfo;
                 item->dimension = Type.dimension;
                 *offset += Type.width;
             }
@@ -436,7 +412,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 40: {// Subprogram_head -> function id B Formal_parameter : Standard_type ;
             auto tempPoint = curBlock->query(vectorAttribute[top - 5].attribute);
-            tempPoint->type = vectorAttribute[top - 1].type;
+            tempPoint->type111 = vectorAttribute[top - 1].type222;
             tempPoint->specialType = SymbolTableLine::FUNCTION;
             // 参数的声明
             auto tempVector = vectorAttribute[top - 3].IDlist;
@@ -444,7 +420,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             tempFuncInfo.parametersNum = tempVector.size();
             tempFuncInfo.IDlist = tempVector;
             for (int i = 0; i < tempVector.size(); ++i) {
-                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type);
+                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type111);
             }
             tempPoint->funcInfo = tempFuncInfo;
 
@@ -452,7 +428,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 41: {// Subprogram_head -> procedure id C Formal_parameter ;
             auto tempPoint = curBlock->query(vectorAttribute[top - 3].attribute);
-            tempPoint->type = -1;
+            tempPoint->type111 = -1;
             tempPoint->specialType = SymbolTableLine::PROCEDURE;
             //参数的声明
             auto tempVector = vectorAttribute[top - 1].IDlist;
@@ -460,7 +436,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             tempFuncInfo.parametersNum = tempVector.size();
             tempFuncInfo.IDlist = tempVector;
             for (int i = 0; i < tempVector.size(); ++i) {
-                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type);
+                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type111);
             }
             tempPoint->funcInfo = tempFuncInfo;
             break;
@@ -484,10 +460,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 49: {  //49. Value_parameter -> Identifier_list : Standard_type
             vectorAttributeItem tmp = vectorAttribute[top];
             for (auto &item : vectorAttribute[top - 2].IDlist) {
-                item->type = tmp.type;
+                item->type111 = tmp.type222;
                 item->offset = *offset;
                 item->blockPoint = tmp.tableEntry;
-                item->arrayInfo = tmp.arrayInfo;
                 item->dimension = tmp.dimension;
                 *offset += tmp.width;
             }
@@ -502,71 +477,51 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 53: { // Statement -> Variable assignop Expression
             auto Expression = vectorAttribute[top];
             auto Variable = vectorAttribute[top - 2];
-            int type = Variable.type;
-            if (type != Expression.type)
-                recordSemanticError(Variable.line, "赋值语句类型错误");
+            if (*(Variable.type) != *(Expression.type))
+                recordSemanticError(Variable.line, "错误：赋值语句类型不匹配");
             break;
         }
         case 62: { // Variable -> id F62 Id_varparts
             auto Id_varparts = vectorAttribute[top];
-//            leftSymbol->entry = Id_varparts.entry;
-            int type;
-            if (Id_varparts.entry != nullptr)
-                type = Id_varparts.entry->type;
-            else
-                type = SymbolTableLine::VOID;
-
-            // 数组做特殊处理
-            if (type == SymbolTableLine::ARRAY) {
-                // 拷贝构造
-                leftSymbol->entry = new SymbolTableLine(*Id_varparts.entry);
-                if (Id_varparts.curArrayInfo == nullptr) {
-                    type = Id_varparts.entry->arrayInfo->elementType;
-                }
-                else {
-                    recordSemanticError(Id_varparts.line, "不允许数组直接参加运算");
-                }
-            }
-            leftSymbol->type = type;
+            leftSymbol->type = Id_varparts.type;
             break;
         }
         case 63: { // Id_varparts0 -> Id_varparts1 Id_varpart
             auto Id_varpart = vectorAttribute[top];
             leftSymbol->entry = Id_varpart.entry;
-            leftSymbol->curArrayInfo = Id_varpart.curArrayInfo;
+            leftSymbol->type = Id_varpart.type;
             break;
         }
         case 64: { // Id_varparts -> #
             leftSymbol->entry = vectorAttribute[top].entry;
-            leftSymbol->curArrayInfo = vectorAttribute[top].curArrayInfo;
+            leftSymbol->type = vectorAttribute[top].type;
             break;
         }
         case 65: {// Id_varpart -> [ Expression_list ]
             auto Expression_list = vectorAttribute[top - 1];
+            auto i_type = vectorAttribute[top - 3].type;
             auto i_entry = vectorAttribute[top - 3].entry;
-            auto i_curArrayInfo = vectorAttribute[top - 3].curArrayInfo;
             int lines = vectorAttribute[top].line;
-            int type = i_entry->type;
-            if (type == SymbolTableLine::ARRAY) {
-                int dimension = 0;
-                auto ptr = i_curArrayInfo;
-                while (ptr != nullptr) {
-                    dimension++;
-                    ptr = ptr->nextDemision;
-                }
-                auto expressionTypeList = Expression_list.expressionTypeList;
-                if (dimension >= expressionTypeList.size()) {
+            auto type = i_type;
+            if (type->getType() == Type::ARRAY) {
+                int dimension = type->getDimension();
+                auto typeList = Expression_list.typeList;
+                int size = typeList.size();
+                if (dimension >= size) {
                     bool isExpressionsTypeInteger = true;
-                    for(int expressionType : expressionTypeList) {
-                        if (expressionType != SymbolTableLine::INTEGER) {
+
+                    for (const auto& item : typeList)
+                        if(item->getType() != Type::INTEGER){
                             isExpressionsTypeInteger = false;
                             break;
                         }
-                        i_curArrayInfo = i_curArrayInfo->nextDemision;
-                    }
-                    if (isExpressionsTypeInteger) {
+                    if(isExpressionsTypeInteger) {
                         leftSymbol->entry = i_entry;
-                        leftSymbol->curArrayInfo = i_curArrayInfo;
+                        while(size--){
+                            auto t = (Array*)type;
+                            type = t->elem;
+                        }
+                        leftSymbol->type = type;
                     }
                     else {
                         leftSymbol->entry = nullptr;
@@ -576,7 +531,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     leftSymbol->entry = nullptr;
                     recordSemanticError(lines, "类型错误，超过指定ARRAY的维度");
                 }
-            } else {
+            }else {
                 leftSymbol->entry = nullptr;
                 recordSemanticError(lines, "类型错误，不是ARRAY类型，不能使用[]运算符");
             }
@@ -584,21 +539,25 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 66: { // Id_varpart -> . id
             auto id_local = vectorAttribute[top];
+            auto i_type = vectorAttribute[top - 2].type;
             auto i_entry = vectorAttribute[top - 2].entry;
-            int type = i_entry->type;
-            if (type == SymbolTableLine::RECORD) {
+            auto type = i_type;
+            if (type->getType() == Type::RECORD) {
                 auto recordBlock = i_entry->blockPoint;
                 auto entry = recordBlock->blockQuery(id_local.attribute);
                 if (entry != nullptr) {
                     leftSymbol->entry = entry;
+                    leftSymbol->type = entry->type;
                 } else {
                     leftSymbol->entry = nullptr;
+                    leftSymbol->type = new Type(Type::TYPE_ERROR);
                     stringstream o;
                     o << "语义错误，record " << i_entry->name << "中没有" << id_local.attribute << "域";
                     recordSemanticError(id_local.line, o.str());
                 }
             } else {
                 leftSymbol->entry = nullptr;
+                leftSymbol->type = new Type(Type::TYPE_ERROR);
                 recordSemanticError(id_local.line, "类型错误，不是RECORD类型，不能使用.运算符");
             }
             break;
@@ -611,7 +570,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->specialType == SymbolTableLine::PROCEDURE) {
-                    leftSymbol->type = tempLinePoint->type;
+                    leftSymbol->type222 = tempLinePoint->type111;
                 } else {
                     recordSemanticError(line, "语义错误！此id不为Procesure");
                 }
@@ -628,24 +587,28 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto Expression_list1 = vectorAttribute[top - 2];
             auto Expression = vectorAttribute[top];
             leftSymbol->expressionTypeList = Expression_list1.expressionTypeList;
-            leftSymbol->expressionTypeList.push_back(Expression.type);
+            leftSymbol->expressionTypeList.push_back(Expression.type222);
+
+            leftSymbol->typeList = Expression_list1.typeList;
+            leftSymbol->typeList.push_back(Expression.type);
             break;
         }
         case 81: { // Expression_list -> Expression
             auto Expression = vectorAttribute[top];
-            leftSymbol->expressionTypeList.push_back(Expression.type);
+            leftSymbol->expressionTypeList.push_back(Expression.type222);
+            leftSymbol->typeList.push_back(Expression.type);
             break;
         }
         case 82: { // Expression -> Simple_expression0 = Simple_expression1
             auto Simple_expression0 = vectorAttribute[top - 2];
             auto Simple_expression1 = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Simple_expression0.type == Simple_expression1.type) {
-                bool flag = isBasicType(Simple_expression0.type) &&
-                            isBasicType(Simple_expression1.type);
-                if (flag) {
-                    resultType = SymbolTableLine::BOOLEAN;
+            if(*(Simple_expression0.type) == *(Simple_expression1.type)){
+                bool flag = Simple_expression0.type->isBasicType() &&
+                        Simple_expression1.type->isBasicType();
+                if(flag) {
+                    resultType = new Type(Type::BOOLEAN);
                     if (!Simple_expression0.value.empty() && !Simple_expression1.value.empty()) {
                         if (Simple_expression0.value == Simple_expression1.value)
                             value = "1";
@@ -653,9 +616,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                             value = "0";
                     }
                 } else {
+                    resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Simple_expression0.line, "逻辑运算符=：操作数类型违法");
                 }
-            } else {
+            }else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression0.line, "逻辑运算符=：左右操作数类型不一致");
             }
             leftSymbol->type = resultType;
@@ -665,13 +630,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 83: { // Expression -> Simple_expression0 <> Simple_expression1
             auto Simple_expression0 = vectorAttribute[top - 2];
             auto Simple_expression1 = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Simple_expression0.type == Simple_expression1.type) {
-                bool flag = isBasicType(Simple_expression0.type) &&
-                            isBasicType(Simple_expression1.type);
+            if (*(Simple_expression0.type) == *(Simple_expression1.type)) {
+                bool flag = Simple_expression0.type->isBasicType() &&
+                            Simple_expression1.type->isBasicType();
                 if (flag) {
-                    resultType = SymbolTableLine::BOOLEAN;
+                    resultType = new Type(Type::BOOLEAN);
                     if (!Simple_expression0.value.empty() && !Simple_expression1.value.empty()) {
                         if (Simple_expression0.value == Simple_expression1.value)
                             value = "0"; // false
@@ -679,9 +644,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                             value = "1"; // true
                     }
                 } else {
+                    resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Simple_expression0.line, "逻辑运算符<>：操作数类型违法");
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression0.line, "逻辑运算符<>：左右操作数类型不一致");
             }
             leftSymbol->type = resultType;
@@ -691,13 +658,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 84: { // Expression -> Simple_expression0 < Simple_expression1
             auto Simple_expression0 = vectorAttribute[top - 2];
             auto Simple_expression1 = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Simple_expression0.type == Simple_expression1.type) {
-                if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
-                    Simple_expression0.type == SymbolTableLine::INTEGER) {
-                    resultType = SymbolTableLine::BOOLEAN;
-                    if (Simple_expression0.value.empty() && Simple_expression1.value.empty())
+            if (*(Simple_expression0.type) == *(Simple_expression1.type)) {
+                if (Simple_expression0.type->getType() == Type::BOOLEAN ||
+                    Simple_expression0.type->getType() == Type::INTEGER) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
                         value = "";
                     else {
                         int a = stoi(Simple_expression0.value);
@@ -707,9 +674,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         else
                             value = "0";
                     }
-                } else if (Simple_expression0.type == SymbolTableLine::REAL) {
-                    resultType = SymbolTableLine::BOOLEAN;
-                    if (Simple_expression0.value.empty() && Simple_expression1.value.empty())
+                } else if (Simple_expression0.type->getType() == Type::REAL) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
                         value = "";
                     else {
                         float a = stof(Simple_expression0.value);
@@ -719,9 +686,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         else
                             value = "0";
                     }
-                } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
-                    resultType = SymbolTableLine::BOOLEAN;
-                    if (Simple_expression0.value.empty() && Simple_expression1.value.empty())
+                } else if (Simple_expression0.type->getType() == Type::CHAR) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
                         value = "";
                     else {
                         char a = Simple_expression0.value[0];
@@ -732,9 +699,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                             value = "0";
                     }
                 } else {
+                    resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Simple_expression0.line, "逻辑运算符<：操作数类型违法");
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression0.line, "逻辑运算符<：左右操作数类型不一致");
             }
             leftSymbol->type = resultType;
@@ -744,29 +713,39 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 85: { // Expression -> Simple_expression0 <= Simple_expression1
             auto Simple_expression0 = vectorAttribute[top - 2];
             auto Simple_expression1 = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Simple_expression0.type == Simple_expression1.type) {
-                if (!Simple_expression0.value.empty() && !Simple_expression1.value.empty()) {
-                    if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
-                        Simple_expression0.type == SymbolTableLine::INTEGER) {
-                        resultType = SymbolTableLine::BOOLEAN;
+            if (*(Simple_expression0.type) == *(Simple_expression1.type)) {
+                if (Simple_expression0.type->getType() == Type::BOOLEAN ||
+                    Simple_expression0.type->getType() == Type::INTEGER) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         int a = stoi(Simple_expression0.value);
                         int b = stoi(Simple_expression1.value);
                         if (a <= b)
                             value = "1";
                         else
                             value = "0";
-                    } else if (Simple_expression0.type == SymbolTableLine::REAL) {
-                        resultType = SymbolTableLine::BOOLEAN;
+                    }
+                } else if (Simple_expression0.type->getType() == Type::REAL) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         float a = stof(Simple_expression0.value);
                         float b = stof(Simple_expression1.value);
                         if (a <= b)
                             value = "1";
                         else
                             value = "0";
-                    } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
-                        resultType = SymbolTableLine::BOOLEAN;
+                    }
+                } else if (Simple_expression0.type->getType() == Type::CHAR) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         char a = Simple_expression0.value[0];
                         char b = Simple_expression1.value[0];
                         if (a < b)
@@ -775,9 +754,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                             value = "0";
                     }
                 } else {
+                    resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Simple_expression0.line, "逻辑运算符<=：操作数类型违法");
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression0.line, "逻辑运算符<=：左右操作数类型不一致");
             }
             leftSymbol->type = resultType;
@@ -787,40 +768,52 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 86: { // Expression -> Simple_expression0 > Simple_expression1
             auto Simple_expression0 = vectorAttribute[top - 2];
             auto Simple_expression1 = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Simple_expression0.type == Simple_expression1.type) {
-                if (!Simple_expression0.value.empty() && !Simple_expression1.value.empty()) {
-                    if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
-                        Simple_expression0.type == SymbolTableLine::INTEGER) {
-                        resultType = SymbolTableLine::BOOLEAN;
+            if (*(Simple_expression0.type) == *(Simple_expression1.type)) {
+                if (Simple_expression0.type->getType() == Type::BOOLEAN ||
+                    Simple_expression0.type->getType() == Type::INTEGER) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         int a = stoi(Simple_expression0.value);
                         int b = stoi(Simple_expression1.value);
                         if (a > b)
                             value = "1";
                         else
                             value = "0";
-                    } else if (Simple_expression0.type == SymbolTableLine::REAL) {
-                        resultType = SymbolTableLine::BOOLEAN;
+                    }
+                } else if (Simple_expression0.type->getType() == Type::REAL) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         float a = stof(Simple_expression0.value);
                         float b = stof(Simple_expression1.value);
                         if (a > b)
                             value = "1";
                         else
                             value = "0";
-                    } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
-                        resultType = SymbolTableLine::BOOLEAN;
+                    }
+                } else if (Simple_expression0.type->getType() == Type::CHAR) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         char a = Simple_expression0.value[0];
                         char b = Simple_expression1.value[0];
                         if (a > b)
                             value = "1";
                         else
                             value = "0";
-                    } else {
-                        recordSemanticError(Simple_expression0.line, "逻辑运算符>：操作数类型违法");
                     }
+                } else {
+                    resultType = new Type(Type::TYPE_ERROR);
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符>：操作数类型违法");
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression0.line, "逻辑运算符>：左右操作数类型不一致");
             }
             leftSymbol->type = resultType;
@@ -830,40 +823,52 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 87: { // Expression -> Simple_expression0 >= Simple_expression1
             auto Simple_expression0 = vectorAttribute[top - 2];
             auto Simple_expression1 = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Simple_expression0.type == Simple_expression1.type) {
-                if (!Simple_expression0.value.empty() && !Simple_expression1.value.empty()) {
-                    if (Simple_expression0.type == SymbolTableLine::BOOLEAN ||
-                        Simple_expression0.type == SymbolTableLine::INTEGER) {
-                        resultType = SymbolTableLine::BOOLEAN;
+            if (*(Simple_expression0.type) == *(Simple_expression1.type)) {
+                if (Simple_expression0.type->getType() == Type::BOOLEAN ||
+                    Simple_expression0.type->getType() == Type::INTEGER) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         int a = stoi(Simple_expression0.value);
                         int b = stoi(Simple_expression1.value);
                         if (a >= b)
                             value = "1";
                         else
                             value = "0";
-                    } else if (Simple_expression0.type == SymbolTableLine::REAL) {
-                        resultType = SymbolTableLine::BOOLEAN;
+                    }
+                } else if (Simple_expression0.type->getType() == Type::REAL) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         float a = stof(Simple_expression0.value);
                         float b = stof(Simple_expression1.value);
                         if (a >= b)
                             value = "1";
                         else
                             value = "0";
-                    } else if (Simple_expression0.type == SymbolTableLine::CHAR) {
-                        resultType = SymbolTableLine::BOOLEAN;
+                    }
+                } else if (Simple_expression0.type->getType() == Type::CHAR) {
+                    resultType = new Type(Type::BOOLEAN);
+                    if (Simple_expression0.value.empty() || Simple_expression1.value.empty())
+                        value = "";
+                    else {
                         char a = Simple_expression0.value[0];
                         char b = Simple_expression1.value[0];
                         if (a >= b)
                             value = "1";
                         else
                             value = "0";
-                    } else {
-                        recordSemanticError(Simple_expression0.line, "逻辑运算符>=：操作数类型违法");
                     }
+                } else {
+                    resultType = new Type(Type::TYPE_ERROR);
+                    recordSemanticError(Simple_expression0.line, "逻辑运算符>=：操作数类型违法");
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression0.line, "逻辑运算符>=：左右操作数类型不一致");
             }
             leftSymbol->type = resultType;
@@ -884,49 +889,49 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 90: { // Simple_expression -> + Term
             auto Term = vectorAttribute[top];
-            leftSymbol->type = Term.type;
             string value;
-            if (Term.type == SymbolTableLine::INTEGER ||
-                Term.type == SymbolTableLine::REAL) {
+            if (Term.type->getType() == Type::INTEGER ||
+                Term.type->getType() == Type::REAL) {
                 if (!Term.value.empty()) {
                     float a = stof(Term.value);
                     value = to_string(a);
                 }
             }
+            leftSymbol->type = Term.type;
             leftSymbol->value = Term.value;
             break;
         }
         case 91: { // Simple_expression -> - Term
             auto Term = vectorAttribute[top];
-            leftSymbol->type = Term.type;
             string value;
-            if (Term.type == SymbolTableLine::INTEGER ||
-                Term.type == SymbolTableLine::REAL) {
+            if (Term.type->getType() == Type::INTEGER ||
+                Term.type->getType() == Type::REAL) {
                 if (!Term.value.empty()) {
                     float a = stof(Term.value);
                     value = to_string(0 - a);
                 }
             }
+            leftSymbol->type = Term.type;
             leftSymbol->value = Term.value;
             break;
         }
         case 92: { // Simple_expression0 -> Simple_expression1 + Term
             auto Simple_expression1 = vectorAttribute[top - 2];
             auto Term = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
             int flag;
-            if (Simple_expression1.type == SymbolTableLine::INTEGER) {
-                if (Term.type == SymbolTableLine::INTEGER)
+            if (Simple_expression1.type->getType() == Type::INTEGER) {
+                if (Term.type->getType() == Type::INTEGER)
                     flag = 1;
-                else if (Term.type == SymbolTableLine::REAL)
+                else if (Term.type->getType() == Type::REAL)
                     flag = 2;
                 else
                     flag = 0;
-            } else if (Simple_expression1.type == SymbolTableLine::REAL) {
-                if (Term.type == SymbolTableLine::INTEGER)
+            } else if (Simple_expression1.type->getType() == Type::REAL) {
+                if (Term.type->getType() == Type::INTEGER)
                     flag = 3;
-                else if (Term.type == SymbolTableLine::REAL)
+                else if (Term.type->getType() == Type::REAL)
                     flag = 4;
                 else
                     flag = 0;
@@ -935,7 +940,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 
             switch (flag) {
                 case 1: { // 都是INTEGER
-                    resultType = SymbolTableLine::INTEGER;
+                    resultType = new Type(Type::INTEGER);
                     if (!Simple_expression1.value.empty() && !Term.value.empty()) {
                         int a = stoi(Simple_expression1.value);
                         int b = stoi(Term.value);
@@ -946,7 +951,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 case 2:
                 case 3:
                 case 4: {
-                    resultType = SymbolTableLine::REAL;
+                    resultType = new Type(Type::REAL);
                     if (!Simple_expression1.value.empty() && !Term.value.empty()) {
                         float a = stof(Simple_expression1.value);
                         float b = stof(Term.value);
@@ -955,6 +960,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     break;
                 }
                 default: {
+                    resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Simple_expression1.line, "运算符+：运算对象类型错误");
                     break;
                 }
@@ -966,20 +972,20 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 93: { // Simple_expression0 -> Simple_expression1 - Term
             auto Simple_expression1 = vectorAttribute[top - 2];
             auto Term = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
             int flag;
-            if (Simple_expression1.type == SymbolTableLine::INTEGER) {
-                if (Term.type == SymbolTableLine::INTEGER)
+            if (Simple_expression1.type->getType() == Type::INTEGER) {
+                if (Term.type->getType() == Type::INTEGER)
                     flag = 1;
-                else if (Term.type == SymbolTableLine::REAL)
+                else if (Term.type->getType() == Type::REAL)
                     flag = 2;
                 else
                     flag = 0;
-            } else if (Simple_expression1.type == SymbolTableLine::REAL) {
-                if (Term.type == SymbolTableLine::INTEGER)
+            } else if (Simple_expression1.type->getType() == Type::REAL) {
+                if (Term.type->getType() == Type::INTEGER)
                     flag = 3;
-                else if (Term.type == SymbolTableLine::REAL)
+                else if (Term.type->getType() == Type::REAL)
                     flag = 4;
                 else
                     flag = 0;
@@ -988,7 +994,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 
             switch (flag) {
                 case 1: { // 都是INTEGER
-                    resultType = SymbolTableLine::INTEGER;
+                    resultType = new Type(Type::INTEGER);
                     if (!Simple_expression1.value.empty() && !Term.value.empty()) {
                         int a = stoi(Simple_expression1.value);
                         int b = stoi(Term.value);
@@ -999,7 +1005,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 case 2:
                 case 3:
                 case 4: {
-                    resultType = SymbolTableLine::REAL;
+                    resultType = new Type(Type::REAL);
                     if (!Simple_expression1.value.empty() && !Term.value.empty()) {
                         float a = stof(Simple_expression1.value);
                         float b = stof(Term.value);
@@ -1008,6 +1014,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     break;
                 }
                 default: {
+                    resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Simple_expression1.line, "运算符-：运算对象类型错误");
                     break;
                 }
@@ -1019,17 +1026,18 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 94: { // Simple_expression0 -> Simple_expression1 or Term
             auto Simple_expression1 = vectorAttribute[top - 2];
             auto Term = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Simple_expression1.type == SymbolTableLine::BOOLEAN &&
-                Term.type == SymbolTableLine::BOOLEAN) {
-                resultType = SymbolTableLine::BOOLEAN;
+            if (Simple_expression1.type->getType() == Type::BOOLEAN &&
+                Term.type->getType() == Type::BOOLEAN) {
+                resultType = new Type(Type::BOOLEAN);
                 if (!Simple_expression1.value.empty() && !Term.value.empty()) {
                     int a = stoi(Simple_expression1.value);
                     int b = stoi(Term.value);
                     value = to_string(a || b);
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression1.line, "运算符or：运算对象类型错误");
             }
             leftSymbol->type = resultType;
@@ -1039,20 +1047,20 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 95: { // Term0 -> Term1 * Factor
             auto Term1 = vectorAttribute[top - 2];
             auto Factor = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
             int flag;
-            if (Term1.type == SymbolTableLine::INTEGER) {
-                if (Factor.type == SymbolTableLine::INTEGER)
+            if (Term1.type->getType() == Type::INTEGER) {
+                if (Factor.type->getType() == Type::INTEGER)
                     flag = 1;
-                else if (Factor.type == SymbolTableLine::REAL)
+                else if (Factor.type->getType() == Type::REAL)
                     flag = 2;
                 else
                     flag = 0;
-            } else if (Term1.type == SymbolTableLine::REAL) {
-                if (Factor.type == SymbolTableLine::INTEGER)
+            } else if (Term1.type->getType() == Type::REAL) {
+                if (Factor.type->getType() == Type::INTEGER)
                     flag = 3;
-                else if (Factor.type == SymbolTableLine::REAL)
+                else if (Factor.type->getType() == Type::REAL)
                     flag = 4;
                 else
                     flag = 0;
@@ -1061,7 +1069,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 
             switch (flag) {
                 case 1: { // 都是INTEGER
-                    resultType = SymbolTableLine::INTEGER;
+                    resultType = new Type(Type::INTEGER);
                     if (!Term1.value.empty() && !Factor.value.empty()) {
                         int a = stoi(Term1.value);
                         int b = stoi(Factor.value);
@@ -1072,7 +1080,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 case 2:
                 case 3:
                 case 4: {
-                    resultType = SymbolTableLine::REAL;
+                    resultType = new Type(Type::REAL);
                     if (!Term1.value.empty() && !Factor.value.empty()) {
                         float a = stof(Term1.value);
                         float b = stof(Factor.value);
@@ -1081,6 +1089,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     break;
                 }
                 default: {
+                    resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Term1.line, "运算符*：运算对象类型错误");
                     break;
                 }
@@ -1092,23 +1101,25 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 96: { // Term0 -> Term1 / Factor
             auto Term1 = vectorAttribute[top - 2];
             auto Factor = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
             int flag;
-            if ((Term1.type == SymbolTableLine::INTEGER || Term1.type == SymbolTableLine::REAL) &&
-                (Factor.type == SymbolTableLine::INTEGER || Factor.type == SymbolTableLine::REAL)) {
+            if ((Term1.type->getType() == Type::INTEGER || Term1.type->getType() == Type::REAL) &&
+                (Factor.type->getType() == Type::INTEGER || Factor.type->getType() == Type::REAL)) {
                 if (!Term1.value.empty() && !Factor.value.empty()) {
                     float a = stof(Term1.value);
                     float b = stof(Factor.value);
                     if (b != 0) {
-                        resultType = SymbolTableLine::REAL;
+                        resultType = new Type(Type::REAL);
                         value = to_string(a / b);
                     } else {
+                        resultType = new Type(Type::TYPE_ERROR);
                         recordSemanticError(Term1.line, "除0错误");
                     }
                 } else
-                    resultType = SymbolTableLine::REAL;
+                    resultType = new Type(Type::REAL);
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Term1.line, "运算符/：运算对象类型错误");
             }
             leftSymbol->type = resultType;
@@ -1118,22 +1129,24 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 97: { // Term0 -> Term1 div Factor
             auto Term1 = vectorAttribute[top - 2];
             auto Factor = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Term1.type == SymbolTableLine::INTEGER &&
-                Factor.type == SymbolTableLine::INTEGER) {
+            if (Term1.type->getType() == Type::INTEGER &&
+                Factor.type->getType() == Type::INTEGER) {
                 if (!Term1.value.empty() && !Factor.value.empty()) {
                     int a = stoi(Term1.value);
                     int b = stoi(Factor.value);
                     if (b != 0) {
-                        resultType = SymbolTableLine::INTEGER;
+                        resultType = new Type(Type::INTEGER);
                         value = to_string(a / b);
                     } else {
+                        resultType = new Type(Type::TYPE_ERROR);
                         recordSemanticError(Term1.line, "除0错误");
                     }
                 } else
-                    resultType = SymbolTableLine::REAL;
+                    resultType = new Type(Type::INTEGER);
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Term1.line, "运算符div：运算对象类型错误");
             }
             leftSymbol->type = resultType;
@@ -1143,22 +1156,24 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 98: { // Term0 -> Term1 mod Factor
             auto Term1 = vectorAttribute[top - 2];
             auto Factor = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Term1.type == SymbolTableLine::INTEGER &&
-                Factor.type == SymbolTableLine::INTEGER) {
+            if (Term1.type->getType() == Type::INTEGER &&
+                Factor.type->getType() == Type::INTEGER) {
                 if (!Term1.value.empty() && !Factor.value.empty()) {
                     int a = stoi(Term1.value);
                     int b = stoi(Factor.value);
                     if (b != 0) {
-                        resultType = SymbolTableLine::INTEGER;
+                        resultType = new Type(Type::INTEGER);
                         value = to_string(a % b);
                     } else {
+                        resultType = new Type(Type::TYPE_ERROR);
                         recordSemanticError(Term1.line, "除0错误");
                     }
                 } else
-                    resultType = SymbolTableLine::REAL;
+                    resultType = new Type(Type::INTEGER);
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Term1.line, "运算符mod：运算对象类型错误");
             }
             leftSymbol->type = resultType;
@@ -1168,17 +1183,18 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 99: { // Term0 -> Term1 and Factor
             auto Term1 = vectorAttribute[top - 2];
             auto Factor = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Term1.type == SymbolTableLine::BOOLEAN &&
-                Factor.type == SymbolTableLine::BOOLEAN) {
-                resultType = SymbolTableLine::BOOLEAN;
+            if (Term1.type->getType() == Type::BOOLEAN &&
+                Factor.type->getType() == Type::BOOLEAN) {
+                resultType = new Type(Type::BOOLEAN);
                 if (!Term1.value.empty() && !Factor.value.empty()) {
                     int a = stoi(Term1.value);
                     int b = stoi(Factor.value);
                     value = to_string(a && b);
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Term1.line, "运算符and：运算对象类型错误");
             }
             leftSymbol->type = resultType;
@@ -1200,14 +1216,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 102: { // Factor -> Variable
             auto Variable = vectorAttribute[top];
             auto entry = Variable.entry;
-            int type;
             string value;
-            if (entry != nullptr) {
-                type = entry->type;
-            } else {
-                type = SymbolTableLine::VOID;
-            }
-            leftSymbol->type = type;
+            leftSymbol->type = Variable.type;
             leftSymbol->value = value;
             break;
         }
@@ -1219,10 +1229,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 105: { // Factor0 -> not Factor1
             auto Factor1 = vectorAttribute[top];
-            int resultType = SymbolTableLine::VOID;
+            Type *resultType{nullptr};
             string value;
-            if (Factor1.type == SymbolTableLine::BOOLEAN) {
-                resultType = SymbolTableLine::BOOLEAN;
+            if (Factor1.type->getType() == Type::BOOLEAN) {
+                resultType = new Type(Type::BOOLEAN);
                 if (!Factor1.value.empty()) {
                     if (Factor1.value == "1")
                         value = "0";
@@ -1230,10 +1240,24 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         value = "1";
                 }
             } else {
+                resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Factor1.line, "逻辑运算符not：操作数类型错误");
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
+            break;
+        }
+        case 106: {  //106. Unsign_const_variable -> id
+            id = vectorAttribute[top].attribute;
+            int line = vectorAttribute[top].line;
+            quoteID(line, id);  //查看是否存在这个id
+            SymbolTableLine *tempLinePoint = curBlock->query(id);
+            if (tempLinePoint != nullptr) {//如果存在
+                leftSymbol->type = tempLinePoint->type;
+            } else {
+                leftSymbol->type = new Type(Type::TYPE_ERROR);
+                recordSemanticError(line, "语义错误！引用了未定义的id");
+            }
             break;
         }
         case 107: { // Unsign_const_variable -> num
@@ -1247,17 +1271,17 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 }
             }
             if (isRealType) {
-                leftSymbol->type = SymbolTableLine::REAL;
+                leftSymbol->type = new Type(Type::REAL);
                 leftSymbol->value = num.attribute;
             } else {
-                leftSymbol->type = SymbolTableLine::INTEGER;
+                leftSymbol->type = new Type(Type::INTEGER);
                 leftSymbol->value = num.attribute;
             }
             break;
         }
         case 108: { // Unsign_const_variable -> letter
             auto letter = vectorAttribute[top];
-            leftSymbol->type = SymbolTableLine::CHAR;
+            leftSymbol->type = new Type(Type::CHAR);
             leftSymbol->value = letter.attribute;
             break;
         }
@@ -1267,7 +1291,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
-                curBlock->insert(id, 0, 0, 0, 0);
+                curBlock->insert111(id, 0, 0, 0, 0);
                 if (debugInfoLevel >= 3) {
                     cout << "声明" << id << endl;
                     curBlock->printBlock();
@@ -1292,15 +1316,15 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             if (entry == nullptr) {
                 t.entry = nullptr;
                 leftSymbol->entry = nullptr;
+                t.type = new Type(Type::TYPE_ERROR);
+                leftSymbol->type = new Type(Type::TYPE_ERROR);
                 recordSemanticError(t.line, "未定义的引用");
                 break;
             } else {
+                t.type = entry->type;
+                leftSymbol->type = entry->type;
                 t.entry = entry;
                 leftSymbol->entry = entry;
-                if (entry->type == SymbolTableLine::ARRAY) {
-                    t.curArrayInfo = entry->arrayInfo;
-                    leftSymbol->curArrayInfo = entry->arrayInfo;
-                }
             }
             break;
         }
