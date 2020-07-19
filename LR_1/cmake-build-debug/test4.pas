@@ -42,6 +42,9 @@ program test4(input, output);
             c := (1 = 1);
             d2p1(c);
         end; {end of d1p2}
+    procedure d1p3(var m: char;n:real);
+        var a,b: char;
+        begin a := b; end; {end of d1p1}
     begin
         w := 3; {语义错误，未定义的变量}
         a := 3;
@@ -67,4 +70,8 @@ program test4(input, output);
         rec.i := 4; {正确}
         arr[0][0] := brr[0][0][6]; {正确}
         arr[0] := brr[0][0][6]; {错误，arr[0]是一个数组，不能直接参与运算}
+        d1p1; {错误,参数个数缺失}
+        d1p1(1); {错误 参数类型不一致}
+        d1p3('c',a); {错误 第二个参数类型不一致}
+        func1;
     end. {end of test}
