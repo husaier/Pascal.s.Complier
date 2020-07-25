@@ -73,5 +73,9 @@ program test4(input, output);
         d1p1; {错误,参数个数缺失}
         d1p1(1); {错误 参数类型不一致}
         d1p3('c',a); {错误 第二个参数类型不一致}
-        func1;
+        func1; {错误，func1不是procedure}
+        a := func1(e, f); {正确}
+        a := func1(e); {错误，参数缺失}
+        a := func1(b, f); {错误，第1个参数类型不一致}
+        a := d1p1(g); {错误，d1p1不是function}
     end. {end of test}

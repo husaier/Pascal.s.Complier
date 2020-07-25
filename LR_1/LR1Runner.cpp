@@ -573,25 +573,20 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 id = vectorAttribute[top - 3].attribute;
             }
-
             int line = vectorAttribute[top].line;
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->type->getType() == Type::PROC) {
-
-                    leftSymbol->type = tempLinePoint->type;
+                    auto proc = (Proc*)tempLinePoint->type;
+                    int num = proc->parametersNum;
                     if (op_type == 78) {
-                        auto proc = (Proc*)tempLinePoint->type;
-                        int num = proc->parametersNum;
                         if (num != 0) //如果为参数个数0则正确
                             recordSemanticError(line,
                                                 "语义错误！缺失参数,此Proc需要" + to_string(num) +
                                                 "个参数");
                     } else if (op_type == 79) {
                         auto Expression_list = vectorAttribute[top - 1];
-                        auto func = (Func*)tempLinePoint->type;
-                        int num = func->parametersNum;
                         if (Expression_list.typeList.size() != num) {//如果数量不等
                             recordSemanticError(line,
                                                 "语义错误！参数不一致,此Proc需要" +
@@ -600,7 +595,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         } else {//数量相等,检查类型
                             for (int i = 0; i < Expression_list.typeList.size(); ++i) {
                                 auto type1 = Expression_list.typeList[i];
-                                auto type2 = func->env[i].type;
+                                auto type2 = proc->env[i].type;
                                 if(*type1 != *type2)
                                     recordSemanticError(line, "语义错误！第" + to_string(i + 1) + "个参数类型不一致");
                             }
@@ -612,27 +607,61 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
             }
+            leftSymbol->type = new Type(Type::VOID);
             break;
         }
         case 103: { //103. Factor -> id ( Expression_list )
             id = vectorAttribute[top - 3].attribute;
             int line = vectorAttribute[top - 3].line;
             quoteID(line, id);
+            SymbolTableLine *tempLinePoint = curBlock->query(id);
+            Type *reType{nullptr}; // 函数返回值
+            if (tempLinePoint != nullptr) {//如果存在
+                if (tempLinePoint->type->getType() == Type::FUNC) {
+                    auto func = (Func*)tempLinePoint->type;
+                    int num = func->parametersNum;
+                    auto Expression_list = vectorAttribute[top - 1];
+                    if (num == Expression_list.typeList.size()){
+                        bool flag = true;
+                        for (int i = 0; i < Expression_list.typeList.size(); ++i) {
+                            auto type1 = Expression_list.typeList[i];
+                            auto type2 = func->env[i].type;
+                            if(*type1 != *type2) {
+                                recordSemanticError(line, "语义错误！第" + to_string(i + 1) + "个参数类型不一致");
+                                flag = false;
+                            }
+                        }
+                        if (flag)
+                            reType = func->reType;
+                        else
+                            reType = new Type(Type::TYPE_ERROR);
+                    } else {
+                        reType = new Type(Type::TYPE_ERROR);
+                        recordSemanticError(line,
+                                            "语义错误！参数不一致,此Func需要" +
+                                            to_string(num) +
+                                            "个参数");
+                    }
+                } else {
+                    reType = new Type(Type::TYPE_ERROR);
+                    recordSemanticError(line, "语义错误！此id不为Function");
+                }
+            } else {
+                reType = new Type(Type::TYPE_ERROR);
+                recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
+            }
+            leftSymbol->type = reType;
             break;
         }
         case 80: { // Expression_list0 -> Expression_list1 , Expression
             auto Expression_list1 = vectorAttribute[top - 2];
             auto Expression = vectorAttribute[top];
-            leftSymbol->expressionTypeList = Expression_list1.expressionTypeList;
-            leftSymbol->expressionTypeList.push_back(Expression.type222);
-
             leftSymbol->typeList = Expression_list1.typeList;
             leftSymbol->typeList.push_back(Expression.type);
             break;
         }
         case 81: { // Expression_list -> Expression
             auto Expression = vectorAttribute[top];
-            leftSymbol->expressionTypeList.push_back(Expression.type222);
             leftSymbol->typeList.push_back(Expression.type);
             break;
         }
