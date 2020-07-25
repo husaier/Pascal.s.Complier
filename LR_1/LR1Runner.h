@@ -37,6 +37,7 @@ public:
     vector<SymbolTableLine *> IDlist;
 
     vector<int> expressionTypeList;
+
     vector<Type*> typeList;
 
     SymbolTableLine *entry;

@@ -324,13 +324,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->width = *offset;
             leftSymbol->dimension = Record_body.dimension + 1;
             auto record = new Record();
-            for(auto symbol : curBlock->symbolBlock){
+            for (auto symbol : curBlock->symbolBlock) {
                 EnvItem e;
                 e.id = symbol->name;
                 e.type = symbol->type->copy();
                 record->env.push_back(e);
             }
-            leftSymbol->type = (Type*)record;
+            leftSymbol->type = (Type *) record;
             relocate();
             break;
         }
@@ -515,20 +515,19 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 if (dimension >= size) {
                     bool isExpressionsTypeInteger = true;
 
-                    for (const auto& item : typeList)
-                        if(item->getType() != Type::INTEGER){
+                    for (const auto &item : typeList)
+                        if (item->getType() != Type::INTEGER) {
                             isExpressionsTypeInteger = false;
                             break;
                         }
-                    if(isExpressionsTypeInteger) {
+                    if (isExpressionsTypeInteger) {
                         leftSymbol->entry = i_entry;
-                        while(size--){
-                            auto t = (Array*)type;
+                        while (size--) {
+                            auto t = (Array *) type;
                             type = t->elem;
                         }
                         leftSymbol->type = type;
-                    }
-                    else {
+                    } else {
                         leftSymbol->entry = nullptr;
                         recordSemanticError(lines, "运算符[]的参数不是INTEGER");
                     }
@@ -579,38 +578,43 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
-                if (tempLinePoint->specialType == SymbolTableLine::PROCEDURE) {
-                    leftSymbol->type222 = tempLinePoint->type111;
+                if (tempLinePoint->type->getType() == Type::PROC) {
+
                     leftSymbol->type = tempLinePoint->type;
                     if (op_type == 78) {
-                        if (tempLinePoint->funcInfo.parametersNum != 0) {//如果为参数个数0则正确
+                        auto proc = (Proc*)tempLinePoint->type;
+                        int num = proc->parametersNum;
+                        if (num != 0) //如果为参数个数0则正确
                             recordSemanticError(line,
-                                                "语义错误！缺失参数,此Proc需要" + to_string(tempLinePoint->funcInfo.parametersNum) +
+                                                "语义错误！缺失参数,此Proc需要" + to_string(num) +
                                                 "个参数");
-                        }
                     } else if (op_type == 79) {
-                        if (vectorAttribute[top - 1].expressionTypeList.size() !=
-                            tempLinePoint->funcInfo.parametersNum) {//如果数量不等
+                        auto Expression_list = vectorAttribute[top - 1];
+                        auto func = (Func*)tempLinePoint->type;
+                        int num = func->parametersNum;
+                        if (Expression_list.typeList.size() != num) {//如果数量不等
                             recordSemanticError(line,
                                                 "语义错误！参数不一致,此Proc需要" +
-                                                to_string(tempLinePoint->funcInfo.parametersNum) +
+                                                to_string(num) +
                                                 "个参数");
-                        }else{//数量相等,检查类型
-                            for (int i = 0; i < vectorAttribute[top - 1].expressionTypeList.size(); ++i) {
-                                if (vectorAttribute[top-1].expressionTypeList[i]!=tempLinePoint->funcInfo.paraTypeArray[i]){
-                                    recordSemanticError(line,"语义错误！第"+to_string(i+1)+"个参数类型不一致");
-                                }
+                        } else {//数量相等,检查类型
+                            for (int i = 0; i < Expression_list.typeList.size(); ++i) {
+                                auto type1 = Expression_list.typeList[i];
+                                auto type2 = func->env[i].type;
+                                if(*type1 != *type2)
+                                    recordSemanticError(line, "语义错误！第" + to_string(i + 1) + "个参数类型不一致");
                             }
                         }
-
                     }
                 } else {
-                    recordSemanticError(line, "语义错误！此id不为Procesure");
+                    recordSemanticError(line, "语义错误！此id不为Procedure");
                 }
+            } else {
+                recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
             }
             break;
         }
-        case 103: {
+        case 103: { //103. Factor -> id ( Expression_list )
             id = vectorAttribute[top - 3].attribute;
             int line = vectorAttribute[top - 3].line;
             quoteID(line, id);
@@ -637,10 +641,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto Simple_expression1 = vectorAttribute[top];
             Type *resultType{nullptr};
             string value;
-            if(*(Simple_expression0.type) == *(Simple_expression1.type)){
+            if (*(Simple_expression0.type) == *(Simple_expression1.type)) {
                 bool flag = Simple_expression0.type->isBasicType() &&
-                        Simple_expression1.type->isBasicType();
-                if(flag) {
+                            Simple_expression1.type->isBasicType();
+                if (flag) {
                     resultType = new Type(Type::BOOLEAN);
                     if (!Simple_expression0.value.empty() && !Simple_expression1.value.empty()) {
                         if (Simple_expression0.value == Simple_expression1.value)
@@ -652,7 +656,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     resultType = new Type(Type::TYPE_ERROR);
                     recordSemanticError(Simple_expression0.line, "逻辑运算符=：操作数类型违法");
                 }
-            }else {
+            } else {
                 resultType = new Type(Type::TYPE_ERROR);
                 recordSemanticError(Simple_expression0.line, "逻辑运算符=：左右操作数类型不一致");
             }
