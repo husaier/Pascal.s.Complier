@@ -169,7 +169,6 @@ Record::~Record() {
 }
 
 bool Record::operator==(Type &a) const {
-    bool flag = true;
     if (a.getType() != Type::RECORD)
         return false;
     auto record = (Record*)&a;
@@ -191,11 +190,33 @@ int Record::getDimension() {
 Func::Func():
     Type(Type::FUNC)
 {
+    parametersNum = 0;
+}
 
+bool Func::operator==(Type &a) const {
+    if (a.getType() != Type::FUNC)
+        return false;
+    auto func = (Func*)&a;
+    return *reType == *(func->reType) && env == func->env;
+}
+
+bool Func::operator!=(Type &a) const {
+    return !(Func::operator==(a));
 }
 
 Proc::Proc():
     Type(Type::PROC)
 {
+    parametersNum = 0;
+}
 
+bool Proc::operator==(Type &a) const {
+    if (a.getType() != Type::PROC)
+        return false;
+    auto proc = (Proc*)&a;
+    return env == proc->env;
+}
+
+bool Proc::operator!=(Type &a) const {
+    return !(Proc::operator==(a));
 }

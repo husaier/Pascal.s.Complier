@@ -78,4 +78,26 @@ program test4(input, output);
         a := func1(e); {错误，参数缺失}
         a := func1(b, f); {错误，第1个参数类型不一致}
         a := d1p1(g); {错误，d1p1不是function}
+        if (1 = 1) then
+            a := 1;
+
+        if a then {错误，a不是bool类型}
+            a := 1
+        else
+            b := 2;
+
+        while a do {}
+            a := 1;
+
+        repeat a := 1 until (1 = 1);
+
+        for a := 1 to 5 do
+            b := 1;
+
+        case a of
+            1: b := 2;
+            2, 'c': b := 3; {错误，branch类型不合法}
+            3: b := 4;
+            c: b := 5 {错误，c不是常量}
+        end;
     end. {end of test}

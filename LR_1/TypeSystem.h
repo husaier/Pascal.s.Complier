@@ -105,6 +105,10 @@ class Func: public Type{
 public:
     explicit Func();
 
+    bool operator == (Type&) const override;
+
+    bool operator != (Type&) const override;
+
     int parametersNum;//传参个数
     vector<EnvItem> env;//存储各个参数的类型
     Type *reType{nullptr}; // 返回值类型
@@ -113,6 +117,10 @@ public:
 class Proc: public Type{
 public:
     explicit Proc();
+
+    bool operator == (Type&) const override;
+
+    bool operator != (Type&) const override;
 
     int parametersNum;//传参个数
     vector<EnvItem> env;//存储各个参数的类型

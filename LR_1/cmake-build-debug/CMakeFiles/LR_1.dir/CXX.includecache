@@ -66,10 +66,6 @@ vector
 CJsonObject.hpp
 /home/husserl/pascal/Pascal.s.Complier/LR_1/CJsonObject.hpp
 
-/home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.cpp
-SymbolBlock.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
-
 /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
 string
 -
@@ -97,12 +93,4 @@ algorithm
 -
 vector
 -
-
-/home/husserl/pascal/Pascal.s.Complier/LR_1/main.cpp
-LR1Table.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
-LR1Runner.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
-lexical_analyzer.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
 

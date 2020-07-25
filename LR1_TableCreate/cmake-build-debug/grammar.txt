@@ -1,5 +1,5 @@
 Program -> Program_head Program_body .
-Program_head -> program id A ( Identifier_list ) ;
+Program_head -> program id A2 ( Identifier_list ) ;
 Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
 Identifier_list -> Identifier_list , id
 Identifier_list -> id
@@ -19,7 +19,7 @@ Type_declarations -> #
 Type_declaration -> Type_declaration ; id = Type
 Type_declaration -> id = Type
 Type -> Standard_type
-Type -> record E22 Record_body end
+Type -> record D22 Record_body end
 Type -> array [ Periods ] of Type
 Standard_type -> integer
 Standard_type -> real
@@ -37,8 +37,8 @@ Var_declaration -> Identifier_list : Type
 Subprogram_declarations -> Subprogram_declarations Subprogram_declaration ;
 Subprogram_declarations -> #
 Subprogram_declaration -> Subprogram_head Program_body
-Subprogram_head -> function id B Formal_parameter : Standard_type ;
-Subprogram_head -> procedure id C Formal_parameter ;
+Subprogram_head -> function id B40 Formal_parameter : Standard_type ;
+Subprogram_head -> procedure id C41 Formal_parameter ;
 Formal_parameter -> ( Parameter_lists )
 Formal_parameter -> #
 Parameter_lists -> Parameter_lists ; Parameter_list
@@ -57,9 +57,9 @@ Statement -> if Expression then Statement Else_part
 Statement -> case Expression of Case_body end
 Statement -> while Expression do Statement
 Statement -> repeat Statement_list until Expression
-Statement -> for id assignop Expression D Updown Expression do Statement
+Statement -> for id assignop Expression Updown Expression do Statement
 Statement -> #
-Variable -> id F62 Id_varparts
+Variable -> id E62 Id_varparts
 Id_varparts -> Id_varparts Id_varpart
 Id_varparts -> #
 Id_varpart -> [ Expression_list ]
@@ -106,9 +106,8 @@ Factor -> not Factor
 Unsign_const_variable -> id
 Unsign_const_variable -> num
 Unsign_const_variable -> letter
-A -> #
-B -> #
-C -> #
-D -> #
-E22 -> #
-F62 -> #
+A2 -> #
+B40 -> #
+C41 -> #
+D22 -> #
+E62 -> #

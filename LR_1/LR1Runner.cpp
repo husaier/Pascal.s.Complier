@@ -258,17 +258,21 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 12: {  //12. Const_variable -> id
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
+            Type *type{nullptr};
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->isConst) {
-                    leftSymbol->type = tempLinePoint->type;
+                    type = tempLinePoint->type;
                 } else {
+                    type = new Type(Type::TYPE_ERROR);
                     recordSemanticError(line, "语义错误！此id不为常量");
                 }
             } else {
+                type = new Type(Type::TYPE_ERROR);
                 recordSemanticError(line, "语义错误！id不存在");
             }
+            leftSymbol->type = type;
             break;
         }
         case 13:    // 13. Const_variable -> + num
@@ -318,7 +322,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = vectorAttribute[top].type;
             leftSymbol->width = vectorAttribute[top].width;
             break;
-        case 22: { // Type -> record E22 Record_body end
+        case 22: { // Type -> record D22 Record_body end
             auto Record_body = vectorAttribute[top - 1];
             leftSymbol->tableEntry = curBlock;
             leftSymbol->width = *offset;
@@ -412,7 +416,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 curBlock->printBlock();
             break;
         }
-        case 40: {// Subprogram_head -> function id B Formal_parameter : Standard_type ;
+        case 40: {// Subprogram_head -> function id B40 Formal_parameter : Standard_type ;
             id = vectorAttribute[top - 5].attribute;
             auto tempPoint = curBlock->query(id);
             auto Formal_parameter = vectorAttribute[top - 3];
@@ -429,7 +433,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             tempPoint->type = func;
             break;
         }
-        case 41: {// Subprogram_head -> procedure id C Formal_parameter ;
+        case 41: {// Subprogram_head -> procedure id C41 Formal_parameter ;
             id = vectorAttribute[top - 3].attribute;
             auto tempPoint = curBlock->query(id);
             auto Formal_parameter = vectorAttribute[top - 1];
@@ -486,7 +490,43 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 recordSemanticError(Variable.line, "错误：赋值语句类型不匹配");
             break;
         }
-        case 62: { // Variable -> id F62 Id_varparts
+        case 56: { // 56. Statement -> if Expression then Statement Else_part
+            auto Expression = vectorAttribute[top - 3];
+            if (Expression.type->getType() != Type::BOOLEAN)
+                recordSemanticError(Expression.line, "错误，if语句的判断表达式不是BOOLEAN类型");
+            break;
+        }
+        case 57: { // 57. Statement -> case Expression of Case_body end
+
+            break;
+        }
+        case 58: { // 58. Statement -> while Expression do Statement
+            auto Expression = vectorAttribute[top - 2];
+            if (Expression.type->getType() != Type::BOOLEAN)
+                recordSemanticError(Expression.line, "错误，while语句的判断表达式不是BOOLEAN类型");
+            break;
+        }
+        case 59: { // 59. Statement -> repeat Statement_list until Expression
+            auto Expression = vectorAttribute[top];
+            if (Expression.type->getType() != Type::BOOLEAN)
+                recordSemanticError(Expression.line, "错误，repeat语句的判断表达式不是BOOLEAN类型");
+            break;
+        }
+        case 60: { // 60. Statement -> for id assignop Expression0 Updown Expression1 do Statement
+            id = vectorAttribute[top - 6].attribute;
+            auto tempPoint = curBlock->query(id);
+            auto Expression0 = vectorAttribute[top - 4];
+            auto Expression1 = vectorAttribute[top - 2];
+            bool flag = true;
+            if (*(Expression0.type) != *(Expression1.type))
+                flag = false;
+            if (*(tempPoint->type) != *(Expression0.type))
+                flag = false;
+            if (!flag)
+                recordSemanticError(Expression0.line, "错误，for语句中id，Expression类型不一致");
+            break;
+        }
+        case 62: { // Variable -> id E62 Id_varparts
             auto Id_varparts = vectorAttribute[top];
             leftSymbol->type = Id_varparts.type;
             break;
@@ -566,6 +606,50 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
+        case 69: { //69. Case_body -> Branch_list
+
+            break;
+        }
+        case 70: { // 70. Case_body -> #
+
+            break;
+        }
+        case 71:{ // 71. Branch_list -> Branch_list ; Branch
+            auto Branch = vectorAttribute[top];
+            leftSymbol->type = Branch.type;
+            break;
+        }
+        case 72:{ // 72. Branch_list -> Branch
+            auto i_type = vectorAttribute[top - 2].type;
+            leftSymbol->type = i_type;
+            break;
+        }
+        case 73: { // 73. Branch -> Const_list : Statement
+            auto i_type = vectorAttribute[top - 4].type;
+            auto Const_list = vectorAttribute[top - 2];
+            int line = Const_list.line;
+            bool flag = true;
+            for(const auto &item: Const_list.typeList) {
+                if (*i_type != *item)
+                    flag = false;
+            }
+            if (!flag)
+                recordSemanticError(line, "错误，branch中常量的类型不合法");
+            leftSymbol->type = i_type;
+            break;
+        }
+        case 74: { // 74. Const_list0 -> Const_list1 , Const_variable
+            auto Const_list1 = vectorAttribute[top - 2];
+            auto Const_variable = vectorAttribute[top];
+            leftSymbol->typeList = Const_list1.typeList;
+            leftSymbol->typeList.push_back(Const_variable.type);
+            break;
+        }
+        case 75: { // 75. Const_list -> Const_variable
+            auto Const_variable = vectorAttribute[top];
+            leftSymbol->typeList.push_back(Const_variable.type);
+            break;
+        }
         case 78:    // Call_procedure_statement -> id
         case 79: {  // Call_procedure_statement -> id ( Expression_list )
             if (op_type == 78) {
@@ -608,49 +692,6 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
             }
             leftSymbol->type = new Type(Type::VOID);
-            break;
-        }
-        case 103: { //103. Factor -> id ( Expression_list )
-            id = vectorAttribute[top - 3].attribute;
-            int line = vectorAttribute[top - 3].line;
-            quoteID(line, id);
-            SymbolTableLine *tempLinePoint = curBlock->query(id);
-            Type *reType{nullptr}; // 函数返回值
-            if (tempLinePoint != nullptr) {//如果存在
-                if (tempLinePoint->type->getType() == Type::FUNC) {
-                    auto func = (Func*)tempLinePoint->type;
-                    int num = func->parametersNum;
-                    auto Expression_list = vectorAttribute[top - 1];
-                    if (num == Expression_list.typeList.size()){
-                        bool flag = true;
-                        for (int i = 0; i < Expression_list.typeList.size(); ++i) {
-                            auto type1 = Expression_list.typeList[i];
-                            auto type2 = func->env[i].type;
-                            if(*type1 != *type2) {
-                                recordSemanticError(line, "语义错误！第" + to_string(i + 1) + "个参数类型不一致");
-                                flag = false;
-                            }
-                        }
-                        if (flag)
-                            reType = func->reType;
-                        else
-                            reType = new Type(Type::TYPE_ERROR);
-                    } else {
-                        reType = new Type(Type::TYPE_ERROR);
-                        recordSemanticError(line,
-                                            "语义错误！参数不一致,此Func需要" +
-                                            to_string(num) +
-                                            "个参数");
-                    }
-                } else {
-                    reType = new Type(Type::TYPE_ERROR);
-                    recordSemanticError(line, "语义错误！此id不为Function");
-                }
-            } else {
-                reType = new Type(Type::TYPE_ERROR);
-                recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
-            }
-            leftSymbol->type = reType;
             break;
         }
         case 80: { // Expression_list0 -> Expression_list1 , Expression
@@ -1287,6 +1328,49 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = value;
             break;
         }
+        case 103: { //103. Factor -> id ( Expression_list )
+            id = vectorAttribute[top - 3].attribute;
+            int line = vectorAttribute[top - 3].line;
+            quoteID(line, id);
+            SymbolTableLine *tempLinePoint = curBlock->query(id);
+            Type *reType{nullptr}; // 函数返回值
+            if (tempLinePoint != nullptr) {//如果存在
+                if (tempLinePoint->type->getType() == Type::FUNC) {
+                    auto func = (Func*)tempLinePoint->type;
+                    int num = func->parametersNum;
+                    auto Expression_list = vectorAttribute[top - 1];
+                    if (num == Expression_list.typeList.size()){
+                        bool flag = true;
+                        for (int i = 0; i < Expression_list.typeList.size(); ++i) {
+                            auto type1 = Expression_list.typeList[i];
+                            auto type2 = func->env[i].type;
+                            if(*type1 != *type2) {
+                                recordSemanticError(line, "语义错误！第" + to_string(i + 1) + "个参数类型不一致");
+                                flag = false;
+                            }
+                        }
+                        if (flag)
+                            reType = func->reType;
+                        else
+                            reType = new Type(Type::TYPE_ERROR);
+                    } else {
+                        reType = new Type(Type::TYPE_ERROR);
+                        recordSemanticError(line,
+                                            "语义错误！参数不一致,此Func需要" +
+                                            to_string(num) +
+                                            "个参数");
+                    }
+                } else {
+                    reType = new Type(Type::TYPE_ERROR);
+                    recordSemanticError(line, "语义错误！此id不为Function");
+                }
+            } else {
+                reType = new Type(Type::TYPE_ERROR);
+                recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
+            }
+            leftSymbol->type = reType;
+            break;
+        }
         case 104: { // Factor -> ( Expression )
             auto Expression = vectorAttribute[top - 1];
             leftSymbol->type = Expression.type;
@@ -1351,9 +1435,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = letter.attribute;
             break;
         }
-        case 109: // 109. A -> #
-        case 110: // 110. B -> #
-        case 111: { //111. C -> #
+        case 109: // 109. A2 -> #
+        case 110: // 110. B40 -> #
+        case 111: { //111. C41 -> #
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
@@ -1373,10 +1457,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             tableLine->blockPoint = curBlock;
             break;
         }
-        case 113:
+        case 112: // 112. D22 -> #
             locate();
             break;
-        case 114: { // F62 -> #
+        case 113: { // E62 -> #
             auto t = vectorAttribute[top];
             auto entry = curBlock->query(t.attribute);
             if (entry == nullptr) {
