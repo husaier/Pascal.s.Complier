@@ -14,32 +14,22 @@
 
 class vectorAttributeItem {
 public:
-    vectorAttributeItem(string InAttribute, int InType, int InWidth, int Inline) {
+    vectorAttributeItem(string InAttribute, int InWidth, int Inline) {
         attribute = InAttribute;
-        type222 = InType;
         width = InWidth;
         line = Inline;
     }
-
     ~vectorAttributeItem();
 
     string attribute;
-    int type222;
-
     Type *type{nullptr};
-
-    int specialType;
     int width;
     int num;
     int dimension;
     int line = 0;
     string value;
     vector<SymbolTableLine *> IDlist;
-
-    vector<int> expressionTypeList;
-
     vector<Type*> typeList;
-
     SymbolTableLine *entry;
     SymbolBlock *tableEntry = nullptr;
 };
@@ -59,7 +49,6 @@ public:
 
     vector<string> semanticError;
 private:
-    SymbolBlock *symbolTable = nullptr;
     SymbolBlock *curBlock = nullptr;
     int *offset = nullptr;
     stack<SymbolBlock *> tablePointers; //栈顶指针指向的是本块
@@ -84,8 +73,6 @@ private:
     void initial();
 
     void recordSemanticError(int line, const string &); // 记录语义错误
-
-    static bool isBasicType(int);
 };
 
 

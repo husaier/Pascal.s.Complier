@@ -26,7 +26,7 @@ void LR1Runner::run(LR1Table &table) {
 
     stackState.push(0);
     stackSymbol.push(" ");
-    vectorAttribute.emplace_back(vectorAttributeItem(" ", -1, -1, -1));    ///line
+    vectorAttribute.emplace_back(vectorAttributeItem(" ", -1, -1));    ///line
     if (debugInfoLevel >= 2) {
         cout << setiosflags(ios::left) << setw(width1) << "Stack" << resetiosflags(ios::left) << setiosflags(ios::left)
              << setw(width2) << "Input" << setw(width3) << "Output" << resetiosflags(ios::left) << endl;
@@ -59,7 +59,7 @@ void LR1Runner::run(LR1Table &table) {
         int currentType = table.table[s][tempCol].type;
         if (currentType == TableItem::SHIFT) {
             stackSymbol.push(vectorInput.at(ip).symbol);   //根据输入，压入当前遇到的输入
-            vectorAttribute.emplace_back(vectorInput.at(ip).attribute, -1, -1, vectorInput.at(ip).line);    ///line
+            vectorAttribute.emplace_back(vectorInput.at(ip).attribute, -1, vectorInput.at(ip).line);    ///line
             stackState.push(table.table[s][tempCol].index);  //根据表格中S后的数字，压入状态
             ip++;
             if (debugInfoLevel >= 2) {
@@ -68,7 +68,7 @@ void LR1Runner::run(LR1Table &table) {
         } else if (currentType == TableItem::REDUCTION) {
             int tempProd = table.table[s][tempCol].index;  //取出要按哪个产生式R
             Production tempProduction = table.productions.at(tempProd);
-            vectorAttributeItem tempAttributeItem(tempProduction.left, -1, -1, vectorInput.at(ip).line);    ///line
+            vectorAttributeItem tempAttributeItem(tempProduction.left, -1, vectorInput.at(ip).line);    ///line
             switchTable(&tempAttributeItem, tempProd);
 
             for (int i = 0; i < tempProduction.right.size(); ++i) {    //按照产生式右侧数目来弹出
@@ -239,10 +239,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 8: // Const_declaration -> Const_declaration ; id = Const_variable
         case 9: {// Const_declaration -> id = Const_variable
             id = vectorAttribute[top - 2].attribute;
-            int line = vectorAttribute[top].line;
+            auto Const_variable = vectorAttribute[top];
+            int line = Const_variable.line;
             if (curBlock->blockQuery(id) == nullptr) {
-                SymbolTableLine *tempPoint = curBlock->insert2(id, vectorAttribute[top].type222, 0, 0, 0);
-                tempPoint->specialType = SymbolTableLine::CONST;//将常量标志位置为1
+                SymbolTableLine *tempPoint = curBlock->insert2(id, Const_variable.type, 0, 0, 0);
+                tempPoint->isConst = true;//将常量标志位置为1
                 if (debugInfoLevel >= 3) {
                     cout << "声明" << id << endl;
                     curBlock->printBlock();
@@ -260,8 +261,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
-                if (tempLinePoint->specialType == SymbolTableLine::CONST) {
-                    leftSymbol->type222 = tempLinePoint->type111;
+                if (tempLinePoint->isConst) {
                     leftSymbol->type = tempLinePoint->type;
                 } else {
                     recordSemanticError(line, "语义错误！此id不为常量");
@@ -286,14 +286,14 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             if (tempString.find('.') == std::string::npos) {
                 //如果没找到'.'说明是整形
-                leftSymbol->type222 = SymbolTableLine::INTEGER;
+                leftSymbol->type = new Type(Type::INTEGER);
             } else {//实数型常量
-                leftSymbol->type222 = SymbolTableLine::REAL;
+                leftSymbol->type = new Type(Type::REAL);
             }
             break;
         }
         case 16: {   //16. Const_variable -> letter
-            leftSymbol->type222 = SymbolTableLine::CHAR;
+            leftSymbol->type = new Type(Type::CHAR);
             leftSymbol->width = 1;
             leftSymbol->dimension = 0;
             leftSymbol->value = vectorAttribute[top].attribute;
@@ -1320,9 +1320,6 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
                 leftSymbol->type = tempLinePoint->type;
-//                if (tempLinePoint->specialType == SymbolTableLine::CONST) {
-//                } else {
-//                    recordSemanticError(line, "语义错误！此id不为常量");
             } else {
                 leftSymbol->type = new Type(Type::TYPE_ERROR);
                 recordSemanticError(line, "语义错误！引用了未定义的id");
@@ -1354,13 +1351,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = letter.attribute;
             break;
         }
-        case 109:
-        case 110:
-        case 111: {
+        case 109: // 109. A -> #
+        case 110: // 110. B -> #
+        case 111: { //111. C -> #
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             if (curBlock->blockQuery(id) == nullptr) {
-                curBlock->insert111(id, 0, 0, 0, 0);
+                curBlock->insert(id, nullptr, 0, 0, 0);
                 if (debugInfoLevel >= 3) {
                     cout << "声明" << id << endl;
                     curBlock->printBlock();
@@ -1444,9 +1441,7 @@ void LR1Runner::initial() {
     SymbolBlock *childBlock;
     childBlock = SymbolBlock::makeBlock(curBlock);
     curBlock = childBlock;
-    symbolTable = curBlock;
     offset = new int(0);
-
     tablePointers.push(curBlock);
     offSetStack.push(offset);
 }
@@ -1471,11 +1466,4 @@ void LR1Runner::recordSemanticError(int line, const string &e) {
     tmp.append(s);
     tmp.append(e);
     semanticError.push_back(tmp);
-}
-
-bool LR1Runner::isBasicType(int type) {
-    return type == SymbolTableLine::BOOLEAN ||
-           type == SymbolTableLine::INTEGER ||
-           type == SymbolTableLine::REAL ||
-           type == SymbolTableLine::CHAR;
 }
