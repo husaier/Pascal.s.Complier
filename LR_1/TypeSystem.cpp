@@ -187,3 +187,15 @@ int Record::getWidth() {
 int Record::getDimension() {
     return Type::getDimension();
 }
+
+Func::Func():
+    Type(Type::FUNC)
+{
+
+}
+
+Proc::Proc():
+    Type(Type::PROC)
+{
+
+}

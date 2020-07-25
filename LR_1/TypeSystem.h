@@ -13,7 +13,8 @@ public:
     enum {
         TYPE_ERROR = -1, VOID = 0,
         INTEGER = 1, REAL = 2, BOOLEAN = 3,
-        CHAR = 4, ARRAY = 5, RECORD = 6
+        CHAR = 4, ARRAY = 5, RECORD = 6,
+        FUNC = 7, PROC = 8
     };
 
     explicit Type(int);
@@ -98,6 +99,23 @@ public:
     int getDimension() override;
 
     vector<EnvItem> env;
+};
+
+class Func: public Type{
+public:
+    explicit Func();
+
+    int parametersNum;//传参个数
+    vector<EnvItem> env;//存储各个参数的类型
+    Type *reType{nullptr}; // 返回值类型
+};
+
+class Proc: public Type{
+public:
+    explicit Proc();
+
+    int parametersNum;//传参个数
+    vector<EnvItem> env;//存储各个参数的类型
 };
 
 #endif //LR_1_TYPESYSTEM_H

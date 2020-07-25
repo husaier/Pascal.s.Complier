@@ -11,7 +11,7 @@ int main() {
     table.loadJsonFile(fileName);
     //table.printOut();
 
-    string fileName = "test3.pas";
+    string fileName = "test4.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;

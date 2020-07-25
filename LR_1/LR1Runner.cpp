@@ -413,34 +413,35 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 40: {// Subprogram_head -> function id B Formal_parameter : Standard_type ;
-            auto tempPoint = curBlock->query(vectorAttribute[top - 5].attribute);
-            tempPoint->type111 = vectorAttribute[top - 1].type222;
-            tempPoint->specialType = SymbolTableLine::FUNCTION;
-            // 参数的声明
-            auto tempVector = vectorAttribute[top - 3].IDlist;
-            FuncInfo tempFuncInfo;
-            tempFuncInfo.parametersNum = tempVector.size();
-            tempFuncInfo.IDlist = tempVector;
-            for (int i = 0; i < tempVector.size(); ++i) {
-                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type111);
+            id = vectorAttribute[top - 5].attribute;
+            auto tempPoint = curBlock->query(id);
+            auto Formal_parameter = vectorAttribute[top - 3];
+            auto Standard_type = vectorAttribute[top - 1];
+            auto func = new Func();
+            func->parametersNum = Formal_parameter.IDlist.size();
+            for (const auto &symbol: Formal_parameter.IDlist) {
+                EnvItem e;
+                e.id = symbol->name;
+                e.type = symbol->type->copy();
+                func->env.push_back(e);
             }
-            tempPoint->funcInfo = tempFuncInfo;
-
+            func->reType = Standard_type.type;
+            tempPoint->type = func;
             break;
         }
         case 41: {// Subprogram_head -> procedure id C Formal_parameter ;
-            auto tempPoint = curBlock->query(vectorAttribute[top - 3].attribute);
-            tempPoint->type111 = -1;
-            tempPoint->specialType = SymbolTableLine::PROCEDURE;
-            //参数的声明
-            auto tempVector = vectorAttribute[top - 1].IDlist;
-            FuncInfo tempFuncInfo;
-            tempFuncInfo.parametersNum = tempVector.size();
-            tempFuncInfo.IDlist = tempVector;
-            for (int i = 0; i < tempVector.size(); ++i) {
-                tempFuncInfo.paraTypeArray.push_back(tempVector[i]->type111);
+            id = vectorAttribute[top - 3].attribute;
+            auto tempPoint = curBlock->query(id);
+            auto Formal_parameter = vectorAttribute[top - 1];
+            auto proc = new Proc();
+            proc->parametersNum = Formal_parameter.IDlist.size();
+            for (const auto &symbol: Formal_parameter.IDlist) {
+                EnvItem e;
+                e.id = symbol->name;
+                e.type = symbol->type->copy();
+                proc->env.push_back(e);
             }
-            tempPoint->funcInfo = tempFuncInfo;
+            tempPoint->type = proc;
             break;
         }
         case 42: {  //42. Formal_parameter -> ( Parameter_lists )
