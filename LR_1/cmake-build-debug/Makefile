@@ -204,6 +204,33 @@ LR1Table.cpp.s:
 	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/LR1Table.cpp.s
 .PHONY : LR1Table.cpp.s
 
+MidCode.o: MidCode.cpp.o
+
+.PHONY : MidCode.o
+
+# target to build an object file
+MidCode.cpp.o:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/MidCode.cpp.o
+.PHONY : MidCode.cpp.o
+
+MidCode.i: MidCode.cpp.i
+
+.PHONY : MidCode.i
+
+# target to preprocess a source file
+MidCode.cpp.i:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/MidCode.cpp.i
+.PHONY : MidCode.cpp.i
+
+MidCode.s: MidCode.cpp.s
+
+.PHONY : MidCode.s
+
+# target to generate assembly for a file
+MidCode.cpp.s:
+	$(MAKE) -f CMakeFiles/LR_1.dir/build.make CMakeFiles/LR_1.dir/MidCode.cpp.s
+.PHONY : MidCode.cpp.s
+
 Pcode_Interpreter.o: Pcode_Interpreter.cpp.o
 
 .PHONY : Pcode_Interpreter.o
@@ -438,6 +465,9 @@ help:
 	@echo "... LR1Table.o"
 	@echo "... LR1Table.i"
 	@echo "... LR1Table.s"
+	@echo "... MidCode.o"
+	@echo "... MidCode.i"
+	@echo "... MidCode.s"
 	@echo "... Pcode_Interpreter.o"
 	@echo "... Pcode_Interpreter.i"
 	@echo "... Pcode_Interpreter.s"

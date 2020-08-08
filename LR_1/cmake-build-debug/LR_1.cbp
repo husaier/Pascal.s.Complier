@@ -102,6 +102,12 @@
 		<Unit filename="/home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h">
 			<Option target="LR_1"/>
 		</Unit>
+		<Unit filename="/home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.cpp">
+			<Option target="LR_1"/>
+		</Unit>
+		<Unit filename="/home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.h">
+			<Option target="LR_1"/>
+		</Unit>
 		<Unit filename="/home/husserl/pascal/Pascal.s.Complier/LR_1/Pcode_Interpreter.cpp">
 			<Option target="LR_1"/>
 		</Unit>

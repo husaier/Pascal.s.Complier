@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/LR_1.dir/CJsonObject.cpp.o"
   "CMakeFiles/LR_1.dir/LR1Runner.cpp.o"
   "CMakeFiles/LR_1.dir/LR1Table.cpp.o"
+  "CMakeFiles/LR_1.dir/MidCode.cpp.o"
   "CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o"
   "CMakeFiles/LR_1.dir/Production.cpp.o"
   "CMakeFiles/LR_1.dir/SymbolBlock.cpp.o"
