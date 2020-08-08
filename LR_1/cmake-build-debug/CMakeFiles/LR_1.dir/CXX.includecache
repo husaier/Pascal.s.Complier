@@ -45,8 +45,8 @@ LR1Table.h
 /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
 lexical_analyzer.h
 /home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
-SymbolBlock.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
+MidCode.h
+/home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.h
 
 /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
 map
@@ -55,6 +55,14 @@ Production.h
 /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
 fstream
 -
+
+/home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.h
+iostream
+-
+vector
+-
+SymbolBlock.h
+/home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
 
 /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
 iostream
@@ -93,4 +101,12 @@ algorithm
 -
 vector
 -
+
+/home/husserl/pascal/Pascal.s.Complier/LR_1/main.cpp
+LR1Table.h
+/home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
+LR1Runner.h
+/home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
+lexical_analyzer.h
+/home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
 

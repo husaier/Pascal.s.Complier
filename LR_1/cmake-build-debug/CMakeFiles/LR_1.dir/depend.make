@@ -12,6 +12,7 @@ CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../CJsonObject.hpp
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../LR1Runner.cpp
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../LR1Runner.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../LR1Table.h
+CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../MidCode.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../Production.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../SymbolBlock.h
 CMakeFiles/LR_1.dir/LR1Runner.cpp.o: ../TypeSystem.h
@@ -23,6 +24,11 @@ CMakeFiles/LR_1.dir/LR1Table.cpp.o: ../LR1Table.cpp
 CMakeFiles/LR_1.dir/LR1Table.cpp.o: ../LR1Table.h
 CMakeFiles/LR_1.dir/LR1Table.cpp.o: ../Production.h
 CMakeFiles/LR_1.dir/LR1Table.cpp.o: ../cJSON.h
+
+CMakeFiles/LR_1.dir/MidCode.cpp.o: ../MidCode.cpp
+CMakeFiles/LR_1.dir/MidCode.cpp.o: ../MidCode.h
+CMakeFiles/LR_1.dir/MidCode.cpp.o: ../SymbolBlock.h
+CMakeFiles/LR_1.dir/MidCode.cpp.o: ../TypeSystem.h
 
 CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o: ../Pcode_Interpreter.cpp
 CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o: ../Pcode_Interpreter.h
@@ -51,6 +57,7 @@ CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o: ../lexical_analyzer.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../CJsonObject.hpp
 CMakeFiles/LR_1.dir/main.cpp.o: ../LR1Runner.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../LR1Table.h
+CMakeFiles/LR_1.dir/main.cpp.o: ../MidCode.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../Production.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../SymbolBlock.h
 CMakeFiles/LR_1.dir/main.cpp.o: ../TypeSystem.h

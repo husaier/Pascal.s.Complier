@@ -13,6 +13,7 @@ CMakeFiles/LR_1.dir/LR1Runner.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Runner.cpp
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
@@ -24,6 +25,11 @@ CMakeFiles/LR_1.dir/LR1Table.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/cJSON.h
+CMakeFiles/LR_1.dir/MidCode.cpp.o
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.cpp
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.h
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
 CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Pcode_Interpreter.cpp
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Pcode_Interpreter.h
@@ -52,6 +58,7 @@ CMakeFiles/LR_1.dir/main.cpp.o
  /home/husserl/pascal/Pascal.s.Complier/LR_1/CJsonObject.hpp
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
+ /home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/Production.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
  /home/husserl/pascal/Pascal.s.Complier/LR_1/TypeSystem.h

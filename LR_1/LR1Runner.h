@@ -10,7 +10,7 @@
 #include <stack>
 #include "LR1Table.h"
 #include "lexical_analyzer.h"
-#include "SymbolBlock.h"
+#include "MidCode.h"
 
 class vectorAttributeItem {
 public:
@@ -36,8 +36,9 @@ public:
 
 
 class LR1Runner {
-
 public:
+    explicit LR1Runner();
+
     int debugInfoLevel = 0;
     // 0 表示无输出信息，1 只展示分析结果，2 展示分析的详细过程，不展示符号表的内容，3 全部展示
 
@@ -47,12 +48,15 @@ public:
 
     void printSemanticError();
 
+    SymbolTableLine* newTemp(); // 生成临时变量
+
     vector<string> semanticError;
 private:
     SymbolBlock *curBlock = nullptr;
     int *offset = nullptr;
     stack<SymbolBlock *> tablePointers; //栈顶指针指向的是本块
     stack<int *> offSetStack;
+    int tempID; // 临时变量的编号
 
     static void outStackInt(stack<int> stack);
 

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include "SymbolBlock.h"
 
 class QuaternionItem {
 public:
@@ -21,7 +22,12 @@ public:
 
 class Quaternion {
 public:
+    explicit Quaternion();
+
     std::vector<QuaternionItem> list;
+
+private:
+    static int tempID;
 };
 
 #endif //LR_1_MIDCODE_H

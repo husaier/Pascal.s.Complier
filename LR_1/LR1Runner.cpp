@@ -614,12 +614,12 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 
             break;
         }
-        case 71:{ // 71. Branch_list -> Branch_list ; Branch
+        case 71: { // 71. Branch_list -> Branch_list ; Branch
             auto Branch = vectorAttribute[top];
             leftSymbol->type = Branch.type;
             break;
         }
-        case 72:{ // 72. Branch_list -> Branch
+        case 72: { // 72. Branch_list -> Branch
             auto i_type = vectorAttribute[top - 2].type;
             leftSymbol->type = i_type;
             break;
@@ -629,7 +629,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto Const_list = vectorAttribute[top - 2];
             int line = Const_list.line;
             bool flag = true;
-            for(const auto &item: Const_list.typeList) {
+            for (const auto &item: Const_list.typeList) {
                 if (*i_type != *item)
                     flag = false;
             }
@@ -662,7 +662,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             SymbolTableLine *tempLinePoint = curBlock->query(id);
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->type->getType() == Type::PROC) {
-                    auto proc = (Proc*)tempLinePoint->type;
+                    auto proc = (Proc *) tempLinePoint->type;
                     int num = proc->parametersNum;
                     if (op_type == 78) {
                         if (num != 0) //如果为参数个数0则正确
@@ -680,7 +680,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                             for (int i = 0; i < Expression_list.typeList.size(); ++i) {
                                 auto type1 = Expression_list.typeList[i];
                                 auto type2 = proc->env[i].type;
-                                if(*type1 != *type2)
+                                if (*type1 != *type2)
                                     recordSemanticError(line, "语义错误！第" + to_string(i + 1) + "个参数类型不一致");
                             }
                         }
@@ -1336,15 +1336,15 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             Type *reType{nullptr}; // 函数返回值
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->type->getType() == Type::FUNC) {
-                    auto func = (Func*)tempLinePoint->type;
+                    auto func = (Func *) tempLinePoint->type;
                     int num = func->parametersNum;
                     auto Expression_list = vectorAttribute[top - 1];
-                    if (num == Expression_list.typeList.size()){
+                    if (num == Expression_list.typeList.size()) {
                         bool flag = true;
                         for (int i = 0; i < Expression_list.typeList.size(); ++i) {
                             auto type1 = Expression_list.typeList[i];
                             auto type2 = func->env[i].type;
-                            if(*type1 != *type2) {
+                            if (*type1 != *type2) {
                                 recordSemanticError(line, "语义错误！第" + to_string(i + 1) + "个参数类型不一致");
                                 flag = false;
                             }
@@ -1550,4 +1550,16 @@ void LR1Runner::recordSemanticError(int line, const string &e) {
     tmp.append(s);
     tmp.append(e);
     semanticError.push_back(tmp);
+}
+
+SymbolTableLine *LR1Runner::newTemp() {
+    char t[10];
+    snprintf(t, sizeof(t), "$%d", tempID++);
+    string name;
+    name.append(t);
+    return curBlock->insert2(name, nullptr, 0, 0,0);
+}
+
+LR1Runner::LR1Runner() {
+    tempID = 0;
 }

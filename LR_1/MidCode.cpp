@@ -3,3 +3,6 @@
 //
 
 #include "MidCode.h"
+
+Quaternion::Quaternion() {
+}
