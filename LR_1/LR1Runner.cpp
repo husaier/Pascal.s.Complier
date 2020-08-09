@@ -1273,7 +1273,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             arg1 = Simple_expression1.entry->id;
             arg2 = Term.entry->id;
             res = entry->id;
-            midCode.outCode(QuaternionItem::MINUS, arg1, arg2, res);
+            midCode.outCode(QuaternionItem::OR, arg1, arg2, res);
             break;
         }
         case 95: { // Term0 -> Term1 * Factor
@@ -1573,6 +1573,15 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
+            TempVar *entry{nullptr};
+            entry = midCode.newTemp();
+            entry->type = resultType;
+            entry->value = value;
+            leftSymbol->entry = entry;
+            string arg1, arg2, res;
+            arg1 = Factor1.entry->id;
+            res = entry->id;
+            midCode.outCode(QuaternionItem::NOT, arg1, arg2, res);
             break;
         }
         case 106: {  //106. Unsign_const_variable -> id

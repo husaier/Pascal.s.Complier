@@ -34,8 +34,11 @@ void Quaternion::print() {
         cout << setiosflags(ios::left) << setw(printWidth) << op2string(item.op);
         var = getTempById(item.arg1);
         cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
-        var = getTempById(item.arg2);
-        cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
+        if (!item.arg2.empty()){
+            var = getTempById(item.arg2);
+            cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
+        } else
+            cout << setiosflags(ios::left) << setw(printWidth) << "";
         var = getTempById(item.res);
         cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
         cout<<'\n';
@@ -89,6 +92,9 @@ string Quaternion::op2string(int op) {
             break;
         case QuaternionItem::UNEQUAL:
             output = "<>";
+            break;
+        case QuaternionItem::NOT:
+            output = "not";
             break;
         default:
             break;
