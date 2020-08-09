@@ -9,9 +9,8 @@ const string fileName = "grammar.json";
 int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
-    //table.printOut();
-
-    string fileName = "test4.pas";
+    // 词法分析
+    string fileName = "test5.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;
@@ -20,19 +19,13 @@ int main() {
     vector<LexicalItem> result;
     result = lexicalAnalyzer.analyze();
     lexicalAnalyzer.closeFile();
-
-//    for (const auto& item : result) {
-//        cout << item.tokenToString() << "\t" << item.attribute<< '\t'<< item.symbol << endl;
-//    }
-
+    // 语法分析、语义分析
     LR1Runner runner;
     runner.load(result);
-
-    runner.debugInfoLevel = 2;
-
+    runner.debugInfoLevel = 1;
     runner.run(table);
-
     runner.printSemanticError();
+    runner.printMidCode();
 //    string s = "0.23";
 //    float f = stof(s);
 //    cout << f << endl;

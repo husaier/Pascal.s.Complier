@@ -6,7 +6,6 @@
 #define LR_1_LR1RUNNER_H
 
 #include <queue>
-#include <iomanip>
 #include <stack>
 #include "LR1Table.h"
 #include "lexical_analyzer.h"
@@ -30,8 +29,9 @@ public:
     string value;
     vector<SymbolTableLine *> IDlist;
     vector<Type*> typeList;
-    SymbolTableLine *entry;
-    SymbolBlock *tableEntry = nullptr;
+    SymbolTableLine *tableLineEntry; // 符号表中的入口地址
+    TempVar *entry{nullptr}; // 临时变量入口
+    SymbolBlock *tableEntry{nullptr};
 };
 
 
@@ -46,17 +46,17 @@ public:
 
     void load(const vector<LexicalItem> &vector);
 
-    void printSemanticError();
+    void printSemanticError(); // 打印语义错误信息
 
-    SymbolTableLine* newTemp(); // 生成临时变量
-
-    vector<string> semanticError;
+    void printMidCode(); // 打印中间代码
 private:
     SymbolBlock *curBlock = nullptr;
     int *offset = nullptr;
     stack<SymbolBlock *> tablePointers; //栈顶指针指向的是本块
     stack<int *> offSetStack;
     int tempID; // 临时变量的编号
+    vector<string> semanticError; // 语义错误信息
+    Quaternion midCode; // 产生的中间代码
 
     static void outStackInt(stack<int> stack);
 
@@ -77,6 +77,10 @@ private:
     void initial();
 
     void recordSemanticError(int line, const string &); // 记录语义错误
+
+    SymbolTableLine* newTemp(); // 生成临时变量
+
+    static Type *getType(SymbolTableLine*);
 };
 
 

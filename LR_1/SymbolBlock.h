@@ -38,6 +38,7 @@ public:
     vector<int> referenceLineVector;//引用行
     SymbolTableLine *point; //自己指针
     SymbolBlock *blockPoint;//指向下一个表的指针
+    string value; //值
 };
 
 

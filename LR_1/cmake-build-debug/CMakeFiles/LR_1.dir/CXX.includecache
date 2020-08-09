@@ -37,8 +37,6 @@ lexical_analyzer.h
 /home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
 queue
 -
-iomanip
--
 stack
 -
 LR1Table.h
@@ -59,7 +57,11 @@ fstream
 /home/husserl/pascal/Pascal.s.Complier/LR_1/MidCode.h
 iostream
 -
+utility
+-
 vector
+-
+iomanip
 -
 SymbolBlock.h
 /home/husserl/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
@@ -101,12 +103,4 @@ algorithm
 -
 vector
 -
-
-/home/husserl/pascal/Pascal.s.Complier/LR_1/main.cpp
-LR1Table.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Table.h
-LR1Runner.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
-lexical_analyzer.h
-/home/husserl/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
 
