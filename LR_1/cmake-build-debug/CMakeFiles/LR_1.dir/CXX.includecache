@@ -6,11 +6,7 @@
 
 #IncludeRegexTransform: 
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/CJsonObject.cpp
-CJsonObject.hpp
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/CJsonObject.hpp
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/CJsonObject.hpp
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/CJsonObject.hpp
 stdio.h
 -
 stddef.h
@@ -28,45 +24,43 @@ map
 list
 -
 cJSON.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cJSON.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cJSON.h
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Runner.cpp
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.cpp
 sstream
 -
 LR1Runner.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.h
 lexical_analyzer.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/lexical_analyzer.h
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.h
 queue
 -
 stack
 -
 LR1Table.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Table.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Table.h
 lexical_analyzer.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/lexical_analyzer.h
 MidCode.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/MidCode.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Table.cpp
-LR1Table.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Table.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Table.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Table.h
 map
 -
 Production.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Production.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Production.h
 fstream
 -
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/MidCode.cpp
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.cpp
+sstream
+-
 MidCode.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/MidCode.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/MidCode.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
 iostream
 -
 utility
@@ -76,29 +70,9 @@ vector
 iomanip
 -
 SymbolBlock.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.h
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Pcode_Interpreter.cpp
-fstream
--
-sstream
--
-Pcode_Interpreter.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Pcode_Interpreter.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Pcode_Interpreter.h
-iostream
--
-string
--
-vector
--
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Production.cpp
-Production.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Production.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Production.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Production.h
 iostream
 -
 string
@@ -106,13 +80,9 @@ string
 vector
 -
 CJsonObject.hpp
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/CJsonObject.hpp
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/CJsonObject.hpp
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/SymbolBlock.cpp
-SymbolBlock.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/SymbolBlock.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.h
 string
 -
 vector
@@ -120,35 +90,19 @@ vector
 map
 -
 TypeSystem.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TypeSystem.h
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TranslateScheme.cpp
-TranslateScheme.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TranslateScheme.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TranslateScheme.h
-Production.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Production.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TypeSystem.cpp
-TypeSystem.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TypeSystem.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TypeSystem.h
 iostream
 -
 vector
 -
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cJSON.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cJSON.h
 stdint.h
 -
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.cpp
-lexical_analyzer.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
-
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/lexical_analyzer.h
 fstream
 -
 algorithm
@@ -156,11 +110,11 @@ algorithm
 vector
 -
 
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/main.cpp
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/main.cpp
 LR1Table.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Table.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Table.h
 LR1Runner.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Runner.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.h
 lexical_analyzer.h
-E:/CLionproject/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/lexical_analyzer.h
 

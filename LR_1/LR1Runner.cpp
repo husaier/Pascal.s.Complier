@@ -488,6 +488,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto Variable = vectorAttribute[top - 2];
             if (*(Variable.type) != *(Expression.type))
                 recordSemanticError(Variable.line, "错误：赋值语句类型不匹配");
+            //中间代码生成,赋值语句
+            string arg1, arg2, res;
+            arg1 = Expression.entry->id;
+            res = Variable.attribute;
+            midCode.outCode(QuaternionItem::ASSIGN,arg1,arg2,res);
             break;
         }
         case 56: { // 56. Statement -> if Expression then Statement Else_part
@@ -529,6 +534,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 62: { // Variable -> id E62 Id_varparts
             auto Id_varparts = vectorAttribute[top];
             leftSymbol->type = Id_varparts.type;
+            leftSymbol->attribute = vectorAttribute[top-2].attribute;
+            ////这里还没能实现数组赋值的情况
             break;
         }
         case 63: { // Id_varparts0 -> Id_varparts1 Id_varpart

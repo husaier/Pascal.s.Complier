@@ -4,7 +4,7 @@ var
   b: Integer;
   c: Real;
 begin
-  a := 1 = 2;
+  a := 'a' = 'c';
   a := 1 <> 2;
   a := 1 < 2;
   a := 1 <= 2;
