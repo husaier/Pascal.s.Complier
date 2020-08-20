@@ -1,1 +1,3 @@
-/usr/bin/c++  -g   CMakeFiles/LR_1.dir/main.cpp.o CMakeFiles/LR_1.dir/LR1Runner.cpp.o CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o CMakeFiles/LR_1.dir/LR1Table.cpp.o CMakeFiles/LR_1.dir/Production.cpp.o CMakeFiles/LR_1.dir/cJSON.c.o CMakeFiles/LR_1.dir/CJsonObject.cpp.o CMakeFiles/LR_1.dir/SymbolBlock.cpp.o CMakeFiles/LR_1.dir/TranslateScheme.cpp.o CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o CMakeFiles/LR_1.dir/TypeSystem.cpp.o CMakeFiles/LR_1.dir/MidCode.cpp.o  -o LR_1 
+"E:\Clion\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\LR_1.dir/objects.a
+D:\wingw\mingw64\bin\ar.exe cr CMakeFiles\LR_1.dir/objects.a @CMakeFiles\LR_1.dir\objects1.rsp
+D:\wingw\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\LR_1.dir/objects.a -Wl,--no-whole-archive  -o LR_1.exe -Wl,--out-implib,libLR_1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\LR_1.dir\linklibs.rsp
