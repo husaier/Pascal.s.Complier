@@ -68,6 +68,8 @@ private:
     int tempSeq = 0;
 
     static string op2string(int);
+
+    void argPrint(string arg);
 };
 
 #endif //LR_1_MIDCODE_H

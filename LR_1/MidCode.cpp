@@ -2,46 +2,60 @@
 // Created by husserl on 2020/8/8.
 //
 
+#include <sstream>
 #include "MidCode.h"
 
 QuaternionItem *Quaternion::outCode
-(int op, const std::string& arg1, const std::string& arg2, const std::string& res) {
+        (int op, const std::string &arg1, const std::string &arg2, const std::string &res) {
     int seq = codeList.size();
     codeList.emplace_back(seq, op, arg1, arg2, res);
     return &codeList[seq];
 }
 
+void Quaternion::argPrint(string arg) {//判断是用户变量还是临时变量
+    TempVar *var;
+    if (arg[0] == '#') {
+        var = getTempById(arg);
+        cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
+    }else{
+        cout << setiosflags(ios::left) << setw(printWidth) << arg;
+    }
+}
+
 void Quaternion::print() {
-    cout<<"\n";
-    cout<<"中间代码："<<endl;
+    cout << "\n";
+    cout << "中间代码：" << endl;
     int i = 50;
-    while(i--)
-        cout<<'=';
-    cout<<'\n';
+    while (i--)
+        cout << '=';
+    cout << '\n';
     cout << setiosflags(ios::left) << setw(printWidth) << "seq";
     cout << setiosflags(ios::left) << setw(printWidth) << "op";
     cout << setiosflags(ios::left) << setw(printWidth) << "arg1";
     cout << setiosflags(ios::left) << setw(printWidth) << "arg2";
     cout << setiosflags(ios::left) << setw(printWidth) << "res";
-    cout<<'\n';
+    cout << '\n';
     i = 50;
-    while(i--)
-        cout<<'=';
-    cout<<'\n';
+    while (i--)
+        cout << '=';
+    cout << '\n';
     TempVar *var;
-    for(const auto &item:codeList){
+    for (const auto &item:codeList) {
         cout << setiosflags(ios::left) << setw(printWidth) << item.seq;
         cout << setiosflags(ios::left) << setw(printWidth) << op2string(item.op);
-        var = getTempById(item.arg1);
-        cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
-        if (!item.arg2.empty()){
-            var = getTempById(item.arg2);
-            cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
+        argPrint(item.arg1);
+//        var = getTempById(item.arg1);
+//        cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
+        if (!item.arg2.empty()) {
+            argPrint(item.arg2);
+//            var = getTempById(item.arg2);
+//            cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
         } else
             cout << setiosflags(ios::left) << setw(printWidth) << "";
-        var = getTempById(item.res);
-        cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
-        cout<<'\n';
+        argPrint(item.res);
+//        var = getTempById(item.res);
+//        cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
+        cout << '\n';
     }
 }
 
@@ -104,7 +118,7 @@ string Quaternion::op2string(int op) {
 
 TempVar *Quaternion::newTemp(bool flag) {
     char t[10];
-    snprintf(t, sizeof(t), "t%d", tempSeq++);
+    snprintf(t, sizeof(t), "#%d", tempSeq++);//这里的井号用于表示临时变量
     string name;
     name.append(t);
     auto var = new TempVar(name, flag);
@@ -120,10 +134,12 @@ TempVar *Quaternion::getTempById(string id) {
 
 string TempVar::toString() const {
     stringstream ss;
-    if (isImmediate){
+    if (isImmediate) {
         ss << "$" << value;
         return ss.str();
-    } else {
+    } else if (id[0] == '#') {//如果是临时变量
         return id;
+    } else {//如果是用户标识符
+        return value;
     }
 }
