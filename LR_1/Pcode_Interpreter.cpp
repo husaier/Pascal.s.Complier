@@ -21,7 +21,7 @@ vector<Pcode> Pcode_Interpreter::readFile(string filename) {
     vector<Pcode> allPcode;
     Pcode_Interpreter interpreter;
     string line_info, input_result, read;
-    Pcode a;
+    Pcode pcodeitem;
 
     ifstream file(filename);
 
@@ -35,30 +35,30 @@ vector<Pcode> Pcode_Interpreter::readFile(string filename) {
             input >> read;
 
             if (read == "LIT")
-                a.OP = LIT;
+                pcodeitem.OP = LIT;
             else if (read == "LOD")
-                a.OP = LOD;
+                pcodeitem.OP = LOD;
             else if (read == "STO")
-                a.OP = STO;
+                pcodeitem.OP = STO;
             else if (read == "CAL")
-                a.OP = CAL;
+                pcodeitem.OP = CAL;
             else if (read == "INT")
-                a.OP = INT;
+                pcodeitem.OP = INT;
             else if (read == "JMP")
-                a.OP = JMP;
+                pcodeitem.OP = JMP;
             else if (read == "JPC")
-                a.OP = JPC;
+                pcodeitem.OP = JPC;
             else if (read == "OPR")
-                a.OP = OPR;
+                pcodeitem.OP = OPR;
             else {
                 printf("出错\n");
                 return allPcode;
             }
             input >> read;
-            a.L = stoi(read);
+            pcodeitem.L = stoi(read);
             input >> read;
-            a.D = stoi(read);
-            allPcode.push_back(a);
+            pcodeitem.D = stoi(read);
+            allPcode.push_back(pcodeitem);
         }
         return allPcode;
     }
@@ -79,7 +79,7 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
         pc++;
         switch (currentPcode.OP) {
             case OPR:
-                //OPR：关系或算术运算，A段指明具体运算
+                //OPR：关系或算术运算，D段指明具体运算
                 switch (currentPcode.D) {
                     case 0:
                         //OPR 0 0   过程调用结束后,返回调用点并退栈
@@ -190,7 +190,7 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 }
                 break;
             case LIT:
-                //LIT：将常量送到运行栈S的栈顶，这时A段为常量值
+                //LIT：将常量送到运行栈S的栈顶，这时D段为常量值
                 dataStack[top] = currentPcode.D;
                 top++;
                 break;
@@ -200,12 +200,12 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 top++;
                 break;
             case STO:
-                //STO：将运行栈S的栈顶内容送入某个变量单元中，A段为变量所在说明层中的相对位置。
+                //STO：将运行栈S的栈顶内容送入某个变量单元中，D段为变量所在说明层中的相对位置。
                 dataStack[currentPcode.D + getBase(base, currentPcode.L)] = dataStack[top - 1];
                 top--;
                 break;
             case CAL:
-                //CAL：调用过程，这时A段为被调用过程的过程体（过程体之前一条指令）在目标程序区的入口地址。
+                //CAL：调用过程，这时D段为被调用过程的过程体（过程体之前一条指令）在目标程序区的入口地址。
                 //跳转时，将该层基地址，跳转层基地址，pc指针保存在栈中
                 //基地址base变为此时栈顶top，pc指向要跳转的地方
                 //不修改top，因为前面代码已经将address+3，生成Pcode后会产生INT语句，修改top值
@@ -216,15 +216,15 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 pc = currentPcode.D;
                 break;
             case INT:
-                //INT：为被调用的过程（包括主过程）在运行栈S中开辟数据区，这时A段为所需数据单元个数（包括三个连接数据）；L段恒为0。
+                //INT：为被调用的过程（包括主过程）在运行栈S中开辟数据区，这时D段为所需数据单元个数（包括三个连接数据）；L段恒为0。
                 top = top + currentPcode.D;
                 break;
             case JMP:
-                //JMP：无条件转移，这时A段为转向地址（目标程序）。
+                //JMP：无条件转移，这时D段为转向地址（目标程序）。
                 pc = currentPcode.D;
                 break;
             case JPC:
-                //JPC：条件转移，当运行栈S的栈顶的布尔值为假（0）时，则转向A段所指目标程序地址；否则顺序执行。
+                //JPC：条件转移，当运行栈S的栈顶的布尔值为假（0）时，则转向D段所指目标程序地址；否则顺序执行。
                 if (dataStack[top - 1] == 0) {
                     pc = currentPcode.D;
                 }
