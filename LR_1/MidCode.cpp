@@ -139,7 +139,5 @@ string TempVar::toString() const {
         return ss.str();
     } else if (id[0] == '#') {//如果是临时变量
         return id;
-    } else {//如果是用户标识符
-        return value;
     }
 }
