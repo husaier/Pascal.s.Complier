@@ -1,9 +1,25 @@
 program test5(input, output);
 var
   a: Boolean;
-  b: Integer;
+  b,b2: Integer;
   c: Real;
+  arr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
+  rec: record
+    i: integer;
+    c: record
+      a: integer;
+      b: boolean;
+      c: real;
+      d: char;
+    end; {end of record c}
+    j,k: char;
+  end; {end of record rec}
 begin
+  b := 5;
+  b := b2;
+  b := rec.i;
+  rec.c.a := b;
+  {b := arr[0][0][6];}
   a := 'a' = 'c';
   a := 1 <> 2;
   a := 1 < 2;
