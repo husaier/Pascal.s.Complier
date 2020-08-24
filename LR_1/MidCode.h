@@ -22,6 +22,7 @@ public:
     Type *type{nullptr};
     string value;
     bool isImmediate;
+    SymbolTableLine * tableLineEntry= nullptr;//如果是用户变量,则这里存储的就是相应的符号表行的指针
 
     string toString() const;
 };

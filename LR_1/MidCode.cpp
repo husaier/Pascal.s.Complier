@@ -16,8 +16,12 @@ void Quaternion::argPrint(string arg) {//判断是用户变量还是临时变量
     TempVar *var;
     if (arg[0] == '#') {
         var = getTempById(arg);
-        cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
-    }else{
+        if (var->tableLineEntry != nullptr) {//如果是用户变量
+            cout << setiosflags(ios::left) << setw(printWidth) << var->toString() + "->" + var->tableLineEntry->name;
+        } else {
+            cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
+        }
+    } else {
         cout << setiosflags(ios::left) << setw(printWidth) << arg;
     }
 }
