@@ -47,6 +47,7 @@ public:
     int seq = 0;
     int op;
     std::string arg1, arg2, res;
+    int type;
 };
 
 class Quaternion {

@@ -4,20 +4,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "TransformPcode.h"
 
 #ifndef PASCAL_S_COMPLIER1_PCODE_INTERPRETER_H
 #define PASCAL_S_COMPLIER1_PCODE_INTERPRETER_H
 using namespace std;
-
-enum Operator {
-    LIT, LOD, STO, CAL, INT, JMP, JPC, OPR
-};
-
-struct Pcode {
-    Operator OP;
-    int L;
-    int D;
-};
 
 class Pcode_Interpreter {
 private:
