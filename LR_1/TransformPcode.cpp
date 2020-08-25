@@ -18,6 +18,7 @@ int TransformPcode::exist(vector<int> list, int num) {
     return -1;
 }
 
+
 vector<Pcode> TransformPcode::transformPcode(vector<QuaternionItem> codeList) {
     //遍历所有的四元式
     for (int i = 0; i < codeList.size(); i++) {
@@ -64,11 +65,29 @@ void TransformPcode::singlePcode(QuaternionItem code, int index) {
 
     }
     //开始对每一条四元式进行翻译
+    int l, d = 0;
     switch (code.type) {
         case 1:
-            //OPR：关系或算术运算，D段指明具体运算
             switch (code.op) {
                 case QuaternionItem::ADD: // +
+                    if (code.arg1[0] == '$')
+                        allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
+                    else {
+                        //todo:根据index找到所在的过程序号
+                        //todo:调用对应的block的query函数找到变量arg1定义的位置
+                        allPcode.push_back({LOD, l, d});
+                    }
+                    if (code.arg2[0] == '$')
+                        allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
+                    else {
+                        //todo:根据index找到所在的过程序号
+                        //todo:调用对应的block的query函数找到变量arg2定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                        allPcode.push_back({LOD, l, d});
+                    }
+                    allPcode.push_back({OPR, 0, 2});
+                    //todo:根据index找到所在的过程序号
+                    //todo:调用对应的block的query函数找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                    allPcode.push_back({STO, l, d});
                     break;
                 case QuaternionItem::MINUS:// -
                     break;
