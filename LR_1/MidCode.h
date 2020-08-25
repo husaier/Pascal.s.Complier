@@ -33,7 +33,7 @@ public:
         ADD = 1, MINUS = 2, MULTIPLY = 3, DIVIDE = 4, ASSIGN = 5,
         EQUAL = 6, OR = 7, FLOOR_DIVIDE = 8, MOD = 9, AND = 10,
         UNEQUAL = 11, LESS = 12, LESS_EQUAL = 13, MORE = 14,
-        MORE_EQUAL = 15, NOT = 16
+        MORE_EQUAL = 15, NOT = 16, GOTO = 17, IF = 18
     };
 
     QuaternionItem(int seq, int op, std::string arg1, std::string arg2, std::string res) {
@@ -63,6 +63,8 @@ public:
     TempVar *newTemp(bool flag = false);
 
     TempVar *getTempById(string);
+
+    void backPatch(const vector<int> &list, int quad);
 
 private:
     int printWidth = 15;

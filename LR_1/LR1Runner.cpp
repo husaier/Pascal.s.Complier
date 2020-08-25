@@ -207,9 +207,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 2: {   //Program_head -> program id A ( Identifier_list ) ;
-            auto id = vectorAttribute[top - 5];
-            id.tableLineEntry = curBlock->query(id.attribute);
-            leftSymbol->tableLineEntry = id.tableLineEntry;
+            auto M_id = &vectorAttribute[top - 5];
+            M_id->tableLineEntry = curBlock->query(M_id->attribute);
+            leftSymbol->tableLineEntry = M_id->tableLineEntry;
             break;
         }
         case 3: {   //3. Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
@@ -395,14 +395,14 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 30: { //30. Periods0 -> Periods1 , Period
-            auto period = vectorAttribute[top];
-            auto periods1 = vectorAttribute[top - 2];
+            auto period = &vectorAttribute[top];
+            auto periods1 = &vectorAttribute[top - 2];
             auto &periods0 = leftSymbol;
-            periods0->dimension = periods1.dimension + 1;
+            periods0->dimension = periods1->dimension + 1;
 
-            auto t = period.type;
-            periods1.type->addElem(t);
-            periods0->type = periods1.type;
+            auto t = period->type;
+            periods1->type->addElem(t);
+            periods0->type = periods1->type;
             break;
         }
         case 31: { //31. Periods -> Period
@@ -514,66 +514,95 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 51: {  //51. Statement_list -> Statement_list1 ; M Statement
-            ////这里注意,这里的top-2是临时的,这里的M还没算进去,加入了M后需要修改
-            auto Statement_list1 = vectorAttribute[top-3];
-            leftSymbol->startQuad = Statement_list1.startQuad;
+            auto Statement_list1 = &vectorAttribute[top - 3];
+            auto M = vectorAttribute[top-1];
+            auto Statement = vectorAttribute[top];
+            leftSymbol->startQuad = Statement_list1->startQuad;
+
+            midCode.backPatch(Statement_list1->nextList,M.quad);
+            leftSymbol->nextList = Statement.nextList;
             break;
         }
         case 52: {  //52. Statement_list -> Statement
             auto Statement = vectorAttribute[top];
             leftSymbol->startQuad = Statement.startQuad;
+            leftSymbol->nextList = Statement.nextList;
             break;
         }
         case 53: { // Statement -> Variable assignop Expression
-            auto Expression = vectorAttribute[top];
-            auto Variable = vectorAttribute[top - 2];
+            vectorAttributeItem* Expression = &vectorAttribute[top];
+            vectorAttributeItem* Variable = &vectorAttribute[top - 2];
             leftSymbol->startQuad = midCode.codeList.size();
-            if (*(Variable.type) != *(Expression.type))
-                recordSemanticError(Variable.line, "错误：赋值语句类型不匹配");
+            if (*(Variable->type) != *(Expression->type))
+                recordSemanticError(Variable->line, "错误：赋值语句类型不匹配");
             //中间代码生成,赋值语句
             string arg1, arg2, res;
-            if (Expression.entry) {
-                arg1 = Expression.entry->id;
+            if (Expression->entry) {
+                arg1 = Expression->entry->id;
             } else {
                 TempVar *entry{nullptr};
                 entry = midCode.newTemp();
-                entry->value = Expression.variableName;
-                entry->type = Expression.type;
-                entry->tableLineEntry = Expression.tableLineEntry;
-                Expression.entry = entry;
-                arg1 = Expression.entry->id;
+                entry->value = Expression->variableName;
+                entry->type = Expression->type;
+                entry->tableLineEntry = Expression->tableLineEntry;
+                Expression->entry = entry;
+                arg1 = Expression->entry->id;
 //                arg1 = Expression.tableLineEntry->name;
 //                printf("type%d\n",Expression.tableLineEntry->type->getType());
             }
 
             TempVar *entry{nullptr};
             entry = midCode.newTemp();
-            entry->value = Variable.variableName;
-            entry->type = Variable.type;
-            entry->tableLineEntry = Variable.tableLineEntry;
-            Variable.entry = entry;
-            res = Variable.entry->id;
+            entry->value = Variable->variableName;
+            entry->type = Variable->type;
+            entry->tableLineEntry = Variable->tableLineEntry;
+            Variable->entry = entry;
+            res = Variable->entry->id;
 //            res = Variable.tableLineEntry->name;
 
 //            printf("typeVar%d",Variable.tableLineEntry->type->getType());
             midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
-
+            leftSymbol->nextList.push_back(midCode.codeList.size());
             break;
         }
         case 54: {  //54. Statement -> Call_procedure_statement
             leftSymbol->startQuad = midCode.codeList.size();
+
+
+//            leftSymbol->nextList.push_back(midCode.codeList.size());//不确定是否这里写
             break;
         }
         case 55: {  //55. Statement -> Compound_statement
             auto Compound_statement = vectorAttribute[top];
             leftSymbol->startQuad = Compound_statement.startQuad;
+
+            leftSymbol->nextList.push_back(midCode.codeList.size());//放最后
             break;
         }
-        case 56: { // 56. Statement -> if Expression F56 then M Statement Else_part
-            auto Expression = vectorAttribute[top - 5];
+        case 56: { // 56. Statement -> if Expression F56 then M Statement1 Else_part
+            vectorAttributeItem *Expression = &vectorAttribute[top - 5];
+            vectorAttributeItem *Else_part = &vectorAttribute[top];
+            vectorAttributeItem *M = &vectorAttribute[top - 2];
+            vectorAttributeItem *Statement1 = &vectorAttribute[top - 1];
+//            printf("%p,%lu\n", &Expression, Expression.trueList.size());
             leftSymbol->startQuad = midCode.codeList.size();
-            if (Expression.type->getType() != Type::BOOLEAN)
-                recordSemanticError(Expression.line, "错误，if语句的判断表达式不是BOOLEAN类型");
+            if (Expression->type->getType() != Type::BOOLEAN)
+                recordSemanticError(Expression->line, "错误，if语句的判断表达式不是BOOLEAN类型");
+
+            if (Else_part->nextList.empty()) {
+                midCode.backPatch(Expression->trueList, M->quad);
+                leftSymbol->nextList.insert(leftSymbol->nextList.end(), Expression->falseList.begin(),
+                                            Expression->falseList.end());
+                leftSymbol->nextList.insert(leftSymbol->nextList.end(), Statement1->nextList.begin(),
+                                            Statement1->nextList.end());
+            } else {
+                midCode.backPatch(Expression->trueList, M->quad);
+                midCode.backPatch(Expression->falseList, Else_part->quad);
+                leftSymbol->nextList.insert(leftSymbol->nextList.end(), Statement1->nextList.begin(),
+                                            Statement1->nextList.end());
+                leftSymbol->nextList.insert(leftSymbol->nextList.end(), Else_part->nextList.begin(),
+                                            Else_part->nextList.end());
+            }
             break;
         }
         case 57: { // 57. Statement -> case Expression W of Case_body end
@@ -708,7 +737,22 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             break;
         }
-        case 70: { // 70. Case_body -> #
+        case 67: {  //67. Else_part -> N else M Statement
+            auto M = vectorAttribute[top - 1];
+            auto N = vectorAttribute[top - 3];
+            auto Statement = vectorAttribute[top];
+            leftSymbol->quad = M.quad;
+            leftSymbol->nextList.insert(leftSymbol->nextList.end(), N.nextList.begin(), N.nextList.end());
+            leftSymbol->nextList.insert(leftSymbol->nextList.end(), Statement.nextList.begin(),
+                                        Statement.nextList.end());
+            break;
+        }
+        case 68: {  //68. Else_part -> #
+            leftSymbol->nextList.clear();//这条语句一般情况下是没有变化的
+//            Else_part.nextlist = null;
+            break;
+        }
+        case 70: {  // 70. Case_body -> #
 
             break;
         }
@@ -1779,21 +1823,60 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             locate();
             break;
         case 113: { // E62 -> #
-            auto t = vectorAttribute[top];
-            auto entry = curBlock->query(t.attribute);
+            vectorAttributeItem *t = &vectorAttribute[top];
+            auto entry = curBlock->query(t->attribute);
             if (entry == nullptr) {
-                t.tableLineEntry = nullptr;
+                t->tableLineEntry = nullptr;
                 leftSymbol->tableLineEntry = nullptr;
-                t.type = new Type(Type::TYPE_ERROR);
+                t->type = new Type(Type::TYPE_ERROR);
                 leftSymbol->type = new Type(Type::TYPE_ERROR);
-                recordSemanticError(t.line, "未定义的引用");
+                recordSemanticError(t->line, "未定义的引用");
                 break;
             } else {
-                t.type = entry->type;
+                t->type = entry->type;
                 leftSymbol->type = entry->type;
-                t.tableLineEntry = entry;
+                t->tableLineEntry = entry;
                 leftSymbol->tableLineEntry = entry;
             }
+            break;
+        }
+        case 114: { //114. M -> #
+            leftSymbol->quad = midCode.codeList.size();
+            break;
+        }
+        case 115: { //115. N -> #
+            leftSymbol->nextList.push_back(midCode.codeList.size());
+            string arg1, arg2, res;
+            midCode.outCode(QuaternionItem::GOTO, arg1, arg2, res);
+            break;
+        }
+        case 118: { //118. F56 -> #
+            vectorAttributeItem *Expression = &vectorAttribute[top];
+            Expression->trueList.push_back(midCode.codeList.size());
+            Expression->falseList.push_back(midCode.codeList.size() + 1);
+//            printf("%d\n",Expression.trueList.size());
+            printf("%p,%lu\n", &Expression, Expression->trueList.size());
+
+            string arg1, arg2, res;
+            if (Expression->entry) {
+                arg1 = Expression->entry->id;
+            } else {
+                TempVar *entry{nullptr};
+                entry = midCode.newTemp();
+                entry->value = Expression->variableName;
+                entry->type = Expression->type;
+                entry->tableLineEntry = Expression->tableLineEntry;
+                Expression->entry = entry;
+                arg1 = Expression->entry->id;
+//                arg1 = Expression.tableLineEntry->name;
+//                printf("type%d\n",Expression.tableLineEntry->type->getType());
+            }
+
+            midCode.outCode(QuaternionItem::IF, arg1, arg2, res);
+            string argb1, argb2, resb;
+            midCode.outCode(QuaternionItem::GOTO, argb1, argb2, resb);
+            printf("%p,%lu\n", &Expression, Expression->trueList.size());
+
             break;
         }
         default:
@@ -1841,7 +1924,7 @@ void LR1Runner::relocate() {
 
 void LR1Runner::initial() {
     SymbolBlock *childBlock;
-    childBlock = SymbolBlock::makeBlock(curBlock);
+    childBlock = SymbolBlock::makeBlock(curBlock);//初始化最外层的符号表
     curBlock = childBlock;
     offset = new int(0);
     tablePointers.push(curBlock);
