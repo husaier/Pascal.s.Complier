@@ -11,6 +11,7 @@
 using namespace std;
 
 class SymbolBlock;
+
 class SymbolTableLine;
 
 class SymbolTableLine {
@@ -26,6 +27,7 @@ public:
         point = nullptr; //指向存储位置的指针
         blockPoint = nullptr;//指指向下一个符号块
     }
+
     void printLine(SymbolTableLine *InLinePoint);
 
     int id;//序号
@@ -39,6 +41,7 @@ public:
     SymbolTableLine *point; //自己指针
     SymbolBlock *blockPoint;//指向下一个表的指针
     string value; //值
+    int startQuad = -1;
 };
 
 

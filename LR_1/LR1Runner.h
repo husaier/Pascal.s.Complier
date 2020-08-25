@@ -34,6 +34,7 @@ public:
     SymbolTableLine *tableLineEntry = nullptr; // 符号表中的入口地址
     TempVar *entry{nullptr}; // 临时变量入口
     SymbolBlock *tableEntry{nullptr};
+    int startQuad = -1;
 };
 
 
