@@ -114,6 +114,12 @@ string Quaternion::op2string(int op) {
         case QuaternionItem::NOT:
             output = "not";
             break;
+        case QuaternionItem::GOTO:
+            output = "goto";
+            break;
+        case QuaternionItem::IF:
+            output = "if";
+            break;
         default:
             break;
     }
@@ -134,6 +140,20 @@ TempVar *Quaternion::getTempById(string id) {
     id.erase(id.begin());
     int i = stoi(id);
     return tempVarList[i];
+}
+
+void Quaternion::backPatch(const vector<int> &list, int quad) {
+    for (int i : list) {
+        if (codeList[i].op != QuaternionItem::GOTO && codeList[i].op != QuaternionItem::IF) {
+            printf("BackPatch ERROR,not GOTO or IF code\n");
+            break;
+        }
+        if (!codeList[i].res.empty()) {
+            printf("BackPatch ERROR,res already exist\n");
+            break;
+        }
+        codeList[i].res = to_string(quad);
+    }
 }
 
 string TempVar::toString() const {

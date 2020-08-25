@@ -15,6 +15,13 @@ var
     j,k: char;
   end; {end of record rec}
 begin
+  a := 2=2;
+  if (1 = 1) then
+    b := 1;
+    c := 1.2;
+  if a then {这里还有bug,没能正确识别出是a}
+    b := 2;
+    c := 2.2;
   b := 5;
   b := b2;
   b := rec.i;
