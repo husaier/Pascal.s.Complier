@@ -21,7 +21,7 @@ struct Pcode {
 
 class Pcode_Interpreter {
 private:
-    int dataStack[1000];//数据栈
+    int dataStack[1000] = {0};//数据栈
     vector<Pcode> allPcode;
 
 public:

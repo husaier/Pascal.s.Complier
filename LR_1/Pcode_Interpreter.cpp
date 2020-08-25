@@ -231,6 +231,7 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 break;
         }
         if(pc == 0 || pc >= size)
-            cout<< 1;
+            cout << "运行结束";
     } while (pc != 0 && pc < size);
+
 }

@@ -1,6 +1,7 @@
 #include "LR1Table.h"
 #include "LR1Runner.h"
 #include "lexical_analyzer.h"
+#include "Pcode_Interpreter.h"
 
 using namespace std;
 
@@ -26,6 +27,10 @@ int main() {
     runner.run(table);
     runner.printSemanticError();
     runner.printMidCode();
+
+//    //    下列代码可以从文件里面读出p-code并执行
+//    Pcode_Interpreter interpreter;
+//    interpreter.interpreter(interpreter.readFile("text.txt"));
 //    string s = "0.23";
 //    float f = stof(s);
 //    cout << f << endl;
