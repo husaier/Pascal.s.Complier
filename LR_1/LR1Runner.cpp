@@ -515,7 +515,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 51: {  //51. Statement_list -> Statement_list1 ; M Statement
             ////这里注意,这里的top-2是临时的,这里的M还没算进去,加入了M后需要修改
-            auto Statement_list1 = vectorAttribute[top-2];
+            auto Statement_list1 = vectorAttribute[top-3];
             leftSymbol->startQuad = Statement_list1.startQuad;
             break;
         }
@@ -569,36 +569,36 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->startQuad = Compound_statement.startQuad;
             break;
         }
-        case 56: { // 56. Statement -> if Expression then Statement Else_part
-            auto Expression = vectorAttribute[top - 3];
+        case 56: { // 56. Statement -> if Expression F56 then M Statement Else_part
+            auto Expression = vectorAttribute[top - 5];
             leftSymbol->startQuad = midCode.codeList.size();
             if (Expression.type->getType() != Type::BOOLEAN)
                 recordSemanticError(Expression.line, "错误，if语句的判断表达式不是BOOLEAN类型");
             break;
         }
-        case 57: { // 57. Statement -> case Expression of Case_body end
+        case 57: { // 57. Statement -> case Expression W of Case_body end
             leftSymbol->startQuad = midCode.codeList.size();
             break;
         }
-        case 58: { // 58. Statement -> while Expression do Statement
-            auto Expression = vectorAttribute[top - 2];
+        case 58: { // 58. Statement -> while M Expression do M Statement
+            auto Expression = vectorAttribute[top - 3];
             leftSymbol->startQuad = midCode.codeList.size();
             if (Expression.type->getType() != Type::BOOLEAN)
                 recordSemanticError(Expression.line, "错误，while语句的判断表达式不是BOOLEAN类型");
             break;
         }
-        case 59: { // 59. Statement -> repeat Statement_list until Expression
+        case 59: { // 59. Statement -> repeat M Statement_list M until Expression
             auto Expression = vectorAttribute[top];
             leftSymbol->startQuad = midCode.codeList.size();
             if (Expression.type->getType() != Type::BOOLEAN)
                 recordSemanticError(Expression.line, "错误，repeat语句的判断表达式不是BOOLEAN类型");
             break;
         }
-        case 60: { // 60. Statement -> for id assignop Expression0 Updown Expression1 do Statement
-            id = vectorAttribute[top - 6].attribute;
+        case 60: { // 60. Statement -> for id assignop Expression0 Updown M Expression1 I60 do M Statement
+            id = vectorAttribute[top - 9].attribute;
             auto tempPoint = curBlock->query(id);
-            auto Expression0 = vectorAttribute[top - 4];
-            auto Expression1 = vectorAttribute[top - 2];
+            auto Expression0 = vectorAttribute[top - 7];
+            auto Expression1 = vectorAttribute[top - 4];
             leftSymbol->startQuad = midCode.codeList.size();
             bool flag = true;
             if (*(Expression0.type) != *(Expression1.type))
@@ -722,9 +722,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = i_type;
             break;
         }
-        case 73: { // 73. Branch -> Const_list : Statement
-            auto i_type = vectorAttribute[top - 4].type;
-            auto Const_list = vectorAttribute[top - 2];
+        case 73: { // 73. Branch -> Const_list : U Statement
+            auto i_type = vectorAttribute[top - 5].type;
+            auto Const_list = vectorAttribute[top - 3];
             int line = Const_list.line;
             bool flag = true;
             for (const auto &item: Const_list.typeList) {
