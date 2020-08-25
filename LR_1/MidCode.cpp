@@ -17,7 +17,7 @@ void Quaternion::argPrint(string arg) {//判断是用户变量还是临时变量
     if (arg[0] == '#') {
         var = getTempById(arg);
         if (var->tableLineEntry != nullptr) {//如果是用户变量
-            cout << setiosflags(ios::left) << setw(printWidth) << var->toString() + "->" + var->tableLineEntry->name;
+            cout << setiosflags(ios::left) << setw(printWidth) << var->toString() + "->" + var->value;
         } else {
             cout << setiosflags(ios::left) << setw(printWidth) << var->toString();
         }
@@ -29,7 +29,7 @@ void Quaternion::argPrint(string arg) {//判断是用户变量还是临时变量
 void Quaternion::print() {
     cout << "\n";
     cout << "中间代码：" << endl;
-    int i = 50;
+    int i = 5 * printWidth;
     while (i--)
         cout << '=';
     cout << '\n';
@@ -39,7 +39,7 @@ void Quaternion::print() {
     cout << setiosflags(ios::left) << setw(printWidth) << "arg2";
     cout << setiosflags(ios::left) << setw(printWidth) << "res";
     cout << '\n';
-    i = 50;
+    i = 5 * printWidth;
     while (i--)
         cout << '=';
     cout << '\n';

@@ -18,9 +18,11 @@ public:
         width = InWidth;
         line = Inline;
     }
+
     ~vectorAttributeItem();
 
     string attribute;
+    string variableName;
     Type *type{nullptr};
     int width;
     int num;
@@ -28,10 +30,11 @@ public:
     int line = 0;
     string value;
     vector<SymbolTableLine *> IDlist;
-    vector<Type*> typeList;
-    SymbolTableLine *tableLineEntry; // 符号表中的入口地址
+    vector<Type *> typeList;
+    SymbolTableLine *tableLineEntry = nullptr; // 符号表中的入口地址
     TempVar *entry{nullptr}; // 临时变量入口
     SymbolBlock *tableEntry{nullptr};
+    int startQuad = -1;
 };
 
 
@@ -78,9 +81,9 @@ private:
 
     void recordSemanticError(int line, const string &); // 记录语义错误
 
-    SymbolTableLine* newTemp(); // 生成临时变量
+    SymbolTableLine *newTemp(); // 生成临时变量
 
-    static Type *getType(SymbolTableLine*);
+    static Type *getType(SymbolTableLine *);
 };
 
 

@@ -200,7 +200,24 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
     int top = vectorAttribute.size() - 1;
     string id;
     switch (op_type) {
-        case 4: { // Identifier_list -> Identifier_list , id
+        case 1: {   //Program -> Program_head Program_body .
+            auto Program_head = vectorAttribute[top - 2];
+            auto Program_body = vectorAttribute[top - 1];
+            Program_head.tableLineEntry->startQuad = Program_body.startQuad;
+            break;
+        }
+        case 2: {   //Program_head -> program id A ( Identifier_list ) ;
+            auto id = vectorAttribute[top - 5];
+            id.tableLineEntry = curBlock->query(id.attribute);
+            leftSymbol->tableLineEntry = id.tableLineEntry;
+            break;
+        }
+        case 3: {   //3. Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
+            auto Compound_statement = vectorAttribute[top];
+            leftSymbol->startQuad = Compound_statement.startQuad;
+            break;
+        }
+        case 4: {   // Identifier_list -> Identifier_list , id
             id = vectorAttribute[top].attribute;
             int line = vectorAttribute[top].line;
             for (auto item : vectorAttribute[top - 2].IDlist) {
@@ -419,6 +436,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 curBlock->printBlock();
             break;
         }
+        case 39: {  //Subprogram_declaration -> Subprogram_head Program_body
+            auto Program_body = vectorAttribute[top];
+            leftSymbol->tableLineEntry->startQuad = Program_body.startQuad;
+            break;
+        }
         case 40: {// Subprogram_head -> function id B40 Formal_parameter : Standard_type ;
             id = vectorAttribute[top - 5].attribute;
             auto tempPoint = curBlock->query(id);
@@ -434,6 +456,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             func->reType = Standard_type.type;
             tempPoint->type = func;
+            leftSymbol->tableLineEntry = tempPoint;
             break;
         }
         case 41: {// Subprogram_head -> procedure id C41 Formal_parameter ;
@@ -449,6 +472,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 proc->env.push_back(e);
             }
             tempPoint->type = proc;
+            leftSymbol->tableLineEntry = tempPoint;
             break;
         }
         case 42: {  //42. Formal_parameter -> ( Parameter_lists )
@@ -483,12 +507,27 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->IDlist = vectorAttribute[top - 2].IDlist; // 向上传递IDlist
             break;
         }
-        case 50:
+        case 50: {  //50. Compound_statement -> begin Statement_list end
+            auto Statement_list = vectorAttribute[top - 1];
+            leftSymbol->startQuad = Statement_list.startQuad;
             relocate();
             break;
+        }
+        case 51: {  //51. Statement_list -> Statement_list1 ; M Statement
+            ////这里注意,这里的top-2是临时的,这里的M还没算进去,加入了M后需要修改
+            auto Statement_list1 = vectorAttribute[top-3];
+            leftSymbol->startQuad = Statement_list1.startQuad;
+            break;
+        }
+        case 52: {  //52. Statement_list -> Statement
+            auto Statement = vectorAttribute[top];
+            leftSymbol->startQuad = Statement.startQuad;
+            break;
+        }
         case 53: { // Statement -> Variable assignop Expression
             auto Expression = vectorAttribute[top];
             auto Variable = vectorAttribute[top - 2];
+            leftSymbol->startQuad = midCode.codeList.size();
             if (*(Variable.type) != *(Expression.type))
                 recordSemanticError(Variable.line, "错误：赋值语句类型不匹配");
             //中间代码生成,赋值语句
@@ -498,57 +537,69 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 TempVar *entry{nullptr};
                 entry = midCode.newTemp();
-                entry->value = Expression.tableLineEntry->value;
-                entry->type = Expression.tableLineEntry->type;
+                entry->value = Expression.variableName;
+                entry->type = Expression.type;
                 entry->tableLineEntry = Expression.tableLineEntry;
                 Expression.entry = entry;
                 arg1 = Expression.entry->id;
+//                arg1 = Expression.tableLineEntry->name;
 //                printf("type%d\n",Expression.tableLineEntry->type->getType());
             }
 
-//            arg1 = Expression.tableLineEntry->id;
-//            res = Variable.tableLineEntry->name;
             TempVar *entry{nullptr};
             entry = midCode.newTemp();
-            entry->value = Variable.tableLineEntry->value;
-            entry->type = Variable.tableLineEntry->type;
+            entry->value = Variable.variableName;
+            entry->type = Variable.type;
             entry->tableLineEntry = Variable.tableLineEntry;
             Variable.entry = entry;
             res = Variable.entry->id;
-//            printf("type%d\n",Expression.tableLineEntry->type->getType());
-
+//            res = Variable.tableLineEntry->name;
 
 //            printf("typeVar%d",Variable.tableLineEntry->type->getType());
             midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
+
             break;
         }
-        case 56: { // 56. Statement -> if Expression then Statement Else_part
-            auto Expression = vectorAttribute[top - 3];
+        case 54: {  //54. Statement -> Call_procedure_statement
+            leftSymbol->startQuad = midCode.codeList.size();
+            break;
+        }
+        case 55: {  //55. Statement -> Compound_statement
+            auto Compound_statement = vectorAttribute[top];
+            leftSymbol->startQuad = Compound_statement.startQuad;
+            break;
+        }
+        case 56: { // 56. Statement -> if Expression F56 then M Statement Else_part
+            auto Expression = vectorAttribute[top - 5];
+            leftSymbol->startQuad = midCode.codeList.size();
             if (Expression.type->getType() != Type::BOOLEAN)
                 recordSemanticError(Expression.line, "错误，if语句的判断表达式不是BOOLEAN类型");
             break;
         }
-        case 57: { // 57. Statement -> case Expression of Case_body end
-
+        case 57: { // 57. Statement -> case Expression W of Case_body end
+            leftSymbol->startQuad = midCode.codeList.size();
             break;
         }
-        case 58: { // 58. Statement -> while Expression do Statement
-            auto Expression = vectorAttribute[top - 2];
+        case 58: { // 58. Statement -> while M Expression do M Statement
+            auto Expression = vectorAttribute[top - 3];
+            leftSymbol->startQuad = midCode.codeList.size();
             if (Expression.type->getType() != Type::BOOLEAN)
                 recordSemanticError(Expression.line, "错误，while语句的判断表达式不是BOOLEAN类型");
             break;
         }
-        case 59: { // 59. Statement -> repeat Statement_list until Expression
+        case 59: { // 59. Statement -> repeat M Statement_list M until Expression
             auto Expression = vectorAttribute[top];
+            leftSymbol->startQuad = midCode.codeList.size();
             if (Expression.type->getType() != Type::BOOLEAN)
                 recordSemanticError(Expression.line, "错误，repeat语句的判断表达式不是BOOLEAN类型");
             break;
         }
-        case 60: { // 60. Statement -> for id assignop Expression0 Updown Expression1 do Statement
-            id = vectorAttribute[top - 6].attribute;
+        case 60: { // 60. Statement -> for id assignop Expression0 Updown M Expression1 I60 do M Statement
+            id = vectorAttribute[top - 9].attribute;
             auto tempPoint = curBlock->query(id);
-            auto Expression0 = vectorAttribute[top - 4];
-            auto Expression1 = vectorAttribute[top - 2];
+            auto Expression0 = vectorAttribute[top - 7];
+            auto Expression1 = vectorAttribute[top - 4];
+            leftSymbol->startQuad = midCode.codeList.size();
             bool flag = true;
             if (*(Expression0.type) != *(Expression1.type))
                 flag = false;
@@ -558,23 +609,37 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 recordSemanticError(Expression0.line, "错误，for语句中id，Expression类型不一致");
             break;
         }
+        case 61: {  //61. Statement -> #
+            leftSymbol->startQuad = midCode.codeList.size();
+            break;
+        }
         case 62: { // Variable -> id E62 Id_varparts
             auto Id_varparts = vectorAttribute[top];
             leftSymbol->type = Id_varparts.type;
             leftSymbol->tableLineEntry = Id_varparts.tableLineEntry;
-            leftSymbol->attribute = vectorAttribute[top - 2].attribute;
-            ////这里还没能实现数组赋值的情况
+            leftSymbol->variableName = vectorAttribute[top - 2].attribute;
+            if (Id_varparts.variableName != "Id_varparts") {
+                leftSymbol->variableName += Id_varparts.variableName;
+            }
             break;
         }
         case 63: { // Id_varparts0 -> Id_varparts1 Id_varpart
             auto Id_varpart = vectorAttribute[top];
+            auto Id_varparts1 = vectorAttribute[top - 1];
             leftSymbol->tableLineEntry = Id_varpart.tableLineEntry;
+            if (Id_varparts1.variableName != "Id_varparts") {
+                leftSymbol->variableName = Id_varparts1.variableName;
+            }
+            if (Id_varpart.variableName != "Id_varpart") {
+                leftSymbol->variableName += Id_varpart.variableName;
+            }
             leftSymbol->type = Id_varpart.type;
             break;
         }
         case 64: { // Id_varparts -> #
             leftSymbol->tableLineEntry = vectorAttribute[top].tableLineEntry;
             leftSymbol->type = vectorAttribute[top].type;
+            leftSymbol->variableName = "";
             break;
         }
         case 65: {// Id_varpart -> [ Expression_list ]
@@ -597,6 +662,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         }
                     if (isExpressionsTypeInteger) {
                         leftSymbol->tableLineEntry = i_entry;
+                        leftSymbol->variableName = "[" + Expression_list.variableName + "]";
                         while (size--) {
                             auto t = (Array *) type;
                             type = t->elem;
@@ -626,6 +692,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 auto entry = recordBlock->blockQuery(id_local.attribute);
                 if (entry != nullptr) {
                     leftSymbol->tableLineEntry = entry;
+                    leftSymbol->variableName = "." + id_local.attribute;
                     leftSymbol->type = entry->type;
                 } else {
                     leftSymbol->tableLineEntry = nullptr;
@@ -655,9 +722,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = i_type;
             break;
         }
-        case 73: { // 73. Branch -> Const_list : Statement
-            auto i_type = vectorAttribute[top - 4].type;
-            auto Const_list = vectorAttribute[top - 2];
+        case 73: { // 73. Branch -> Const_list : U Statement
+            auto i_type = vectorAttribute[top - 5].type;
+            auto Const_list = vectorAttribute[top - 3];
             int line = Const_list.line;
             bool flag = true;
             for (const auto &item: Const_list.typeList) {
@@ -730,11 +797,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto Expression = vectorAttribute[top];
             leftSymbol->typeList = Expression_list1.typeList;
             leftSymbol->typeList.push_back(Expression.type);
+            leftSymbol->variableName = Expression_list1.variableName + Expression.variableName;
             break;
         }
         case 81: { // Expression_list -> Expression
             auto Expression = vectorAttribute[top];
             leftSymbol->typeList.push_back(Expression.type);
+            leftSymbol->variableName = Expression.variableName;
             break;
         }
         case 82: { // Expression -> Simple_expression0 = Simple_expression1
@@ -1081,6 +1150,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = Simple_expression.value;
             leftSymbol->entry = Simple_expression.entry;
             leftSymbol->tableLineEntry = Simple_expression.tableLineEntry;
+            leftSymbol->variableName = Simple_expression.variableName;
             break;
         }
         case 89: { // Simple_expression -> Term
@@ -1089,6 +1159,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = Term.value;
             leftSymbol->entry = Term.entry;
             leftSymbol->tableLineEntry = Term.tableLineEntry;
+            leftSymbol->variableName = Term.variableName;
             break;
         }
         case 90: { // Simple_expression -> + Term
@@ -1108,6 +1179,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = Term.type;
             leftSymbol->value = Term.value;
             leftSymbol->tableLineEntry = Term.tableLineEntry;
+            leftSymbol->variableName = "+" + Term.variableName;
 
             TempVar *entry{nullptr};
             entry = midCode.newTemp();
@@ -1141,6 +1213,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = Term.type;
             leftSymbol->value = Term.value;
             leftSymbol->tableLineEntry = Term.tableLineEntry;
+            leftSymbol->variableName = "-" + Term.variableName;
             TempVar *entry{nullptr};
             entry = midCode.newTemp();
             entry->value = value;
@@ -1528,6 +1601,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = Factor.value;
             leftSymbol->entry = Factor.entry;
             leftSymbol->tableLineEntry = Factor.tableLineEntry;
+            leftSymbol->variableName = Factor.variableName;
             break;
         }
         case 101: { //Factor -> Unsign_const_variable
@@ -1535,6 +1609,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = Unsign_const_variable.type;
             leftSymbol->value = Unsign_const_variable.value;
             leftSymbol->entry = Unsign_const_variable.entry;
+            leftSymbol->variableName = Unsign_const_variable.variableName;
             break;
         }
         case 102: { // Factor -> Variable
@@ -1544,6 +1619,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = Variable.type;
             leftSymbol->value = value;
             leftSymbol->tableLineEntry = Variable.tableLineEntry;
+            leftSymbol->variableName = Variable.variableName;
             break;
         }
         case 103: { //103. Factor -> id ( Expression_list )
@@ -1633,6 +1709,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             if (tempLinePoint != nullptr) {//如果存在
                 leftSymbol->type = tempLinePoint->type;
                 leftSymbol->tableLineEntry = tempLinePoint;
+                leftSymbol->variableName = tempLinePoint->name;
             } else {
                 leftSymbol->type = new Type(Type::TYPE_ERROR);
                 leftSymbol->tableLineEntry = nullptr;
@@ -1657,6 +1734,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 type = new Type(Type::INTEGER);
             }
             leftSymbol->value = num.attribute;
+            leftSymbol->variableName = num.attribute;
             leftSymbol->type = type;
             auto var = midCode.newTemp(true);
             var->type = type;

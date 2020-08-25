@@ -11,9 +11,9 @@
 #include <iomanip>
 #include "SymbolBlock.h"
 
-class TempVar{
+class TempVar {
 public:
-    explicit TempVar(string i, bool f){
+    explicit TempVar(string i, bool f) {
         id = std::move(i);
         isImmediate = f;
     }
@@ -22,7 +22,7 @@ public:
     Type *type{nullptr};
     string value;
     bool isImmediate;
-    SymbolTableLine * tableLineEntry= nullptr;//如果是用户变量,则这里存储的就是相应的符号表行的指针
+    SymbolTableLine *tableLineEntry = nullptr;//如果是用户变量,则这里存储的就是相应的符号表行的指针
 
     string toString() const;
 };
@@ -36,7 +36,7 @@ public:
         MORE_EQUAL = 15, NOT = 16
     };
 
-    QuaternionItem(int seq, int op, std::string arg1, std::string arg2, std::string res){
+    QuaternionItem(int seq, int op, std::string arg1, std::string arg2, std::string res) {
         this->seq = seq;
         this->op = op;
         this->arg1 = std::move(arg1);
@@ -53,18 +53,18 @@ class Quaternion {
 public:
     std::vector<QuaternionItem> codeList;
 
-    std::vector<TempVar*> tempVarList;
+    std::vector<TempVar *> tempVarList;
 
-    QuaternionItem *outCode(int op, const std::string& arg1, const std::string& arg2, const std::string& res);
+    QuaternionItem *outCode(int op, const std::string &arg1, const std::string &arg2, const std::string &res);
 
     void print();
 
-    TempVar* newTemp(bool flag = false);
+    TempVar *newTemp(bool flag = false);
 
-    TempVar* getTempById(string);
+    TempVar *getTempById(string);
 
 private:
-    int printWidth = 10;
+    int printWidth = 15;
 
     int tempSeq = 0;
 
