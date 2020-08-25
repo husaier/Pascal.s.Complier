@@ -19,7 +19,8 @@ begin
   b := b2;
   b := rec.i;
   rec.c.a := b;
-  {b := arr[0][0][6];}
+  b := arr[b][0][6];
+  arr[b][rec.c.a][6] := b;
   a := 'a' = 'c';
   a := 1 <> 2;
   a := 1 < 2;
