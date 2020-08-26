@@ -17,7 +17,7 @@ var
     j,k: char;
   end; {end of record rec}
 begin
-  a := 2=2;
+  a := b=2;
 {  if (1 = 1) then
     begin
       b := 1;
@@ -31,7 +31,9 @@ begin
 
   case b of
     1 : b2 := 1;
-    2 : b2 := 2{这里不能加分号否则会异常}
+    2 : b2 := 2;
+    3 : b2 := 3
+      {这里不能加分号否则会异常}
   end;
 
   b := 5;
