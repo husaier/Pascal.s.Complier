@@ -34,7 +34,7 @@ SymbolTableLine *SymbolBlock::insert2(string name, Type *type, int offset, int d
         printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
         return nullptr;
     } else {
-        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine);
+        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine,this);
         invMap.insert(map<string, int>::value_type(name, rowNum));
         rowNum++;
         symbolBlock.push_back(tempPoint);
@@ -48,7 +48,7 @@ bool SymbolBlock::insert(string name, Type *type, int offset, int dimension, int
         printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
         return false;
     } else {
-        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine);
+        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine,this);
         invMap.insert(map<string, int>::value_type(name, rowNum));
         rowNum++;
         symbolBlock.push_back(tempPoint);

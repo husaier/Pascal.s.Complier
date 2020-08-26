@@ -1,6 +1,6 @@
 Program -> Program_head Program_body .
 Program_head -> program id A2 ( Identifier_list ) ;
-Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
+Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Statement_body
 Identifier_list -> Identifier_list , id
 Identifier_list -> id
 Const_declarations -> const Const_declaration ;
@@ -119,3 +119,4 @@ F56 -> #
 G58 -> #
 H59 -> #
 I60 -> #
+Statement_body -> Compound_statement

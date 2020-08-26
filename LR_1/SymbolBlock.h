@@ -16,7 +16,7 @@ class SymbolTableLine;
 
 class SymbolTableLine {
 public:
-    SymbolTableLine(int InId, string InName, Type *InType, int InOffset, int InDimension, int InDeclarationLine) {
+    SymbolTableLine(int InId, string InName, Type *InType, int InOffset, int InDimension, int InDeclarationLine,SymbolBlock* InCurrentBlock) {
         id = InId;//序号
         name = InName;//名字
         type = InType;//类型
@@ -26,6 +26,7 @@ public:
         vector<int> referenceLineVector;//引用行 创建时为空
         point = nullptr; //指向存储位置的指针
         blockPoint = nullptr;//指指向下一个符号块
+        currentBlock = InCurrentBlock;
     }
 
     void printLine(SymbolTableLine *InLinePoint);
@@ -40,6 +41,7 @@ public:
     vector<int> referenceLineVector;//引用行
     SymbolTableLine *point; //自己指针
     SymbolBlock *blockPoint;//指向下一个表的指针
+    SymbolBlock *currentBlock; //指向自己所在表的指针
     string value; //值
     int startQuad = -1;
 };
