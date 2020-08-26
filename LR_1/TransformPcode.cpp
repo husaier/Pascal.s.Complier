@@ -30,10 +30,11 @@ int TransformPcode::getProcedureIndex(int index) {
 }
 
 //把codelist里面的四元式转变成pcode
-vector<Pcode> TransformPcode::transformPcode(vector<QuaternionItem> codeList) {
+vector<Pcode> TransformPcode::transformPcode(Quaternion midCode) {
+
     //遍历所有的四元式
-    for (int i = 0; i < codeList.size(); i++) {
-        singlePcode(codeList[i], i);
+    for (int i = 0; i < midCode.codeList.size(); i++) {
+        singlePcode(midCode, i);
     }
     //需要加上主过程的退栈pcode语句
     Pcode pcode;
@@ -46,7 +47,8 @@ vector<Pcode> TransformPcode::transformPcode(vector<QuaternionItem> codeList) {
 }
 
 //把单个四元式转变成pcode
-void TransformPcode::singlePcode(QuaternionItem code, int index) {
+void TransformPcode::singlePcode(Quaternion midCode, int index) {
+    QuaternionItem code = midCode.codeList[index];//获取当前四元式
     //如果四元式地址是某个过程的开始地址，形成开辟栈空间的pcode语句
     if (exist(startCodeIndex, index) != -1) {
         int i = exist(startCodeIndex, index);//当前地址为第i个过程的开始地址（i从0开始）
@@ -86,15 +88,15 @@ void TransformPcode::singlePcode(QuaternionItem code, int index) {
                     case QuaternionItem::ADD: // +
                         // 把第一个变量放到栈顶
                         if (code.arg1[0] == '$')
-                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
+                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
                         else {
                             //todo:调用对应的block的query函数找到变量arg1定义的位置
-
+                            midCode.tempVarList[index]->tableLineEntry->currentBlock
                             allPcode.push_back({LOD, l, d});
                         }
                         // 把第二个变量放到栈顶
                         if (code.arg2[0] == '$')
-                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
+                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
                         else {
                             //todo:调用对应的block的query函数找到变量arg2定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                             allPcode.push_back({LOD, l, d});
