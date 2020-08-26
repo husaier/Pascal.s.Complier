@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/CJsonObject.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.cpp
 CJsonObject.hpp
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 stdio.h
 -
 stddef.h
@@ -30,13 +30,13 @@ map
 list
 -
 cJSON.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/cJSON.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/FirstSetCalculator.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.cpp
 FirstSetCalculator.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/FirstSetCalculator.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/FirstSetCalculator.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
 iostream
 -
 string
@@ -50,41 +50,41 @@ vector
 sstream
 -
 CJsonObject.hpp
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 Production.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1Table.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.cpp
 LR1Table.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1Table.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1Table.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
 map
 -
 Production.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
 fstream
 -
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1TableMaker.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.cpp
 LR1TableMaker.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1TableMaker.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1TableMaker.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
 FirstSetCalculator.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/FirstSetCalculator.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/FirstSetCalculator.h
 LR1Table.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1Table.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1Table.h
 set
 -
 utility
 -
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/Production.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.cpp
 Production.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/Production.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/Production.h
 iostream
 -
 string
@@ -92,15 +92,15 @@ string
 vector
 -
 CJsonObject.hpp
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/cJSON.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/cJSON.h
 stdint.h
 -
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/main.cpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/main.cpp
 LR1TableMaker.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/LR1TableMaker.h
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/LR1TableMaker.h
 CJsonObject.hpp
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR1_TableCreate/CJsonObject.hpp
+/home/husserl/pascal/Pascal.s.Complier/LR1_TableCreate/CJsonObject.hpp
 

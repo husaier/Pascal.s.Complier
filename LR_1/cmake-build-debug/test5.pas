@@ -18,12 +18,12 @@ var
   end; {end of record rec}
 begin
   a := 2=2;
-{  if (1 = 1) then
+  if (1 = 1) then
     begin
       b := 1;
       c := 1.2;
       c := 1.3;
-    end;}{这里begin和end会导致异常,貌似是relocate的问题}
+    end;{这里begin和end会导致异常,貌似是relocate的问题}
   if a then
       b := 1
   else
