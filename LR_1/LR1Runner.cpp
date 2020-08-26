@@ -517,7 +517,6 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         case 50: {  //50. Compound_statement -> begin Statement_list end
             auto Statement_list = vectorAttribute[top - 1];
             leftSymbol->startQuad = Statement_list.startQuad;
-            relocate();
             break;
         }
         case 51: {  //51. Statement_list -> Statement_list1 ; M Statement
@@ -1972,6 +1971,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             midCode.outCode(QuaternionItem::GOTO, argb1, argb2, resb);
             printf("%p,%lu\n", &Expression, Expression->trueList.size());
 
+            break;
+        }
+        case 122: {//122、Statement_body -> Compound_statement
+            relocate();
             break;
         }
         default:
