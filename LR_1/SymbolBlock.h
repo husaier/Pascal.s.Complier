@@ -55,6 +55,7 @@ public:
     //反映射表，建立string -> index的映射,name -> id
     map<string, int> invMap;
     int rowNum = 0;
+    int level = 0; //符号表的深度
     //int colNum = 8;
 
     SymbolTableLine *query(string name);
