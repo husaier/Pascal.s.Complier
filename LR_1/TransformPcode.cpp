@@ -91,7 +91,9 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                             allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
                         else {
                             //todo:调用对应的block的query函数找到变量arg1定义的位置
-                            midCode.tempVarList[index]->tableLineEntry->currentBlock
+                            if(midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr){
+                                l =procedure[procedureIndex]->level - midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry->currentBlock->level;
+                            }
                             allPcode.push_back({LOD, l, d});
                         }
                         // 把第二个变量放到栈顶
