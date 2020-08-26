@@ -7,9 +7,11 @@
 vector<int> startCodeIndex;//[0,15,19,19,23,27,28]  前面是每个过程的四元式开始地址，按从小到大排序,最后一个值是程序的结束地址+1
 //todo:如果最后一个值等于倒数第二个值，那么在codelist里面加上一条无意义的语句（最后一个值加一），用于帮助空的主过程形成开栈和退栈的pcode语句
 vector<int> valueNum;//[2,3,0,5,2,1]  每个过程定义的过程数加上变量数
+//todo:符号表里面定义的变量的个数（数组的大小和结构的大小）+结构的个数+临时变量的个数（遍历一遍四元式列表，得到每个过程临时变量的个数）
 vector<SymbolBlock *> procedure;//每个过程的符号表，与startCodeIndex相对应
 vector<int> pcodeIndex;//[0,20,34,36,48,65]  每个过程的pcode码开始地址
 
+//判断数字是否在数组里面,如果在，返回序号，否则返回-1
 int TransformPcode::exist(vector<int> list, int num) {
     for (int i = 0; i < list.size(); i++) {
         if (list[i] == num)
@@ -18,7 +20,16 @@ int TransformPcode::exist(vector<int> list, int num) {
     return -1;
 }
 
+//根据index找到所在的过程序号,返回序号值，若没找到，则报错
+int TransformPcode::getProcedureIndex(int index) {
+    for (int i = 0; i < startCodeIndex.size() - 1; i++) {
+        if (startCodeIndex[i] <= index && startCodeIndex[i + 1] > index)
+            return i;
+    }
+    return -1;
+}
 
+//把codelist里面的四元式转变成pcode
 vector<Pcode> TransformPcode::transformPcode(vector<QuaternionItem> codeList) {
     //遍历所有的四元式
     for (int i = 0; i < codeList.size(); i++) {
@@ -34,6 +45,7 @@ vector<Pcode> TransformPcode::transformPcode(vector<QuaternionItem> codeList) {
     return allPcode;
 }
 
+//把单个四元式转变成pcode
 void TransformPcode::singlePcode(QuaternionItem code, int index) {
     //如果四元式地址是某个过程的开始地址，形成开辟栈空间的pcode语句
     if (exist(startCodeIndex, index) != -1) {
@@ -66,84 +78,92 @@ void TransformPcode::singlePcode(QuaternionItem code, int index) {
     }
     //开始对每一条四元式进行翻译
     int l, d = 0;
-    switch (code.type) {
-        case 1:
-            switch (code.op) {
-                case QuaternionItem::ADD: // +
-                    if (code.arg1[0] == '$')
-                        allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
-                    else {
-                        //todo:根据index找到所在的过程序号
-                        //todo:调用对应的block的query函数找到变量arg1定义的位置
-                        allPcode.push_back({LOD, l, d});
-                    }
-                    if (code.arg2[0] == '$')
-                        allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
-                    else {
-                        //todo:根据index找到所在的过程序号
-                        //todo:调用对应的block的query函数找到变量arg2定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
-                        allPcode.push_back({LOD, l, d});
-                    }
-                    allPcode.push_back({OPR, 0, 2});
-                    //todo:根据index找到所在的过程序号
-                    //todo:调用对应的block的query函数找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
-                    allPcode.push_back({STO, l, d});
-                    break;
-                case QuaternionItem::MINUS:// -
-                    break;
-                case QuaternionItem::MULTIPLY:// *
-                    break;
-                case QuaternionItem::DIVIDE:// /
-                    break;
-                case QuaternionItem::ASSIGN:// 赋值
-                    break;
-                case QuaternionItem::EQUAL:// ==
-                    break;
-                case QuaternionItem::OR:// or
-                    break;
-                case QuaternionItem::FLOOR_DIVIDE:// 整除
-                    break;
-                case QuaternionItem::MOD:// 模除
-                    break;
-                case QuaternionItem::AND:// and
-                    break;
-                case QuaternionItem::UNEQUAL:// !=
-                    break;
-                case QuaternionItem::LESS:// <
-                    break;
-                case QuaternionItem::LESS_EQUAL:// <=
-                    break;
-                case QuaternionItem::MORE:// >
-                    break;
-                case QuaternionItem::MORE_EQUAL:// >=
-                    break;
-                case QuaternionItem::NOT:// not
-                    break;
+    int procedureIndex = getProcedureIndex(index);//根据index找到所在的过程序号
+    if (procedureIndex != -1) {
+        switch (code.type) {
+            case 1:
+                switch (code.op) {
+                    case QuaternionItem::ADD: // +
+                        // 把第一个变量放到栈顶
+                        if (code.arg1[0] == '$')
+                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
+                        else {
+                            //todo:调用对应的block的query函数找到变量arg1定义的位置
 
-            }
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        case 7:
-            break;
-        case 8:
-            break;
-        case 9:
-            break;
-        case 10:
-            break;
-        default:
-            break;
-    }
+                            allPcode.push_back({LOD, l, d});
+                        }
+                        // 把第二个变量放到栈顶
+                        if (code.arg2[0] == '$')
+                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1, code.arg1.length()))});
+                        else {
+                            //todo:调用对应的block的query函数找到变量arg2定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                            allPcode.push_back({LOD, l, d});
+                        }
+                        // 从栈顶取值存到结果中
+                        allPcode.push_back({OPR, 0, 2});
+                        //todo:调用对应的block的query函数找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                        allPcode.push_back({STO, l, d});
+                        break;
+                    case QuaternionItem::MINUS:// -
+                        break;
+                    case QuaternionItem::MULTIPLY:// *
+                        break;
+                    case QuaternionItem::DIVIDE:// /
+                        break;
+                    case QuaternionItem::ASSIGN:// 赋值
+                        break;
+                    case QuaternionItem::EQUAL:// ==
+                        break;
+                    case QuaternionItem::OR:// or
+                        break;
+                    case QuaternionItem::FLOOR_DIVIDE:// 整除
+                        break;
+                    case QuaternionItem::MOD:// 模除
+                        break;
+                    case QuaternionItem::AND:// and
+                        break;
+                    case QuaternionItem::UNEQUAL:// !=
+                        break;
+                    case QuaternionItem::LESS:// <
+                        break;
+                    case QuaternionItem::LESS_EQUAL:// <=
+                        break;
+                    case QuaternionItem::MORE:// >
+                        break;
+                    case QuaternionItem::MORE_EQUAL:// >=
+                        break;
+                    case QuaternionItem::NOT:// not
+                        break;
+
+                }
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            default:
+                break;
+        }
+    } else
+        printf("error:搜索过程序号时出现错误");
+
 
 }
+
+
 
 

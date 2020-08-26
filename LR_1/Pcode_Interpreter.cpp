@@ -115,6 +115,11 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                         //OPR 0 6   栈顶元素的奇偶判断，结果值在栈顶
                         dataStack[top - 1] = dataStack[top - 1] % 2;
                         break;
+                    case 7:
+                        //OPR 0 7   次栈顶模除栈顶，退两个栈元素，结果值进栈
+                        dataStack[top - 2] = dataStack[top - 2] % dataStack[top - 1];
+                        top--;
+                        break;
                     case 8:
                         //OPR 0 8   次栈顶与栈顶是否相等，退两个栈元素，结果值进栈
                         if (dataStack[top - 2] == dataStack[top - 1]) {
