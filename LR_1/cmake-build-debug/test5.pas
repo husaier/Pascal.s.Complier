@@ -1,4 +1,6 @@
 program test5(input, output);
+const pai = 3.14; {常量声明}
+      pai2 = pai; {常量id声明}
 var
   a: Boolean;
   b,b2: Integer;
@@ -16,12 +18,22 @@ var
   end; {end of record rec}
 begin
   a := 2=2;
-  if (1 = 1) then
-    b := 1;
-    c := 1.2;
-  if a then {这里还有bug,没能正确识别出是a}
-    b := 2;
-    c := 2.2;
+{  if (1 = 1) then
+    begin
+      b := 1;
+      c := 1.2;
+      c := 1.3;
+    end;}{这里begin和end会导致异常,貌似是relocate的问题}
+  if a then
+      b := 1
+  else
+      b := 2;
+
+  case b of
+    1 : b2 := 1;
+    2 : b2 := 2{这里不能加分号否则会异常}
+  end;
+
   b := 5;
   b := b2;
   b := rec.i;

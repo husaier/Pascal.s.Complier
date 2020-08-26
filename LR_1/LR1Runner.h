@@ -35,7 +35,9 @@ public:
     TempVar *entry{nullptr}; // 临时变量入口
     SymbolBlock *tableEntry{nullptr};
     int startQuad = -1;
-    vector<int> nextList,trueList,falseList,testList,caseList,varList_list;
+    vector<int> nextList,trueList,falseList,testList,caseList;
+    vector<string> varList;
+    vector<vector<string>> varList_list;
     int quad = -1;
 };
 
