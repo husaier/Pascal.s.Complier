@@ -149,7 +149,7 @@ void Quaternion::backPatch(const vector<int> &list, int quad) {
             break;
         }
         if (!codeList[i].res.empty()) {
-            printf("BackPatch ERROR,res already exist\n");
+            printf("BackPatch ERROR,res already existInt\n");
             break;
         }
         codeList[i].res = to_string(quad);

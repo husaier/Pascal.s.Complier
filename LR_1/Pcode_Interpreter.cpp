@@ -88,12 +88,12 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                         base = dataStack[base];
                         break;
                     case 1:
-                        //OPR 0 1     栈顶元素取反
+                        //OPR 0 1     栈顶元素取负
                         dataStack[top - 1] = -dataStack[top - 1];
                         break;
                     case 2:
                         //OPR 0 2   次栈顶与栈顶相加，退两个栈元素，结果值进栈
-                        dataStack[top - 2] = dataStack[top - 1] + dataStack[top - 2];
+                        dataStack[top - 2] = dataStack[top - 2] + dataStack[top - 1];
                         top--;
                         break;
                     case 3:
@@ -103,7 +103,7 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                         break;
                     case 4:
                         //OPR 0 4     次栈顶乘以栈顶，退两个栈元素，结果值进栈
-                        dataStack[top - 2] = dataStack[top - 1] * dataStack[top - 2];
+                        dataStack[top - 2] = dataStack[top - 2] * dataStack[top - 1];
                         top--;
                         break;
                     case 5:
@@ -187,6 +187,26 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                         cout << "please input a number" << endl;
                         cin >> dataStack[top];
                         top++;
+                        break;
+                    case 17:
+                        //OPR 0 17     次栈顶与栈顶取and，退两个栈元素，结果值进栈
+                        dataStack[top - 2] = dataStack[top - 2] && dataStack[top - 1];
+                        top--;
+                        break;
+                    case 18:
+                        //OPR 0 18     次栈顶与栈顶取or，退两个栈元素，结果值进栈
+                        dataStack[top - 2] = dataStack[top - 2] || dataStack[top - 1];
+                        top--;
+                        break;
+                    case 19:
+                        //OPR 0 19     栈顶取not
+                        dataStack[top - 1] = !dataStack[top - 1];
+                        break;
+                    case 20:
+                        //OPR 0 20     次栈顶整除栈顶，退两个栈元素，结果值进栈
+                        dataStack[top - 2] -= dataStack[top - 2] % dataStack[top - 1];
+                        dataStack[top - 2] = dataStack[top - 2] / dataStack[top - 1];
+                        top--;
                         break;
                     default:
                         cout << "OPR指令出现错误" << currentPcode.D << " " << pc;

@@ -22,13 +22,16 @@ struct Pcode {
 
 class TransformPcode {
 private:
-    vector<Pcode> allPcode;;
+    vector<Pcode> allPcode;//生成的pcode集合
+    vector<int> pcodeIndex;//每个过程的pcode码开始地址
 
 public:
     vector<Pcode> transformPcode(Quaternion midCode); //把codelist里面的四元式转变成pcode
     void singlePcode(Quaternion midCode,int index); //把单个四元式转变成pcode
-    int exist(vector<int> list, int num); //判断数字是否在数组里面,如果在，返回序号，否则返回-1
+    int existInt(vector<int> list, int num); //判断数字是否在数组里面,如果在，返回序号，否则返回-1
+    int existBlock(vector<SymbolBlock *> procedure,SymbolBlock *block);//判断block是否在数组里面,如果在，返回序号，否则返回-1
     int getProcedureIndex(int index); //根据index找到所在的过程序号
+    int getAddress(int blockIndex, string value); //根据变量名和符号表序号得到该变量在该符号表里面的位置
 };
 
 
