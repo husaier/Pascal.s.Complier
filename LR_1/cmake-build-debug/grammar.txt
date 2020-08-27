@@ -55,8 +55,8 @@ Statement -> Call_procedure_statement
 Statement -> Compound_statement
 Statement -> if Expression F56 then M Statement Else_part
 Statement -> case Expression W of Case_body end
-Statement -> while M Expression do M Statement
-Statement -> repeat M Statement_list M until Expression
+Statement -> while M Expression G58 do M Statement
+Statement -> repeat M Statement_list M until Expression H59
 Statement -> for id assignop Expression Updown M Expression I60 do M Statement
 Statement -> #
 Variable -> id E62 Id_varparts
