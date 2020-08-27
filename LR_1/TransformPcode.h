@@ -11,7 +11,7 @@
 
 using namespace std;
 enum Operator {
-    LIT, LOD, STO, CAL, INT, JMP, JPC, OPR
+    LIT, LOD, STO, CAL, INT, JMP, JPC, OPR, LOA, LAO
 };
 
 struct Pcode {
