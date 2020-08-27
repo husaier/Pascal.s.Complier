@@ -27,7 +27,9 @@ public:
 
     virtual void addElem(Type*);
 
-    virtual int getWidth();
+    virtual int getWidth(); // 获取类型的位宽，单位：比特
+
+    virtual int getSize(); // 获取变量个数
 
     virtual int getDimension();
 
@@ -57,6 +59,8 @@ public:
 
     int getWidth() override;
 
+    int getSize() override;
+
     int getDimension() override;
 
     Type *elem{nullptr};
@@ -78,6 +82,10 @@ public:
 
     bool operator != (const EnvItem&) const;
 
+    int getWidth() const;
+
+    int getSize() const;
+
     string id;
     Type *type{nullptr};
 };
@@ -95,6 +103,8 @@ public:
     bool operator != (Type&) const override;
 
     int getWidth() override;
+
+    int getSize() override;
 
     int getDimension() override;
 

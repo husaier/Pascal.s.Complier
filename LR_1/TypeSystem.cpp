@@ -64,6 +64,10 @@ Type* Type::copy() {
     }
 }
 
+int Type::getSize() {
+    return 1;
+}
+
 Array::Array(int l, int h):
     Type(Type::ARRAY)
 {
@@ -129,6 +133,10 @@ int Array::getDimension() {
     return elem->getDimension() + 1;
 }
 
+int Array::getSize() {
+    return length * elem->getSize();
+}
+
 EnvItem::EnvItem() = default;
 
 EnvItem::~EnvItem() {
@@ -156,6 +164,14 @@ EnvItem::EnvItem(const EnvItem &e) {
     }
 }
 
+int EnvItem::getWidth() const {
+    return type->getWidth();
+}
+
+int EnvItem::getSize() const {
+    return type->getSize();
+}
+
 Record::Record(): Type(Type::RECORD) { }
 
 Record::Record(const Record &r):
@@ -180,11 +196,23 @@ bool Record::operator!=(Type &a) const {
 }
 
 int Record::getWidth() {
-    return Type::getWidth();
+    int r=0;
+    for(const auto &item: env){
+        r += item.getWidth();
+    }
+    return r;
 }
 
 int Record::getDimension() {
     return Type::getDimension();
+}
+
+int Record::getSize() {
+    int r = 0;
+    for(const auto &item : env){
+        r += item.getSize();
+    }
+    return r;
 }
 
 Func::Func():

@@ -358,6 +358,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 record->env.push_back(e);
             }
             leftSymbol->type = (Type *) record;
+//            int t = record->getWidth();
+//            int tmp = record->getSize();
             relocate();
             break;
         }
@@ -366,6 +368,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto Periods = vectorAttribute[top - 3];
             auto *type = Periods.type;
             type->addElem(Type.type);
+//            int t = type->getWidth();
+//            int tmp = type->getSize();
             leftSymbol->type = type;
             leftSymbol->width = type->getWidth();
             leftSymbol->tableEntry = Type.tableEntry;
@@ -1999,6 +2003,10 @@ void LR1Runner::quoteID(int line, string id) {
 void LR1Runner::locate() {
     SymbolBlock *childBlock;
     childBlock = SymbolBlock::makeBlock(curBlock);//父亲指针
+    childBlock->level = 1;
+    if(curBlock != nullptr)
+        childBlock->level = curBlock->level + 1;
+
     curBlock = childBlock;
     offset = new int(0);
 
