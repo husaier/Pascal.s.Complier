@@ -3,6 +3,7 @@
 //
 
 #include "TransformPcode.h"
+#include "any"
 
 //todo:如果最后一个值等于倒数第二个值，那么在codelist里面加上一条无意义的语句（最后一个值加一），用于帮助空的主过程形成开栈和退栈的pcode语句
 vector<int> startCodeIndex;//[0,15,19,19,23,27,28]  前面是每个过程的四元式开始地址，按从小到大排序,最后一个值是程序的结束地址+1
@@ -15,7 +16,7 @@ vector<SymbolBlock *> procedure;//每个过程的符号表，与startCodeIndex�
 //todo:每个符号表存的变量数组的数组，包括每个过程的变量（数组和结构），过程，临时变量，参数
 vector<vector<string>> valueData;
 
-vector<Boost::any> para;//记录传入的参数
+vector<any> para;//记录传入的参数
 
 //判断数字是否在数组里面,如果在，返回序号，否则返回-1
 int TransformPcode::existInt(vector<int> list, int num) {
