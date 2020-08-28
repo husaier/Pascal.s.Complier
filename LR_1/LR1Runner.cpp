@@ -212,9 +212,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->tableLineEntry = M_id->tableLineEntry;
             break;
         }
-        case 3: {   //3. Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations Compound_statement
-            auto Compound_statement = vectorAttribute[top];
-            leftSymbol->startQuad = Compound_statement.startQuad;
+        case 3: {   //3. Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations  Statement_body
+            auto Statement_body = vectorAttribute[top];
+            leftSymbol->startQuad = Statement_body.startQuad;
             break;
         }
         case 4: {   // Identifier_list -> Identifier_list , id
@@ -572,7 +572,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 
 //            printf("typeVar%d",Variable.tableLineEntry->type->getType());
             midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
-            leftSymbol->nextList.push_back(midCode.codeList.size());
+            leftSymbol->nextList.clear();
             break;
         }
         case 54: {  //54. Statement -> Call_procedure_statement
@@ -621,47 +621,152 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->startQuad = midCode.codeList.size();
             auto W = &vectorAttribute[top - 3];
             auto Case_body = &vectorAttribute[top - 1];
+            auto Expression = &vectorAttribute[top - 4];
             midCode.backPatch(W->testList, midCode.codeList.size());
             int tempC = 0;
             while (tempC < Case_body->num) {
                 int caseSite = Case_body->caseList[tempC];  //获取第tempC+1个分支的开始地址
-                vector<string> varList = Case_body->varList_list[tempC];
-                for (int i = 0; i < varList.size(); ++i) {
-                    varList[i];
-//                    midCode.outCode(QuaternionItem::EQUAL,,)
-//                    midCode.outCode(QuaternionItem::IF,"","","");
+                vector<string> varList = Case_body->varList_list[tempC]; // 获取第C+1个分支的选择变量表
+                for (auto &i : varList) {
+                    string value;
+                    if (Expression->value == i) {
+                        value = "1";
+                    } else {
+                        value = "0";
+                    }
+                    TempVar *entry{nullptr};
+                    entry = midCode.newTemp();
+                    entry->value = value;
+                    entry->type = new Type(Type::BOOLEAN);
+                    leftSymbol->entry = entry;
+                    string arg1, arg2, res;
+                    arg1 = Expression->entry->id;
+                    arg2 = i;
+                    res = entry->id;
+                    midCode.outCode(QuaternionItem::EQUAL, arg1, arg2, res);
+                    string argb1, argb2, resb;
+                    resb = "$" + to_string(caseSite);
+                    argb1 = res;
+                    midCode.outCode(QuaternionItem::IF, argb1, argb2, resb);
                 }
                 tempC++;
             }
+            midCode.backPatch(Case_body->nextList, midCode.codeList.size());
             break;
         }
-        case 58: { // 58. Statement -> while M Expression do M Statement
-            auto Expression = vectorAttribute[top - 3];
+        case 58: { // 58. Statement -> while M1 Expression G58 do M2 Statement1
+            auto Expression = &vectorAttribute[top - 4];
             leftSymbol->startQuad = midCode.codeList.size();
-            if (Expression.type->getType() != Type::BOOLEAN)
-                recordSemanticError(Expression.line, "错误，while语句的判断表达式不是BOOLEAN类型");
+            if (Expression->type->getType() != Type::BOOLEAN)
+                recordSemanticError(Expression->line, "错误，while语句的判断表达式不是BOOLEAN类型");
+            ////中间代码
+            auto Statement1 = &vectorAttribute[top];
+            auto M1 = &vectorAttribute[top - 5];
+            auto M2 = &vectorAttribute[top - 1];
+            midCode.backPatch(Statement1->nextList, M1->quad);
+            midCode.backPatch(Expression->trueList, M2->quad);
+            leftSymbol->nextList = Expression->falseList;
+            string arg1, arg2, res;
+            res = to_string(M1->quad);
+            midCode.outCode(QuaternionItem::GOTO, arg1, arg2, res);
             break;
         }
-        case 59: { // 59. Statement -> repeat M Statement_list M until Expression
-            auto Expression = vectorAttribute[top];
+        case 59: { // 59. Statement -> repeat M1 Statement_list M2 until Expression H59
+            auto Expression = vectorAttribute[top - 1];
             leftSymbol->startQuad = midCode.codeList.size();
             if (Expression.type->getType() != Type::BOOLEAN)
                 recordSemanticError(Expression.line, "错误，repeat语句的判断表达式不是BOOLEAN类型");
+            ////中间代码
+            auto Statement_list = &vectorAttribute[top - 4];
+            auto M1 = &vectorAttribute[top - 5];
+            auto M2 = &vectorAttribute[top - 3];
+            midCode.backPatch(Statement_list->nextList, M2->quad);
+            midCode.backPatch(Expression.falseList, M1->quad);
+
             break;
         }
-        case 60: { // 60. Statement -> for id assignop Expression0 Updown M Expression1 I60 do M Statement
-            string id = vectorAttribute[top - 9].attribute;
-            auto tempPoint = curBlock->query(id);
-            auto Expression0 = vectorAttribute[top - 7];
-            auto Expression1 = vectorAttribute[top - 4];
+        case 60: { // 60. Statement -> for id assignop Expression0 Updown M1 Expression1 I60 do M2 Statement1
+            auto id = &vectorAttribute[top - 9];
+            auto tempPoint = curBlock->query(id->attribute);
+            auto Expression0 = &vectorAttribute[top - 7];
+            auto Expression1 = &vectorAttribute[top - 4];
             leftSymbol->startQuad = midCode.codeList.size();
             bool flag = true;
-            if (*(Expression0.type) != *(Expression1.type))
+            if (*(Expression0->type) != *(Expression1->type))
                 flag = false;
-            if (*(tempPoint->type) != *(Expression0.type))
+            if (*(tempPoint->type) != *(Expression0->type))
                 flag = false;
             if (!flag)
-                recordSemanticError(Expression0.line, "错误，for语句中id，Expression类型不一致");
+                recordSemanticError(Expression0->line, "错误，for语句中id，Expression类型不一致");
+            ////中间代码
+            auto M1 = &vectorAttribute[top - 5];
+            auto M2 = &vectorAttribute[top - 1];
+            auto Statement1 = &vectorAttribute[top];
+            auto Updown = &vectorAttribute[top - 6];
+            string arg1, arg2, res;
+            if (Expression0->entry) {
+                arg1 = Expression0->entry->id;
+            } else {
+                TempVar *entry{nullptr};
+                entry = midCode.newTemp();
+                entry->value = Expression0->variableName;
+                entry->type = Expression0->type;
+                entry->tableLineEntry = Expression0->tableLineEntry;
+                Expression0->entry = entry;
+                arg1 = Expression0->entry->id;
+//                arg1 = Expression.tableLineEntry->name;
+            }
+            if (id->entry) {
+                res = id->entry->id;
+            } else {
+                TempVar *entry{nullptr};
+                entry = midCode.newTemp();
+                entry->value = id->attribute;
+                entry->type = id->type;
+                id->tableLineEntry = tempPoint;
+                entry->tableLineEntry = id->tableLineEntry;
+                id->entry = entry;
+                res = id->entry->id;
+            }
+            midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
+            midCode.backPatch(Statement1->nextList, M1->quad);
+            midCode.backPatch(Expression1->trueList, M2->quad);
+            leftSymbol->nextList = Expression1->falseList;
+            if (Updown->value == "to") {
+                TempVar *entryb{nullptr};
+                entryb = midCode.newTemp();
+                entryb->type = tempPoint->type;
+//                entryb->value = "NotKnow";
+                string argb1, argb2, resb;
+                argb1 = id->entry->id;
+                argb2 = "$1";
+                resb = entryb->id;
+                midCode.outCode(QuaternionItem::ADD, argb1, argb2, resb);
+
+                string argc1, argc2, resc;
+                argc1 = entryb->id;
+                resc = res;
+                midCode.outCode(QuaternionItem::ASSIGN, argc1, argc2, resc);
+            } else if (Updown->value == "downto") {
+                TempVar *entryb{nullptr};
+                entryb = midCode.newTemp();
+                entryb->type = tempPoint->type;
+//                entryb->value = "NotKnow";
+                string argb1, argb2, resb;
+                argb1 = id->entry->id;
+                argb2 = "$1";
+                resb = entryb->id;
+                midCode.outCode(QuaternionItem::MINUS, argb1, argb2, resb);
+
+                string argc1, argc2, resc;
+                argc1 = entryb->id;
+                resc = res;
+                midCode.outCode(QuaternionItem::ASSIGN, argc1, argc2, resc);
+            }
+            string argd1, argd2, resd;
+            resd = to_string(M1->quad);
+            midCode.outCode(QuaternionItem::GOTO, argd1, argd2, resd);
+
             break;
         }
         case 61: {  //61. Statement -> #
@@ -866,6 +971,14 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->typeList.push_back(Const_variable.type);
             ////中间代码
             leftSymbol->varList.push_back(Const_variable.value);
+            break;
+        }
+        case 76: {  //76. Updown -> to
+            leftSymbol->value = "to";
+            break;
+        }
+        case 77: {  //77. Updown -> downto
+            leftSymbol->value = "downto";
             break;
         }
         case 78:    // Call_procedure_statement -> id
@@ -1952,8 +2065,6 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             vectorAttributeItem *Expression = &vectorAttribute[top];
             Expression->trueList.push_back(midCode.codeList.size());
             Expression->falseList.push_back(midCode.codeList.size() + 1);
-//            printf("%d\n",Expression.trueList.size());
-            printf("%p,%lu\n", &Expression, Expression->trueList.size());
 
             string arg1, arg2, res;
             if (Expression->entry) {
@@ -1961,23 +2072,142 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 TempVar *entry{nullptr};
                 entry = midCode.newTemp();
-                entry->value = Expression->variableName;
+                entry->value = Expression->value;
                 entry->type = Expression->type;
                 entry->tableLineEntry = Expression->tableLineEntry;
                 Expression->entry = entry;
                 arg1 = Expression->entry->id;
 //                arg1 = Expression.tableLineEntry->name;
-//                printf("type%d\n",Expression.tableLineEntry->type->getType());
             }
 
             midCode.outCode(QuaternionItem::IF, arg1, arg2, res);
             string argb1, argb2, resb;
             midCode.outCode(QuaternionItem::GOTO, argb1, argb2, resb);
-            printf("%p,%lu\n", &Expression, Expression->trueList.size());
-
+//            printf("%p,%lu\n", &Expression, Expression->trueList.size());
             break;
         }
-        case 122: {//122、Statement_body -> Compound_statement
+        case 119: { //G58 -> #
+            auto Expression = &vectorAttribute[top];
+            Expression->trueList.push_back(midCode.codeList.size());
+            Expression->falseList.push_back(midCode.codeList.size() + 1);
+
+            string arg1, arg2, res;
+            if (Expression->entry) {
+                arg1 = Expression->entry->id;
+            } else {
+                TempVar *entry{nullptr};
+                entry = midCode.newTemp();
+                entry->value = Expression->value;
+                entry->type = Expression->type;
+                entry->tableLineEntry = Expression->tableLineEntry;
+                Expression->entry = entry;
+                arg1 = Expression->entry->id;
+//                arg1 = Expression.tableLineEntry->name;
+            }
+            midCode.outCode(QuaternionItem::IF, arg1, arg2, res);
+            string argb1, argb2, resb;
+            midCode.outCode(QuaternionItem::GOTO, argb1, argb2, resb);
+            break;
+        }
+        case 120: { //120. H59 -> #
+            auto Expression = &vectorAttribute[top];
+            Expression->falseList.push_back(midCode.codeList.size() + 1);
+            string arg1, arg2, res;
+            if (Expression->entry) {
+                arg1 = Expression->entry->id;
+            } else {
+                TempVar *entry{nullptr};
+                entry = midCode.newTemp();
+                entry->value = Expression->value;
+                entry->type = Expression->type;
+                entry->tableLineEntry = Expression->tableLineEntry;
+                Expression->entry = entry;
+                arg1 = Expression->entry->id;
+//                arg1 = Expression.tableLineEntry->name;
+            }
+            TempVar *entry{nullptr};
+            entry = midCode.newTemp();
+            string value;
+            if (Expression->value == "1")
+                value = "0";
+            else
+                value = "1";
+            entry->value = value;
+            entry->type = new Type(Type::BOOLEAN);
+            leftSymbol->entry = entry;
+            res = entry->id;
+            midCode.outCode(QuaternionItem::NOT, arg1, arg2, res);
+            string argb1, argb2, resb;
+            argb1 = res;
+            midCode.outCode(QuaternionItem::IF, argb1, argb2, resb);
+            break;
+        }
+        case 121: { //121. I60 -> #
+            auto Expression1 = &vectorAttribute[top];
+            auto id = &vectorAttribute[top - 6];
+            auto Updown = &vectorAttribute[top - 2];
+            Expression1->trueList.push_back(midCode.codeList.size());
+            Expression1->falseList.push_back(midCode.codeList.size() + 1);
+            if (Updown->value == "to") {
+                TempVar *entry{nullptr};
+                entry = midCode.newTemp();
+//                entry->value = value;
+                entry->type = new Type(Type::BOOLEAN);
+                string arg1, arg2, res;
+
+                if (id->entry) {
+                    res = id->entry->id;
+                } else {
+                    TempVar *entryb{nullptr};
+                    entryb = midCode.newTemp();
+                    entryb->value = id->attribute;
+                    entryb->type = id->type;
+                    id->tableLineEntry = curBlock->query(id->attribute);
+                    entryb->tableLineEntry = id->tableLineEntry;
+                    id->entry = entryb;
+                    res = id->entry->id;
+                }
+                arg1 = id->entry->id;
+                arg2 = Expression1->entry->id;
+                res = entry->id;
+                midCode.outCode(QuaternionItem::MORE_EQUAL, arg1, arg2, res);
+                string argb1, argb2, resb3;
+                argb1 = res;
+                midCode.outCode(QuaternionItem::IF, argb1, argb2, resb3);
+            } else if (Updown->value == "downto") {
+                TempVar *entry{nullptr};
+                entry = midCode.newTemp();
+//                entry->value = value;
+                entry->type = new Type(Type::BOOLEAN);
+                string arg1, arg2, res;
+
+                if (id->entry) {
+                    res = id->entry->id;
+                } else {
+                    TempVar *entryb{nullptr};
+                    entryb = midCode.newTemp();
+                    entryb->value = id->attribute;
+                    entryb->type = id->type;
+                    id->tableLineEntry = curBlock->query(id->attribute);
+                    entryb->tableLineEntry = id->tableLineEntry;
+                    id->entry = entryb;
+                    res = id->entry->id;
+                }
+                arg1 = id->entry->id;
+                arg2 = Expression1->entry->id;
+                res = entry->id;
+                midCode.outCode(QuaternionItem::LESS_EQUAL, arg1, arg2, res);
+                string argb1, argb2, resb3;
+                argb1 = res;
+                midCode.outCode(QuaternionItem::IF, argb1, argb2, resb3);
+            }
+            string argc1, argc2, resc;
+            midCode.outCode(QuaternionItem::GOTO, argc1, argc2, resc);
+            break;
+        }
+        case 122: { //122. Statement_body -> Compound_statement
+            auto Compound_statement = vectorAttribute[top];
+            leftSymbol->startQuad = Compound_statement.startQuad;
             relocate();
             break;
         }
@@ -2004,7 +2234,7 @@ void LR1Runner::locate() {
     SymbolBlock *childBlock;
     childBlock = SymbolBlock::makeBlock(curBlock);//父亲指针
     childBlock->level = 1;
-    if(curBlock != nullptr)
+    if (curBlock != nullptr)
         childBlock->level = curBlock->level + 1;
 
     curBlock = childBlock;

@@ -1,6 +1,6 @@
 program test5(input, output);
-const pai = 3.14; {常量声明}
-      pai2 = pai; {常量id声明}
+{const pai = 3.14; {常量声明}
+{      pai2 = pai; {常量id声明}
 var
   a: Boolean;
   b,b2: Integer;
@@ -17,31 +17,16 @@ var
     j,k: char;
   end; {end of record rec}
 begin
-  a := b=2;
-{  if (1 = 1) then
-    begin
-      b := 1;
-      c := 1.2;
-      c := 1.3;
-    end;}{这里begin和end会导致异常,貌似是relocate的问题}
-  if a then
-      b := 1
-  else
-      b := 2;
 
-  case b of
-    1 : b2 := 1;
-    2 : b2 := 2;
-    3 : b2 := 3
-      {这里不能加分号否则会异常}
-  end;
+  for b := 1 to 5 do
+    b2 := 1;
 
   b := 5;
   b := b2;
   b := rec.i;
   rec.c.a := b;
-  b := arr[b][0][6];
-  arr[b][rec.c.a][6] := b;
+{  b := arr[0][0][6];
+  arr[b][rec.c.a][6] := b;}
   a := 'a' = 'c';
   a := 1 <> 2;
   a := 1 < 2;
@@ -61,4 +46,35 @@ begin
   c := - 0.3;
   c := 1 / 3;
   a := 3 * (2 + 4) < 10;
+  a := b=2;
+  if (1 = 1) then
+  begin
+    b := 1;
+    c := 1.2;
+    c := 1.3;
+  end;
+  if a then
+    b := 1
+  else
+    b := 2;
+
+  case b of
+    1 : b2 := 1;
+    2 : b2 := 2;
+    3 :
+    begin
+      b2 := 3;
+      b2 := 4;
+    end {这里不能加分号否则会异常}
+  end;
+
+  while b<5 do
+  begin
+    b := b+1;
+    c := c+0.1;
+  end;
+
+  repeat b := b+1 until (b > 10);
+
+
 end.
