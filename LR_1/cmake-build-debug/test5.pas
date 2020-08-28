@@ -1,10 +1,11 @@
 program test5(input, output);
-{const pai = 3.14; {常量声明}
-{      pai2 = pai; {常量id声明}
+const pai = 3.14; {常量声明}
+      pai2 = pai; {常量id声明}
 var
   a: Boolean;
-  b,b2: Integer;
-  c: Real;
+  b,b2,b3: Integer;
+  c,c2: Real;
+  ch: Char;
   arr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
   rec: record
     i: integer;
@@ -16,10 +17,57 @@ var
     end; {end of record c}
     j,k: char;
   end; {end of record rec}
+
+function func1 ( var id2 : real ;var id4 : real) : integer ; {Subprogram声明}
+  procedure proc1 (var id3 : integer;var id4 : real) ;
+    const pai6 = pai;
+    function func2 ( var id2 : real) : integer ;
+      begin C := pai * 2; end ; {end of func2}
+    begin C := pai * 2; end ; {end of proc1}
+  begin
+    C := pai * 2; end ; {end of func1}
+
+procedure d1p1;
+  var a,b: char;
+  begin a := b; end; {end of d1p1}
+
+procedure d1p2(var n: integer);
+    var c,b,d: boolean;
+    procedure d2p1(var q: boolean);
+      var k,m: integer;
+      begin k := 2; end; {end of d2p1}
+    begin
+      c := (1 = 1);
+      d2p1(c);
+    end; {end of d1p2}
+
+procedure d1p3(var m: char;n:real);
+  var a,b: char;
+begin a := b; end; {end of d1p1}
+
 begin
+  b := 123454321;
+  d1p1;
+  d1p3(ch,c);
+  b := 6789876;
+  b := func1(c,c2);
+  b := 3333333333;
+  d1p2(func1(c,c2));
+  repeat
+    repeat b := b+1 until (b > 10);
+  until (b2 > 10);
+
+  while b<5 do
+    while b2<5 do
+      {begin}
+      b2 := b2 + 1;
+      {b3 := b3 + 1;
+      end;}
+    {b3 := b3+2;}
 
   for b := 1 to 5 do
-    b2 := 1;
+    for b2 := 5 downto 1 do
+      b3 := 1;
 
   b := 5;
   b := b2;
@@ -74,7 +122,9 @@ begin
     c := c+0.1;
   end;
 
-  repeat b := b+1 until (b > 10);
+  repeat
+    repeat b := b+1 until (b > 10);
+  until (b > 10);
 
 
 end.
