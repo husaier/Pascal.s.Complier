@@ -39,6 +39,7 @@ public:
     vector<string> varList;
     vector<vector<string>> varList_list;
     int quad = -1;
+    vector<string> queue;
 };
 
 

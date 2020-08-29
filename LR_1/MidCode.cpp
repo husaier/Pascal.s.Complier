@@ -120,6 +120,15 @@ string Quaternion::op2string(int op) {
         case QuaternionItem::IF:
             output = "if";
             break;
+        case QuaternionItem::CALL:
+            output = "call";
+            break;
+        case QuaternionItem::PARAM:
+            output = "param";
+            break;
+        case QuaternionItem::RETURN:
+            output = "return";
+            break;
         default:
             break;
     }
@@ -152,7 +161,7 @@ void Quaternion::backPatch(const vector<int> &list, int quad) {
             printf("BackPatch ERROR,res already existInt\n");
             break;
         }
-        codeList[i].res = to_string(quad);
+        codeList[i].res = "$" + to_string(quad);
     }
 }
 
