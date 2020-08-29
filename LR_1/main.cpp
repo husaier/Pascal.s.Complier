@@ -10,7 +10,7 @@ const string fileName = "grammar.json";
 int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
-    // è¯æ³•åˆ†æ
+    // ´Ê·¨·ÖÎö
     string fileName = "test5.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
@@ -20,7 +20,7 @@ int main() {
     vector<LexicalItem> result;
     result = lexicalAnalyzer.analyze();
     lexicalAnalyzer.closeFile();
-    // è¯­æ³•åˆ†æã€è¯­ä¹‰åˆ†æ
+    // Óï·¨·ÖÎö¡¢ÓïÒå·ÖÎö
     LR1Runner runner;
     runner.load(result);
     runner.debugInfoLevel = 1;
@@ -28,7 +28,7 @@ int main() {
     runner.printSemanticError();
     runner.printMidCode();
 
-//    //    ä¸‹åˆ—ä»£ç å¯ä»¥ä»æ–‡ä»¶é‡Œé¢è¯»å‡ºp-codeå¹¶æ‰§è¡Œ
+//    //    ÏÂÁĞ´úÂë¿ÉÒÔ´ÓÎÄ¼şÀïÃæ¶Á³öp-code²¢Ö´ĞĞ
 //    Pcode_Interpreter interpreter;
 //    interpreter.interpreter(interpreter.readFile("text.txt"));
 //    string s = "0.23";
