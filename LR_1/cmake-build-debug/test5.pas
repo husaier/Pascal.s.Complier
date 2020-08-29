@@ -7,7 +7,7 @@ var
   c,c2: Real;
   ch: Char;
   arr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
-  rec: record
+  rec,rec2: record
     i: integer;
     c: record
       a: integer;
@@ -47,6 +47,9 @@ begin a := b; end; {end of d1p1}
 
 begin
   b := 123454321;
+  rec :=rec2;
+  b := arr[b+1][0][6];
+  arr[b][rec.c.a][6] := b;
   d1p1;
   d1p3(ch,c);
   b := 6789876;
@@ -73,8 +76,7 @@ begin
   b := b2;
   b := rec.i;
   rec.c.a := b;
-{  b := arr[0][0][6];
-  arr[b][rec.c.a][6] := b;}
+
   a := 'a' = 'c';
   a := 1 <> 2;
   a := 1 < 2;

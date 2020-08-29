@@ -112,6 +112,8 @@ void LR1Runner::run(LR1Table &table) {
                     << "------------------------------------------------------------------------------------------------------"
                     << endl;
         }
+        if (!semanticError.empty())
+            break;
     }
     if (debugInfoLevel >= 1) {
         cout
@@ -752,8 +754,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 62: { // Variable -> id E62 Id_varparts
             auto Id_varparts = vectorAttribute[top];
+            auto id = &vectorAttribute[top-2];
             leftSymbol->type = Id_varparts.type;
-            leftSymbol->tableLineEntry = Id_varparts.tableLineEntry;
+//            leftSymbol->tableLineEntry = Id_varparts.tableLineEntry;
+            leftSymbol->tableLineEntry = curBlock->query(id->attribute);
             leftSymbol->variableName = vectorAttribute[top - 2].attribute;
             if (Id_varparts.variableName != "Id_varparts") {
                 leftSymbol->variableName += Id_varparts.variableName;
@@ -763,6 +767,12 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             entry->value = leftSymbol->variableName;
             entry->type = leftSymbol->type;
             entry->tableLineEntry = leftSymbol->tableLineEntry;
+            if (id->type->getType() == Type::ARRAY){
+//                entry->offset =
+
+            }else if (id->type->getType() == Type::RECORD){
+
+            }
             leftSymbol->entry = entry;
             break;
         }
@@ -777,6 +787,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->variableName += Id_varpart.variableName;
             }
             leftSymbol->type = Id_varpart.type;
+//            leftSymbol->queue =
             break;
         }
         case 64: { // Id_varparts -> #
@@ -823,6 +834,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->tableLineEntry = nullptr;
                 recordSemanticError(lines, "类型错误，不是ARRAY类型，不能使用[]运算符");
             }
+            leftSymbol->queue = Expression_list.queue;
             break;
         }
         case 66: { // Id_varpart -> . id
