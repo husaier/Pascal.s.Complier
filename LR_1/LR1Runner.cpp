@@ -112,6 +112,8 @@ void LR1Runner::run(LR1Table &table) {
                     << "------------------------------------------------------------------------------------------------------"
                     << endl;
         }
+        if (!semanticError.empty())
+            break;
     }
     if (debugInfoLevel >= 1) {
         cout
@@ -448,7 +450,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 39: {  //Subprogram_declaration -> Subprogram_head Program_body
             auto Program_body = vectorAttribute[top];
-            auto Subprogram_head = vectorAttribute[top-1];
+            auto Subprogram_head = vectorAttribute[top - 1];
             leftSymbol->tableLineEntry = Subprogram_head.tableLineEntry;
             leftSymbol->tableLineEntry->startQuad = Program_body.startQuad;
             break;
@@ -563,17 +565,18 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 //                printf("type%d\n",Expression.tableLineEntry->type->getType());
             }
 
-//            TempVar *entry{nullptr};
-//            entry = midCode.newTemp();
-//            entry->value = Variable->variableName;
-//            entry->type = Variable->type;
-//            entry->tableLineEntry = Variable->tableLineEntry;
-//            Variable->entry = entry;
             res = Variable->entry->id;
 ////            res = Variable.tableLineEntry->name;
 
-//            printf("typeVar%d",Variable.tableLineEntry->type->getType());
-            midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
+            if (Variable->entry->backOffset!= nullptr){
+                res = Variable->entry->backOffset->id;
+                arg2 = Variable->entry->backOffset->offset->id;
+                midCode.outCode(QuaternionItem::OFFSETASSIGN,arg1,arg2,res);
+            }else{
+                midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
+            }
+
+
             leftSymbol->nextList.clear();
             break;
         }
@@ -669,7 +672,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             midCode.backPatch(Expression->trueList, M2->quad);
             leftSymbol->nextList = Expression->falseList;
             string arg1, arg2, res;
-            res = "$"+to_string(M1->quad);
+            res = "$" + to_string(M1->quad);
             midCode.outCode(QuaternionItem::GOTO, arg1, arg2, res);
             break;
         }
@@ -741,7 +744,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 midCode.outCode(QuaternionItem::ASSIGN, argc1, argc2, resc);
             }
             string argd1, argd2, resd;
-            resd ="$"+ to_string(M1->quad);
+            resd = "$" + to_string(M1->quad);
             midCode.outCode(QuaternionItem::GOTO, argd1, argd2, resd);
 
             break;
@@ -752,8 +755,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 62: { // Variable -> id E62 Id_varparts
             auto Id_varparts = vectorAttribute[top];
+            auto id = &vectorAttribute[top - 2];
             leftSymbol->type = Id_varparts.type;
-            leftSymbol->tableLineEntry = Id_varparts.tableLineEntry;
+//            leftSymbol->tableLineEntry = Id_varparts.tableLineEntry;
+            leftSymbol->tableLineEntry = curBlock->query(id->attribute);
             leftSymbol->variableName = vectorAttribute[top - 2].attribute;
             if (Id_varparts.variableName != "Id_varparts") {
                 leftSymbol->variableName += Id_varparts.variableName;
@@ -763,7 +768,39 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             entry->value = leftSymbol->variableName;
             entry->type = leftSymbol->type;
             entry->tableLineEntry = leftSymbol->tableLineEntry;
-            leftSymbol->entry = entry;
+            Type *typePoint = id->type;
+//            int tempOffset = 0;
+            if (!Id_varparts.queue.empty()){
+                TempVar *entryb{nullptr};
+                entryb = midCode.newTemp();
+                entryb->value = "0";
+                entryb->type = new Type(Type::INTEGER);
+                midCode.outCode(QuaternionItem::ASSIGN, "$0", "", entryb->id);
+                for (int i = 0; i < Id_varparts.queue.size(); ++i) {
+                    if (typePoint->getType() == Type::ARRAY) {
+                        Array * arrPoint = (Array *) typePoint;
+                        midCode.outCode(QuaternionItem::ADD, entryb->id, Id_varparts.queue[i], entryb->id);
+                        midCode.outCode(QuaternionItem::MINUS,entryb->id,to_string(arrPoint->low),entryb->id);
+                        if (i != Id_varparts.queue.size() - 1) {
+                            midCode.outCode(QuaternionItem::MULTIPLY,entryb->id,to_string(arrPoint->length),entryb->id);
+                        }
+                        typePoint = arrPoint->elem;
+                    } else if (typePoint->getType() == Type::RECORD) {
+                        Record * recPoint = (Record *) typePoint;
+//                        midCode.outCode(QuaternionItem::ADD, entryb->id,,entryb->id)
+                    }
+                }
+                entry->offset = entryb;
+
+                TempVar *entryc{nullptr};
+                entryc = midCode.newTemp();
+                entryc->type = leftSymbol->type;
+                midCode.outCode(QuaternionItem::ASSIGNOFFSET,entry->id,entryb->id,entryc->id);
+                entryc->backOffset = entry;
+                leftSymbol->entry = entryc;
+            }else{
+                leftSymbol->entry = entry;
+            }
             break;
         }
         case 63: { // Id_varparts0 -> Id_varparts1 Id_varpart
@@ -777,6 +814,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->variableName += Id_varpart.variableName;
             }
             leftSymbol->type = Id_varpart.type;
+            leftSymbol->queue = Id_varparts1.queue;
+            leftSymbol->queue.insert(leftSymbol->queue.end(), Id_varpart.queue.begin(), Id_varpart.queue.end());
             break;
         }
         case 64: { // Id_varparts -> #
@@ -823,6 +862,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->tableLineEntry = nullptr;
                 recordSemanticError(lines, "类型错误，不是ARRAY类型，不能使用[]运算符");
             }
+            leftSymbol->queue = Expression_list.queue;
             break;
         }
         case 66: { // Id_varpart -> . id
@@ -951,8 +991,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 76: {  //76. Updown -> to
-            auto Expression0 = &vectorAttribute[top-1];
-            auto id = &vectorAttribute[top-3];
+            auto Expression0 = &vectorAttribute[top - 1];
+            auto id = &vectorAttribute[top - 3];
             string arg1, arg2, res;
             if (Expression0->entry) {
                 arg1 = Expression0->entry->id;
@@ -985,8 +1025,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             break;
         }
         case 77: {  //77. Updown -> downto
-            auto Expression0 = &vectorAttribute[top-1];
-            auto id = &vectorAttribute[top-3];
+            auto Expression0 = &vectorAttribute[top - 1];
+            auto id = &vectorAttribute[top - 3];
             string arg1, arg2, res;
             if (Expression0->entry) {
                 arg1 = Expression0->entry->id;
@@ -1060,16 +1100,16 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = new Type(Type::VOID);
             ////中间代码
-            string arg1,arg2,res;
+            string arg1, arg2, res;
             vectorAttributeItem *idPoint = nullptr;
-            if (op_type==78){
+            if (op_type == 78) {
                 idPoint = &vectorAttribute[top];
-            } else if(op_type==79){
-                idPoint = &vectorAttribute[top-3];
+            } else if (op_type == 79) {
+                idPoint = &vectorAttribute[top - 3];
             }
-            if (idPoint->entry){
+            if (idPoint->entry) {
                 arg1 = idPoint->entry->id;
-            }else{
+            } else {
                 TempVar *entry{nullptr};
                 entry = midCode.newTemp();
                 entry->value = idPoint->attribute;
@@ -1079,18 +1119,18 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 idPoint->entry = entry;
                 arg1 = idPoint->entry->id;
             }
-            if (op_type==78){
+            if (op_type == 78) {
                 arg2 = "$0";
-                midCode.outCode(QuaternionItem::CALL,arg1,arg2,res);
-            }else if (op_type==79){
-                auto Expression_list = &vectorAttribute[top-1];
-                for (auto & i : Expression_list->queue) {
-                    string argb1,argb2,resb;
+                midCode.outCode(QuaternionItem::CALL, arg1, arg2, res);
+            } else if (op_type == 79) {
+                auto Expression_list = &vectorAttribute[top - 1];
+                for (auto &i : Expression_list->queue) {
+                    string argb1, argb2, resb;
                     argb1 = i;
-                    midCode.outCode(QuaternionItem::PARAM,argb1,argb2,resb);
+                    midCode.outCode(QuaternionItem::PARAM, argb1, argb2, resb);
                 }
                 arg2 = to_string(Expression_list->queue.size());
-                midCode.outCode(QuaternionItem::CALL,arg1,arg2,res);
+                midCode.outCode(QuaternionItem::CALL, arg1, arg2, res);
             }
             break;
         }
@@ -1973,9 +2013,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = reType;
             ////
-            auto Expression_list = &vectorAttribute[top-1];
+            auto Expression_list = &vectorAttribute[top - 1];
 
-            string arg1,arg2,res;
+            string arg1, arg2, res;
 
             if (id->entry) {
 //                leftSymbol->entry = id->entry;
@@ -1990,20 +2030,20 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 //                leftSymbol->entry = id->entry;
                 arg1 = id->entry->id;
             }
-            for (auto & i : Expression_list->queue) {
-                string argb1,argb2,resb;
+            for (auto &i : Expression_list->queue) {
+                string argb1, argb2, resb;
                 argb1 = i;
-                midCode.outCode(QuaternionItem::PARAM,argb1,argb2,resb);
+                midCode.outCode(QuaternionItem::PARAM, argb1, argb2, resb);
             }
             arg2 = to_string(Expression_list->queue.size());
-            midCode.outCode(QuaternionItem::CALL,arg1,arg2,res);
-            string argc1,argc2,resc;
+            midCode.outCode(QuaternionItem::CALL, arg1, arg2, res);
+            string argc1, argc2, resc;
             TempVar *entryb{nullptr};
             entryb = midCode.newTemp();
             entryb->type = id->type;
             leftSymbol->entry = entryb;
             argc1 = entryb->id;
-            midCode.outCode(QuaternionItem::RETURN,argc1,argc2,resc);
+            midCode.outCode(QuaternionItem::RETURN, argc1, argc2, resc);
             break;
         }
         case 104: { // Factor -> ( Expression )
