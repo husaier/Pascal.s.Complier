@@ -6,6 +6,7 @@
 #include <map>
 #include "MidCode.h"
 #include "SymbolBlock.h"
+#include "any"
 #ifndef LR_1_TRANSFORMPCODE_H
 #define LR_1_TRANSFORMPCODE_H
 
@@ -17,7 +18,7 @@ enum Operator {
 struct Pcode {
     Operator OP;
     int L;
-    int D;
+    any D;
 };
 
 class TransformPcode {

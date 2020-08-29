@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "TransformPcode.h"
+#include "any"
 
 #ifndef PASCAL_S_COMPLIER1_PCODE_INTERPRETER_H
 #define PASCAL_S_COMPLIER1_PCODE_INTERPRETER_H
@@ -12,7 +13,7 @@ using namespace std;
 
 class Pcode_Interpreter {
 private:
-    int dataStack[1000] = {0};//数据栈
+    any dataStack[1000] = {0};//数据栈
     vector<Pcode> allPcode;
 
 public:
