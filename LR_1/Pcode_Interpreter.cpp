@@ -112,10 +112,10 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                         dataStack[top - 2] = dataStack[top - 2] / dataStack[top - 1];
                         top--;
                         break;
-                    case 6:
-                        //OPR 0 6   栈顶元素的奇偶判断，结果值在栈顶
-                        dataStack[top - 1] = dataStack[top - 1] % 2;
-                        break;
+//                    case 6:
+//                        //OPR 0 6   栈顶元素的奇偶判断，结果值在栈顶
+//                        dataStack[top - 1] = dataStack[top - 1] % 2;
+//                        break;
                     case 7:
                         //OPR 0 7   次栈顶模除栈顶，退两个栈元素，结果值进栈
                         dataStack[top - 2] = dataStack[top - 2] % dataStack[top - 1];
@@ -209,11 +209,11 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                         dataStack[top - 2] = dataStack[top - 2] / dataStack[top - 1];
                         top--;
                         break;
-                    case 21:
-                        //OPR 0 21     把栈顶值作为地址，在此地址处的单元存入次栈顶的值，退2个栈元素
-                        dataStack[dataStack[top - 1]] = dataStack[top - 2];
-                        top -= 2;
-                        break;
+//                    case 21:
+//                        //OPR 0 21     把栈顶值作为地址，在此地址处的单元存入次栈顶的值，退2个栈元素
+//                        dataStack[dataStack[top - 1]] = dataStack[top - 2];
+//                        top -= 2;
+//                        break;
                     default:
                         cout << "OPR指令出现错误" << currentPcode.D << " " << pc;
                         pc = 0;
@@ -250,18 +250,18 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                     top--;
                 }
                 break;
-            case LOA:
-                //LOA：获取变量的地址放到数据栈栈顶(相对地址为d，层次差为l)
-                dataStack[top] = currentPcode.D + getBase(base, currentPcode.L);
-                top++;
-                break;
-            case LAO:
-                //LAO：获取地址为栈顶值的变量放到数据栈栈顶
-                address = dataStack[top - 1];//从栈顶取地址
-                top--;
-                dataStack[top] = dataStack[address];
-                top++;
-                break;
+//            case LOA:
+//                //LOA：获取变量的地址放到数据栈栈顶(相对地址为d，层次差为l)
+//                dataStack[top] = currentPcode.D + getBase(base, currentPcode.L);
+//                top++;
+//                break;
+//            case LAO:
+//                //LAO：获取地址为栈顶值的变量放到数据栈栈顶
+//                address = dataStack[top - 1];//从栈顶取地址
+//                top--;
+//                dataStack[top] = dataStack[address];
+//                top++;
+//                break;
             case CAL:
                 //CAL：调用过程，这时D段为被调用过程的过程体（过程体之前一条指令）在目标程序区的入口地址。
                 //跳转时，将该层基地址，跳转层基地址，pc指针保存在栈中

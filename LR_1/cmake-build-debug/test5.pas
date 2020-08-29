@@ -21,7 +21,7 @@ begin
   for b := 1 to 5 do
     b2 := 1;
 
-  b := 5;
+  b := b + c;
   b := b2;
   b := rec.i;
   rec.c.a := b;
