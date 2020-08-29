@@ -64,10 +64,10 @@ public:
     int getDimension() override;
 
     Type *elem{nullptr};
-
-private:
     int low, high;
     int length;
+private:
+
 };
 
 class EnvItem{

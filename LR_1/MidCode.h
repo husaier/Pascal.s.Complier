@@ -23,7 +23,8 @@ public:
     string value;
     bool isImmediate;
     SymbolTableLine *tableLineEntry = nullptr;//如果是用户变量,则这里存储的就是相应的符号表行的指针
-    int offset;
+    TempVar *offset= nullptr;
+    TempVar *backOffset = nullptr;
     string toString() const;
 };
 

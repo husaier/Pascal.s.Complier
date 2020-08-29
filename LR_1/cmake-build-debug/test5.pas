@@ -7,7 +7,8 @@ var
   c,c2: Real;
   ch: Char;
   arr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
-  rec,rec2: record
+  arr2: array [0 .. 7]of integer;
+rec,rec2: record
     i: integer;
     c: record
       a: integer;
@@ -46,9 +47,10 @@ procedure d1p3(var m: char;n:real);
 begin a := b; end; {end of d1p1}
 
 begin
-  b := 123454321;
-  rec :=rec2;
-  b := arr[b+1][0][6];
+  b := 111111111111;
+  b := arr2[2] + arr2[1];
+  arr2[arr2[2]] := 1;
+  b := arr[b+1][0,6];
   arr[b][rec.c.a][6] := b;
   d1p1;
   d1p3(ch,c);
