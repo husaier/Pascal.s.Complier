@@ -2,7 +2,7 @@
 #include "LR1Runner.h"
 #include "lexical_analyzer.h"
 #include "Pcode_Interpreter.h"
-
+#include "TransformPcode.h"
 using namespace std;
 
 const string fileName = "grammar.json";
@@ -28,6 +28,9 @@ int main() {
     runner.printSemanticError();
     runner.printMidCode();
     vector<SymbolTableLine*> proFunVector = runner.generateProFunVector(runner.startBlock);
+    TransformPcode transformPcode;
+    transformPcode.init(proFunVector);
+
 //    //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;
 //    interpreter.interpreter(interpreter.readFile("text.txt"));
