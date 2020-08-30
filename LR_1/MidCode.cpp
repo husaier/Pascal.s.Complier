@@ -179,4 +179,6 @@ string TempVar::toString() const {
     } else if (id[0] == '#') {//如果是临时变量
         return id;
     }
+    return std::string();
 }
+

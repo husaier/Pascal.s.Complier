@@ -23,8 +23,9 @@ public:
     string value;
     bool isImmediate;
     SymbolTableLine *tableLineEntry = nullptr;//如果是用户变量,则这里存储的就是相应的符号表行的指针
-    TempVar *offset= nullptr;
+    TempVar *offset = nullptr;
     TempVar *backOffset = nullptr;
+
     string toString() const;
 };
 
@@ -34,8 +35,8 @@ public:
         ADD = 1, MINUS = 2, MULTIPLY = 3, DIVIDE = 4, ASSIGN = 5,
         EQUAL = 6, OR = 7, FLOOR_DIVIDE = 8, MOD = 9, AND = 10,
         UNEQUAL = 11, LESS = 12, LESS_EQUAL = 13, MORE = 14,
-        MORE_EQUAL = 15, NOT = 16, GOTO = 17, IF = 18, CALL = 19,
-        PARAM = 20, RETURN = 21 , ASSIGNOFFSET = 22, OFFSETASSIGN = 23
+        MORE_EQUAL = 15, NOT = 16, ASSIGNOFFSET = 22, OFFSETASSIGN = 23,
+        GOTO = 27, IF = 28, PARAM = 29, CALL = 30, RETURN = 31,
     };
 
     QuaternionItem(int seq, int op, std::string arg1, std::string arg2, std::string res) {
@@ -44,6 +45,11 @@ public:
         this->arg1 = std::move(arg1);
         this->arg2 = std::move(arg2);
         this->res = std::move(res);
+        if (op <= 16)
+            this->type = 1;
+        else {
+            this->type = op - 20;
+        }
     }
 
     int seq = 0;

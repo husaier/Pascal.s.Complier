@@ -27,7 +27,7 @@ int main() {
     runner.run(table);
     runner.printSemanticError();
     runner.printMidCode();
-
+    vector<SymbolTableLine*> proFunVector = runner.generateProFunVector(runner.startBlock);
 //    //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;
 //    interpreter.interpreter(interpreter.readFile("text.txt"));
