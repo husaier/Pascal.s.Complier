@@ -4,9 +4,8 @@
 
 #include "TransformPcode.h"
 #include "any"
-//todo:把取立即数的步骤进行修改（现在只考虑了整数的情况，需要考虑real，char，int）(需要标志位。因为‘1’和1无法区分）
 
-//todo:如果最后一个值等于倒数第二个值，那么在codelist里面加上一条无意义的语句（最后一个值加一），用于帮助空的主过程形成开栈和退栈的pcode语句
+
 vector<int> startCodeIndex;//[0,15,19,19,23,27,28]  前面是每个过程的四元式开始地址，按从小到大排序,最后一个值是程序的结束地址+1
 
 //todo:符号表里面定义的变量的个数（数组的大小和结构的大小）+过程的个数+临时变量的个数（遍历一遍四元式列表，得到每个过程临时变量的个数）+参数的个数
@@ -45,6 +44,19 @@ any getValue(string s) {
         }
     }
     return value;
+}
+
+//初始化startCodeIndex和procedure数组
+void TransformPcode::init(vector<SymbolTableLine *> proFunVector, Quaternion midCode) {
+    for (int i = 0; i < proFunVector.size(); i++) {
+        procedure.push_back(proFunVector[i]->blockPoint);
+        startCodeIndex.push_back(proFunVector[i]->startQuad);
+    }
+    //如果最后一个过程的开始地址处已经没有四元式，那么在codelist里面加上一条无意义的语句（最后一个值加一），用于帮助空的主过程形成开栈和退栈的pcode语句
+    if (midCode.codeList.size() <= startCodeIndex[startCodeIndex.size() - 1]){
+        midCode.codeList.emplace_back(midCode.codeList.size(), QuaternionItem::NONE, "$0", "$0", "$0");
+    }
+    startCodeIndex.push_back(midCode.codeList.size());
 }
 
 //判断数字是否在数组里面,如果在，返回序号，否则返回-1
@@ -92,7 +104,7 @@ vector<Pcode> TransformPcode::transformPcode(Quaternion midCode) {
     pcode.L = 0;
     pcode.D = 0;
     allPcode.push_back(pcode);
-    allPcode[0].D = pcodeIndex[pcodeIndex.size()];//回填主过程的pcode码
+    allPcode[0].D = pcodeIndex[pcodeIndex.size() - 1];//回填主过程的pcode码
     //回填pcodeExit的跳转语句
     for (int i = 0; i < pcodeExit.size(); i++) {
         if (pcodeExit[i].addr < pcodeIndex.size() - 1)
@@ -474,9 +486,8 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 para.emplace_back(code.arg1);
                 break;
             case 10: // call p,n
-                //todo:这里callBlock可能需要更换
-                callBlock = procedure[procedureIndex]->query(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)->blockPoint;
-//                callBlock = midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry->currentBlock;
+                callBlock = procedure[procedureIndex]->query(
+                        midCode.tempVarList[stoi(code.arg1.substr(1))]->value)->blockPoint;
                 allPcode.push_back({CAL, procedure[procedureIndex]->level - callBlock->level,
                                     pcodeIndex[existBlock(procedure, callBlock)]});
                 for (int i = 0; i < para.size(); i++) {
@@ -496,6 +507,20 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                         }
                         allPcode.push_back({LOP, l, d});
                     }
+                }
+                if (midCode.codeList[index + 1].type == 11) {
+                    code = midCode.codeList[index + 1];
+                    //找到返回值定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                    if (midCode.tempVarList[stoi(code.res.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
+                        SymbolBlock *defineBlock = midCode.tempVarList[stoi(
+                                code.res.substr(1))]->tableLineEntry->currentBlock;
+                        l = procedure[procedureIndex]->level - defineBlock->level;
+                        d = getAddress(existBlock(procedure, defineBlock), code.res);
+                    } else {  //是临时变量
+                        l = 0;
+                        d = getAddress(procedureIndex, code.res);
+                    }
+                    allPcode.push_back({SRO, l, d});
                 }
                 break;
             default:

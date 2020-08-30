@@ -2,6 +2,7 @@
 #include "LR1Runner.h"
 #include "lexical_analyzer.h"
 #include "Pcode_Interpreter.h"
+#include "TransformPcode.h"
 
 using namespace std;
 
@@ -27,7 +28,15 @@ int main() {
     runner.run(table);
     runner.printSemanticError();
     runner.printMidCode();
-    vector<SymbolTableLine*> proFunVector = runner.generateProFunVector(runner.startBlock);
+    vector<SymbolTableLine *> proFunVector = runner.generateProFunVector(runner.startBlock);
+    // 开始转pcode码
+    TransformPcode transformPcode;
+    transformPcode.init(proFunVector, runner.midCode);//初始化
+    transformPcode.transformPcode(runner.midCode);
+
+    // pcode解释执行
+    Pcode_Interpreter interpreter;
+    interpreter.interpreter(transformPcode.allPcode);
 
 //    //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;

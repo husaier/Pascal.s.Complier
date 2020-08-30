@@ -601,6 +601,10 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                     top--;
                 }
                 break;
+            case SRO:
+                //把数据栈栈顶+3（返回值）存入变量(相对地址为d,层次差为l)
+                dataStack[std::any_cast<int>(
+                        calculate(ADD, currentPcode.D, any(getBase(base, currentPcode.L))))] = dataStack[top + 3];
 //            case LOA:
 //                //LOA：获取变量的地址放到数据栈栈顶(相对地址为d，层次差为l)
 //                dataStack[top] = currentPcode.D + getBase(base, currentPcode.L);
@@ -622,13 +626,13 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 dataStack[top + 1] = getBase(base, currentPcode.L);
                 dataStack[top + 2] = pc;
                 i = 1;
-                while (allPcode[pc + i].OP == LIP || allPcode[pc + i].OP == LOP) {
-                    if (allPcode[pc + i].OP == LIP) {
+                while (allPcode[pc + i - 1].OP == LIP || allPcode[pc + i - 1].OP == LOP) {
+                    if (allPcode[pc + i - 1].OP == LIP) {
                         //LIP：取常量d作为函数参数传入
-                        dataStack[top + 2 + i] = currentPcode.D;
+                        dataStack[top + 3 + i] = currentPcode.D;
                     } else {
                         //LOP：取变量(相对地址为d,层次差为l)作为函数参数传入
-                        dataStack[top + 2 + i] = dataStack[std::any_cast<int>(
+                        dataStack[top + 3 + i] = dataStack[std::any_cast<int>(
                                 calculate(ADD, currentPcode.D, any(getBase(base, currentPcode.L))))];
                     }
                 }
