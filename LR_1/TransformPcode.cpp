@@ -15,13 +15,86 @@ vector<SymbolBlock *> procedure;//每个过程的符号表，与startCodeIndex�
 
 //todo:每个符号表存的变量数组的数组，包括每个过程的变量（数组和结构），过程，临时变量，参数
 vector<vector<string>> valueData;
-void initialValueData(){
+
+int TransformPcode::fillRecord(vector<string> &list, Record* record){
+    int num = 0;
+    for(const auto &item : record->env){
+        auto name = item.id;
+        auto type = item.type;
+        if(type->getType() == Type::ARRAY){
+            auto array = (Array*)(type);
+            int size = array->getSize();
+            for(int i=0;i<size;i++){
+                list.push_back(name);
+                num++;
+            }
+        } else if(type->getType() == Type::RECORD) {
+            auto r = (Record*)(type);
+            list.push_back(name);
+            num++;
+            num += fillRecord(list, r);
+        } else {
+            list.push_back(name);
+            num++;
+        }
+    }
+    return num;
+}
+
+void TransformPcode::initialValueData(){
     for(auto block : procedure){
-        vector<string> t_list;
+        vector<string> t_funcList;
+        vector<string> t_varList;
+        vector<string> t_tmpList;
+        int t_num = 0;
         for(auto item: block->symbolBlock){
             string name = item->name;
-            t_list.push_back(name);
+            if(item->type == nullptr){ // 临时变量
+                if(item->tempVarPoint != nullptr){
+                    auto tmpVar = item->tempVarPoint;
+                    t_tmpList.push_back(tmpVar->id);
+                    t_num++;
+                }
+                continue;
+            }
+            auto type = item->type;
+            if(type->getType() == Type::FUNC){
+                auto func = (Func*)type;
+                t_funcList.push_back(name);
+                t_num++;
+                for(const auto& para:func->env){
+                    t_funcList.push_back(para.id);
+                    t_num++;
+                }
+            } else if(type->getType() == Type::PROC){
+                auto proc = (Proc*)(type);
+                t_funcList.push_back(name);
+                t_num++;
+                for(const auto& para: proc->env){
+                    t_funcList.push_back(para.id);
+                    t_num++;
+                }
+            } else if(type->getType() == Type::ARRAY){
+                auto array = (Array*)(type);
+                int size = array->getSize();
+                for(int i=0;i<size;i++){
+                    t_varList.push_back(name);
+                    t_num++;
+                }
+            } else if(type->getType() == Type::RECORD){
+                auto record = (Record*)(type);
+                t_varList.push_back(name);
+                t_num++;
+                t_num += fillRecord(t_varList, record);
+            } else {
+                t_varList.push_back(name);
+                t_num++;
+            }
         }
+        t_funcList.insert(t_funcList.end(),t_varList.begin(),t_varList.end());
+        t_funcList.insert(t_funcList.end(),t_tmpList.begin(),t_tmpList.end());
+        valueData.push_back(t_funcList);
+        valueNum.push_back(t_num);
     }
 }
 
@@ -531,6 +604,3 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
 
 
 }
-
-
-

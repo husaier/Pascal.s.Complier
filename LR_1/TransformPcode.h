@@ -33,6 +33,7 @@ private:
     vector<int> pcodeStart;//每个四元式的pcode码开始地址
     vector<backItem> pcodeExit;//记录每条需要回填所在过程结束地址的pcode码的地址和其所在的过程
     vector<backItem> pcodeWait;//记录每条需要回填的pcode码的地址和其跳转的四元式位置
+    int fillRecord(vector<string> &list, Record* record);
 
 public:
     vector<Pcode> allPcode;//生成的pcode集合
@@ -45,6 +46,7 @@ public:
     int getAddress(int blockIndex, string value); //根据变量名和符号表序号得到该变量在该符号表里面的位置
     void simple(Quaternion midCode, QuaternionItem code, int cal, int procedureIndex); //生成简单赋值语句的pcode码
     void init(vector<SymbolTableLine*> proFunVector, Quaternion midCode); //初始化startCodeIndex和procedure数组
+    void initialValueData();
 };
 
 

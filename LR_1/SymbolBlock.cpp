@@ -87,6 +87,19 @@ SymbolTableLine *SymbolBlock::blockQuery(string name) {
     }
 }
 
+bool SymbolBlock::insertTmpVar(TempVar *tempVar, string name) {
+    if (blockQuery(name)) {
+        printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
+        return false;
+    } else {
+        auto *tempPoint = new SymbolTableLine(rowNum, tempVar, name, this);
+        invMap.insert(map<string, int>::value_type(name, rowNum));
+        rowNum++;
+        symbolBlock.push_back(tempPoint);
+        return true;
+    }
+}
+
 void SymbolTableLine::printLine(SymbolTableLine *InLinePoint) {
     printf("id:%3d\tname:%8s\ttype:%d\toffset:%d\tdimension:%d\tdeclarationLine:%d\tpoint:%p\tblockPoint:%p\treferenceLineVector:",
            InLinePoint->id, InLinePoint->name.c_str(),

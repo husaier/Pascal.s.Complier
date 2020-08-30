@@ -29,7 +29,19 @@ public:
         point = nullptr; //指向存储位置的指针
         blockPoint = nullptr;//指指向下一个符号块
         currentBlock = InCurrentBlock;
-        TempVar* tempVarPoint{nullptr}; // 如果是临时变量会有这一项，注意对于临时变量type是无效的
+    }
+
+    SymbolTableLine(int InId, TempVar* var, string n, SymbolBlock* InCurrentBlock){
+        id = InId;//序号
+        name = n;
+        type = nullptr;
+        offset = 0;
+        dimension = 0;
+        declarationLine = 0;//声明行
+        point = nullptr; //指向存储位置的指针
+        blockPoint = nullptr;//指指向下一个符号块
+        currentBlock = InCurrentBlock;
+        tempVarPoint = var;
     }
 
     void printLine(SymbolTableLine *InLinePoint);
@@ -47,6 +59,7 @@ public:
     SymbolBlock *currentBlock; //指向自己所在表的指针
     string value; //值
     int startQuad = -1;
+    TempVar* tempVarPoint{nullptr}; // 如果是临时变量会有这一项，注意对于临时变量type是无效的
 };
 
 
@@ -66,6 +79,8 @@ public:
     bool insert(string name, Type *type, int offset, int dimension, int declarationLine);
 
     SymbolTableLine *insert2(string name, Type *type, int offset, int dimension, int declarationLine);
+
+    bool insertTmpVar(TempVar*, string);
 
     static SymbolBlock *makeBlock(SymbolBlock *InPrevious);
 

@@ -148,7 +148,7 @@ TempVar *Quaternion::newTemp(SymbolBlock *block, bool flag) {
     name.append(t);
     auto var = new TempVar(name, flag);
     tempVarList.push_back(var);
-    block->insert(name, nullptr, 0, 0, 0);
+    block->insertTmpVar(var, name);
     return var;
 }
 
