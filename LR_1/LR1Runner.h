@@ -45,6 +45,8 @@ public:
 
 class LR1Runner {
 public:
+    Quaternion midCode; // 产生的中间代码
+
     explicit LR1Runner();
 
     int debugInfoLevel = 0;
@@ -67,7 +69,7 @@ private:
     stack<int *> offSetStack;
     int tempID; // 临时变量的编号
     vector<string> semanticError; // 语义错误信息
-    Quaternion midCode; // 产生的中间代码
+
 
     static void outStackInt(stack<int> stack);
 

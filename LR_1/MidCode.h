@@ -36,7 +36,7 @@ public:
         EQUAL = 6, OR = 7, FLOOR_DIVIDE = 8, MOD = 9, AND = 10,
         UNEQUAL = 11, LESS = 12, LESS_EQUAL = 13, MORE = 14,
         MORE_EQUAL = 15, NOT = 16, ASSIGNOFFSET = 22, OFFSETASSIGN = 23,
-        GOTO = 27, IF = 28, PARAM = 29, CALL = 30, RETURN = 31,
+        GOTO = 27, IF = 28, PARAM = 29, CALL = 30, RETURN = 31,NONE = 32
     };
 
     QuaternionItem(int seq, int op, std::string arg1, std::string arg2, std::string res) {

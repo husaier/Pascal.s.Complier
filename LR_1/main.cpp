@@ -29,7 +29,7 @@ int main() {
     runner.printMidCode();
     vector<SymbolTableLine*> proFunVector = runner.generateProFunVector(runner.startBlock);
     TransformPcode transformPcode;
-    transformPcode.init(proFunVector);
+    transformPcode.init(proFunVector, runner.midCode);
 
 //    //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;

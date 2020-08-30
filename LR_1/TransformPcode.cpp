@@ -5,7 +5,7 @@
 #include "TransformPcode.h"
 #include "any"
 
-//todo:如果最后一个值等于倒数第二个值，那么在codelist里面加上一条无意义的语句（最后一个值加一），用于帮助空的主过程形成开栈和退栈的pcode语句
+
 vector<int> startCodeIndex;//[0,15,19,19,23,27,28]  前面是每个过程的四元式开始地址，按从小到大排序,最后一个值是程序的结束地址+1
 
 //todo:符号表里面定义的变量的个数（数组的大小和结构的大小）+过程的个数+临时变量的个数（遍历一遍四元式列表，得到每个过程临时变量的个数）+参数的个数
@@ -37,12 +37,17 @@ any getValue(string s) {
     return value;
 }
 
-//初始化startCodeIndex和valueNum数组
-void TransformPcode::init(vector<SymbolTableLine *> proFunVector) {
+//初始化startCodeIndex和procedure数组
+void TransformPcode::init(vector<SymbolTableLine *> proFunVector, Quaternion midCode) {
     for (int i = 0; i < proFunVector.size(); i++) {
         procedure.push_back(proFunVector[i]->blockPoint);
         startCodeIndex.push_back(proFunVector[i]->startQuad);
     }
+    //如果最后一个过程的开始地址处已经没有四元式，那么在codelist里面加上一条无意义的语句（最后一个值加一），用于帮助空的主过程形成开栈和退栈的pcode语句
+    if (midCode.codeList.size() <= startCodeIndex[startCodeIndex.size() - 1]){
+        midCode.codeList.emplace_back(midCode.codeList.size(), QuaternionItem::NONE, "$0", "$0", "$0");
+    }
+    startCodeIndex.push_back(midCode.codeList.size());
 }
 
 //判断数字是否在数组里面,如果在，返回序号，否则返回-1
@@ -90,7 +95,7 @@ vector<Pcode> TransformPcode::transformPcode(Quaternion midCode) {
     pcode.L = 0;
     pcode.D = 0;
     allPcode.push_back(pcode);
-    allPcode[0].D = pcodeIndex[pcodeIndex.size()];//回填主过程的pcode码
+    allPcode[0].D = pcodeIndex[pcodeIndex.size() - 1];//回填主过程的pcode码
     //回填pcodeExit的跳转语句
     for (int i = 0; i < pcodeExit.size(); i++) {
         if (pcodeExit[i].addr < pcodeIndex.size() - 1)
