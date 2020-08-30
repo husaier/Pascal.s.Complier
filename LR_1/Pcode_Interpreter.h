@@ -19,7 +19,7 @@ enum pcodeOP {
 
 class Pcode_Interpreter {
 private:
-    any dataStack[1000] = {0};//数据栈
+    any dataStack[2000];//数据栈
     vector<Pcode> allPcode;
 
 public:
@@ -30,7 +30,7 @@ public:
 
 //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;
-//    interpreter.interpreter(interpreter.readFile("test.txt"));
+//    interpreter.interpreter(interpreter.readFile("text.txt"));
 };
 
 

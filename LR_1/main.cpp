@@ -39,9 +39,11 @@ int main() {
     Pcode_Interpreter interpreter;
     interpreter.interpreter(transformPcode.allPcode);
 
-//    //    下列代码可以从文件里面读出p-code并执行
+    //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;
-//    interpreter.interpreter(interpreter.readFile("text.txt"));
+//    interpreter.interpreter(Pcode_Interpreter::readFile("test.txt"));
+
+
 //    string s = "0.23";
 //    float f = stof(s);
 //    cout << f << endl;

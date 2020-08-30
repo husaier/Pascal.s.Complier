@@ -17,7 +17,7 @@ int Pcode_Interpreter::getBase(int nowBp, int lev) {
 }
 
 //从文件里面读取p-code码
-vector<Pcode> Pcode_Interpreter::readFile(const string& filename) {
+vector<Pcode> Pcode_Interpreter::readFile(const string &filename) {
     vector<Pcode> allPcode;
     Pcode_Interpreter interpreter;
     string line_info, input_result, read;
@@ -413,6 +413,9 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
     bool b;
     allPcode.assign(pcode.begin(), pcode.end());//为allPcode赋值
     size = allPcode.size();
+    //初始化dataStack
+    for (int num = 0; num < 2000; num++)
+        dataStack[num] = 0;
     do {
         Pcode currentPcode = allPcode[pc];
         pc++;
