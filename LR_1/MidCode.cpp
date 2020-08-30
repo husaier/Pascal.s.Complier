@@ -141,13 +141,14 @@ string Quaternion::op2string(int op) {
     return output;
 }
 
-TempVar *Quaternion::newTemp(bool flag) {
+TempVar *Quaternion::newTemp(SymbolBlock *block, bool flag) {
     char t[10];
     snprintf(t, sizeof(t), "#%d", tempSeq++);//这里的井号用于表示临时变量
     string name;
     name.append(t);
     auto var = new TempVar(name, flag);
     tempVarList.push_back(var);
+    block->insert(name, nullptr, 0, 0, 0);
     return var;
 }
 

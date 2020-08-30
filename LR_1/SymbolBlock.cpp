@@ -3,6 +3,7 @@
 //
 //
 #include "SymbolBlock.h"
+#include "MidCode.h"
 
 
 //查找操作：按给定的名字查找，若查找成功则返回该行的指针，否则返回空指针

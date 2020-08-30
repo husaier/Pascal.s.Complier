@@ -14,6 +14,8 @@ class SymbolBlock;
 
 class SymbolTableLine;
 
+class TempVar;
+
 class SymbolTableLine {
 public:
     SymbolTableLine(int InId, string InName, Type *InType, int InOffset, int InDimension, int InDeclarationLine,SymbolBlock* InCurrentBlock) {
@@ -27,6 +29,7 @@ public:
         point = nullptr; //指向存储位置的指针
         blockPoint = nullptr;//指指向下一个符号块
         currentBlock = InCurrentBlock;
+        TempVar* tempVarPoint{nullptr}; // 如果是临时变量会有这一项，注意对于临时变量type是无效的
     }
 
     void printLine(SymbolTableLine *InLinePoint);

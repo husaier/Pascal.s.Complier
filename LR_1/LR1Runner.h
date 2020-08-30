@@ -60,14 +60,15 @@ public:
     vector<SymbolTableLine *> generateProFunVector(SymbolBlock *);
 
     SymbolBlock *startBlock = nullptr;
+
+    Quaternion midCode; // 产生的中间代码
+
 private:
     SymbolBlock *curBlock = nullptr;
     int *offset = nullptr;
     stack<SymbolBlock *> tablePointers; //栈顶指针指向的是本块
     stack<int *> offSetStack;
-    int tempID; // 临时变量的编号
     vector<string> semanticError; // 语义错误信息
-    Quaternion midCode; // 产生的中间代码
 
     static void outStackInt(stack<int> stack);
 
@@ -89,10 +90,7 @@ private:
 
     void recordSemanticError(int line, const string &); // 记录语义错误
 
-    SymbolTableLine *newTemp(); // 生成临时变量
-
     static Type *getType(SymbolTableLine *);
-
 };
 
 

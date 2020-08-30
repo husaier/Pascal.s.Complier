@@ -16,6 +16,15 @@ vector<SymbolBlock *> procedure;//每个过程的符号表，与startCodeIndex�
 
 //todo:每个符号表存的变量数组的数组，包括每个过程的变量（数组和结构），过程，临时变量，参数
 vector<vector<string>> valueData;
+void initialValueData(){
+    for(auto block : procedure){
+        vector<string> t_list;
+        for(auto item: block->symbolBlock){
+            string name = item->name;
+            t_list.push_back(name);
+        }
+    }
+}
 
 vector<string> para;//记录传入的参数
 

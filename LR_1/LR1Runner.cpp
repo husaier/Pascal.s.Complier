@@ -557,7 +557,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 arg1 = Expression->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = Expression->variableName;
                 entry->type = Expression->type;
                 entry->tableLineEntry = Expression->tableLineEntry;
@@ -659,7 +659,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         value = "0";
                     }
                     TempVar *entry{nullptr};
-                    entry = midCode.newTemp();
+                    entry = midCode.newTemp(curBlock);
                     entry->value = value;
                     entry->type = new Type(Type::BOOLEAN);
                     leftSymbol->entry = entry;
@@ -733,7 +733,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->nextList = Expression1->falseList;
             if (Updown->value == "to") {
                 TempVar *entryb{nullptr};
-                entryb = midCode.newTemp();
+                entryb = midCode.newTemp(curBlock);
                 entryb->type = tempPoint->type;
 //                entryb->value = "NotKnow";
                 string argb1, argb2, resb;
@@ -748,7 +748,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 midCode.outCode(QuaternionItem::ASSIGN, argc1, argc2, resc);
             } else if (Updown->value == "downto") {
                 TempVar *entryb{nullptr};
-                entryb = midCode.newTemp();
+                entryb = midCode.newTemp(curBlock);
                 entryb->type = tempPoint->type;
 //                entryb->value = "NotKnow";
                 string argb1, argb2, resb;
@@ -783,7 +783,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->variableName += Id_varparts.variableName;
             }
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = leftSymbol->variableName;
             entry->type = curBlock->query(id->attribute)->type;
             entry->tableLineEntry = leftSymbol->tableLineEntry;
@@ -791,7 +791,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 //            int tempOffset = 0;
             if (!Id_varparts.queue.empty()) {
                 TempVar *entryb{nullptr};
-                entryb = midCode.newTemp();
+                entryb = midCode.newTemp(curBlock);
                 entryb->value = "0";
                 entryb->type = new Type(Type::INTEGER);
                 midCode.outCode(QuaternionItem::ASSIGN, "$0", "", entryb->id);
@@ -800,12 +800,12 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         Array *arrPoint = (Array *) typePoint;
                         auto nextPoint = arrPoint->elem;
                         TempVar *entryc{nullptr};
-                        entryc = midCode.newTemp();
+                        entryc = midCode.newTemp(curBlock);
                         entryc->value = "0";
                         entryc->type = new Type(Type::INTEGER);
 
                         TempVar *entryd{nullptr};
-                        entryd = midCode.newTemp();
+                        entryd = midCode.newTemp(curBlock);
                         entryd->value = "0";
                         entryd->type = new Type(Type::INTEGER);
                         midCode.outCode(QuaternionItem::MINUS, Id_varparts.queue[i], "$" + to_string(arrPoint->low),
@@ -818,12 +818,12 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                         Record *recPoint = (Record *) typePoint;
                         int recOffset = 0;
                         TempVar *entryc{nullptr};
-                        entryc = midCode.newTemp();
+                        entryc = midCode.newTemp(curBlock);
                         entryc->value = "0";
                         entryc->type = new Type(Type::INTEGER);
 
                         TempVar *entryd{nullptr};
-                        entryd = midCode.newTemp();
+                        entryd = midCode.newTemp(curBlock);
                         entryd->value = "0";
                         entryd->type = new Type(Type::INTEGER);
 
@@ -847,7 +847,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 entry->offset = entryb;
 
                 TempVar *entrye{nullptr};
-                entrye = midCode.newTemp();
+                entrye = midCode.newTemp(curBlock);
                 entrye->type = leftSymbol->type;
                 midCode.outCode(QuaternionItem::ASSIGNOFFSET, entry->id, entryb->id, entrye->id);
                 entrye->backOffset = entry;
@@ -1055,7 +1055,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 arg1 = Expression0->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = Expression0->variableName;
                 entry->type = Expression0->type;
                 entry->tableLineEntry = Expression0->tableLineEntry;
@@ -1067,7 +1067,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 res = id->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = id->attribute;
                 entry->type = id->type;
                 id->tableLineEntry = curBlock->query(id->attribute);
@@ -1089,7 +1089,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 arg1 = Expression0->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = Expression0->variableName;
                 entry->type = Expression0->type;
                 entry->tableLineEntry = Expression0->tableLineEntry;
@@ -1101,7 +1101,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 res = id->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = id->attribute;
                 entry->type = id->type;
                 id->tableLineEntry = curBlock->query(id->attribute);
@@ -1168,7 +1168,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 arg1 = idPoint->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = idPoint->attribute;
                 entry->type = idPoint->type;
                 idPoint->tableLineEntry = curBlock->query(idPoint->attribute);
@@ -1239,7 +1239,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
@@ -1277,7 +1277,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
@@ -1342,7 +1342,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
@@ -1407,7 +1407,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
@@ -1472,7 +1472,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
@@ -1537,7 +1537,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
@@ -1586,12 +1586,12 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->variableName = "+" + Term.variableName;
 
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
             string arg1, arg2, res;
-            auto var = midCode.newTemp(true);
+            auto var = midCode.newTemp(curBlock, true);
             var->type = new Type(Type::INTEGER);
             var->value = "0";
             arg1 = var->id;
@@ -1619,12 +1619,12 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->tableLineEntry = Term.tableLineEntry;
             leftSymbol->variableName = "-" + Term.variableName;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->value = value;
             entry->type = resultType;
             leftSymbol->entry = entry;
             string arg1, arg2, res;
-            auto var = midCode.newTemp(true);
+            auto var = midCode.newTemp(curBlock, true);
             var->type = new Type(Type::INTEGER);
             var->value = "0";
             arg1 = var->id;
@@ -1684,7 +1684,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     break;
                 }
             }
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->type = resultType;
@@ -1750,7 +1750,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -1781,7 +1781,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -1845,7 +1845,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -1883,7 +1883,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -1920,7 +1920,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             }
             leftSymbol->type = resultType;
             leftSymbol->value = value;
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -1957,7 +1957,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -1988,7 +1988,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -2078,7 +2078,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 //                leftSymbol->entry = id->entry;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = id->attribute;
                 entry->type = id->type;
                 id->tableLineEntry = curBlock->query(id->attribute);
@@ -2096,7 +2096,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             midCode.outCode(QuaternionItem::CALL, arg1, arg2, res);
             string argc1, argc2, resc;
             TempVar *entryb{nullptr};
-            entryb = midCode.newTemp();
+            entryb = midCode.newTemp(curBlock);
             entryb->type = id->type;
             leftSymbol->entry = entryb;
             argc1 = entryb->id;
@@ -2129,7 +2129,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->type = resultType;
             leftSymbol->value = value;
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             entry->type = resultType;
             entry->value = value;
             leftSymbol->entry = entry;
@@ -2150,7 +2150,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->variableName = tempLinePoint->name;
 
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = leftSymbol->variableName;
                 entry->type = leftSymbol->type;
                 entry->tableLineEntry = leftSymbol->tableLineEntry;
@@ -2181,7 +2181,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             leftSymbol->value = num.attribute;
             leftSymbol->variableName = num.attribute;
             leftSymbol->type = type;
-            auto var = midCode.newTemp(true);
+            auto var = midCode.newTemp(curBlock, true);
             var->type = type;
             var->value = num.attribute;
             leftSymbol->entry = var;
@@ -2192,7 +2192,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto type = new Type(Type::CHAR);
             leftSymbol->type = type;
             leftSymbol->value = letter.attribute;
-            auto var = midCode.newTemp(true);
+            auto var = midCode.newTemp(curBlock, true);
             var->type = type;
             var->value = letter.attribute;
             leftSymbol->entry = var;
@@ -2274,7 +2274,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 arg1 = Expression->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = Expression->value;
                 entry->type = Expression->type;
                 entry->tableLineEntry = Expression->tableLineEntry;
@@ -2299,7 +2299,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 arg1 = Expression->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = Expression->value;
                 entry->type = Expression->type;
                 entry->tableLineEntry = Expression->tableLineEntry;
@@ -2320,7 +2320,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 arg1 = Expression->entry->id;
             } else {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
                 entry->value = Expression->value;
                 entry->type = Expression->type;
                 entry->tableLineEntry = Expression->tableLineEntry;
@@ -2329,7 +2329,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 //                arg1 = Expression.tableLineEntry->name;
             }
             TempVar *entry{nullptr};
-            entry = midCode.newTemp();
+            entry = midCode.newTemp(curBlock);
             string value;
             if (Expression->value == "1")
                 value = "0";
@@ -2356,7 +2356,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             Expression1->falseList.push_back(midCode.codeList.size() + 2);
             if (Updown->value == "to") {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
 //                entry->value = value;
                 entry->type = new Type(Type::BOOLEAN);
                 string arg1, arg2, res;
@@ -2365,7 +2365,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     res = id->entry->id;
                 } else {
                     TempVar *entryb{nullptr};
-                    entryb = midCode.newTemp();
+                    entryb = midCode.newTemp(curBlock);
                     entryb->value = id->attribute;
                     entryb->type = id->type;
                     id->tableLineEntry = curBlock->query(id->attribute);
@@ -2382,7 +2382,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 midCode.outCode(QuaternionItem::IF, argb1, argb2, resb3);
             } else if (Updown->value == "downto") {
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp();
+                entry = midCode.newTemp(curBlock);
 //                entry->value = value;
                 entry->type = new Type(Type::BOOLEAN);
                 string arg1, arg2, res;
@@ -2391,7 +2391,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     res = id->entry->id;
                 } else {
                     TempVar *entryb{nullptr};
-                    entryb = midCode.newTemp();
+                    entryb = midCode.newTemp(curBlock);
                     entryb->value = id->attribute;
                     entryb->type = id->type;
                     id->tableLineEntry = curBlock->query(id->attribute);
@@ -2496,16 +2496,8 @@ void LR1Runner::recordSemanticError(int line, const string &e) {
     semanticError.push_back(tmp);
 }
 
-SymbolTableLine *LR1Runner::newTemp() {
-    char t[10];
-    snprintf(t, sizeof(t), "$%d", tempID++);
-    string name;
-    name.append(t);
-    return curBlock->insert2(name, nullptr, 0, 0, 0);
-}
-
 LR1Runner::LR1Runner() {
-    tempID = 0;
+    
 }
 
 Type *LR1Runner::getType(SymbolTableLine *p) {

@@ -68,7 +68,7 @@ public:
 
     void print();
 
-    TempVar *newTemp(bool flag = false);
+    TempVar *newTemp(SymbolBlock *block = nullptr, bool flag = false);
 
     TempVar *getTempById(string);
 
