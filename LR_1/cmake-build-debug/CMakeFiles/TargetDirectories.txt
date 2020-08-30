@@ -1,3 +1,3 @@
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir
+E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir
+E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

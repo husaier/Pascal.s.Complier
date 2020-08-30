@@ -5,27 +5,27 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cJSON.c" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.o"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cJSON.c" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/cJSON.c.obj"
   )
-set(CMAKE_C_COMPILER_ID "AppleClang")
+set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/CJsonObject.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Table.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/MidCode.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Pcode_Interpreter.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Production.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TranslateScheme.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TypeSystem.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TypeSystem.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/lexical_analyzer.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.o"
-  "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/main.cpp" "/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.o"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/CJsonObject.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/CJsonObject.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Runner.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Runner.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/LR1Table.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/LR1Table.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/MidCode.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/MidCode.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Pcode_Interpreter.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Pcode_Interpreter.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/Production.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/Production.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/SymbolBlock.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/SymbolBlock.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TranslateScheme.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TranslateScheme.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/TypeSystem.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/TypeSystem.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/lexical_analyzer.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/lexical_analyzer.cpp.obj"
+  "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/main.cpp" "E:/CLionproject/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/CMakeFiles/LR_1.dir/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
