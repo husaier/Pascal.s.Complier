@@ -466,7 +466,8 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 break;
             case 10: // call p,n
                 //todo:这里callBlock可能需要更换
-                callBlock = midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry->currentBlock;
+                callBlock = procedure[procedureIndex]->query(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)->blockPoint;
+//                callBlock = midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry->currentBlock;
                 allPcode.push_back({CAL, procedure[procedureIndex]->level - callBlock->level,
                                     pcodeIndex[existBlock(procedure, callBlock)]});
                 for (int i = 0; i < para.size(); i++) {

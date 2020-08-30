@@ -569,13 +569,31 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 
             res = Variable->entry->id;
 ////            res = Variable.tableLineEntry->name;
+            if (Variable->entry->type->getType() == Type::RECORD) {
+                TempVar *Ventry{nullptr};
+                Ventry = Variable->entry;
+                if (Variable->entry->backOffset != nullptr) {
+                    Ventry = Variable->entry->backOffset;
+                }
+                TempVar *Eentry{nullptr};
+                Eentry = Expression->entry;
+                if (Expression->entry->backOffset != nullptr) {
+                    Eentry = Expression->entry->backOffset;
+                }
+//                midCode.outCode(QuaternionItem::ASSIGN,Ventry->id,Eentry->id,"");
+                printf("v%d\n",Variable->entry->type->getSize());
+                printf("v%d\n",Ventry->type->getSize());
+                for (int i = 0; i < Variable->entry->type->getSize(); ++i) {
+                }
 
-            if (Variable->entry->backOffset != nullptr) {
-                res = Variable->entry->backOffset->id;
-                arg2 = Variable->entry->backOffset->offset->id;
-                midCode.outCode(QuaternionItem::OFFSETASSIGN, arg1, arg2, res);
             } else {
-                midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
+                if (Variable->entry->backOffset != nullptr) {
+                    res = Variable->entry->backOffset->id;
+                    arg2 = Variable->entry->backOffset->offset->id;
+                    midCode.outCode(QuaternionItem::OFFSETASSIGN, arg1, arg2, res);
+                } else {
+                    midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
+                }
             }
 
 
@@ -584,7 +602,6 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
         }
         case 54: {  //54. Statement -> Call_procedure_statement
             leftSymbol->startQuad = midCode.codeList.size();
-
 
 //            leftSymbol->nextList.push_back(midCode.codeList.size());//不确定是否这里写
             break;
@@ -768,7 +785,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             TempVar *entry{nullptr};
             entry = midCode.newTemp();
             entry->value = leftSymbol->variableName;
-            entry->type = leftSymbol->type;
+            entry->type = curBlock->query(id->attribute)->type;
             entry->tableLineEntry = leftSymbol->tableLineEntry;
             Type *typePoint = id->type;
 //            int tempOffset = 0;
@@ -829,12 +846,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 }
                 entry->offset = entryb;
 
-                TempVar *entryc{nullptr};
-                entryc = midCode.newTemp();
-                entryc->type = leftSymbol->type;
-                midCode.outCode(QuaternionItem::ASSIGNOFFSET, entry->id, entryb->id, entryc->id);
-                entryc->backOffset = entry;
-                leftSymbol->entry = entryc;
+                TempVar *entrye{nullptr};
+                entrye = midCode.newTemp();
+                entrye->type = leftSymbol->type;
+                midCode.outCode(QuaternionItem::ASSIGNOFFSET, entry->id, entryb->id, entrye->id);
+                entrye->backOffset = entry;
+                cout<< entry->type->getSize()<<endl;
+                leftSymbol->entry = entrye;
             } else {
                 leftSymbol->entry = entry;
             }

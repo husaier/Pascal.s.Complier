@@ -43,7 +43,7 @@ void Quaternion::print() {
     while (i--)
         cout << '=';
     cout << '\n';
-    TempVar *var;
+//    TempVar *var;
     for (const auto &item:codeList) {
         cout << setiosflags(ios::left) << setw(printWidth) << item.seq;
         cout << setiosflags(ios::left) << setw(printWidth) << op2string(item.op);
@@ -174,7 +174,11 @@ void Quaternion::backPatch(const vector<int> &list, int quad) {
 string TempVar::toString() const {
     stringstream ss;
     if (isImmediate) {
-        ss << "$" << value;
+        if (type->getType() == Type::CHAR) {
+            ss << "$c" << value;
+        }else{
+            ss << "$" << value;
+        }
         return ss.str();
     } else if (id[0] == '#') {//如果是临时变量
         return id;
