@@ -57,6 +57,9 @@ public:
     void printSemanticError(); // 打印语义错误信息
 
     void printMidCode(); // 打印中间代码
+    vector<SymbolTableLine *> generateProFunVector(SymbolBlock *);
+
+    SymbolBlock *startBlock = nullptr;
 private:
     SymbolBlock *curBlock = nullptr;
     int *offset = nullptr;
@@ -89,6 +92,7 @@ private:
     SymbolTableLine *newTemp(); // 生成临时变量
 
     static Type *getType(SymbolTableLine *);
+
 };
 
 

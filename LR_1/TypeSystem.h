@@ -14,7 +14,7 @@ public:
         TYPE_ERROR = -1, VOID = 0,
         INTEGER = 1, REAL = 2, BOOLEAN = 3,
         CHAR = 4, ARRAY = 5, RECORD = 6,
-        FUNC = 7, PROC = 8
+        FUNC = 7, PROC = 8 , PROGRAM = 9
     };
 
     explicit Type(int);

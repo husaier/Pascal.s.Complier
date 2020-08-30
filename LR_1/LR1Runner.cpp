@@ -212,6 +212,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             auto M_id = &vectorAttribute[top - 5];
             M_id->tableLineEntry = curBlock->query(M_id->attribute);
             leftSymbol->tableLineEntry = M_id->tableLineEntry;
+            leftSymbol->tableLineEntry->type = new Type(Type::PROGRAM);
+            leftSymbol->tableLineEntry->startQuad = midCode.codeList.size();
             break;
         }
         case 3: {   //3. Program_body -> Const_declarations Type_declarations Var_declarations Subprogram_declarations  Statement_body
@@ -568,11 +570,11 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             res = Variable->entry->id;
 ////            res = Variable.tableLineEntry->name;
 
-            if (Variable->entry->backOffset!= nullptr){
+            if (Variable->entry->backOffset != nullptr) {
                 res = Variable->entry->backOffset->id;
                 arg2 = Variable->entry->backOffset->offset->id;
-                midCode.outCode(QuaternionItem::OFFSETASSIGN,arg1,arg2,res);
-            }else{
+                midCode.outCode(QuaternionItem::OFFSETASSIGN, arg1, arg2, res);
+            } else {
                 midCode.outCode(QuaternionItem::ASSIGN, arg1, arg2, res);
             }
 
@@ -770,7 +772,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             entry->tableLineEntry = leftSymbol->tableLineEntry;
             Type *typePoint = id->type;
 //            int tempOffset = 0;
-            if (!Id_varparts.queue.empty()){
+            if (!Id_varparts.queue.empty()) {
                 TempVar *entryb{nullptr};
                 entryb = midCode.newTemp();
                 entryb->value = "0";
@@ -778,16 +780,51 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 midCode.outCode(QuaternionItem::ASSIGN, "$0", "", entryb->id);
                 for (int i = 0; i < Id_varparts.queue.size(); ++i) {
                     if (typePoint->getType() == Type::ARRAY) {
-                        Array * arrPoint = (Array *) typePoint;
-                        midCode.outCode(QuaternionItem::ADD, entryb->id, Id_varparts.queue[i], entryb->id);
-                        midCode.outCode(QuaternionItem::MINUS,entryb->id,to_string(arrPoint->low),entryb->id);
-                        if (i != Id_varparts.queue.size() - 1) {
-                            midCode.outCode(QuaternionItem::MULTIPLY,entryb->id,to_string(arrPoint->length),entryb->id);
-                        }
-                        typePoint = arrPoint->elem;
+                        Array *arrPoint = (Array *) typePoint;
+                        auto nextPoint = arrPoint->elem;
+                        TempVar *entryc{nullptr};
+                        entryc = midCode.newTemp();
+                        entryc->value = "0";
+                        entryc->type = new Type(Type::INTEGER);
+
+                        TempVar *entryd{nullptr};
+                        entryd = midCode.newTemp();
+                        entryd->value = "0";
+                        entryd->type = new Type(Type::INTEGER);
+                        midCode.outCode(QuaternionItem::MINUS, Id_varparts.queue[i], "$" + to_string(arrPoint->low),
+                                        entryd->id);
+                        midCode.outCode(QuaternionItem::MULTIPLY, entryd->id, "$" + to_string(nextPoint->getSize()),
+                                        entryc->id);
+                        midCode.outCode(QuaternionItem::ADD, entryb->id, entryc->id, entryb->id);
+                        typePoint = nextPoint;
                     } else if (typePoint->getType() == Type::RECORD) {
-                        Record * recPoint = (Record *) typePoint;
-//                        midCode.outCode(QuaternionItem::ADD, entryb->id,,entryb->id)
+                        Record *recPoint = (Record *) typePoint;
+                        int recOffset = 0;
+                        TempVar *entryc{nullptr};
+                        entryc = midCode.newTemp();
+                        entryc->value = "0";
+                        entryc->type = new Type(Type::INTEGER);
+
+                        TempVar *entryd{nullptr};
+                        entryd = midCode.newTemp();
+                        entryd->value = "0";
+                        entryd->type = new Type(Type::INTEGER);
+
+                        for (int j = 0; j < recPoint->env.size(); ++j) {
+                            if (recPoint->env[j].id == Id_varparts.queue[i]) {
+                                recOffset = j;
+                                break;
+                            }
+                            midCode.outCode(QuaternionItem::ADD, entryb->id,
+                                            "$" + to_string(recPoint->env[j].getSize()), entryb->id);
+                        }
+                        typePoint = recPoint->env[recOffset].type;
+//                        midCode.outCode(QuaternionItem::ADD, entryb->id, "$" + to_string(recOffset), entryb->id);
+//                        if (i != Id_varparts.queue.size() - 1) {
+//                            Record *nextRecPoint = (Record *) typePoint;
+//                            midCode.outCode(QuaternionItem::MULTIPLY, entryb->id, to_string(nextRecPoint->getSize()),
+//                                            entryb->id);
+//                        }
                     }
                 }
                 entry->offset = entryb;
@@ -795,10 +832,10 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 TempVar *entryc{nullptr};
                 entryc = midCode.newTemp();
                 entryc->type = leftSymbol->type;
-                midCode.outCode(QuaternionItem::ASSIGNOFFSET,entry->id,entryb->id,entryc->id);
+                midCode.outCode(QuaternionItem::ASSIGNOFFSET, entry->id, entryb->id, entryc->id);
                 entryc->backOffset = entry;
                 leftSymbol->entry = entryc;
-            }else{
+            } else {
                 leftSymbol->entry = entry;
             }
             break;
@@ -889,6 +926,8 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->type = new Type(Type::TYPE_ERROR);
                 recordSemanticError(id_local.line, "类型错误，不是RECORD类型，不能使用.运算符");
             }
+            ////
+            leftSymbol->queue.push_back(id_local.attribute);
             break;
         }
         case 67: {  //67. Else_part -> N else M Statement
@@ -2411,6 +2450,7 @@ void LR1Runner::initial() {
     SymbolBlock *childBlock;
     childBlock = SymbolBlock::makeBlock(curBlock);//初始化最外层的符号表
     curBlock = childBlock;
+    startBlock = childBlock;
     offset = new int(0);
     tablePointers.push(curBlock);
     offSetStack.push(offset);
@@ -2458,4 +2498,17 @@ void LR1Runner::printMidCode() {
     if (debugInfoLevel >= 1 && semanticError.empty()) {
         midCode.print();
     }
+}
+
+vector<SymbolTableLine *> LR1Runner::generateProFunVector(SymbolBlock *startPoint) {
+    vector<SymbolTableLine *> generateVector;
+    for (auto &i : startPoint->symbolBlock) {
+        if (i->type && (i->type->getType() == Type::PROC || i->type->getType() == Type::FUNC ||
+                        i->type->getType() == Type::PROGRAM)) {
+            vector<SymbolTableLine *> tempVector = generateProFunVector(i->blockPoint);
+            generateVector.insert(generateVector.end(), tempVector.begin(), tempVector.end());
+            generateVector.push_back(i);
+        }
+    }
+    return generateVector;
 }

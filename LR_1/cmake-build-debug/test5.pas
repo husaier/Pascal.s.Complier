@@ -8,16 +8,34 @@ var
   ch: Char;
   arr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
   arr2: array [0 .. 7]of integer;
-rec,rec2: record
+  rec,rec2: record
     i: integer;
     c: record
       a: integer;
       b: boolean;
       c: real;
       d: char;
+      e: record
+        a2: Integer;
+        b2: Integer;
+        end;
     end; {end of record c}
     j,k: char;
   end; {end of record rec}
+  arr3: array [1 .. 5] of record
+    i,i2: integer;
+    c: record
+      a: integer;
+      b: boolean;
+      c: real;
+      d: char;
+      e: array [2..6] of record
+        a2: Integer;
+        b2: Integer;
+      end;
+    end; {end of record c}
+    j,k: Integer;
+  end;
 
 function func1 ( var id2 : real ;var id4 : real) : integer ; {Subprogram声明}
   procedure proc1 (var id3 : integer;var id4 : real) ;
@@ -47,7 +65,13 @@ procedure d1p3(var m: char;n:real);
 begin a := b; end; {end of d1p1}
 
 begin
+
   b := 111111111111;
+  rec.c := rec2.c;
+  arr3[2].j:=arr3[3].c.e[5].b2;
+
+  rec.c.e.b2 := b;
+  d1p2(arr2[b]);
   b := arr2[2] + arr2[1];
   arr2[arr2[2]] := 1;
   b := arr[b+1][0,6];
@@ -74,10 +98,9 @@ begin
     for b2 := 5 downto 1 do
       b3 := 1;
 
-  b := b + c;
+  c := b + c;
   b := b2;
   b := rec.i;
-  rec.c.a := b;
 
   a := 'a' = 'c';
   a := 1 <> 2;

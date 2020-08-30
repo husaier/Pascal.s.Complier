@@ -1,11 +1,6 @@
 //
 // Created by 叶铭炜 on 2020/5/30.
 //
-
-
-
-//
-////文件未完工，注意第30行
 //
 #include "SymbolBlock.h"
 
