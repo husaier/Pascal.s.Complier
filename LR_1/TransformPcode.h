@@ -29,13 +29,14 @@ struct backItem {
 };
 class TransformPcode {
 private:
-    vector<Pcode> allPcode;//生成的pcode集合
     vector<int> pcodeIndex;//每个过程的pcode码开始地址
     vector<int> pcodeStart;//每个四元式的pcode码开始地址
     vector<backItem> pcodeExit;//记录每条需要回填所在过程结束地址的pcode码的地址和其所在的过程
     vector<backItem> pcodeWait;//记录每条需要回填的pcode码的地址和其跳转的四元式位置
 
 public:
+    vector<Pcode> allPcode;//生成的pcode集合
+
     vector<Pcode> transformPcode(Quaternion midCode); //把codelist里面的四元式转变成pcode
     void singlePcode(Quaternion midCode, int index); //把单个四元式转变成pcode
     int existInt(vector<int> list, int num); //判断数字是否在数组里面,如果在，返回序号，否则返回-1
