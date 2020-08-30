@@ -19,8 +19,23 @@ vector<vector<string>> valueData;
 
 vector<string> para;//记录传入的参数
 
-int getValue(string s) {
-
+//由s中的字符串获取其中的值
+any getValue(string s) {
+    any value;
+    if (s.at(0) == 'c') { //有标志位c，是字符
+        value = s.at(1);
+    } else {
+        if (s.find(string(".")) != string::npos) {//有小数点，是double
+            double d;
+            d = atof(s.c_str());
+            value = d;
+        } else { //是整数
+            int i;
+            i = atoi(s.c_str());
+            value = i;
+        }
+    }
+    return value;
 }
 
 //判断数字是否在数组里面,如果在，返回序号，否则返回-1
@@ -89,7 +104,7 @@ void TransformPcode::simple(Quaternion midCode, QuaternionItem code, int cal, in
     int l, d = 0;
     // 把第一个变量放到栈顶
     if (code.arg1[0] == '$')
-        allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
+        allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
     else {
         //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
         if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -105,7 +120,7 @@ void TransformPcode::simple(Quaternion midCode, QuaternionItem code, int cal, in
     }
     // 把第二个变量放到栈顶
     if (code.arg2[0] == '$')
-        allPcode.push_back({LIT, 0, stoi(code.arg2.substr(1))});
+        allPcode.push_back({LIT, 0, getValue(code.arg2.substr(1))});
     else {
         //找到变量arg2定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
         if (midCode.tempVarList[stoi(code.arg2.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -191,7 +206,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     case QuaternionItem::ASSIGN:// 赋值
                         // 把第一个变量放到栈顶
                         if (code.arg1[0] == '$')
-                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
+                            allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
                         else {
                             //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                             if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -252,7 +267,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     case QuaternionItem::NOT:// not
                         // 把第一个变量放到栈顶
                         if (code.arg1[0] == '$')
-                            allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
+                            allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
                         else {
                             //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                             if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -335,7 +350,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 // 把y放到栈顶
                 // 找到y定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                 if (code.arg1[0] == '$')
-                    allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
+                    allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
                 else {
                     //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                     if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -411,7 +426,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
             case 8: // if x goto L
                 // 把x放到栈顶
                 if (code.arg1[0] == '$')
-                    allPcode.push_back({LIT, 0, stoi(code.arg1.substr(1))});
+                    allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
                 else {
                     //找到变量x定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                     if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -457,7 +472,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 for (int i = 0; i < para.size(); i++) {
                     // 把参数放到栈顶
                     if (para[i][0] == '$')
-                        allPcode.push_back({LIP, 0, stoi(para[i].substr(1))});
+                        allPcode.push_back({LIP, 0, getValue(para[i].substr(1))});
                     else {
                         //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                         if (midCode.tempVarList[stoi(para[i].substr(1))]->tableLineEntry != nullptr) {  //不是临时变量

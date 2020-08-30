@@ -23,10 +23,10 @@ private:
     vector<Pcode> allPcode;
 
 public:
-    vector<Pcode> readFile(string filename);//从文件里面读取p-code码
+    static vector<Pcode> readFile(const string& filename);//从文件里面读取p-code码
     void interpreter(vector<Pcode> pcode);//解释器
     int getBase(int nowBp, int lev);//获取基地址
-    any calculate(pcodeOP op, any arg1, any arg2);//对2个any类型的变量进行运算，若出错返回空的res，否则返回结果
+    static any calculate(pcodeOP op, any arg1, any arg2);//对2个any类型的变量进行运算，若出错返回空的res，否则返回结果
 
 //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;

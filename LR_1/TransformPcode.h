@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include "MidCode.h"
+#include <cstdio>
 #include "SymbolBlock.h"
 #include "any"
 

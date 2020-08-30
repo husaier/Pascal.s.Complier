@@ -17,7 +17,7 @@ int Pcode_Interpreter::getBase(int nowBp, int lev) {
 }
 
 //从文件里面读取p-code码
-vector<Pcode> Pcode_Interpreter::readFile(string filename) {
+vector<Pcode> Pcode_Interpreter::readFile(const string& filename) {
     vector<Pcode> allPcode;
     Pcode_Interpreter interpreter;
     string line_info, input_result, read;
