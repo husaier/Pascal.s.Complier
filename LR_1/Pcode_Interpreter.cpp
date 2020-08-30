@@ -66,7 +66,7 @@ vector<Pcode> Pcode_Interpreter::readFile(string filename) {
 }
 
 //对2个any类型的变量进行运算，若出错返回空的res，否则返回结果
-any calculate(pcodeOP op, any arg1, any arg2) {
+any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
     any res;
     res.reset();
     // 没有第二个操作数，为单操作数op

@@ -58,7 +58,6 @@ int TransformPcode::getAddress(int blockIndex, string value) {
 
 //把codelist里面的四元式转变成pcode
 vector<Pcode> TransformPcode::transformPcode(Quaternion midCode) {
-
     //遍历所有的四元式
     for (int i = 0; i < midCode.codeList.size(); i++) {
         singlePcode(midCode, i);
