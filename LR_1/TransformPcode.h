@@ -47,6 +47,7 @@ private:
 
     vector<string> para;//记录传入的参数
 
+    Quaternion midCode;
 public:
     vector<Pcode> allPcode;//生成的pcode集合
 
