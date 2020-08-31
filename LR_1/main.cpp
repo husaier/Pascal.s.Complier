@@ -32,6 +32,7 @@ int main() {
     // 开始转pcode码
     TransformPcode transformPcode;
     transformPcode.init(proFunVector, runner.midCode);//初始化
+    transformPcode.initialValueData();
     transformPcode.transformPcode(runner.midCode);
 
     // pcode解释执行

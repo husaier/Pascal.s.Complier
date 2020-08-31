@@ -3,6 +3,7 @@
 //
 //
 #include "SymbolBlock.h"
+#include "MidCode.h"
 
 
 //查找操作：按给定的名字查找，若查找成功则返回该行的指针，否则返回空指针
@@ -83,6 +84,19 @@ SymbolTableLine *SymbolBlock::blockQuery(string name) {
         return symbolBlock[iter->second];
     else {//当前块没找到，则向返回空指针
         return nullptr;
+    }
+}
+
+bool SymbolBlock::insertTmpVar(TempVar *tempVar, string name) {
+    if (blockQuery(name)) {
+        printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
+        return false;
+    } else {
+        auto *tempPoint = new SymbolTableLine(rowNum, tempVar, name, this);
+        invMap.insert(map<string, int>::value_type(name, rowNum));
+        rowNum++;
+        symbolBlock.push_back(tempPoint);
+        return true;
     }
 }
 

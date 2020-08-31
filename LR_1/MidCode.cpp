@@ -135,19 +135,26 @@ string Quaternion::op2string(int op) {
         case QuaternionItem::OFFSETASSIGN:
             output = "[]:=";
             break;
+        case QuaternionItem::READ:
+            output = "read";
+            break;
+        case QuaternionItem::WRITE:
+            output = "write";
+            break;
         default:
             break;
     }
     return output;
 }
 
-TempVar *Quaternion::newTemp(bool flag) {
+TempVar *Quaternion::newTemp(SymbolBlock *block, bool flag) {
     char t[10];
     snprintf(t, sizeof(t), "#%d", tempSeq++);//这里的井号用于表示临时变量
     string name;
     name.append(t);
     auto var = new TempVar(name, flag);
     tempVarList.push_back(var);
+    block->insertTmpVar(var, name);
     return var;
 }
 
