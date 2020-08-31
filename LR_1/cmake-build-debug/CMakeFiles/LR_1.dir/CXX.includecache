@@ -26,6 +26,14 @@ list
 cJSON.h
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/cJSON.h
 
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.cpp
+sstream
+-
+LR1Runner.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.h
+lexical_analyzer.h
+/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/lexical_analyzer.h
+
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.h
 queue
 -
@@ -58,18 +66,6 @@ iomanip
 SymbolBlock.h
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Pcode_Interpreter.h
-iostream
--
-string
--
-vector
--
-TransformPcode.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TransformPcode.h
-any
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/any
-
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Production.h
 iostream
 -
@@ -90,24 +86,6 @@ map
 TypeSystem.h
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TypeSystem.h
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TransformPcode.h
-string
--
-vector
--
-map
--
-MidCode.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
-cstdio
--
-SymbolBlock.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.h
-MidCode.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
-any
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/any
-
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TypeSystem.h
 iostream
 -
@@ -125,16 +103,4 @@ algorithm
 -
 vector
 -
-
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/main.cpp
-LR1Table.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Table.h
-LR1Runner.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/LR1Runner.h
-lexical_analyzer.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/lexical_analyzer.h
-Pcode_Interpreter.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Pcode_Interpreter.h
-TransformPcode.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TransformPcode.h
 
