@@ -12,7 +12,7 @@ int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
     // ´Ê·¨·ÖÎö
-    string fileName = "test6.pas";
+    string fileName = "test5.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;
