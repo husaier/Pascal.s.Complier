@@ -1,6 +1,6 @@
 program test5(input, output);
 const pai = 3.14; {常量声明}
-      pai2 = pai; {常量id声明}
+  pai2 = pai; {常量id声明}
 var
   a: Boolean;
   b,b2,b3: Integer;
@@ -18,7 +18,7 @@ var
       e: record
         a2: Integer;
         b2: Integer;
-        end;
+      end;
     end; {end of record c}
     j,k: char;
   end; {end of record rec}
@@ -38,31 +38,31 @@ var
   end;
 
 function func1 ( var id2 : real ;var id4 : real) : integer ; {Subprogram声明}
-  procedure proc1 (var id3 : integer;var id4 : real) ;
-    const pai6 = pai;
-    function func2 ( var id2 : real) : integer ;
-      begin C := pai * 2; end ; {end of func2}
-    begin C := pai * 2; end ; {end of proc1}
-  begin
-    C := pai * 2; end ; {end of func1}
+procedure proc1 (var id3 : integer;var id4 : real) ;
+const pai6 = pai;
+function func2 ( var id2 : real) : integer ;
+begin C := pai * 2; end ; {end of func2}
+begin C := pai * 2; end ; {end of proc1}
+begin
+  C := pai * 2; end ; {end of func1}
 
 
 procedure d1p1;
-  var a,b: char;
-  begin a := b; end; {end of d1p1}
+var a,b: char;
+begin a := b; end; {end of d1p1}
 
 procedure d1p2(var n: integer);
-    var c,b,d: boolean;
-    procedure d2p1(var q: boolean);
-      var k,m: integer;
-      begin k := 2; end; {end of d2p1}
-    begin
-      c := (1 = 1);
-      d2p1(c);
-    end; {end of d1p2}
+var c,b,d: boolean;
+procedure d2p1(var q: boolean);
+var k,m: integer;
+begin k := 2; end; {end of d2p1}
+begin
+  c := (1 = 1);
+  d2p1(c);
+end; {end of d1p2}
 
 procedure d1p3(var m: char;n:real);
-  var a,b: char;
+var a,b: char;
 begin a := b; end; {end of d1p1}
 
 begin
@@ -92,11 +92,11 @@ begin
 
   while b<5 do
     while b2<5 do
-      {begin}
+        {begin}
       b2 := b2 + 1;
-      {b3 := b3 + 1;
-      end;}
-    {b3 := b3+2;}
+  {b3 := b3 + 1;
+  end;}
+  {b3 := b3+2;}
 
   for b := 1 to 5 do
     for b2 := 5 downto 1 do
