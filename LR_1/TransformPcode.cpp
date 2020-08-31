@@ -5,17 +5,6 @@
 #include "TransformPcode.h"
 #include "any"
 
-
-vector<int> startCodeIndex;//[0,15,19,19,23,27,28]  前面是每个过程的四元式开始地址，按从小到大排序,最后一个值是程序的结束地址+1
-
-//todo:符号表里面定义的变量的个数（数组的大小和结构的大小）+过程的个数+临时变量的个数（遍历一遍四元式列表，得到每个过程临时变量的个数）+参数的个数
-vector<int> valueNum;//[2,3,0,5,2,1]  每个过程定义的过程数加上变量数
-
-vector<SymbolBlock *> procedure;//每个过程的符号表，与startCodeIndex相对应
-
-//todo:每个符号表存的变量数组的数组，包括每个过程的变量（数组和结构），过程，临时变量，参数
-vector<vector<string>> valueData;
-
 int TransformPcode::fillRecord(vector<string> &list, Record* record){
     int num = 0;
     for(const auto &item : record->env){
@@ -98,8 +87,6 @@ void TransformPcode::initialValueData(){
     }
 }
 
-vector<string> para;//记录传入的参数
-
 //由s中的字符串获取其中的值
 any getValue(string s) {
     any value;
@@ -161,7 +148,7 @@ int TransformPcode::getProcedureIndex(int index) {
 
 //todo:根据变量名和符号表序号得到该变量在该符号表里面的位置, blockIndex必须大于等于0
 int TransformPcode::getAddress(int blockIndex, string value) {
-    return 0;
+
 }
 
 
