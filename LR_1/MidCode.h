@@ -69,7 +69,7 @@ public:
 
     void print();
 
-    TempVar *newTemp(SymbolBlock *block = nullptr, bool flag = false);
+    TempVar *newTemp(SymbolBlock *block = nullptr, bool flag = false); //flag用来标识是不是立即数
 
     TempVar *getTempById(string);
 

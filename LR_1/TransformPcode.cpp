@@ -16,20 +16,20 @@ vector<SymbolBlock *> procedure;//每个过程的符号表，与startCodeIndex�
 //todo:每个符号表存的变量数组的数组，包括每个过程的变量（数组和结构），过程，临时变量，参数
 vector<vector<string>> valueData;
 
-int TransformPcode::fillRecord(vector<string> &list, Record* record){
+int TransformPcode::fillRecord(vector<string> &list, Record *record) {
     int num = 0;
-    for(const auto &item : record->env){
+    for (const auto &item : record->env) {
         auto name = item.id;
         auto type = item.type;
-        if(type->getType() == Type::ARRAY){
-            auto array = (Array*)(type);
+        if (type->getType() == Type::ARRAY) {
+            auto array = (Array *) (type);
             int size = array->getSize();
-            for(int i=0;i<size;i++){
+            for (int i = 0; i < size; i++) {
                 list.push_back(name);
                 num++;
             }
-        } else if(type->getType() == Type::RECORD) {
-            auto r = (Record*)(type);
+        } else if (type->getType() == Type::RECORD) {
+            auto r = (Record *) (type);
             list.push_back(name);
             num++;
             num += fillRecord(list, r);
@@ -41,16 +41,18 @@ int TransformPcode::fillRecord(vector<string> &list, Record* record){
     return num;
 }
 
-void TransformPcode::initialValueData(){
-    for(auto block : procedure){
-        vector<string> t_funcList;
+void TransformPcode::initialValueData() {
+    for (auto block : procedure) {
         vector<string> t_varList;
         vector<string> t_tmpList;
+        auto parent = block->previous;
+        auto self = parent->findFunc_Proc(block);
+        t_varList.push_back(self->name);
         int t_num = 0;
-        for(auto item: block->symbolBlock){
+        for (auto item: block->symbolBlock) {
             string name = item->name;
-            if(item->type == nullptr){ // 临时变量
-                if(item->tempVarPoint != nullptr){
+            if (item->type == nullptr) { // 临时变量
+                if (item->tempVarPoint != nullptr) {
                     auto tmpVar = item->tempVarPoint;
                     t_tmpList.push_back(tmpVar->id);
                     t_num++;
@@ -58,31 +60,19 @@ void TransformPcode::initialValueData(){
                 continue;
             }
             auto type = item->type;
-            if(type->getType() == Type::FUNC){
-                auto func = (Func*)type;
-                t_funcList.push_back(name);
-                t_num++;
-                for(const auto& para:func->env){
-                    t_funcList.push_back(para.id);
-                    t_num++;
-                }
-            } else if(type->getType() == Type::PROC){
-                auto proc = (Proc*)(type);
-                t_funcList.push_back(name);
-                t_num++;
-                for(const auto& para: proc->env){
-                    t_funcList.push_back(para.id);
-                    t_num++;
-                }
-            } else if(type->getType() == Type::ARRAY){
-                auto array = (Array*)(type);
+            if (type->getType() == Type::FUNC) {
+                continue;
+            } else if (type->getType() == Type::PROC) {
+                continue;
+            } else if (type->getType() == Type::ARRAY) {
+                auto array = (Array *) (type);
                 int size = array->getSize();
-                for(int i=0;i<size;i++){
+                for (int i = 0; i < size; i++) {
                     t_varList.push_back(name);
                     t_num++;
                 }
-            } else if(type->getType() == Type::RECORD){
-                auto record = (Record*)(type);
+            } else if (type->getType() == Type::RECORD) {
+                auto record = (Record *) (type);
                 t_varList.push_back(name);
                 t_num++;
                 t_num += fillRecord(t_varList, record);
@@ -91,9 +81,8 @@ void TransformPcode::initialValueData(){
                 t_num++;
             }
         }
-        t_funcList.insert(t_funcList.end(),t_varList.begin(),t_varList.end());
-        t_funcList.insert(t_funcList.end(),t_tmpList.begin(),t_tmpList.end());
-        valueData.push_back(t_funcList);
+        t_varList.insert(t_varList.end(), t_tmpList.begin(), t_tmpList.end());
+        valueData.push_back(t_varList);
         valueNum.push_back(t_num);
     }
 }
@@ -121,12 +110,13 @@ any getValue(string s) {
 
 //初始化startCodeIndex和procedure数组
 void TransformPcode::init(vector<SymbolTableLine *> proFunVector, Quaternion midCode) {
+    this->midCode = midCode;
     for (int i = 0; i < proFunVector.size(); i++) {
         procedure.push_back(proFunVector[i]->blockPoint);
         startCodeIndex.push_back(proFunVector[i]->startQuad);
     }
     //如果最后一个过程的开始地址处已经没有四元式，那么在codelist里面加上一条无意义的语句（最后一个值加一），用于帮助空的主过程形成开栈和退栈的pcode语句
-    if (midCode.codeList.size() <= startCodeIndex[startCodeIndex.size() - 1]){
+    if (midCode.codeList.size() <= startCodeIndex[startCodeIndex.size() - 1]) {
         midCode.codeList.emplace_back(midCode.codeList.size(), QuaternionItem::NONE, "$0", "$0", "$0");
     }
     startCodeIndex.push_back(midCode.codeList.size());
@@ -159,9 +149,23 @@ int TransformPcode::getProcedureIndex(int index) {
     return -1;
 }
 
-//todo:根据变量名和符号表序号得到该变量在该符号表里面的位置, blockIndex必须大于等于0
+//根据变量名和符号表序号得到该变量在该符号表里面的位置, blockIndex必须大于等于0
 int TransformPcode::getAddress(int blockIndex, string value) {
-    return 0;
+    if (blockIndex < 0)
+        return -1;
+    int j = 0;
+    while (j < valueData[blockIndex].size() && valueData[blockIndex][j].at(0) != '#') {
+        if (midCode.tempVarList[stoi(value.substr(1))]->tableLineEntry != nullptr &&
+            midCode.tempVarList[stoi(value.substr(1))]->tableLineEntry->name == valueData[blockIndex][j])
+            return j;
+        j++;
+    }
+
+    for (int i = 0; i < valueData[blockIndex].size(); i++) {
+        if (valueData[blockIndex][i] == value)
+            return i;
+    }
+    return -1;
 }
 
 
@@ -595,6 +599,46 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     }
                     allPcode.push_back({SRO, l, d});
                 }
+                break;
+            case 13://read
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::INTEGER)
+                    allPcode.push_back({OPR, 0, 161});
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::CHAR)
+                    allPcode.push_back({OPR, 0, 162});
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::REAL)
+                    allPcode.push_back({OPR, 0, 163});
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::BOOLEAN)
+                    allPcode.push_back({OPR, 0, 164});
+                //找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
+                    SymbolBlock *defineBlock = midCode.tempVarList[stoi(
+                            code.arg1.substr(1))]->tableLineEntry->currentBlock;
+                    l = procedure[procedureIndex]->level - defineBlock->level;
+                    d = getAddress(existBlock(procedure, defineBlock), code.arg1);
+                } else {  //是临时变量
+                    l = 0;
+                    d = getAddress(procedureIndex, code.arg1);
+                }
+                allPcode.push_back({STO, l, d});
+                break;
+            case 14://write
+                // 把第变量放到栈顶
+                if (code.arg1[0] == '$')
+                    allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                else {
+                    //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                    if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
+                        SymbolBlock *defineBlock = midCode.tempVarList[stoi(
+                                code.arg1.substr(1))]->tableLineEntry->currentBlock;
+                        l = procedure[procedureIndex]->level - defineBlock->level;
+                        d = getAddress(existBlock(procedure, defineBlock), code.arg1);
+                    } else {  //是临时变量
+                        l = 0;
+                        d = getAddress(procedureIndex, code.arg1);
+                    }
+                    allPcode.push_back({LOD, l, d});
+                }
+                allPcode.push_back({OPR, 0, 14});
                 break;
             default:
                 break;

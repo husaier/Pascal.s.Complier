@@ -100,6 +100,21 @@ bool SymbolBlock::insertTmpVar(TempVar *tempVar, string name) {
     }
 }
 
+SymbolTableLine *SymbolBlock::findFunc_Proc(SymbolBlock* target) {
+    for(auto item : symbolBlock){
+        if(item->type == nullptr)
+            continue;
+        auto type = item->type;
+        if(type->getType() == Type::FUNC ||
+        type->getType() == Type::PROC ||
+        type->getType() == Type::PROGRAM){
+            if(item->blockPoint == target)
+                return item;
+        }
+    }
+    return nullptr;
+}
+
 void SymbolTableLine::printLine(SymbolTableLine *InLinePoint) {
     printf("id:%3d\tname:%8s\ttype:%d\toffset:%d\tdimension:%d\tdeclarationLine:%d\tpoint:%p\tblockPoint:%p\treferenceLineVector:",
            InLinePoint->id, InLinePoint->name.c_str(),
