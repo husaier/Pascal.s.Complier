@@ -679,7 +679,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     leftSymbol->entry = entry;
                     string arg1, arg2, res;
                     arg1 = Expression->entry->id;
-                    arg2 = i;
+                    arg2 = "$" + i;
                     res = entry->id;
                     midCode.outCode(QuaternionItem::EQUAL, arg1, arg2, res);
                     string argb1, argb2, resb;
@@ -1218,7 +1218,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     argb1 = i;
                     midCode.outCode(QuaternionItem::PARAM, argb1, argb2, resb);
                 }
-                arg2 = to_string(Expression_list->queue.size());
+                arg2 = "$" + to_string(Expression_list->queue.size());
                 midCode.outCode(QuaternionItem::CALL, arg1, arg2, res);
             }
             break;
@@ -2148,7 +2148,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 argb1 = i;
                 midCode.outCode(QuaternionItem::PARAM, argb1, argb2, resb);
             }
-            arg2 = to_string(Expression_list->queue.size());
+            arg2 = "$" + to_string(Expression_list->queue.size());
             midCode.outCode(QuaternionItem::CALL, arg1, arg2, res);
             string argc1, argc2, resc;
             TempVar *entryb{nullptr};
