@@ -11,8 +11,8 @@ const string fileName = "grammar.json";
 int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
-    // è¯æ³•åˆ†æ
-    string fileName = "test5.pas";
+    // ´Ê·¨·ÖÎö
+    string fileName = "test6.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;
@@ -21,7 +21,7 @@ int main() {
     vector<LexicalItem> result;
     result = lexicalAnalyzer.analyze();
     lexicalAnalyzer.closeFile();
-    // è¯­æ³•åˆ†æã€è¯­ä¹‰åˆ†æ
+    // Óï·¨·ÖÎö¡¢ÓïÒå·ÖÎö
     LR1Runner runner;
     runner.load(result);
     runner.debugInfoLevel = 1;
@@ -29,17 +29,17 @@ int main() {
     runner.printSemanticError();
     runner.printMidCode();
     vector<SymbolTableLine *> proFunVector = runner.generateProFunVector(runner.startBlock);
-    // å¼€å§‹è½¬pcodeç 
+    // ¿ªÊ¼×ªpcodeÂë
     TransformPcode transformPcode;
-    transformPcode.init(proFunVector, runner.midCode);//åˆå§‹åŒ–
+    transformPcode.init(proFunVector, runner.midCode);//³õÊ¼»¯
     transformPcode.initialValueData();
-    transformPcode.transformPcode(runner.midCode);
+    //transformPcode.transformPcode(runner.midCode);
 
-    // pcodeè§£é‡Šæ‰§è¡Œ
-    Pcode_Interpreter interpreter;
-    interpreter.interpreter(transformPcode.allPcode);
+    // pcode½âÊÍÖ´ĞĞ
+    //Pcode_Interpreter interpreter;
+    //interpreter.interpreter(transformPcode.allPcode);
 
-    //    ä¸‹åˆ—ä»£ç å¯ä»¥ä»æ–‡ä»¶é‡Œé¢è¯»å‡ºp-codeå¹¶æ‰§è¡Œ
+    //    ÏÂÁĞ´úÂë¿ÉÒÔ´ÓÎÄ¼şÀïÃæ¶Á³öp-code²¢Ö´ĞĞ
 //    Pcode_Interpreter interpreter;
 //    interpreter.interpreter(Pcode_Interpreter::readFile("test.txt"));
 
