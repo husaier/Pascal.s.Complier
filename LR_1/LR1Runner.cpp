@@ -2209,8 +2209,14 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->variableName = tempLinePoint->name;
 
                 TempVar *entry{nullptr};
-                entry = midCode.newTemp(curBlock);
-                entry->value = leftSymbol->variableName;
+                if(tempLinePoint->isConst){
+                    entry = midCode.newTemp(curBlock, true);
+                    entry->value = tempLinePoint->value;
+                } else {
+                    entry = midCode.newTemp(curBlock);
+                    entry->value = leftSymbol->variableName;
+                }
+
                 entry->type = leftSymbol->type;
                 entry->tableLineEntry = leftSymbol->tableLineEntry;
                 leftSymbol->entry = entry;
