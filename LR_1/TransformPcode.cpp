@@ -203,6 +203,8 @@ void TransformPcode::simple(Quaternion midCode, QuaternionItem code, int cal, in
     // 把第一个变量放到栈顶
     if (code.arg1[0] == '$')
         allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+    else if (midCode.tempVarList[stoi(code.arg1.substr(1))]->isImmediate)
+        allPcode.push_back({LIT, 0, getValue(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)});
     else {
         //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
         if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -219,6 +221,8 @@ void TransformPcode::simple(Quaternion midCode, QuaternionItem code, int cal, in
     // 把第二个变量放到栈顶
     if (code.arg2[0] == '$')
         allPcode.push_back({LIT, 0, getValue(code.arg2.substr(1))});
+    else if (midCode.tempVarList[stoi(code.arg2.substr(1))]->isImmediate)
+        allPcode.push_back({LIT, 0, getValue(midCode.tempVarList[stoi(code.arg2.substr(1))]->value)});
     else {
         //找到变量arg2定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
         if (midCode.tempVarList[stoi(code.arg2.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -305,6 +309,9 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                         // 把第一个变量放到栈顶
                         if (code.arg1[0] == '$')
                             allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                        else if (midCode.tempVarList[stoi(code.arg1.substr(1))]->isImmediate)
+                            allPcode.push_back(
+                                    {LIT, 0, getValue(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)});
                         else {
                             //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                             if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -366,6 +373,9 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                         // 把第一个变量放到栈顶
                         if (code.arg1[0] == '$')
                             allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                        else if (midCode.tempVarList[stoi(code.arg1.substr(1))]->isImmediate)
+                            allPcode.push_back(
+                                    {LIT, 0, getValue(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)});
                         else {
                             //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                             if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -413,6 +423,10 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     offset = stoi(code.arg2.substr(1));
                     d += offset;
                     allPcode.push_back({LOD, l, d});
+                } else if (midCode.tempVarList[stoi(code.arg2.substr(1))]->isImmediate) {
+                    offset = stoi(midCode.tempVarList[stoi(code.arg2.substr(1))]->value);
+                    d += offset;
+                    allPcode.push_back({LOD, l, d});
                 } else {  //i是变量，则先把变量值和y的偏移量放到栈顶并计算和，再令下一条LOD 的d参数设为-1，意为等于栈顶值然后退一个栈元素
                     allPcode.push_back({LIT, 0, d});//把y的偏移量放在栈顶
                     int l1 = l;//记录y的层次
@@ -449,6 +463,9 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 // 找到y定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                 if (code.arg1[0] == '$')
                     allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                else if (midCode.tempVarList[stoi(code.arg1.substr(1))]->isImmediate)
+                    allPcode.push_back(
+                            {LIT, 0, getValue(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)});
                 else {
                     //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                     if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -481,6 +498,10 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     offset = stoi(code.arg2.substr(1));
                     d += offset;
                     allPcode.push_back({STO, l, d});
+                } else if (midCode.tempVarList[stoi(code.arg2.substr(1))]->isImmediate) {
+                    offset = stoi(midCode.tempVarList[stoi(code.arg2.substr(1))]->value);
+                    d += offset;
+                    allPcode.push_back({STO, l, d});
                 } else {  //i是变量，则先把变量值和x的偏移量放到栈顶并计算和，再令下一条STO 的d参数设为-1，意为等于栈顶值然后退一个栈元素
                     allPcode.push_back({LIT, 0, d});//把x的偏移量放在栈顶
                     int l1 = l;//记录x的层次
@@ -500,31 +521,55 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 }
                 break;
             case 7: // goto L
-                if (code.arg1[0] == '$')
-                    if (stoi(code.arg1.substr(1)) < index) {  //如果跳转地址小于当前地址，直接读出跳转的pcode地址
-                        allPcode.push_back({JMP, 0, pcodeStart[stoi(code.arg1.substr(1))]});
-                    } else if (stoi(code.arg1.substr(1)) == index) {
+                if (code.res[0] == '$') {
+                    if (stoi(code.res.substr(1)) < index) {  //如果跳转地址小于当前地址，直接读出跳转的pcode地址
+                        allPcode.push_back({JMP, 0, pcodeStart[stoi(code.res.substr(1))]});
+                    } else if (stoi(code.res.substr(1)) == index) {
                         printf("goto语句跳入死循环");
                     } else {
-                        if (index > startCodeIndex[existInt(startCodeIndex, index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
+                        if (index > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
                             //让他跳到当前过程pcode码的结束地址处，等回填，记录每条需要回填的pcode码的地址和其所在的过程，存入pcodeExit
                             pcodeExit.push_back(
-                                    backItem{static_cast<int>(allPcode.size()), existInt(startCodeIndex, index)});
+                                    backItem{static_cast<int>(allPcode.size()), getProcedureIndex(index)});
                             allPcode.push_back({JMP, 0, -1});
                         } else {
                             //否则等待回填,记录每条需要回填的pcode码的地址和其跳转的四元式位置，存入pcodeWait
                             pcodeWait.push_back(
-                                    backItem{static_cast<int>(allPcode.size()), stoi(code.arg1.substr(1))});
+                                    backItem{static_cast<int>(allPcode.size()), stoi(code.res.substr(1))});
                             allPcode.push_back({JMP, 0, -1});
                         }
                     }
-                else
-                    printf("goto语句跳转地址出错。\n");
+                } else if (midCode.tempVarList[stoi(code.res.substr(1))]->isImmediate) {
+                    if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) <
+                        index) {  //如果跳转地址小于当前地址，直接读出跳转的pcode地址
+                        allPcode.push_back(
+                                {JMP, 0, pcodeStart[stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value)]});
+                    } else if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) == index) {
+                        printf("goto语句跳入死循环");
+                    } else {
+                        if (index > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
+                            //让他跳到当前过程pcode码的结束地址处，等回填，记录每条需要回填的pcode码的地址和其所在的过程，存入pcodeExit
+                            pcodeExit.push_back(
+                                    backItem{static_cast<int>(allPcode.size()), getProcedureIndex(index)});
+                            allPcode.push_back({JMP, 0, -1});
+                        } else {
+                            //否则等待回填,记录每条需要回填的pcode码的地址和其跳转的四元式位置，存入pcodeWait
+                            pcodeWait.push_back(
+                                    backItem{static_cast<int>(allPcode.size()),
+                                             stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value)});
+                            allPcode.push_back({JMP, 0, -1});
+                        }
+                    }
+                } else
+                    printf("error:7 goto语句跳转地址出错。\n");
                 break;
             case 8: // if x goto L
                 // 把x放到栈顶
                 if (code.arg1[0] == '$')
                     allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                else if (midCode.tempVarList[stoi(code.arg1.substr(1))]->isImmediate)
+                    allPcode.push_back(
+                            {LIT, 0, getValue(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)});
                 else {
                     //找到变量x定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                     if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -538,26 +583,47 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     }
                     allPcode.push_back({LOD, l, d});
                 }
-                if (code.arg2[0] == '$')
-                    if (stoi(code.arg2.substr(1)) < index) {  //如果跳转地址小于当前地址，直接读出跳转的pcode地址
-                        allPcode.push_back({JPC, 0, pcodeStart[stoi(code.arg2.substr(1))]});
-                    } else if (stoi(code.arg2.substr(1)) == index) {
-                        printf("goto语句跳入死循环");
+                if (code.res[0] == '$')
+                    if (stoi(code.res.substr(1)) < index) {  //如果跳转地址小于当前地址，直接读出跳转的pcode地址
+                        allPcode.push_back({JPC, 0, pcodeStart[stoi(code.res.substr(1))]});
+                    } else if (stoi(code.res.substr(1)) == index) {
+                        printf("error:8 goto语句跳入死循环");
                     } else {
-                        if (index > startCodeIndex[existInt(startCodeIndex, index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
+                        if (index > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
                             //让他跳到当前过程pcode码的结束地址处，等回填，记录每条需要回填的pcode码的地址和其所在的过程，存入pcodeExit
                             pcodeExit.push_back(
-                                    backItem{static_cast<int>(allPcode.size()), existInt(startCodeIndex, index)});
+                                    backItem{static_cast<int>(allPcode.size()), getProcedureIndex(index)});
                             allPcode.push_back({JPC, 0, -1});
                         } else {
                             //否则等待回填,记录每条需要回填的pcode码的地址和其跳转的四元式位置，存入pcodeWait
                             pcodeWait.push_back(
-                                    backItem{static_cast<int>(allPcode.size()), stoi(code.arg2.substr(1))});
+                                    backItem{static_cast<int>(allPcode.size()), stoi(code.res.substr(1))});
                             allPcode.push_back({JPC, 0, -1});
                         }
                     }
-                else
-                    printf("goto语句跳转地址出错。\n");
+                else if (midCode.tempVarList[stoi(code.res.substr(1))]->isImmediate) {
+                    if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) <
+                        index) {  //如果跳转地址小于当前地址，直接读出跳转的pcode地址
+                        allPcode.push_back(
+                                {JPC, 0, pcodeStart[stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value)]});
+                    } else if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) == index) {
+                        printf("error:8 goto语句跳入死循环");
+                    } else {
+                        if (index > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
+                            //让他跳到当前过程pcode码的结束地址处，等回填，记录每条需要回填的pcode码的地址和其所在的过程，存入pcodeExit
+                            pcodeExit.push_back(
+                                    backItem{static_cast<int>(allPcode.size()), getProcedureIndex(index)});
+                            allPcode.push_back({JPC, 0, -1});
+                        } else {
+                            //否则等待回填,记录每条需要回填的pcode码的地址和其跳转的四元式位置，存入pcodeWait
+                            pcodeWait.push_back(
+                                    backItem{static_cast<int>(allPcode.size()),
+                                             stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value)});
+                            allPcode.push_back({JPC, 0, -1});
+                        }
+                    }
+                } else
+                    printf("error:8 goto语句跳转地址出错。\n");
                 break;
             case 9: // param x
                 para.emplace_back(code.arg1);
@@ -571,6 +637,9 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     // 把参数放到栈顶
                     if (para[i][0] == '$')
                         allPcode.push_back({LIP, 0, getValue(para[i].substr(1))});
+                    else if (midCode.tempVarList[stoi(para[i].substr(1))]->isImmediate)
+                        allPcode.push_back(
+                                {LIP, 0, getValue(midCode.tempVarList[stoi(para[i].substr(1))]->value)});
                     else {
                         //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                         if (midCode.tempVarList[stoi(para[i].substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -601,13 +670,13 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 }
                 break;
             case 13://read
-                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::INTEGER)
+                if (midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::INTEGER)
                     allPcode.push_back({OPR, 0, 161});
-                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::CHAR)
+                if (midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::CHAR)
                     allPcode.push_back({OPR, 0, 162});
-                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::REAL)
+                if (midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::REAL)
                     allPcode.push_back({OPR, 0, 163});
-                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::BOOLEAN)
+                if (midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::BOOLEAN)
                     allPcode.push_back({OPR, 0, 164});
                 //找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                 if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
@@ -622,12 +691,15 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 allPcode.push_back({STO, l, d});
                 break;
             case 14://write
-                if (code.arg1 == "\n")
+                if (code.arg1 == "\\n")
                     allPcode.push_back({OPR, 0, 15});
-                else{
-                    // 把第变量放到栈顶
+                else {
+                    // 把变量放到栈顶
                     if (code.arg1[0] == '$')
                         allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                    else if (midCode.tempVarList[stoi(code.arg1.substr(1))]->isImmediate)
+                        allPcode.push_back(
+                                {LIT, 0, getValue(midCode.tempVarList[stoi(code.arg1.substr(1))]->value)});
                     else {
                         //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                         if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量

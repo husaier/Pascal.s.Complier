@@ -11,8 +11,8 @@ const string fileName = "grammar.json";
 int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
-    // 词法分析
-    string fileName = "test5.pas";
+    // ???????
+    string fileName = "test2.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;
@@ -21,7 +21,7 @@ int main() {
     vector<LexicalItem> result;
     result = lexicalAnalyzer.analyze();
     lexicalAnalyzer.closeFile();
-    // 语法分析、语义分析
+    // ???????????????
     LR1Runner runner;
     runner.load(result);
     runner.debugInfoLevel = 1;
@@ -29,17 +29,17 @@ int main() {
     runner.printSemanticError();
     runner.printMidCode();
     vector<SymbolTableLine *> proFunVector = runner.generateProFunVector(runner.startBlock);
-    // 开始转pcode码
+    // ????pcode??
     TransformPcode transformPcode;
-    transformPcode.init(proFunVector, runner.midCode);//初始化
+    transformPcode.init(proFunVector, runner.midCode);//?????
     transformPcode.initialValueData();
-    //transformPcode.transformPcode(runner.midCode);
+    transformPcode.transformPcode(runner.midCode);
 
-    // pcode解释执行
-    //Pcode_Interpreter interpreter;
-    //interpreter.interpreter(transformPcode.allPcode);
+    // pcode???????
+    Pcode_Interpreter interpreter;
+    interpreter.interpreter(transformPcode.allPcode);
 
-    //    下列代码可以从文件里面读出p-code并执行
+    //    ???д?????????????????p-code?????
 //    Pcode_Interpreter interpreter;
 //    interpreter.interpreter(Pcode_Interpreter::readFile("test.txt"));
 
