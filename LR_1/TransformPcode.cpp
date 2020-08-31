@@ -43,9 +43,11 @@ int TransformPcode::fillRecord(vector<string> &list, Record* record){
 
 void TransformPcode::initialValueData(){
     for(auto block : procedure){
-        vector<string> t_funcList;
         vector<string> t_varList;
         vector<string> t_tmpList;
+        auto parent = block->previous;
+        auto self = parent->findFunc_Proc(block);
+        t_varList.push_back(self->name);
         int t_num = 0;
         for(auto item: block->symbolBlock){
             string name = item->name;
@@ -59,21 +61,9 @@ void TransformPcode::initialValueData(){
             }
             auto type = item->type;
             if(type->getType() == Type::FUNC){
-                auto func = (Func*)type;
-                t_funcList.push_back(name);
-                t_num++;
-                for(const auto& para:func->env){
-                    t_funcList.push_back(para.id);
-                    t_num++;
-                }
+                continue;
             } else if(type->getType() == Type::PROC){
-                auto proc = (Proc*)(type);
-                t_funcList.push_back(name);
-                t_num++;
-                for(const auto& para: proc->env){
-                    t_funcList.push_back(para.id);
-                    t_num++;
-                }
+                continue;
             } else if(type->getType() == Type::ARRAY){
                 auto array = (Array*)(type);
                 int size = array->getSize();
@@ -91,9 +81,8 @@ void TransformPcode::initialValueData(){
                 t_num++;
             }
         }
-        t_funcList.insert(t_funcList.end(),t_varList.begin(),t_varList.end());
-        t_funcList.insert(t_funcList.end(),t_tmpList.begin(),t_tmpList.end());
-        valueData.push_back(t_funcList);
+        t_varList.insert(t_varList.end(),t_tmpList.begin(),t_tmpList.end());
+        valueData.push_back(t_varList);
         valueNum.push_back(t_num);
     }
 }
