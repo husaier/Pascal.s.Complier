@@ -1174,11 +1174,26 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             } else {
                 if (id == "read" && op_type == 79) {
                     auto Expression_list = &vectorAttribute[top - 1];
-                    midCode.outCode(QuaternionItem::READ, Expression_list->queue[0], "", "");
+                    for (int i = 0; i < Expression_list->queue.size(); ++i) {
+                        midCode.outCode(QuaternionItem::READ, Expression_list->queue[i], "", "");
+                        string tempString = Expression_list->queue[i].substr(1);
+//                        tempString.substr(1);
+                        TempVar *Tentry{nullptr};
+                        Tentry = midCode.tempVarList[stoi(tempString)]->backOffset;
+                        if (Tentry) {
+                            midCode.outCode(QuaternionItem::OFFSETASSIGN, Expression_list->queue[i], Tentry->offset->id,
+                                            Tentry->id);
+                        }
+                    }
                     tempFlag = 1;
-                } else if (id == "write" && op_type == 79) {
+                } else if (id == "write" || id == "writeln") {
                     auto Expression_list = &vectorAttribute[top - 1];
-                    midCode.outCode(QuaternionItem::WRITE, Expression_list->queue[0], "", "");
+                    for (int i = 0; i < Expression_list->queue.size(); ++i) {
+                        midCode.outCode(QuaternionItem::WRITE, Expression_list->queue[i], "", "");
+                    }
+                    if (id == "writeln") {
+                        midCode.outCode(QuaternionItem::WRITE, "\\n", "", "");
+                    }
                     tempFlag = 1;
                 } else {
                     recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
@@ -2209,7 +2224,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 leftSymbol->variableName = tempLinePoint->name;
 
                 TempVar *entry{nullptr};
-                if(tempLinePoint->isConst){
+                if (tempLinePoint->isConst) {
                     entry = midCode.newTemp(curBlock, true);
                     entry->value = tempLinePoint->value;
                 } else {
@@ -2501,7 +2516,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 }
 
 void LR1Runner::quoteID(int line, string id) {
-    if (id == "write" || id == "read") {
+    if (id == "read" || id == "write" || id == "writeln") {
         return;
     }
     if (curBlock->query(id) == nullptr) {

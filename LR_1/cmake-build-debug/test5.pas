@@ -68,8 +68,9 @@ begin a := b; end; {end of d1p1}
 begin
 
   b := 111111111111;
-  read(b);
-  write(b);
+  read(b,b2,c,c2,rec2.j);
+  write(b,c2);
+  writeln(rec.c.b);
   rec := rec2;
   rec.c := rec2.c;
   arr3[2].j:=arr3[3].c.e[5].b2;
