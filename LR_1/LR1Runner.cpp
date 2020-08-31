@@ -563,27 +563,37 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 entry->tableLineEntry = Expression->tableLineEntry;
                 Expression->entry = entry;
                 arg1 = Expression->entry->id;
-//                arg1 = Expression.tableLineEntry->name;
-//                printf("type%d\n",Expression.tableLineEntry->type->getType());
             }
 
             res = Variable->entry->id;
-////            res = Variable.tableLineEntry->name;
             if (Variable->entry->type->getType() == Type::RECORD) {
                 TempVar *Ventry{nullptr};
+                TempVar *offEntry{nullptr};
+//                Ventry = midCode.newTemp(curBlock);
                 Ventry = Variable->entry;
                 if (Variable->entry->backOffset != nullptr) {
                     Ventry = Variable->entry->backOffset;
+                    offEntry = Ventry->offset;
+                }else{
+                    offEntry = midCode.newTemp(curBlock);
+                    midCode.outCode(QuaternionItem::ASSIGN,"$0","",offEntry->id);
                 }
+
                 TempVar *Eentry{nullptr};
+//                Eentry = midCode.newTemp(curBlock);
                 Eentry = Expression->entry;
                 if (Expression->entry->backOffset != nullptr) {
                     Eentry = Expression->entry->backOffset;
                 }
-//                midCode.outCode(QuaternionItem::ASSIGN,Ventry->id,Eentry->id,"");
-                printf("v%d\n",Variable->entry->type->getSize());
-                printf("v%d\n",Ventry->type->getSize());
+
                 for (int i = 0; i < Variable->entry->type->getSize(); ++i) {
+                    if (i!=0){
+                        midCode.outCode(QuaternionItem::ADD,offEntry->id,"$1",offEntry->id);
+                    }
+                    TempVar * tempEntry;
+                    tempEntry = midCode.newTemp(curBlock);
+                    midCode.outCode(QuaternionItem::ASSIGNOFFSET,Eentry->id,offEntry->id,tempEntry->id);
+                    midCode.outCode(QuaternionItem::OFFSETASSIGN,tempEntry->id,offEntry->id,Ventry->id);
                 }
 
             } else {
@@ -851,7 +861,6 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 entrye->type = leftSymbol->type;
                 midCode.outCode(QuaternionItem::ASSIGNOFFSET, entry->id, entryb->id, entrye->id);
                 entrye->backOffset = entry;
-                cout<< entry->type->getSize()<<endl;
                 leftSymbol->entry = entrye;
             } else {
                 leftSymbol->entry = entry;
