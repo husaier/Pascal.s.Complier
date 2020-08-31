@@ -110,7 +110,7 @@ any getValue(string s) {
 
 //初始化startCodeIndex和procedure数组
 void TransformPcode::init(vector<SymbolTableLine *> proFunVector, Quaternion midCode) {
-    this->midCode = midCode;
+    midCodec = midCode;
     for (int i = 0; i < proFunVector.size(); i++) {
         procedure.push_back(proFunVector[i]->blockPoint);
         startCodeIndex.push_back(proFunVector[i]->startQuad);
@@ -155,8 +155,8 @@ int TransformPcode::getAddress(int blockIndex, string value) {
         return -1;
     int j = 0;
     while (j < valueData[blockIndex].size() && valueData[blockIndex][j].at(0) != '#') {
-        if (midCode.tempVarList[stoi(value.substr(1))]->tableLineEntry != nullptr &&
-            midCode.tempVarList[stoi(value.substr(1))]->tableLineEntry->name == valueData[blockIndex][j])
+        if (midCodec.tempVarList[stoi(value.substr(1))]->tableLineEntry != nullptr &&
+            midCodec.tempVarList[stoi(value.substr(1))]->tableLineEntry->name == valueData[blockIndex][j])
             return j;
         j++;
     }
@@ -588,14 +588,14 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 if (midCode.codeList[index + 1].type == 11) {
                     code = midCode.codeList[index + 1];
                     //找到返回值定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
-                    if (midCode.tempVarList[stoi(code.res.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
+                    if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
                         SymbolBlock *defineBlock = midCode.tempVarList[stoi(
-                                code.res.substr(1))]->tableLineEntry->currentBlock;
+                                code.arg1.substr(1))]->tableLineEntry->currentBlock;
                         l = procedure[procedureIndex]->level - defineBlock->level;
-                        d = getAddress(existBlock(procedure, defineBlock), code.res);
+                        d = getAddress(existBlock(procedure, defineBlock), code.arg1);
                     } else {  //是临时变量
                         l = 0;
-                        d = getAddress(procedureIndex, code.res);
+                        d = getAddress(procedureIndex, code.arg1);
                     }
                     allPcode.push_back({SRO, l, d});
                 }
@@ -622,23 +622,27 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 allPcode.push_back({STO, l, d});
                 break;
             case 14://write
-                // 把第变量放到栈顶
-                if (code.arg1[0] == '$')
-                    allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
-                else {
-                    //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
-                    if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
-                        SymbolBlock *defineBlock = midCode.tempVarList[stoi(
-                                code.arg1.substr(1))]->tableLineEntry->currentBlock;
-                        l = procedure[procedureIndex]->level - defineBlock->level;
-                        d = getAddress(existBlock(procedure, defineBlock), code.arg1);
-                    } else {  //是临时变量
-                        l = 0;
-                        d = getAddress(procedureIndex, code.arg1);
+                if (code.arg1 == "\n")
+                    allPcode.push_back({OPR, 0, 15});
+                else{
+                    // 把第变量放到栈顶
+                    if (code.arg1[0] == '$')
+                        allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                    else {
+                        //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                        if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
+                            SymbolBlock *defineBlock = midCode.tempVarList[stoi(
+                                    code.arg1.substr(1))]->tableLineEntry->currentBlock;
+                            l = procedure[procedureIndex]->level - defineBlock->level;
+                            d = getAddress(existBlock(procedure, defineBlock), code.arg1);
+                        } else {  //是临时变量
+                            l = 0;
+                            d = getAddress(procedureIndex, code.arg1);
+                        }
+                        allPcode.push_back({LOD, l, d});
                     }
-                    allPcode.push_back({LOD, l, d});
+                    allPcode.push_back({OPR, 0, 14});
                 }
-                allPcode.push_back({OPR, 0, 14});
                 break;
             default:
                 break;
