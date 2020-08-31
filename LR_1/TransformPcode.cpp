@@ -157,13 +157,13 @@ int TransformPcode::getAddress(int blockIndex, string value) {
     while (j < valueData[blockIndex].size() && valueData[blockIndex][j].at(0) != '#') {
         if (midCodec.tempVarList[stoi(value.substr(1))]->tableLineEntry != nullptr &&
             midCodec.tempVarList[stoi(value.substr(1))]->tableLineEntry->name == valueData[blockIndex][j])
-            return j;
+            return j + 3;
         j++;
     }
 
     for (int i = 0; i < valueData[blockIndex].size(); i++) {
         if (valueData[blockIndex][i] == value)
-            return i;
+            return i + 3;
     }
     return -1;
 }
