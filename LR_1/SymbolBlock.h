@@ -89,6 +89,8 @@ public:
     void printBlock();
 
     SymbolTableLine *blockQuery(string name);
+
+    SymbolTableLine* findFunc_Proc(SymbolBlock*);
 };
 
 #endif //LR_1_SYMBOLTABLE_H

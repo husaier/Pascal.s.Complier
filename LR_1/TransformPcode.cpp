@@ -5,6 +5,17 @@
 #include "TransformPcode.h"
 #include "any"
 
+
+vector<int> startCodeIndex;//[0,15,19,19,23,27,28]  前面是每个过程的四元式开始地址，按从小到大排序,最后一个值是程序的结束地址+1
+
+//todo:符号表里面定义的变量的个数（数组的大小和结构的大小）+过程的个数+临时变量的个数（遍历一遍四元式列表，得到每个过程临时变量的个数）+参数的个数
+vector<int> valueNum;//[2,3,0,5,2,1]  每个过程定义的过程数加上变量数
+
+vector<SymbolBlock *> procedure;//每个过程的符号表，与startCodeIndex相对应
+
+//todo:每个符号表存的变量数组的数组，包括每个过程的变量（数组和结构），过程，临时变量，参数
+vector<vector<string>> valueData;
+
 int TransformPcode::fillRecord(vector<string> &list, Record* record){
     int num = 0;
     for(const auto &item : record->env){
@@ -32,9 +43,11 @@ int TransformPcode::fillRecord(vector<string> &list, Record* record){
 
 void TransformPcode::initialValueData(){
     for(auto block : procedure){
-        vector<string> t_funcList;
         vector<string> t_varList;
         vector<string> t_tmpList;
+        auto parent = block->previous;
+        auto self = parent->findFunc_Proc(block);
+        t_varList.push_back(self->name);
         int t_num = 0;
         for(auto item: block->symbolBlock){
             string name = item->name;
@@ -48,21 +61,9 @@ void TransformPcode::initialValueData(){
             }
             auto type = item->type;
             if(type->getType() == Type::FUNC){
-                auto func = (Func*)type;
-                t_funcList.push_back(name);
-                t_num++;
-                for(const auto& para:func->env){
-                    t_funcList.push_back(para.id);
-                    t_num++;
-                }
+                continue;
             } else if(type->getType() == Type::PROC){
-                auto proc = (Proc*)(type);
-                t_funcList.push_back(name);
-                t_num++;
-                for(const auto& para: proc->env){
-                    t_funcList.push_back(para.id);
-                    t_num++;
-                }
+                continue;
             } else if(type->getType() == Type::ARRAY){
                 auto array = (Array*)(type);
                 int size = array->getSize();
@@ -80,12 +81,13 @@ void TransformPcode::initialValueData(){
                 t_num++;
             }
         }
-        t_funcList.insert(t_funcList.end(),t_varList.begin(),t_varList.end());
-        t_funcList.insert(t_funcList.end(),t_tmpList.begin(),t_tmpList.end());
-        valueData.push_back(t_funcList);
+        t_varList.insert(t_varList.end(),t_tmpList.begin(),t_tmpList.end());
+        valueData.push_back(t_varList);
         valueNum.push_back(t_num);
     }
 }
+
+vector<string> para;//记录传入的参数
 
 //由s中的字符串获取其中的值
 any getValue(string s) {
@@ -148,7 +150,13 @@ int TransformPcode::getProcedureIndex(int index) {
 
 //todo:根据变量名和符号表序号得到该变量在该符号表里面的位置, blockIndex必须大于等于0
 int TransformPcode::getAddress(int blockIndex, string value) {
-
+    if(blockIndex < 0)
+        return -1;
+    for(int i = 0;i<valueData.size();i++){
+        if(valueData[blockIndex][i] == value)
+            return i;
+    }
+    return -1;
 }
 
 
