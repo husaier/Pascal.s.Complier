@@ -5,5 +5,5 @@ program test(input, output);
         a := 3;
         b := 4;
         c := 5;
-        write(a);
+        writeln(a,b,c);
     end. {end of test}

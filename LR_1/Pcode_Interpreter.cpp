@@ -662,7 +662,7 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 break;
         }
         if (pc == 0 || pc >= size)
-            cout << "运行结束";
+            cout << "\n运行结束";
     } while (pc != 0 && pc < size);
 
 }
