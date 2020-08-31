@@ -600,6 +600,46 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     allPcode.push_back({SRO, l, d});
                 }
                 break;
+            case 13://read
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::INTEGER)
+                    allPcode.push_back({OPR, 0, 161});
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::CHAR)
+                    allPcode.push_back({OPR, 0, 162});
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::REAL)
+                    allPcode.push_back({OPR, 0, 163});
+                if(midCode.tempVarList[stoi(code.arg1.substr(1))]->type->getType() == Type::BOOLEAN)
+                    allPcode.push_back({OPR, 0, 164});
+                //找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
+                    SymbolBlock *defineBlock = midCode.tempVarList[stoi(
+                            code.arg1.substr(1))]->tableLineEntry->currentBlock;
+                    l = procedure[procedureIndex]->level - defineBlock->level;
+                    d = getAddress(existBlock(procedure, defineBlock), code.arg1);
+                } else {  //是临时变量
+                    l = 0;
+                    d = getAddress(procedureIndex, code.arg1);
+                }
+                allPcode.push_back({STO, l, d});
+                break;
+            case 14://write
+                // 把第变量放到栈顶
+                if (code.arg1[0] == '$')
+                    allPcode.push_back({LIT, 0, getValue(code.arg1.substr(1))});
+                else {
+                    //找到变量arg1定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
+                    if (midCode.tempVarList[stoi(code.arg1.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
+                        SymbolBlock *defineBlock = midCode.tempVarList[stoi(
+                                code.arg1.substr(1))]->tableLineEntry->currentBlock;
+                        l = procedure[procedureIndex]->level - defineBlock->level;
+                        d = getAddress(existBlock(procedure, defineBlock), code.arg1);
+                    } else {  //是临时变量
+                        l = 0;
+                        d = getAddress(procedureIndex, code.arg1);
+                    }
+                    allPcode.push_back({LOD, l, d});
+                }
+                allPcode.push_back({OPR, 0, 14});
+                break;
             default:
                 break;
         }
