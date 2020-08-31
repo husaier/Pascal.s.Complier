@@ -574,9 +574,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 if (Variable->entry->backOffset != nullptr) {
                     Ventry = Variable->entry->backOffset;
                     offEntry = Ventry->offset;
-                }else{
+                } else {
                     offEntry = midCode.newTemp(curBlock);
-                    midCode.outCode(QuaternionItem::ASSIGN,"$0","",offEntry->id);
+                    midCode.outCode(QuaternionItem::ASSIGN, "$0", "", offEntry->id);
                 }
 
                 TempVar *Eentry{nullptr};
@@ -587,13 +587,13 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                 }
 
                 for (int i = 0; i < Variable->entry->type->getSize(); ++i) {
-                    if (i!=0){
-                        midCode.outCode(QuaternionItem::ADD,offEntry->id,"$1",offEntry->id);
+                    if (i != 0) {
+                        midCode.outCode(QuaternionItem::ADD, offEntry->id, "$1", offEntry->id);
                     }
-                    TempVar * tempEntry;
+                    TempVar *tempEntry;
                     tempEntry = midCode.newTemp(curBlock);
-                    midCode.outCode(QuaternionItem::ASSIGNOFFSET,Eentry->id,offEntry->id,tempEntry->id);
-                    midCode.outCode(QuaternionItem::OFFSETASSIGN,tempEntry->id,offEntry->id,Ventry->id);
+                    midCode.outCode(QuaternionItem::ASSIGNOFFSET, Eentry->id, offEntry->id, tempEntry->id);
+                    midCode.outCode(QuaternionItem::OFFSETASSIGN, tempEntry->id, offEntry->id, Ventry->id);
                 }
 
             } else {
@@ -1133,6 +1133,7 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             int line = vectorAttribute[top].line;
             quoteID(line, id);  //查看是否存在这个id
             SymbolTableLine *tempLinePoint = curBlock->query(id);
+            int tempFlag = 0;
             if (tempLinePoint != nullptr) {//如果存在
                 if (tempLinePoint->type->getType() == Type::PROC) {
                     auto proc = (Proc *) tempLinePoint->type;
@@ -1162,10 +1163,23 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
                     recordSemanticError(line, "语义错误！此id不为Procedure");
                 }
             } else {
-                recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
+                if (id == "read" && op_type == 79) {
+                    auto Expression_list = &vectorAttribute[top - 1];
+                    midCode.outCode(QuaternionItem::READ, Expression_list->queue[0], "", "");
+                    tempFlag = 1;
+                } else if (id == "write" && op_type == 79) {
+                    auto Expression_list = &vectorAttribute[top - 1];
+                    midCode.outCode(QuaternionItem::WRITE, Expression_list->queue[0], "", "");
+                    tempFlag = 1;
+                } else {
+                    recordSemanticError(line, "语义错误！引用了不存在的标识符" + id);
+                }
             }
             leftSymbol->type = new Type(Type::VOID);
             ////中间代码
+            if (tempFlag==1){
+                break;
+            }
             string arg1, arg2, res;
             vectorAttributeItem *idPoint = nullptr;
             if (op_type == 78) {
@@ -2432,6 +2446,9 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
 }
 
 void LR1Runner::quoteID(int line, string id) {
+    if (id == "write" || id == "read") {
+        return;
+    }
     if (curBlock->query(id) == nullptr) {
         string t;
         t = "语义错误！引用了未定义的标识符";
@@ -2506,7 +2523,7 @@ void LR1Runner::recordSemanticError(int line, const string &e) {
 }
 
 LR1Runner::LR1Runner() {
-    
+
 }
 
 Type *LR1Runner::getType(SymbolTableLine *p) {

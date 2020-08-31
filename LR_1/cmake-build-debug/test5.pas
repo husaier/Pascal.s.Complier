@@ -46,6 +46,7 @@ function func1 ( var id2 : real ;var id4 : real) : integer ; {Subprogram声明}
   begin
     C := pai * 2; end ; {end of func1}
 
+
 procedure d1p1;
   var a,b: char;
   begin a := b; end; {end of d1p1}
@@ -67,6 +68,8 @@ begin a := b; end; {end of d1p1}
 begin
 
   b := 111111111111;
+  read(b);
+  write(b);
   rec := rec2;
   rec.c := rec2.c;
   arr3[2].j:=arr3[3].c.e[5].b2;

@@ -135,6 +135,12 @@ string Quaternion::op2string(int op) {
         case QuaternionItem::OFFSETASSIGN:
             output = "[]:=";
             break;
+        case QuaternionItem::READ:
+            output = "read";
+            break;
+        case QuaternionItem::WRITE:
+            output = "write";
+            break;
         default:
             break;
     }
