@@ -150,7 +150,13 @@ int TransformPcode::getProcedureIndex(int index) {
 
 //todo:根据变量名和符号表序号得到该变量在该符号表里面的位置, blockIndex必须大于等于0
 int TransformPcode::getAddress(int blockIndex, string value) {
-    return 0;
+    if(blockIndex < 0)
+        return -1;
+    for(int i = 0;i<valueData.size();i++){
+        if(valueData[blockIndex][i] == value)
+            return i;
+    }
+    return -1;
 }
 
 
