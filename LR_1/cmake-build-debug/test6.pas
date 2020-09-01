@@ -1,12 +1,20 @@
-program test6(intput, output);
-var
-  B : Integer;
-  function d1p1(var a : integer): integer;
-          begin
-           Write(a);
-           d1p1 := -a;
-          end; {end of d1p1}
+{快速排序}
+program test9(input, output);
+  var num : Integer;
+  t : Integer;
+  procedure initial(var a: Integer);
+    begin
+      num := 20;
+    end;{end of intital}
+
+  procedure print(var a: Integer);
+    var i :Integer;
+      begin
+        for i := 0 to 0 do
+          WriteLn(num);
+      end;{end of print}
+
   begin
-    b := d1p1(60);
-    WriteLn(b);
-  end.
+    initial(1);
+    print(1);
+  end.{end of program}

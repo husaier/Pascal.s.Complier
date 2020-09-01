@@ -12,7 +12,7 @@ int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
     // 词法分析
-    string fileName = "test9.pas";
+    string fileName = "test6.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;
@@ -56,7 +56,7 @@ int main() {
         }
         cout << endl;
     }
-    cout << endl << endl << "code start:";
+    cout << endl<< "code start:" << endl ;
 
     // pcode解释执行
     Pcode_Interpreter interpreter;
