@@ -1,7 +1,8 @@
 program test7(intput, output);
   var A, B : Integer;
   T : Integer;
-
+  arr2: array [0 .. 7]of integer;
+  arr: array [0 .. 7]of array [0 .. 3, 6 .. 10] of integer;
   function d1p1(var a : integer;var b : integer;var t : integer): integer;
           begin
            while b > 0 do
@@ -11,11 +12,10 @@ program test7(intput, output);
                 a := t;
               end;
            Write(a,b);
-           d1p1 := a;
+
           end; {end of d1p1}
   begin
-    a := 60;
-    b := 100;
-    t := d1p1(a,b,t);
-    Write(t);
+    arr2[5] := 60;
+    arr[2][1]:= 100;
+    t := d1p1(arr2[5],arr[2][1],t);
   end.

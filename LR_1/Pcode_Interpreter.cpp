@@ -608,6 +608,7 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 //把数据栈栈顶+3（返回值）存入变量(相对地址为d,层次差为l)
                 dataStack[std::any_cast<int>(
                         calculate(ADD, currentPcode.D, any(getBase(base, currentPcode.L))))] = dataStack[top + 3];
+                break;
 //            case LOA:
 //                //LOA：获取变量的地址放到数据栈栈顶(相对地址为d，层次差为l)
 //                dataStack[top] = currentPcode.D + getBase(base, currentPcode.L);
