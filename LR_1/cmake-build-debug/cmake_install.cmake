@@ -1,4 +1,4 @@
-# Install script for directory: /home/liuchang/桌面/Pascal.s.Complier/LR_1
+# Install script for directory: /home/husserl/pascal/Pascal.s.Complier/LR_1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/liuchang/桌面/Pascal.s.Complier/LR_1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/husserl/pascal/Pascal.s.Complier/LR_1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

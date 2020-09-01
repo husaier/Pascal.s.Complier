@@ -4,13 +4,13 @@ program test7(intput, output);
 
   function d1p1(var a : integer;var b : integer;var t : integer): integer;
           begin
-           while b > 0 do
+           {while b > 0 do
               begin
                 t := b;
                 b := a mod b;
                 a := t;
               end;
-           Write(a,b);
+           Write(a,b);}
            d1p1 := a;
           end; {end of d1p1}
   begin

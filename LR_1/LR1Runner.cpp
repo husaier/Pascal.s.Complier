@@ -552,7 +552,12 @@ void LR1Runner::switchTable(vectorAttributeItem *leftSymbol, int op_type) {
             vectorAttributeItem *Expression = &vectorAttribute[top];
             vectorAttributeItem *Variable = &vectorAttribute[top - 2];
             leftSymbol->startQuad = Variable->startQuad;
-            if (*(Variable->type) != *(Expression->type))
+            if (Variable->type->getType() == Type::FUNC){
+                auto func = (Func*)Variable->type;
+                auto returnType = func->reType;
+                if(*(returnType) != *(Expression->type))
+                    recordSemanticError(Variable->line, "错误：赋值语句类型不匹配");
+            } else if (*(Variable->type) != *(Expression->type))
                 recordSemanticError(Variable->line, "错误：赋值语句类型不匹配");
             //中间代码生成,赋值语句
             string arg1, arg2, res;
