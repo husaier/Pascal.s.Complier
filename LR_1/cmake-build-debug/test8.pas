@@ -1,6 +1,6 @@
 {冒泡排序}
 program test8(input, output);
-  var num : array[0 .. 9] of Integer;
+  var num : array[0 .. 10] of Integer;
   n, t, i, j : Integer;
   procedure initial();
     begin

@@ -4,9 +4,9 @@ var
   function d1p1(var a : integer): integer;
           begin
            Write(a);
-           d1p1 := a;
+           d1p1 := -a;
           end; {end of d1p1}
   begin
     b := d1p1(60);
-    Write(b);
+    WriteLn(b);
   end.
