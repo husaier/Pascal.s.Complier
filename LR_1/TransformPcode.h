@@ -51,6 +51,8 @@ private:
 public:
     vector<Pcode> allPcode;//生成的pcode集合
 
+    static string opToString(Operator op);
+
     vector<Pcode> transformPcode(Quaternion midCode); //把codelist里面的四元式转变成pcode
     void singlePcode(Quaternion midCode, int index); //把单个四元式转变成pcode
     int existInt(vector<int> list, int num); //判断数字是否在数组里面,如果在，返回序号，否则返回-1

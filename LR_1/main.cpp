@@ -35,6 +35,28 @@ int main() {
     transformPcode.initialValueData();
     transformPcode.transformPcode(runner.midCode);
 
+    cout << endl;
+    for (int i = 0; i < transformPcode.allPcode.size(); i++) {
+        cout << i << "\t" << transformPcode.opToString(transformPcode.allPcode[i].OP) << "\t"
+             << transformPcode.allPcode[i].L << "\t";
+        if (string(transformPcode.allPcode[i].D.type().name()) == "i") {
+            auto d = any_cast<int>(transformPcode.allPcode[i].D);
+            cout << d << " ";
+        } else if (string(transformPcode.allPcode[i].D.type().name()) == "d") {
+            auto d = any_cast<double>(transformPcode.allPcode[i].D);
+            cout << d << " ";
+        } else if (string(transformPcode.allPcode[i].D.type().name()) == "b") {
+            auto d = any_cast<bool>(transformPcode.allPcode[i].D);
+            cout << d << " ";
+        } else if (string(transformPcode.allPcode[i].D.type().name()) == "c") {
+            auto d = any_cast<char>(transformPcode.allPcode[i].D);
+            cout << d << " ";
+        } else {
+            printf("error：栈顶值无法打印");
+        }
+        cout << endl;
+    }
+
     // pcode解释执行
     Pcode_Interpreter interpreter;
     interpreter.interpreter(transformPcode.allPcode);

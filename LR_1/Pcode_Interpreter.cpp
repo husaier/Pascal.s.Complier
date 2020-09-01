@@ -632,12 +632,14 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 while (allPcode[pc + i - 1].OP == LIP || allPcode[pc + i - 1].OP == LOP) {
                     if (allPcode[pc + i - 1].OP == LIP) {
                         //LIP：取常量d作为函数参数传入
-                        dataStack[top + 3 + i] = currentPcode.D;
+                        dataStack[top + 3 + i] = allPcode[pc + i - 1].D;
                     } else {
                         //LOP：取变量(相对地址为d,层次差为l)作为函数参数传入
+                        any bas = getBase(base, allPcode[pc + i - 1].L);
                         dataStack[top + 3 + i] = dataStack[std::any_cast<int>(
-                                calculate(ADD, currentPcode.D, any(getBase(base, currentPcode.L))))];
+                                calculate(ADD, allPcode[pc + i - 1].D, bas))];
                     }
+                    i++;
                 }
                 base = top;
                 pc = std::any_cast<int>(currentPcode.D);

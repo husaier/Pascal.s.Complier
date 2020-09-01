@@ -631,7 +631,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
             case 10: // call p,n
                 callBlock = procedure[procedureIndex]->query(
                         midCode.tempVarList[stoi(code.arg1.substr(1))]->value)->blockPoint;
-                allPcode.push_back({CAL, procedure[procedureIndex]->level - callBlock->level,
+                allPcode.push_back({CAL, procedure[procedureIndex]->level - callBlock->level + 1,
                                     pcodeIndex[existBlock(procedure, callBlock)]});
                 for (int i = 0; i < para.size(); i++) {
                     // 把参数放到栈顶
@@ -723,4 +723,46 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
         printf("error:搜索过程序号时出现错误");
 
 
+}
+
+
+
+string TransformPcode::opToString(Operator op) {
+    string s;
+    switch (op){
+        case LIT:
+            s = "LIT";
+            break;
+        case LOD:
+            s = "LOD";
+            break;
+        case STO:
+            s = "STO";
+            break;
+        case CAL:
+            s = "CAL";
+            break;
+        case INT:
+            s = "INT";
+            break;
+        case JMP:
+            s = "JMP";
+            break;
+        case JPC:
+            s = "JPC";
+            break;
+        case OPR:
+            s = "OPR";
+            break;
+        case LIP:
+            s = "LIP";
+            break;
+        case LOP:
+            s = "LOP";
+            break;
+        case SRO:
+            s = "SRO";
+            break;
+    }
+    return s;
 }
