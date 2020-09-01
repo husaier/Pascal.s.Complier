@@ -26,7 +26,7 @@ int main() {
     runner.load(result);
     runner.debugInfoLevel = 2;
     runner.run(table);
-    runner.printSemanticError();
+//    runner.printSemanticError();
     runner.printMidCode();
     vector<SymbolTableLine *> proFunVector = runner.generateProFunVector(runner.startBlock);
     // 开始转pcode码
@@ -35,7 +35,7 @@ int main() {
     transformPcode.initialValueData();
     transformPcode.transformPcode(runner.midCode);
 
-    cout << endl;
+    cout <<"pcode:"<< endl;
     for (int i = 0; i < transformPcode.allPcode.size(); i++) {
         cout << i << "\t" << transformPcode.opToString(transformPcode.allPcode[i].OP) << "\t"
              << transformPcode.allPcode[i].L << "\t";
@@ -56,6 +56,7 @@ int main() {
         }
         cout << endl;
     }
+    cout << endl << endl << "code start:";
 
     // pcode解释执行
     Pcode_Interpreter interpreter;

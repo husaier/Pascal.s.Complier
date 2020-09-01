@@ -240,7 +240,8 @@ void TransformPcode::simple(Quaternion midCode, QuaternionItem code, int cal, in
     allPcode.push_back({OPR, 0, cal});
     //找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
     if (midCode.tempVarList[stoi(code.res.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
-        if (midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
+        if (midCode.tempVarList[stoi(code.res.substr(1))]->type != nullptr &&
+            midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
             l = 0;
             d = getAddress(procedureIndex, code.res);
         } else {
@@ -334,7 +335,8 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                         // 从栈顶取值存到结果中
                         //找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                         if (midCode.tempVarList[stoi(code.res.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
-                            if (midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
+                            if (midCode.tempVarList[stoi(code.res.substr(1))]->type != nullptr &&
+                                midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
                                 l = 0;
                                 d = getAddress(procedureIndex, code.res);
                             } else {
@@ -404,7 +406,8 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                         allPcode.push_back({OPR, 0, 19});
                         //找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                         if (midCode.tempVarList[stoi(code.res.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
-                            if (midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
+                            if (midCode.tempVarList[stoi(code.res.substr(1))]->type != nullptr &&
+                                midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
                                 l = 0;
                                 d = getAddress(procedureIndex, code.res);
                             } else {
@@ -463,7 +466,8 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                 // 从栈顶取值存到结果中
                 //找到变量res定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
                 if (midCode.tempVarList[stoi(code.res.substr(1))]->tableLineEntry != nullptr) {  //不是临时变量
-                    if (midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
+                    if (midCode.tempVarList[stoi(code.res.substr(1))]->type != nullptr &&
+                        midCode.tempVarList[stoi(code.res.substr(1))]->type->getType() == Type::FUNC) {
                         l = 0;
                         d = getAddress(procedureIndex, code.res);
                     } else {
