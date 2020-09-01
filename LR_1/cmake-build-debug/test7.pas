@@ -16,6 +16,9 @@ program test7(intput, output);
           end; {end of d1p1}
   begin
     arr2[5] := 60;
-    arr[2][1]:= 100;
-    t := d1p1(arr2[5],arr[2][1],t);
+    arr[2][1][2]:= 100;
+    t := d1p1(arr2[5],arr[2,1,2],t);
   end.
+
+
+
