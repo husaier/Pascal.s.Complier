@@ -1,26 +1,16 @@
 {快速排序}
 program test9(input, output);
-  var num : array[0 .. 9] of Integer;
-  t : Integer;
-  procedure initial(var a: Integer);
+  var a,b :Integer;
+  procedure initial();
     begin
-      num[0] := 20;
-      num[1] := 9;
-      num[2] := 11;
-      num[3] := 4;
-      num[4] := 17;
-      num[5] := 12;
-      num[6] := 6;
-      num[7] := 16;
-      num[8] := 2;
-      num[9] := 8;
+      a := 20;
+      b := 9;
     end;{end of intital}
 
-  procedure print(var a: Integer);
+  procedure print();
     var i :Integer;
       begin
-        for i := 0 to 9 do
-          WriteLn(num[i]);
+          WriteLn(a,b);
       end;{end of print}
 
   procedure exchange(i, j: Integer);
@@ -66,7 +56,7 @@ program test9(input, output);
     end;{end of qSort}
 
   begin
-    initial(1);
+    initial();
     qSort(0, 9);
-    print(1);
+    print();
   end.{end of program}
