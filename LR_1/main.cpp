@@ -33,11 +33,11 @@ int main() {
     TransformPcode transformPcode;
     transformPcode.init(proFunVector, runner.midCode);//初始化
     transformPcode.initialValueData();
-    //transformPcode.transformPcode(runner.midCode);
+    transformPcode.transformPcode(runner.midCode);
 
     // pcode解释执行
-    //Pcode_Interpreter interpreter;
-    //interpreter.interpreter(transformPcode.allPcode);
+    Pcode_Interpreter interpreter;
+    interpreter.interpreter(transformPcode.allPcode);
 
     //    下列代码可以从文件里面读出p-code并执行
 //    Pcode_Interpreter interpreter;

@@ -225,19 +225,19 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                     auto type = string(arg1.type().name());
                     if (type == "i") {
                         int t1 = any_cast<int>(arg1);
-                        int t2 = any_cast<int>(arg1);
+                        int t2 = any_cast<int>(arg2);
                         res = (t1 == t2);
                     } else if (type == "d") {
                         double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg1);
+                        double t2 = any_cast<double>(arg2);
                         res = (t1 == t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
-                        char t2 = any_cast<char>(arg1);
+                        char t2 = any_cast<char>(arg2);
                         res = (t1 == t2);
                     } else if (type == "b") {
                         bool t1 = any_cast<bool>(arg1);
-                        bool t2 = any_cast<bool>(arg1);
+                        bool t2 = any_cast<bool>(arg2);
                         res = (t1 == t2);
                     }
                 } else
@@ -249,19 +249,19 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                     auto type = string(arg1.type().name());
                     if (type == "i") {
                         int t1 = any_cast<int>(arg1);
-                        int t2 = any_cast<int>(arg1);
+                        int t2 = any_cast<int>(arg2);
                         res = (t1 != t2);
                     } else if (type == "d") {
                         double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg1);
+                        double t2 = any_cast<double>(arg2);
                         res = (t1 != t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
-                        char t2 = any_cast<char>(arg1);
+                        char t2 = any_cast<char>(arg2);
                         res = (t1 != t2);
                     } else if (type == "b") {
                         bool t1 = any_cast<bool>(arg1);
-                        bool t2 = any_cast<bool>(arg1);
+                        bool t2 = any_cast<bool>(arg2);
                         res = (t1 != t2);
                     }
                 } else
@@ -273,19 +273,19 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                     auto type = string(arg1.type().name());
                     if (type == "i") {
                         int t1 = any_cast<int>(arg1);
-                        int t2 = any_cast<int>(arg1);
+                        int t2 = any_cast<int>(arg2);
                         res = (t1 < t2);
                     } else if (type == "d") {
                         double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg1);
+                        double t2 = any_cast<double>(arg2);
                         res = (t1 < t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
-                        char t2 = any_cast<char>(arg1);
+                        char t2 = any_cast<char>(arg2);
                         res = (t1 < t2);
                     } else if (type == "b") {
                         bool t1 = any_cast<bool>(arg1);
-                        bool t2 = any_cast<bool>(arg1);
+                        bool t2 = any_cast<bool>(arg2);
                         res = (t1 < t2);
                     }
                 } else
@@ -297,19 +297,19 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                     auto type = string(arg1.type().name());
                     if (type == "i") {
                         int t1 = any_cast<int>(arg1);
-                        int t2 = any_cast<int>(arg1);
+                        int t2 = any_cast<int>(arg2);
                         res = (t1 <= t2);
                     } else if (type == "d") {
                         double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg1);
+                        double t2 = any_cast<double>(arg2);
                         res = (t1 <= t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
-                        char t2 = any_cast<char>(arg1);
+                        char t2 = any_cast<char>(arg2);
                         res = (t1 <= t2);
                     } else if (type == "b") {
                         bool t1 = any_cast<bool>(arg1);
-                        bool t2 = any_cast<bool>(arg1);
+                        bool t2 = any_cast<bool>(arg2);
                         res = (t1 <= t2);
                     }
                 } else
@@ -321,19 +321,19 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                     auto type = string(arg1.type().name());
                     if (type == "i") {
                         int t1 = any_cast<int>(arg1);
-                        int t2 = any_cast<int>(arg1);
+                        int t2 = any_cast<int>(arg2);
                         res = (t1 > t2);
                     } else if (type == "d") {
                         double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg1);
+                        double t2 = any_cast<double>(arg2);
                         res = (t1 > t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
-                        char t2 = any_cast<char>(arg1);
+                        char t2 = any_cast<char>(arg2);
                         res = (t1 > t2);
                     } else if (type == "b") {
                         bool t1 = any_cast<bool>(arg1);
-                        bool t2 = any_cast<bool>(arg1);
+                        bool t2 = any_cast<bool>(arg2);
                         res = (t1 > t2);
                     }
                 } else
@@ -345,19 +345,19 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                     auto type = string(arg1.type().name());
                     if (type == "i") {
                         int t1 = any_cast<int>(arg1);
-                        int t2 = any_cast<int>(arg1);
+                        int t2 = any_cast<int>(arg2);
                         res = (t1 >= t2);
                     } else if (type == "d") {
                         double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg1);
+                        double t2 = any_cast<double>(arg2);
                         res = (t1 >= t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
-                        char t2 = any_cast<char>(arg1);
+                        char t2 = any_cast<char>(arg2);
                         res = (t1 >= t2);
                     } else if (type == "b") {
                         bool t1 = any_cast<bool>(arg1);
-                        bool t2 = any_cast<bool>(arg1);
+                        bool t2 = any_cast<bool>(arg2);
                         res = (t1 >= t2);
                     }
                 } else
@@ -367,7 +367,7 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
             case AND: {
                 if (string(arg1.type().name()) == "b" && string(arg2.type().name()) == "b") {
                     bool t1 = any_cast<bool>(arg1);
-                    bool t2 = any_cast<bool>(arg1);
+                    bool t2 = any_cast<bool>(arg2);
                     res = (t1 && t2);
                 } else
                     printf("error:and 类型错误");
@@ -376,7 +376,7 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
             case OR: {
                 if (string(arg1.type().name()) == "b" && string(arg2.type().name()) == "b") {
                     bool t1 = any_cast<bool>(arg1);
-                    bool t2 = any_cast<bool>(arg1);
+                    bool t2 = any_cast<bool>(arg2);
                     res = (t1 || t2);
                 } else
                     printf("error:or 类型错误");
@@ -662,7 +662,7 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                 break;
         }
         if (pc == 0 || pc >= size)
-            cout << "运行结束";
+            cout << "\n运行结束";
     } while (pc != 0 && pc < size);
 
 }

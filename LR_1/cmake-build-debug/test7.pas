@@ -10,5 +10,5 @@ program test7(intput, output);
         b := a mod b;
         a := t;
       end;
-    Write(a);
+    Write(a,b);
   end.
