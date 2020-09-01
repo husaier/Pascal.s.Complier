@@ -2,7 +2,7 @@
 program test9(input, output);
   var num : array[0 .. 9] of Integer;
   t : Integer;
-  procedure initial();
+  procedure initial(var a: Integer);
     begin
       num[0] := 20;
       num[1] := 9;
@@ -16,7 +16,7 @@ program test9(input, output);
       num[9] := 8;
     end;{end of intital}
 
-  procedure print();
+  procedure print(var a: Integer);
     var i :Integer;
       begin
         for i := 0 to 9 do
@@ -66,7 +66,7 @@ program test9(input, output);
     end;{end of qSort}
 
   begin
-    initial();
+    initial(1);
     qSort(0, 9);
-    print();
+    print(1);
   end.{end of program}

@@ -2,7 +2,7 @@
 program test8(input, output);
   var num : array[0 .. 10] of Integer;
   n, t, i, j : Integer;
-  procedure initial();
+  procedure initial(var a: Integer);
     begin
       num[0] := 20;
       num[1] := 9;
@@ -17,14 +17,14 @@ program test8(input, output);
     end;
   begin
     n := 10;
-    initial();
+    initial(1);
     for i := 9 downto 1 do
       for j := 0 to i - 1 do
           if num [j] > num[j + 1] then
             begin
               t := num[j];
               num[j] := num[j + 1];
-              num[j + 1] := t;
+              num[j + 1] := t
             end;
     WriteLn(num[0]);
     WriteLn(num[1]);

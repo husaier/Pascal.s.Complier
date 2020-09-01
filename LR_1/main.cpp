@@ -24,7 +24,7 @@ int main() {
     // 语法分析、语义分析
     LR1Runner runner;
     runner.load(result);
-    runner.debugInfoLevel = 1;
+    runner.debugInfoLevel = 2;
     runner.run(table);
     runner.printSemanticError();
     runner.printMidCode();
