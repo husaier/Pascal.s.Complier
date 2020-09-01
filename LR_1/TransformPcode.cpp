@@ -676,9 +676,11 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                             l = 0;
                             d = getAddress(procedureIndex, para[i]);
                         }
+                        int number = allPcode.size();
                         allPcode.push_back({LOP, l, d});
                     }
                 }
+                para.clear();
                 if (midCode.codeList[index + 1].type == 11) {
                     code = midCode.codeList[index + 1];
                     //找到返回值定义的位置，计算这个变量在其表中的序号，以及2个表的层次差
