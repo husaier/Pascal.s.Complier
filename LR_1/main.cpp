@@ -12,7 +12,7 @@ int main() {
     LR1Table table;
     table.loadJsonFile(fileName);
     // 词法分析
-    string fileName = "test6.pas";
+    string fileName = "test9.pas";
     LexicalAnalyzer lexicalAnalyzer;
     if (!lexicalAnalyzer.openFile(fileName)) {
         cout << "fail to open it" << endl;
@@ -24,7 +24,7 @@ int main() {
     // 语法分析、语义分析
     LR1Runner runner;
     runner.load(result);
-    runner.debugInfoLevel = 1;
+    runner.debugInfoLevel = 2;
     runner.run(table);
     runner.printSemanticError();
     runner.printMidCode();
