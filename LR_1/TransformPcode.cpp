@@ -571,7 +571,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     } else if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) == index) {
                         printf("goto语句跳入死循环");
                     } else {
-                        if (index > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
+                        if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
                             //让他跳到当前过程pcode码的结束地址处，等回填，记录每条需要回填的pcode码的地址和其所在的过程，存入pcodeExit
                             pcodeExit.push_back(
                                     backItem{static_cast<int>(allPcode.size()), getProcedureIndex(index)});
@@ -633,7 +633,7 @@ void TransformPcode::singlePcode(Quaternion midCode, int index) {
                     } else if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) == index) {
                         printf("error:8 goto语句跳入死循环");
                     } else {
-                        if (index > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
+                        if (stoi(midCode.tempVarList[stoi(code.res.substr(1))]->value) > startCodeIndex[getProcedureIndex(index) + 1] - 1) { //如果跳转地址超过了其所在过程的四元式结束地址
                             //让他跳到当前过程pcode码的结束地址处，等回填，记录每条需要回填的pcode码的地址和其所在的过程，存入pcodeExit
                             pcodeExit.push_back(
                                     backItem{static_cast<int>(allPcode.size()), getProcedureIndex(index)});
