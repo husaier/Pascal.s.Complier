@@ -185,9 +185,12 @@ vector<Pcode> TransformPcode::transformPcode(Quaternion midCode) {
     //回填pcodeExit的跳转语句
     for (int i = 0; i < pcodeExit.size(); i++) {
         if (pcodeExit[i].addr < pcodeIndex.size() - 1)
-            allPcode[pcodeExit[i].size].D = pcodeIndex[pcodeExit[i].addr + 1] - 2;//回填所在过程的OPR 0 0的地址
-        else
-            allPcode[pcodeExit[i].size].D = allPcode.size() - 1;
+            allPcode[pcodeExit[i].size].D = pcodeIndex[pcodeExit[i].addr + 1] - 1;//回填所在过程的OPR 0 0的地址
+        else{
+            int dd = allPcode.size() - 1;
+            allPcode[pcodeExit[i].size].D = dd;
+        }
+
     }
     //回填pcodeWait的跳转语句
     for (int i = 0; i < pcodeWait.size(); i++) {

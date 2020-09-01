@@ -589,7 +589,6 @@ void Pcode_Interpreter::interpreter(vector<Pcode> pcode) {
                     dataStack[top] = dataStack[offset + getBase(base, currentPcode.L)];
                     top++;
                 }
-
                 break;
             case STO:
                 //STO：将运行栈S的栈顶内容送入某个变量单元中，D段为变量所在说明层中的相对位置。  D若为-1意为从栈顶取相对地址
