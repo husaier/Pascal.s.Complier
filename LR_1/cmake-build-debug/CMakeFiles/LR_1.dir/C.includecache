@@ -6,25 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/liuchang/桌面/Pascal.s.Complier/LR_1/cJSON.c
-string.h
--
-stdio.h
--
-math.h
--
-stdlib.h
--
-float.h
--
-limits.h
--
-ctype.h
--
-cJSON.h
-/home/liuchang/桌面/Pascal.s.Complier/LR_1/cJSON.h
-
-/home/liuchang/桌面/Pascal.s.Complier/LR_1/cJSON.h
-stdint.h
--
-

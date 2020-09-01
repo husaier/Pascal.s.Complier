@@ -12,12 +12,13 @@ program test7(intput, output);
                 a := t;
               end;
            Write(a,b);
-
+           d1p1 := -a;
           end; {end of d1p1}
   begin
     arr2[5] := 60;
     arr[2][1][2]:= 100;
-    t := d1p1(arr2[5],arr[2,1,2],t);
+    t := d1p1(60,100,0);
+    Write(t);
   end.
 
 
