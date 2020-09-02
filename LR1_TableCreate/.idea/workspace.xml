@@ -30,7 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aac2c4c8-ad57-4515-bb73-661090e1ab53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LR1TableMaker.h" beforeDir="false" afterPath="$PROJECT_DIR$/LR1TableMaker.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +40,6 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -68,11 +67,23 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="LR1_TableCreate" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LR1_TableCreate" TARGET_NAME="LR1_TableCreate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LR1_TableCreate" RUN_TARGET_NAME="LR1_TableCreate">
+    <configuration name="LR1_TableCreate" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="LR1_TableCreate" TARGET_NAME="LR1_TableCreate" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="LR1_TableCreate" RUN_TARGET_NAME="LR1_TableCreate">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -120,12 +131,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="739" y="232" key="FileChooserDialogImpl" timestamp="1590840814920">

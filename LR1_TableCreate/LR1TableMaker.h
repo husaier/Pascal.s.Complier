@@ -67,8 +67,6 @@ private:
     public:
         vector<LR1Item> items;
         vector<Edge> others;
-//        vector<int> others;
-//        vector<string> symbol;
 
         bool operator== (const LR1Group &t) const {
             return this->items == t.items;
@@ -82,6 +80,7 @@ private:
         }
     };
 
+    //初始化
     void initial();
 
     //识别终结符和非终结符
@@ -127,7 +126,6 @@ private:
     int findProduction(const Production&);
 
     void printGroup(const LR1Group&);
-//    void printOut(); //测试
 };
 
 
