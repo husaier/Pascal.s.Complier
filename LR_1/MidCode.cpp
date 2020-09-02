@@ -5,8 +5,8 @@
 #include <sstream>
 #include "MidCode.h"
 
-QuaternionItem *Quaternion::outCode
-        (int op, const std::string &arg1, const std::string &arg2, const std::string &res) {
+QuaternionItem *Quaternion::outCode(int op, const std::string &arg1, const std::string &arg2, const std::string &res) {
+    //outCode函数输出中间代码，输入参数为op，操作类型，三个string类型的数据，表示相应的立即数或临时变量
     int seq = codeList.size();
     codeList.emplace_back(seq, op, arg1, arg2, res);
     return &codeList[seq];
@@ -158,7 +158,7 @@ TempVar *Quaternion::newTemp(SymbolBlock *block, bool flag) {
     return var;
 }
 
-TempVar *Quaternion::getTempById(string id) {
+TempVar *Quaternion::getTempById(string id) {//通过string类型的id，查询临时变量表中的相应位置，得到一个指向该临时变量的指针
     id.erase(id.begin());
     int i = stoi(id);
     return tempVarList[i];
@@ -178,12 +178,15 @@ void Quaternion::backPatch(const vector<int> &list, int quad) {
     }
 }
 
-string TempVar::toString() const {
+string TempVar::toString() {
     stringstream ss;
     if (isImmediate) {
         if (type->getType() == Type::CHAR) {
-            ss << "$c" << value;
-        }else{
+            if (!this->charAdd){
+                this->value = "c" + value;
+            }
+            ss << "$" << value;
+        } else {
             ss << "$" << value;
         }
         return ss.str();

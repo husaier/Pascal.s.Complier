@@ -65,7 +65,7 @@ public:
 
 class SymbolBlock {
 public:
-    SymbolBlock *previous = NULL;//用于指向外围的符号表
+    SymbolBlock *previous = nullptr;//用于指向外围的符号表
     //符号表
     vector<SymbolTableLine *> symbolBlock;
     //反映射表，建立string -> index的映射,name -> id

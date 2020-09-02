@@ -21,7 +21,7 @@ public:
 
     ~vectorAttributeItem();
 
-    string attribute;
+    string attribute; //词法分析得到的属性
     string variableName;
     Type *type{nullptr};
     int width;
