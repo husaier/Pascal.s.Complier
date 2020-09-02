@@ -41,10 +41,10 @@ function func1 ( var id2 : real ;var id4 : real) : integer ; {Subprogram声明}
 procedure proc1 (var id3 : integer;var id4 : real) ;
 const pai6 = pai;
 function func2 ( var id2 : real) : integer ;
-begin C := pai * 2; end ; {end of func2}
+begin C := pai * 1; end ; {end of func2}
 begin C := pai * 2; end ; {end of proc1}
 begin
-  C := pai * 2; end ; {end of func1}
+  C := pai * 3; end ; {end of func1}
 
 
 procedure d1p1;

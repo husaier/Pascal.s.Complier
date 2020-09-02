@@ -24,9 +24,12 @@ int main() {
     // 语法分析、语义分析
     LR1Runner runner;
     runner.load(result);
-    runner.debugInfoLevel = 2;
+    runner.debugInfoLevel = 3;
     runner.run(table);
-//    runner.printSemanticError();
+    runner.printSemanticError();
+    if  (!runner.semanticError.empty())
+        return 0;
+
     runner.printMidCode();
     vector<SymbolTableLine *> proFunVector = runner.generateProFunVector(runner.startBlock);
     // 开始转pcode码

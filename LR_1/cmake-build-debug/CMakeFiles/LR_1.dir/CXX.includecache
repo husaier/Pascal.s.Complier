@@ -54,12 +54,6 @@ Production.h
 fstream
 -
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.cpp
-sstream
--
-MidCode.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
-
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
 iostream
 -
@@ -71,14 +65,6 @@ iomanip
 -
 SymbolBlock.h
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.h
-
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Pcode_Interpreter.cpp
-fstream
--
-sstream
--
-Pcode_Interpreter.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Pcode_Interpreter.h
 
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/Pcode_Interpreter.h
 iostream
@@ -102,12 +88,6 @@ vector
 CJsonObject.hpp
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/CJsonObject.hpp
 
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.cpp
-SymbolBlock.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.h
-MidCode.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/MidCode.h
-
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/SymbolBlock.h
 string
 -
@@ -117,12 +97,6 @@ map
 -
 TypeSystem.h
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TypeSystem.h
-
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TransformPcode.cpp
-TransformPcode.h
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TransformPcode.h
-any
-/Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/any
 
 /Users/robinyer/Robinyer/code/the_second_sememter_of_junior_year/CompilationPrinciple/8.20/LR_1/TransformPcode.h
 string

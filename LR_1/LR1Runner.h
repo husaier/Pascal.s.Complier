@@ -35,7 +35,7 @@ public:
     TempVar *entry{nullptr}; // 临时变量入口
     SymbolBlock *tableEntry{nullptr};
     int startQuad = -1;
-    vector<int> nextList,trueList,falseList,testList,caseList;
+    vector<int> nextList, trueList, falseList, testList, caseList;
     vector<string> varList;
     vector<vector<string>> varList_list;
     int quad = -1;
@@ -62,13 +62,14 @@ public:
     SymbolBlock *startBlock = nullptr;
 
     Quaternion midCode; // 产生的中间代码
+    vector<string> semanticError; // 语义错误信息
+
 
 private:
     SymbolBlock *curBlock = nullptr;
     int *offset = nullptr;
     stack<SymbolBlock *> tablePointers; //栈顶指针指向的是本块
     stack<int *> offSetStack;
-    vector<string> semanticError; // 语义错误信息
 
     static void outStackInt(stack<int> stack);
 

@@ -30,7 +30,7 @@ SymbolTableLine *SymbolBlock::insert2(string name, Type *type, int offset, int d
         printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
         return nullptr;
     } else {
-        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine,this);
+        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine, this);
         invMap.insert(map<string, int>::value_type(name, rowNum));
         rowNum++;
         symbolBlock.push_back(tempPoint);
@@ -44,7 +44,7 @@ bool SymbolBlock::insert(string name, Type *type, int offset, int dimension, int
         printf("ERROR SymbolBlock.cpp line 22\nIt is already in Block\n");
         return false;
     } else {
-        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine,this);
+        auto *tempPoint = new SymbolTableLine(rowNum, name, type, offset, dimension, declarationLine, this);
         invMap.insert(map<string, int>::value_type(name, rowNum));
         rowNum++;
         symbolBlock.push_back(tempPoint);
@@ -100,15 +100,15 @@ bool SymbolBlock::insertTmpVar(TempVar *tempVar, string name) {
     }
 }
 
-SymbolTableLine *SymbolBlock::findFunc_Proc(SymbolBlock* target) {
-    for(auto item : symbolBlock){
-        if(item->type == nullptr)
+SymbolTableLine *SymbolBlock::findFunc_Proc(SymbolBlock *target) {
+    for (auto item : symbolBlock) {
+        if (item->type == nullptr)
             continue;
         auto type = item->type;
-        if(type->getType() == Type::FUNC ||
-        type->getType() == Type::PROC ||
-        type->getType() == Type::PROGRAM){
-            if(item->blockPoint == target)
+        if (type->getType() == Type::FUNC ||
+            type->getType() == Type::PROC ||
+            type->getType() == Type::PROGRAM) {
+            if (item->blockPoint == target)
                 return item;
         }
     }
@@ -116,10 +116,11 @@ SymbolTableLine *SymbolBlock::findFunc_Proc(SymbolBlock* target) {
 }
 
 void SymbolTableLine::printLine(SymbolTableLine *InLinePoint) {
-    printf("id:%3d\tname:%8s\ttype:%d\toffset:%d\tdimension:%d\tdeclarationLine:%d\tpoint:%p\tblockPoint:%p\treferenceLineVector:",
-           InLinePoint->id, InLinePoint->name.c_str(),
-           InLinePoint->type->getType(), InLinePoint->offset, InLinePoint->dimension, InLinePoint->declarationLine,
-           InLinePoint->point, InLinePoint->blockPoint);
+    if (InLinePoint->type)
+        printf("id:%3d\tname:%8s\ttype:%d\toffset:%d\tdimension:%d\tdeclarationLine:%d\tpoint:%p\tblockPoint:%p\treferenceLineVector:",
+               InLinePoint->id, InLinePoint->name.c_str(),
+               InLinePoint->type->getType(), InLinePoint->offset, InLinePoint->dimension, InLinePoint->declarationLine,
+               InLinePoint->point, InLinePoint->blockPoint);
     for (int i = 0; i < InLinePoint->referenceLineVector.size(); ++i) {
         printf(" %d", InLinePoint->referenceLineVector[i]);
     }
