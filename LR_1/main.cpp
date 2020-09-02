@@ -24,7 +24,8 @@ int main() {
     // 语法分析、语义分析
     LR1Runner runner;
     runner.load(result);
-    runner.debugInfoLevel = 3;
+    runner.debugInfoLevel = 2;
+    // 0 表示无输出信息，1 只展示分析结果，2 展示分析的详细过程，不展示符号表的内容，3 全部展示
     runner.run(table);
     runner.printSemanticError();
     if  (!runner.semanticError.empty())

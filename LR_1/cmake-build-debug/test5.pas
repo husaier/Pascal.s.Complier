@@ -67,7 +67,7 @@ begin a := b; end; {end of d1p1}
 
 begin
 
-  b := 111111111111;
+  b := 1111;
   read(b,b2,c,c2,rec2.j);
   write(b,c2);
   writeln(rec.c.b);
@@ -85,19 +85,19 @@ begin
   d1p3(ch,c);
   b := 6789876;
   b := func1(c,c2);
-  b := 3333333333;
+  b := 3;
   d1p2(func1(c,c2));
-  repeat
+repeat
     repeat b := b+1 until (b > 10);
-  until (b2 > 10);
+  until (b > 10);
 
-  while b<5 do
-    while b2<5 do
-        {begin}
-      b2 := b2 + 1;
-  {b3 := b3 + 1;
-  end;}
-  {b3 := b3+2;}
+
+while b<5 do
+    begin
+      while b2<5 do
+        b2 := b2 + 1;
+      b := b+1;
+    end;
 
   for b := 1 to 5 do
     for b2 := 5 downto 1 do
