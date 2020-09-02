@@ -78,7 +78,7 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                     i = -i;
                     res = i;
                 } else if (string(arg1.type().name()) == "d") {
-                    double d = any_cast<double>(arg1);
+                    auto d = any_cast<double>(arg1);
                     d = -d;
                     res = d;
                 } else
@@ -119,18 +119,39 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         flag = 0;
                 }
 
-                if (flag == 1) {
-                    int i1 = any_cast<int>(arg1);
-                    int i2 = any_cast<int>(arg2);
-                    i1 = i1 + i2;
-                    res = i1;
-                } else if (flag > 1) {
-                    double d1 = any_cast<double>(arg1);
-                    double d2 = any_cast<double>(arg2);
-                    d1 = d1 + d2;
-                    res = d1;
-                } else
-                    printf("error:add 类型错误");
+                switch (flag) {
+                    case 1: {
+                        int i1 = any_cast<int>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        i1 = i1 + i2;
+                        res = i1;
+                    }
+                    break;
+                    case 2: {
+                        int i1 = any_cast<int>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d2 = i1 + d2;
+                        res = d2;
+                    }
+                    break;
+                    case 3: {
+                        auto d1 = any_cast<double>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        d1 = d1 + i2;
+                        res = d1;
+                    }
+                    break;
+                    case 4: {
+                        auto d1 = any_cast<double>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d1 = d1 + d2;
+                        res = d1;
+                    }
+                    break;
+                    default:
+                        printf("error:add 类型错误");
+                        break;
+                }
                 break;
             }
             case MINUS: {
@@ -152,18 +173,39 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         flag = 0;
                 }
 
-                if (flag == 1) {
-                    int i1 = any_cast<int>(arg1);
-                    int i2 = any_cast<int>(arg2);
-                    i1 = i1 - i2;
-                    res = i1;
-                } else if (flag > 1) {
-                    double d1 = any_cast<double>(arg1);
-                    double d2 = any_cast<double>(arg2);
-                    d1 = d1 - d2;
-                    res = d1;
-                } else
-                    printf("error:minus 类型错误");
+                switch (flag) {
+                    case 1: {
+                        int i1 = any_cast<int>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        i1 = i1 - i2;
+                        res = i1;
+                    }
+                        break;
+                    case 2: {
+                        int i1 = any_cast<int>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d2 = i1 - d2;
+                        res = d2;
+                    }
+                        break;
+                    case 3: {
+                        auto d1 = any_cast<double>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        d1 = d1 - i2;
+                        res = d1;
+                    }
+                        break;
+                    case 4: {
+                        auto d1 = any_cast<double>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d1 = d1 - d2;
+                        res = d1;
+                    }
+                        break;
+                    default:
+                        printf("error:minus 类型错误");
+                        break;
+                }
                 break;
             }
             case MULTIPLY: {
@@ -185,29 +227,93 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         flag = 0;
                 }
 
-                if (flag == 1) {
-                    int i1 = any_cast<int>(arg1);
-                    int i2 = any_cast<int>(arg2);
-                    i1 = i1 * i2;
-                    res = i1;
-                } else if (flag > 1) {
-                    double d1 = any_cast<double>(arg1);
-                    double d2 = any_cast<double>(arg2);
-                    d1 = d1 * d2;
-                    res = d1;
-                } else
-                    printf("error:multiply 类型错误");
+                switch (flag) {
+                    case 1: {
+                        int i1 = any_cast<int>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        i1 = i1 * i2;
+                        res = i1;
+                    }
+                        break;
+                    case 2: {
+                        int i1 = any_cast<int>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d2 = i1 * d2;
+                        res = d2;
+                    }
+                        break;
+                    case 3: {
+                        auto d1 = any_cast<double>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        d1 = d1 * i2;
+                        res = d1;
+                    }
+                        break;
+                    case 4: {
+                        auto d1 = any_cast<double>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d1 = d1 * d2;
+                        res = d1;
+                    }
+                        break;
+                    default:
+                        printf("error:multiply 类型错误");
+                        break;
+                }
                 break;
             }
             case DIVIDE: {
-                if ((string(arg1.type().name()) == "i" || string(arg1.type().name()) == "d") &&
-                    (string(arg2.type().name()) == "i") || string(arg2.type().name()) == "d") {
-                    double d1 = any_cast<double>(arg1);
-                    double d2 = any_cast<double>(arg2);
-                    d1 = d1 / d2;
-                    res = d1;
-                } else
-                    printf("error:divide 类型错误");
+                int flag = 0;
+                if (string(arg1.type().name()) == "i") {
+                    if (string(arg2.type().name()) == "i")
+                        flag = 1;
+                    else if (string(arg2.type().name()) == "d")
+                        flag = 2;
+                    else
+                        flag = 0;
+
+                } else if (string(arg1.type().name()) == "d") {
+                    if (string(arg2.type().name()) == "i")
+                        flag = 3;
+                    else if (string(arg2.type().name()) == "d")
+                        flag = 4;
+                    else
+                        flag = 0;
+                }
+
+                switch (flag) {
+                    case 1: {
+                        int i1 = any_cast<int>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        auto r = (double)i1 / i2;
+                        res = r;
+                    }
+                        break;
+                    case 2: {
+                        int i1 = any_cast<int>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d2 = i1 / d2;
+                        res = d2;
+                    }
+                        break;
+                    case 3: {
+                        auto d1 = any_cast<double>(arg1);
+                        int i2 = any_cast<int>(arg2);
+                        d1 = d1 / i2;
+                        res = d1;
+                    }
+                        break;
+                    case 4: {
+                        auto d1 = any_cast<double>(arg1);
+                        auto d2 = any_cast<double>(arg2);
+                        d1 = d1 / d2;
+                        res = d1;
+                    }
+                        break;
+                    default:
+                        printf("error:divide 类型错误");
+                        break;
+                }
                 break;
             }
             case MOD: {
@@ -228,8 +334,8 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         int t2 = any_cast<int>(arg2);
                         res = (t1 == t2);
                     } else if (type == "d") {
-                        double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg2);
+                        auto t1 = any_cast<double>(arg1);
+                        auto t2 = any_cast<double>(arg2);
                         res = (t1 == t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
@@ -252,8 +358,8 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         int t2 = any_cast<int>(arg2);
                         res = (t1 != t2);
                     } else if (type == "d") {
-                        double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg2);
+                        auto t1 = any_cast<double>(arg1);
+                        auto t2 = any_cast<double>(arg2);
                         res = (t1 != t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
@@ -276,8 +382,8 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         int t2 = any_cast<int>(arg2);
                         res = (t1 < t2);
                     } else if (type == "d") {
-                        double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg2);
+                        auto t1 = any_cast<double>(arg1);
+                        auto t2 = any_cast<double>(arg2);
                         res = (t1 < t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
@@ -300,8 +406,8 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         int t2 = any_cast<int>(arg2);
                         res = (t1 <= t2);
                     } else if (type == "d") {
-                        double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg2);
+                        auto t1 = any_cast<double>(arg1);
+                        auto t2 = any_cast<double>(arg2);
                         res = (t1 <= t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
@@ -324,8 +430,8 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         int t2 = any_cast<int>(arg2);
                         res = (t1 > t2);
                     } else if (type == "d") {
-                        double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg2);
+                        auto t1 = any_cast<double>(arg1);
+                        auto t2 = any_cast<double>(arg2);
                         res = (t1 > t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
@@ -348,8 +454,8 @@ any Pcode_Interpreter::calculate(pcodeOP op, any arg1, any arg2) {
                         int t2 = any_cast<int>(arg2);
                         res = (t1 >= t2);
                     } else if (type == "d") {
-                        double t1 = any_cast<double>(arg1);
-                        double t2 = any_cast<double>(arg2);
+                        auto t1 = any_cast<double>(arg1);
+                        auto t2 = any_cast<double>(arg2);
                         res = (t1 >= t2);
                     } else if (type == "c") {
                         char t1 = any_cast<char>(arg1);
